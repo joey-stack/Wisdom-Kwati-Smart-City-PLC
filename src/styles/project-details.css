@@ -1,0 +1,393 @@
+/* ========================================
+   PROJECT DETAILS STYLING
+   "The Architectural Ledger" Layout
+   ======================================== */
+
+.pd-page {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* --- Hero Section --- */
+.pd-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.pd-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.pd-hero-image img,
+.pd-hero-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55);
+}
+
+.pd-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 2;
+}
+
+.pd-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+.pd-hero-title {
+  font-family: Inter, sans-serif;
+  font-size: clamp(48px, 10vw, 120px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.pd-hero-description {
+  font-family: var(--font-main);
+  font-size: clamp(16px, 2vw, 20px);
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* --- Main Layout --- */
+.pd-main-layout {
+  display: grid;
+  grid-template-columns: 1fr 450px; /* Slightly wider sidebar for the new cards */
+  gap: 80px;
+  padding: 100px 0;
+  align-items: start; /* Crucial for sticky to work correctly */
+}
+
+/* --- Content Sections --- */
+.pd-section {
+  margin-bottom: 80px;
+}
+
+.pd-section-title {
+  font-family: "Inter Display", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-section-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--accent-green);
+  border-radius: 2px;
+}
+
+/* --- Bullet List --- */
+.pd-highlights {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pd-highlights li {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  padding-left: 28px;
+  position: relative;
+}
+
+.pd-highlights li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+}
+
+/* --- Tables --- */
+.pd-table-container {
+  border: 1px dashed rgba(187, 227, 57, 0.4); /* Dashed border in accent-green */
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--accent-green-light); /* Light green shade as requested */
+  margin-bottom: 40px;
+}
+
+.pd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.pd-table th {
+  background: rgba(
+    187,
+    227,
+    57,
+    0.15
+  ); /* Slightly darker complementing green shade */
+  padding: 24px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 1px dashed rgba(187, 227, 57, 0.2);
+}
+
+.pd-table td {
+  padding: 22px 24px;
+  color: var(--text-secondary);
+  border-bottom: 1px dashed rgba(187, 227, 57, 0.15);
+  vertical-align: top;
+  text-align: left;
+}
+
+.pd-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pd-table .pd-label-cell {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* --- Sidebar --- */
+.pd-sidebar {
+  position: sticky;
+  top: 120px; /* Distance from top when locked */
+  height: fit-content;
+}
+
+.pd-sidebar-header {
+  margin-bottom: 40px;
+}
+
+.pd-sidebar-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.pd-sidebar-label::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #000;
+  border-radius: 2px;
+}
+
+.pd-sidebar-headline {
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 33.8px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.pd-compact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-compact-item {
+  position: relative;
+  display: block;
+  background: var(--bg-surface); /* Synched with footer background */
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  height: 90px; /* Fixed height for flip effect (70px img + 10px padding top/bottom) */
+  border: 1px solid rgba(187, 227, 57, 0.3); /* Subtle green-tinted border to rhyme with bg-surface */
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.pd-compact-item:hover {
+  border-color: rgba(187, 227, 57, 0.6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+}
+
+.pd-compact-flipper {
+  display: flex;
+  flex-direction: column;
+  height: 180px; /* 90px * 2 */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pd-compact-item:hover .pd-compact-flipper {
+  transform: translateY(-50%);
+}
+
+.pd-compact-front,
+.pd-compact-back {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px;
+  height: 90px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pd-compact-back {
+  background: var(--accent-green);
+  color: #000;
+}
+
+.pd-compact-thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pd-compact-info h4 {
+  font-size: 18px; /* Slightly reduced for balance */
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.pd-compact-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+  display: block; /* Restored for Neighborhood name */
+  font-weight: 500;
+}
+
+/* --- Properties Section --- */
+.pd-properties-section {
+  padding: 100px 0;
+  background: var(--bg-main);
+}
+
+/* --- Agent Section --- */
+.pd-agent-section {
+  padding: 120px 0;
+}
+
+/* Fix: Sidebar advisor card button text color override */
+.pd-sidebar-card .btn-pill .flip-text span {
+  color: #fff;
+}
+
+.pd-agent-card {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 60px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 40px;
+}
+
+.pd-agent-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.pd-agent-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pd-agent-name {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.pd-agent-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 32px;
+}
+
+.pd-agent-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.pd-agent-info-row i {
+  width: 20px;
+  color: var(--text-primary);
+}
+
+.pd-agent-cta {
+  margin-top: 40px;
+  width: fit-content;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .pd-main-layout {
+    grid-template-columns: 1fr;
+  }
+  .pd-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-agent-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .pd-agent-img {
+    height: 350px;
+  }
+}

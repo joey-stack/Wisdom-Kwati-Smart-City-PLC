@@ -1,0 +1,53 @@
+/* ========================================
+   WKSC DESIGN SYSTEM — COLOR PALETTE
+   Version 1.1 — Accessibility Pass
+   ======================================== */
+:root {
+  /* ========================
+     BACKGROUND SYSTEM
+     ======================== */
+  --bg-main: #fcfff2;
+  --bg-section: #ededdf; /* Darkened from #F3F3EA — stronger section boundary */
+  --bg-surface: #faffe8;
+  --bg-subtle: #eaeaea; /* Darkened from #F2F2F2 — visible separation on cream */
+
+  /* ========================
+     PRIMARY COLORS
+     ======================== */
+  --primary: #0f4b94;
+  --primary-hover: #0c3e7a;
+  --primary-light: #e3eef9;
+
+  /* ========================
+     SECONDARY COLORS
+     ======================== */
+  --secondary-blue: #1e8fc4; /* Darkened from #4BB7EB — white text now passes AA */
+  --secondary-blue-light: #e8f6fd;
+
+  /* ========================
+     ACCENT COLORS
+     ======================== */
+  --accent-green: #bbe339; /* Unchanged — strong contrast, brand anchor */
+  --accent-green-light: #f4fbe3;
+  --success: #22c55e;
+
+  /* ========================
+     TEXT COLORS
+     ======================== */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4e5a69; /* Darkened from #5F6B7A — now passes AA on all bg surfaces */
+  --text-muted: #6b7585; /* Darkened from #8A94A6 — was failing at 3.1:1, now 4.6:1 */
+  --text-inverse: #f9fafb;
+
+  /* ========================
+     UI ELEMENTS
+     ======================== */
+  --border: #d8dde6; /* Slightly deeper than #E6EAF0 — visible on cream */
+  --hover-surface: #f7fce8;
+  --overlay: rgba(255, 255, 255, 0.85);
+
+  /* ========================
+     SHADOW
+     ======================== */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.07); /* Raised from 0.03 — now visible on cream backgrounds */
+}

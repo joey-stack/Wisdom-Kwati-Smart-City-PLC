@@ -1,53 +1,38 @@
 'use client';
-
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 
 export default function ClientScripts() {
     const pathname = usePathname();
 
     useEffect(() => {
-        // Poll until GSAP + Lenis are loaded from CDN, then init
-        let attempts = 0;
-        const maxAttempts = 100; // 10 seconds max
-        const timer = setInterval(() => {
-            attempts++;
-            const gsapReady = typeof window.gsap !== 'undefined';
-            const lenisReady = typeof window.Lenis !== 'undefined';
-            if ((gsapReady && lenisReady) || attempts >= maxAttempts) {
-                clearInterval(timer);
-                initScripts();
-            }
-        }, 100);
-        return () => clearInterval(timer);
+        initScripts();
     }, [pathname]);
 
     function initScripts() {
         if (typeof window === 'undefined') return;
 
         // Initialize Lenis
-        let lenis;
-        if (typeof window.Lenis !== 'undefined') {
-            lenis = new window.Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                orientation: 'vertical',
-                gestureOrientation: 'vertical',
-                smoothWheel: true,
-                wheelMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
-                infinite: false,
-            });
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
 
-            if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
-                lenis.on('scroll', window.ScrollTrigger.update);
-                window.gsap.ticker.add((time) => {
-                    lenis.raf(time * 1000);
-                });
-                window.gsap.ticker.lagSmoothing(0);
-            }
-        }
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
 
         const menuToggle = document.querySelector('.menu-toggle');
         const menuClose = document.querySelector('.menu-close');
@@ -130,11 +115,8 @@ export default function ClientScripts() {
             });
         }
 
-        if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
-            const gsap = window.gsap;
-            const ScrollTrigger = window.ScrollTrigger;
-            gsap.registerPlugin(ScrollTrigger);
-            gsap.ticker.lagSmoothing(0);
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.ticker.lagSmoothing(0);
 
             // Timeline Fill Animation
             if (document.querySelector('.timeline-fill') && document.querySelector('.timeline-container')) {
@@ -368,8 +350,7 @@ export default function ClientScripts() {
                     itemTl.from(card, { x: 15, opacity: 0, filter: 'blur(8px)', clipPath: 'inset(0% 100% 0% 0%)', duration: 1.4, ease: 'expo.out' }, "-=0.4");
                 });
             }
-        }
-
+        
         // Modal Logic
         const siteVisitModal = document.getElementById('siteVisitModal');
         if (siteVisitModal) {

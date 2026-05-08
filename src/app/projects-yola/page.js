@@ -39,7 +39,7 @@ export default function Page() {
                        data-state="adamawa" data-neighborhood="yola" data-estate="fintiri extension">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1QZOdlWzkHofdW-Gq3ANQo7qjnfhYtRvT" alt="Fintiri Extension, Yola" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1QZOdlWzkHofdW-Gq3ANQo7qjnfhYtRvT" alt="Fintiri Extension, Yola" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -58,7 +58,7 @@ export default function Page() {
                        data-state="adamawa" data-neighborhood="yola" data-estate="sunbrook estate">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1NrQeDHmLJe2GmoBAwiJCB5sBvn_LXDNM" alt="Sunbrook Estate, Yola" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1NrQeDHmLJe2GmoBAwiJCB5sBvn_LXDNM" alt="Sunbrook Estate, Yola" />
                             </div>
                         </div>
                         <div className="neighborhood-info">

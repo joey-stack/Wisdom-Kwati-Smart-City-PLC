@@ -42,16 +42,16 @@ export default function Page() {
       quote: "Nimi Hills is the crown jewel of Abuja's expansion. Secure your hilltop legacy today before availability closes.",
       phone: "+234 810 001 5555",
       email: "a.bello@wisdomkwatismartcity.com",
-      image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
+      image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
     },
     otherNeighborhoods: [
-      { name: "Sunset Haven", district: "Katampe Ext.", link: "/katampe-extension", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" },
-      { name: "Whispering Pines", district: "Karsana", link: "/karsana-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
-      { name: "Ellington Villa", district: "Mabushi", link: "/mabushi-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" }
+      { name: "Sunset Haven", district: "Katampe Ext.", link: "/katampe-extension", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" },
+      { name: "Whispering Pines", district: "Karsana", link: "/karsana-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
+      { name: "Ellington Villa", district: "Mabushi", link: "/mabushi-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" }
     ],
     houseTypes: [
-      { name: "The Sapphire", location: "Premium Class • 4BR Smart Villa", type: "Emerald Class Villa", beds: "4", baths: "4.5", size: "3,200 SQ FT", link: "/imperial-emerald", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" },
-      { name: "The Emerald", location: "Premium Class • 5BR Smart Duplex", type: "Emerald Class Villa", beds: "5", baths: "6", size: "4,800 SQ FT", link: "/house-types", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" }
+      { name: "The Sapphire", location: "Premium Class • 4BR Smart Villa", type: "Emerald Class Villa", beds: "4", baths: "4.5", size: "3,200 SQ FT", link: "/imperial-emerald", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" },
+      { name: "The Emerald", location: "Premium Class • 5BR Smart Duplex", type: "Emerald Class Villa", beds: "5", baths: "6", size: "4,800 SQ FT", link: "/house-types", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" }
     ]
   };
 

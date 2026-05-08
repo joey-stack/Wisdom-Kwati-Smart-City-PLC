@@ -3,7 +3,7 @@ import ProjectDetailTemplate from '../../components/ProjectDetailTemplate';
 export default function Page() {
   const data = {
     title: "Sunset Haven",
-    heroImage: "https://images.weserv.nl/?url=drive.google.com/uc?id=1dP8dOZmR2Fg7mUkXUDiByr06e64h50Lh",
+    heroImage: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1dP8dOZmR2Fg7mUkXUDiByr06e64h50Lh",
     heroDescription: "An elite smart district engineered for premium living, featuring high-fidelity security and future-ready infrastructure in the heart of Abuja.",
     updatesLink: "/katampe-extension/updates",
     description: "Katampe Extension is Abuja's most ambitious residential undertaking. Designed as a fully integrated smart city district, it combines natural hilly topography with cutting-edge engineering to create a secure, serene, and sophisticated environment for Nigeria's elite.",
@@ -43,16 +43,16 @@ export default function Page() {
       quote: "I specialize in high-net-worth acquisitions within this zone. Let's secure your legacy.",
       phone: "+234 810 001 5555",
       email: "a.bello@wisdomkwatismartcity.com",
-      image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
+      image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
     },
     otherNeighborhoods: [
-      { name: "Whispering Pines", district: "Karsana District", link: "/karsana-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
-      { name: "Guzape II Estate", district: "Guzape II", link: "/guzape-estate", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" },
-      { name: "Ellington Villa 2", district: "Mabushi District", link: "/mabushi-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" }
+      { name: "Whispering Pines", district: "Karsana District", link: "/karsana-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
+      { name: "Guzape II Estate", district: "Guzape II", link: "/guzape-estate", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" },
+      { name: "Ellington Villa 2", district: "Mabushi District", link: "/mabushi-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" }
     ],
     houseTypes: [
-      { name: "The Sapphire", location: "Premium Class • 4BR Smart Villa", type: "Sapphire Class Villa", beds: "4", baths: "4.5", size: "3,200 SQ FT", link: "/blue-sapphire", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" },
-      { name: "The Emerald", location: "Luxury Class • 5BR Smart Duplex", type: "Emerald Class Villa", beds: "5", baths: "6", size: "4,800 SQ FT", link: "/imperial-emerald", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" }
+      { name: "The Sapphire", location: "Premium Class • 4BR Smart Villa", type: "Sapphire Class Villa", beds: "4", baths: "4.5", size: "3,200 SQ FT", link: "/blue-sapphire", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" },
+      { name: "The Emerald", location: "Luxury Class • 5BR Smart Duplex", type: "Emerald Class Villa", beds: "5", baths: "6", size: "4,800 SQ FT", link: "/imperial-emerald", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" }
     ]
   };
 

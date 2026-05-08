@@ -34,7 +34,7 @@ export default function Page() {
 
         {/*  Main image  */}
         <div className="hd-lightbox-stage">
-            <img id="lb-img" src={null} alt="Gallery image" />
+            <img loading="lazy" id="lb-img" src={null} alt="Gallery image" />
         </div>
 
         {/*  Navigation  */}
@@ -47,24 +47,24 @@ export default function Page() {
 
         {/*  Thumbnail strip  */}
         <div className="hd-lightbox-thumbs" id="lb-thumbs">
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="1" data-index="0" />
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="2" data-index="1" />
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="3" data-index="2" />
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="4" data-index="3" />
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL"  alt="5" data-index="4" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="1" data-index="0" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="2" data-index="1" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="3" data-index="2" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="4" data-index="3" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL"  alt="5" data-index="4" />
         </div>
 
         {/*  Hidden full src list  */}
         <div id="lb-srcs" style={{ display: "none" }}>
-            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ</span>
-            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
-            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT</span>
-            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ</span>
-            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL</span>
+            <span>https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ</span>
+            <span>https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
+            <span>https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT</span>
+            <span>https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ</span>
+            <span>https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL</span>
         </div>
     </div>
         <div className="hd-hero-image">
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="The White Pearl" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="The White Pearl" />
         </div>
         <div className="hd-hero-overlay"></div>
         <div className="hd-hero-content reveal-on-scroll">
@@ -278,7 +278,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="5 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612'; }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -306,7 +306,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="4 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ'; }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">

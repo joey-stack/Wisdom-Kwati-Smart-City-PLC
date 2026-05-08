@@ -46,100 +46,100 @@ export default function Page() {
 
         <div className="gallery-grid reveal-on-scroll">
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Mabushi Site Update" loading="lazy" />
             </div>
             <div className="gallery-item skeleton">
-                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
+                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Mabushi Site Update" loading="lazy" />
             </div>
         </div>
 

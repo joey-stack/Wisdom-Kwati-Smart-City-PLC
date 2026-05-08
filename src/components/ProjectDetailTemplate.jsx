@@ -32,7 +32,7 @@ export default function ProjectDetailTemplate({
           {heroVideo ? (
             <video autoPlay loop muted playsInline src={heroVideo} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: "0", left: "0" }} />
           ) : (
-            <img src={heroImage} alt={title} />
+            <img fetchPriority="high" src={heroImage} alt={title} />
           )}
         </div>
         <div className="pd-hero-overlay"></div>
@@ -123,14 +123,14 @@ export default function ProjectDetailTemplate({
                   <Link key={idx} href={item.link} className="pd-compact-item">
                     <div className="pd-compact-flipper">
                       <div className="pd-compact-front">
-                        <img src={item.image} alt={item.name} className="pd-compact-thumb" />
+                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
                         </div>
                       </div>
                       <div className="pd-compact-back">
-                        <img src={item.image} alt={item.name} className="pd-compact-thumb" />
+                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
@@ -146,7 +146,7 @@ export default function ProjectDetailTemplate({
               <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                 <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                  <img src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                  <img loading="lazy" src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
                   <div>
                     <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>{sidebarAdviser.name}</h3>
                     <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>{sidebarAdviser.role}</p>
@@ -191,7 +191,7 @@ export default function ProjectDetailTemplate({
             {houseTypes?.map((item, idx) => (
               <Link key={idx} href={item.link} className="ht-card reveal-on-scroll">
                 <div className="ht-card-image">
-                  <img src={item.image} alt={item.name} />
+                  <img loading="lazy" src={item.image} alt={item.name} />
                 </div>
                 <div className="ht-card-info">
                   <div className="ht-card-left">

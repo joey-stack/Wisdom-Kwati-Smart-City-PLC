@@ -15,7 +15,7 @@ export default function Page() {
     {/*  Hero Section  */}
     <section className="pd-hero">
         <div className="pd-hero-image">
-            <img src="https://images.weserv.nl/?url=https://drive.google.com/uc?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c" alt="PH Rumu-olumeni" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c" alt="PH Rumu-olumeni" />
         </div>
         <div className="pd-hero-overlay"></div>
         <div className="pd-hero-content reveal-on-scroll">
@@ -103,14 +103,14 @@ export default function Page() {
                     <a href="/katampe-extension" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Extension</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Extension</p>
@@ -122,14 +122,14 @@ export default function Page() {
                     <a href="/karsana-district" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana District</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana District</p>
@@ -142,14 +142,14 @@ export default function Page() {
                     <a href="/guzape-estate" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Guzape II Estate" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Guzape II Estate" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Guzape II Estate</h4>
                                     <p>Guzape II</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Guzape II Estate" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Guzape II Estate" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Guzape II Estate</h4>
                                     <p>Guzape II</p>
@@ -162,7 +162,7 @@ export default function Page() {
                 <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                     <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
                         <div>
                             <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>Fatima Usman</h3>
                             <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>PH Region Specialist</p>
@@ -201,7 +201,7 @@ export default function Page() {
                 <div className="portfolio-grid" style={{ marginTop: "60px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "40px" }}>
                 <a href="/blue-sapphire" className="ht-card reveal-on-scroll">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Sapphire" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Sapphire" />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -222,7 +222,7 @@ export default function Page() {
                 </a>
                 <a href="/imperial-emerald" className="ht-card reveal-on-scroll">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="The Emerald" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="The Emerald" />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">

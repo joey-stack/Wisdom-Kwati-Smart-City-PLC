@@ -34,7 +34,7 @@ export default function Page() {
 
         {/*  Main image  */}
         <div className="hd-lightbox-stage">
-            <img id="lb-img" src={null} alt="Gallery image" />
+            <img loading="lazy" id="lb-img" src={null} alt="Gallery image" />
         </div>
 
         {/*  Navigation  */}
@@ -47,11 +47,11 @@ export default function Page() {
 
         {/*  Thumbnail strip  */}
         <div className="hd-lightbox-thumbs" id="lb-thumbs">
-            <img src="[[GAL_IMG_1]]" alt="1" data-index="0" />
-            <img src="[[GAL_IMG_2]]" alt="2" data-index="1" />
-            <img src="[[GAL_IMG_3]]" alt="3" data-index="2" />
-            <img src="[[GAL_IMG_4]]" alt="4" data-index="3" />
-            <img src="[[HERO_IMAGE]]"  alt="5" data-index="4" />
+            <img loading="lazy" src="[[GAL_IMG_1]]" alt="1" data-index="0" />
+            <img loading="lazy" src="[[GAL_IMG_2]]" alt="2" data-index="1" />
+            <img loading="lazy" src="[[GAL_IMG_3]]" alt="3" data-index="2" />
+            <img loading="lazy" src="[[GAL_IMG_4]]" alt="4" data-index="3" />
+            <img loading="lazy" src="[[HERO_IMAGE]]"  alt="5" data-index="4" />
         </div>
 
         {/*  Hidden full src list  */}
@@ -64,7 +64,7 @@ export default function Page() {
         </div>
     </div>
         <div className="hd-hero-image">
-            <img src="[[HERO_IMAGE]]" alt="[[NAME]]" />
+            <img loading="lazy" src="[[HERO_IMAGE]]" alt="[[NAME]]" />
         </div>
         <div className="hd-hero-overlay"></div>
         <div className="hd-hero-content reveal-on-scroll">
@@ -165,19 +165,19 @@ export default function Page() {
                 {/*  Bento Gallery  */}
                 <section className="hd-gallery reveal-on-scroll">
                     <div className="hd-gallery-item hd-gal-1">
-                        <img src="[[GAL_IMG_1]]" alt="Property View 1" />
+                        <img loading="lazy" src="[[GAL_IMG_1]]" alt="Property View 1" />
                     </div>
                     <div className="hd-gallery-item hd-gal-2">
-                        <img src="[[GAL_IMG_2]]" alt="Property View 2" />
+                        <img loading="lazy" src="[[GAL_IMG_2]]" alt="Property View 2" />
                     </div>
                     <div className="hd-gallery-item hd-gal-3">
-                        <img src="[[GAL_IMG_3]]" alt="Property View 3" />
+                        <img loading="lazy" src="[[GAL_IMG_3]]" alt="Property View 3" />
                     </div>
                     <div className="hd-gallery-item hd-gal-4">
-                        <img src="[[GAL_IMG_4]]" alt="Property View 4" />
+                        <img loading="lazy" src="[[GAL_IMG_4]]" alt="Property View 4" />
                     </div>
                     <div className="hd-gallery-item hd-gal-5">
-                        <img src="[[HERO_IMAGE]]" alt="Property View 5" />
+                        <img loading="lazy" src="[[HERO_IMAGE]]" alt="Property View 5" />
                     </div>
                     
                     <a href="#" className="hd-view-all-btn" id="view-all-images-btn">

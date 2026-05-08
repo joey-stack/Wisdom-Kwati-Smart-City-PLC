@@ -41,39 +41,39 @@ export default function Page() {
                 </div>
                 <div className="gallery-grid reveal-on-scroll">
                     <div className="gallery-item" style={{ aspectRatio: "3/4" }}>
-                        <video poster="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" controls>
+                        <video poster="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" controls>
                             <source src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" type="video/mp4" />
                         </video>
                         <div className="gallery-item-label">Foundation Pouring - Video</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "16/9" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Site Update" />
                         <div className="gallery-item-label">Access Road Clearing</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "1/1" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Site Update" />
                         <div className="gallery-item-label">Drainage Installation</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "9/16" }}>
-                        <video poster="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" controls>
+                        <video poster="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" controls>
                             <source src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" type="video/mp4" />
                         </video>
                         <div className="gallery-item-label">Aerial Drone View - Video</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "4/3" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Site Update" />
                         <div className="gallery-item-label">Perimeter Fencing</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "3/2" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Site Update" />
                         <div className="gallery-item-label">Site Surveying</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "1/1.5" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Site Update" />
                         <div className="gallery-item-label">Concrete Pouring</div>
                     </div>
                     <div className="gallery-item" style={{ aspectRatio: "2/1" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Site Update" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Site Update" />
                         <div className="gallery-item-label">Landscaping Begins</div>
                     </div>
                 </div>

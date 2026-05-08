@@ -15,7 +15,7 @@ export default function Page() {
             {/*  Hero Section  */}
     <section className="pd-hero">
         <div className="pd-hero-image">
-            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1iymAgUmz0NeL8RyNb2HAEk-XHMYHR7j9" alt="Royal City" />
+            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1iymAgUmz0NeL8RyNb2HAEk-XHMYHR7j9" alt="Royal City" />
         </div>
         <div className="pd-hero-overlay"></div>
         <div className="pd-hero-content reveal-on-scroll">
@@ -165,14 +165,14 @@ export default function Page() {
                     <a href="/katampe-extension" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Ext.</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Ext.</p>
@@ -184,14 +184,14 @@ export default function Page() {
                     <a href="/karsana-district" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana</p>
@@ -203,14 +203,14 @@ export default function Page() {
                     <a href="/mabushi-district" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Ellington Villa</h4>
                                     <p>Mabushi</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Ellington Villa</h4>
                                     <p>Mabushi</p>
@@ -222,14 +222,14 @@ export default function Page() {
                     <a href="/guzape-estate" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Nimi Hills</h4>
                                     <p>Guzape</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Nimi Hills</h4>
                                     <p>Guzape</p>
@@ -242,7 +242,7 @@ export default function Page() {
                 <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                     <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
                         <div>
                             <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>Samuel Kwati</h3>
                             <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>Royal City Specialist</p>

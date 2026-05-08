@@ -39,8 +39,8 @@ export default function Page() {
                        data-state="kaduna" data-neighborhood="kaduna central" data-estate="kaduna smart district">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4" alt="Kaduna Smart District, Kaduna" />
-                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Kaduna Smart District" style={{ opacity: "0.3" }} />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4" alt="Kaduna Smart District, Kaduna" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Kaduna Smart District" style={{ opacity: "0.3" }} />
                             </div>
                         </div>
                         <div className="neighborhood-info">

@@ -3,7 +3,7 @@ import ProjectDetailTemplate from '../../components/ProjectDetailTemplate';
 export default function Page() {
   const data = {
     title: "Wisdom Kwati Smart City",
-    heroImage: "https://images.weserv.nl/?url=drive.google.com/uc?id=1s5vsiqmbnMMTONiebu1vG2r_Yvcfd6KL",
+    heroImage: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1s5vsiqmbnMMTONiebu1vG2r_Yvcfd6KL",
     heroDescription: "Our flagship ultra-modern megacity project in Karshi, Abuja.",
     updatesLink: "/wisdom-kwati-smart-city/updates",
     description: "Wisdom Kwati Smart City in Karshi is the crown jewel of our portfolio. It is a fully integrated megacity designed to showcase the pinnacle of smart urban planning, sustainable energy, and ultra-modern architecture.",
@@ -42,13 +42,13 @@ export default function Page() {
       quote: "Wisdom Kwati Smart City is the future of urban living in Africa. It is an unparalleled investment in tomorrow's infrastructure.",
       phone: "+234 810 001 8888",
       email: "samuel.k@wisdomkwati.com",
-      image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
+      image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa"
     },
     otherNeighborhoods: [
-      { name: "Sunset Haven", district: "Katampe Ext.", link: "/katampe-extension", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" },
-      { name: "Whispering Pines", district: "Karsana", link: "/karsana-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
-      { name: "Ellington Villa", district: "Mabushi", link: "/mabushi-district", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" },
-      { name: "Nimi Hills", district: "Guzape", link: "/guzape-estate", image: "https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" }
+      { name: "Sunset Haven", district: "Katampe Ext.", link: "/katampe-extension", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" },
+      { name: "Whispering Pines", district: "Karsana", link: "/karsana-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" },
+      { name: "Ellington Villa", district: "Mabushi", link: "/mabushi-district", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" },
+      { name: "Nimi Hills", district: "Guzape", link: "/guzape-estate", image: "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" }
     ],
     houseTypes: []
   };

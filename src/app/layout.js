@@ -47,9 +47,6 @@ export default function RootLayout({ children }) {
         <SiteVisitModal />
         <ClientScripts />
 
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" strategy="afterInteractive" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" strategy="afterInteractive" />
-        <Script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" strategy="afterInteractive" />
       </body>
     </html>
   );

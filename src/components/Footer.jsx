@@ -189,6 +189,7 @@ export default function Footer() {
                 </div>
                 <div className="bottom-center">
                     <span className="copyright">©2026 WISDOM KWATI SMART CITY PLC. REG RC 1573033.</span>
+                    <span style={{ fontSize: '10px', opacity: 0.5, marginLeft: '10px' }}>LAST UPDATED: MAY 2026</span>
                 </div>
                 <div className="bottom-right">
                     <span className="signature">BUILT BY CODESIGHT</span>

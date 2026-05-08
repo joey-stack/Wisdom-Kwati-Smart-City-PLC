@@ -18,8 +18,37 @@ export default function ProjectDetailTemplate({
   houseTypesTitle,
   houseTypes // Array of { name, location, type, beds, baths, size, link, image }
 }) {
+  // AEO/GEO Schema for AI Citations
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": title,
+    "description": heroDescription || description,
+    "image": heroImage,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": title.split(' ')[0],
+      "addressRegion": "Abuja",
+      "addressCountry": "NG"
+    },
+    "amenityFeature": highlights?.map(h => ({
+      "@type": "LocationFeatureSpecification",
+      "name": h,
+      "value": true
+    })),
+    "additionalProperty": realEstateVibe?.map(v => ({
+      "@type": "PropertyValue",
+      "name": v.category,
+      "value": v.details
+    }))
+  };
+
   return (
     <div className="pd-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Custom Card Cursor */}
       <div id="card-cursor" className="card-cursor">
         <span>VIEW</span>

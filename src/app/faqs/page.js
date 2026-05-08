@@ -19,6 +19,41 @@ export default function FAQPage() {
                         and exactly how we can help.
                     </h1>
                 </div>
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      "mainEntity": [
+                        {
+                          "@type": "Question",
+                          "name": "What services does your real estate company offer?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We offer houses and land sales for residential and commercial purposes, and agent partnership opportunities."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What sets your company apart from other real estate firms?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We stand out for our transparency, trusted processes, and commitment to client satisfaction. Our foundation in software engineering and infrastructure ensures we build functional ecosystems, not just houses."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What is the refund policy for deposits or down payments?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "A 20% deduction applies for administrative charges. Refunds are processed 90 days after the receipt of a formal refund application."
+                          }
+                        }
+                      ]
+                    })
+                  }}
+                />
             </section>
 
             {/* FAQ Sections */}

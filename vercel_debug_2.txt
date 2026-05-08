@@ -1,0 +1,192 @@
+> [debug] [2026-05-08T15:21:28.736Z] Found config in file "/Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel.json"
+> [debug] [2026-05-08T15:21:28.738Z] Vercel CLI 53.2.0
+> [debug] [2026-05-08T15:21:28.759Z] Agent/TTY/nonInteractive: isAgent=true agentName=antigravity stdin.isTTY=true --non-interactive=false explicitFalse=false => nonInteractive=false
+> [debug] [2026-05-08T15:21:28.761Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-05-08T15:21:28.766Z] failed to find extension command with name "vercel---yes"
+> [debug] [2026-05-08T15:21:28.825Z] Spinner invoked (Retrieving project…) with a 1000ms delay
+> [debug] [2026-05-08T15:21:28.826Z] Valid access token, skipping token refresh.
+> [debug] [2026-05-08T15:21:28.883Z] #1 → GET https://api.vercel.com/teams/team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:21:28.885Z] #2 → GET https://api.vercel.com/v9/projects/prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:21:30.118Z] #1 ← 200 OK: sfo1::nl2k9-1778253691701-113c909f972c [1.23s]
+> [debug] [2026-05-08T15:21:30.290Z] #2 ← 200 OK: sfo1::9tj5m-1778253691696-d6fc1b28b5a7 [1.41s]
+> [debug] [2026-05-08T15:21:30.359Z] Spinner invoked (Deploying joeladawah2-gmailcoms-projects/wksc-landing) with a 0ms delay
+[client-debug] 2026-05-08T15:21:30.359Z Creating deployment...
+[client-debug] 2026-05-08T15:21:30.359Z Provided 'path' is a directory.
+[client-debug] 2026-05-08T15:21:30.361Z Found 26 rules in .vercelignore
+[client-debug] 2026-05-08T15:21:30.361Z Building file tree...
+[client-debug] 2026-05-08T15:21:30.385Z Found 507 files in the specified directory
+[client-debug] 2026-05-08T15:21:31.266Z Yielding a 'hashes-calculated' event with 485 hashes
+> [debug] [2026-05-08T15:21:31.272Z] #3 → GET https://api.vercel.com/v9/projects/wksc-landing?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:21:31.715Z] #3 ← 200 OK: sfo1::kph6m-1778253693329-800e3d2e31ae [442ms]
+[client-debug] 2026-05-08T15:21:31.718Z Using provided API URL: https://api.vercel.com
+[client-debug] 2026-05-08T15:21:31.718Z Using provided user agent: vercel 53.2.0 node-v22.13.1 darwin (x64)
+[client-debug] 2026-05-08T15:21:31.718Z Setting platform version to harcoded value 2
+[client-debug] 2026-05-08T15:21:31.718Z Creating the deployment and starting upload...
+[client-debug] 2026-05-08T15:21:31.719Z Determining necessary files for upload...
+[client-debug] 2026-05-08T15:21:31.719Z Creating deployment
+[client-debug] 2026-05-08T15:21:31.722Z Sending deployment creation API request
+[client-debug] 2026-05-08T15:21:32.752Z Deployment response: {"error":{"code":"missing_files","message":"Missing files","missing":["a09560c094f26ea18e04fa74aded1c8cd3158e5f","ba2c50a9be5d9df593538797016981f02f83fea3"]}}
+[client-debug] 2026-05-08T15:21:32.752Z Error: Deployment request status is 400
+[client-debug] 2026-05-08T15:21:32.752Z 2 files are required to upload
+[client-debug] 2026-05-08T15:21:32.752Z Yielding a 'file-count' event
+> [debug] [2026-05-08T15:21:32.752Z] Total files 485, 2 changed
+> [debug] [2026-05-08T15:21:32.753Z] Spinner invoked (Uploading [--------------------] (0.0B/14.3KB)) with a 0ms delay
+[client-debug] 2026-05-08T15:21:32.753Z Building an upload list...
+[client-debug] 2026-05-08T15:21:32.755Z Starting upload
+[client-debug] 2026-05-08T15:21:32.755Z POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:21:32.756Z POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:21:32.757Z] Spinner invoked (Uploading [=================---] (12.7KB/14.3KB)) with a 0ms delay
+> [debug] [2026-05-08T15:21:32.757Z] Spinner invoked (Uploading [====================] (14.3KB/14.3KB)) with a 0ms delay
+[client-debug] 2026-05-08T15:21:33.238Z DONE in 482ms: POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:21:33.238Z File ba2c50a9be5d9df593538797016981f02f83fea3 (/Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug_2.txt) uploaded
+[client-debug] 2026-05-08T15:21:33.239Z Yielding a 'file-uploaded' event
+> [debug] [2026-05-08T15:21:33.239Z] Uploaded: /Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug_2.txt (1.64KB)
+[client-debug] 2026-05-08T15:21:33.263Z DONE in 508ms: POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:21:33.263Z File a09560c094f26ea18e04fa74aded1c8cd3158e5f (/Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug.txt) uploaded
+[client-debug] 2026-05-08T15:21:33.263Z Yielding a 'file-uploaded' event
+> [debug] [2026-05-08T15:21:33.263Z] Uploaded: /Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug.txt (12.71KB)
+[client-debug] 2026-05-08T15:21:33.263Z All files uploaded
+[client-debug] 2026-05-08T15:21:33.263Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-05-08T15:21:33.263Z Starting deployment creation
+[client-debug] 2026-05-08T15:21:33.263Z Creating deployment
+[client-debug] 2026-05-08T15:21:33.266Z Sending deployment creation API request
+[client-debug] 2026-05-08T15:21:35.657Z Deployment response: {"alias":["wksc-landing-joeladawah2-7276-joeladawah2-gmailcoms-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":["wksc-landing-joeladawah2-7276-joeladawah2-gmailcoms-projects.vercel.app"],"bootedAt":1778253696111,"buildingAt":1778253696111,"buildSkipped":false,"createdAt":1778253696111,"creator":{"uid":"5BcAqyXxhNKxddf4dEiU75B0","username":"joeladawah2-7276"},"id":"dpl_4uk6JNSKKhwddD8sVKYyKbQ25Zq8","name":"wksc-landing","meta":{"githubCommitAuthorName":"JOEL ADAWAH SANI","githubCommitAuthorEmail":"joeladawahsani@Cybertron.local","githubCommitMessage":"Comprehensive SEO, AEO, and GEO upgrade: JSON-LD schemas, OpenGraph metadata, and indexing optimizations","githubCommitOrg":"joey-stack","githubCommitRef":"main","githubCommitRepo":"Wisdom-Kwati-Smart-City-PLC","githubCommitSha":"040a8a091c383064420744b899e3eeea374b6370","githubDeployment":"1","githubOrg":"joey-stack","githubRepo":"Wisdom-Kwati-Smart-City-PLC","gitDirty":"1","actor":"antigravity"},"originCacheRegion":"iad1","project":{"id":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","name":"wksc-landing","framework":"vite"},"public":false,"readyState":"INITIALIZING","regions":["iad1"],"source":"cli","status":"INITIALIZING","target":null,"team":{"id":"team_AeEOsU18dASRG5GYtIWCt24A","name":"joeladawah2-gmailcom's projects","slug":"joeladawah2-gmailcoms-projects"},"type":"LAMBDAS","url":"wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTokenClaims":{"sub":"owner:joeladawah2-gmailcoms-projects:project:wksc-landing:environment:preview","iss":"https://oidc.vercel.com/joeladawah2-gmailcoms-projects","scope":"owner:joeladawah2-gmailcoms-projects:project:wksc-landing:environment:preview","aud":"https://vercel.com/joeladawah2-gmailcoms-projects","owner":"joeladawah2-gmailcoms-projects","owner_id":"team_AeEOsU18dASRG5GYtIWCt24A","project":"wksc-landing","project_id":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","environment":"preview","plan":"hobby"},"lambdas":[{"id":"bld_nh4tfv1pb","createdAt":1778253696940,"entrypoint":".","readyState":"READY","readyStateAt":1778253696940,"output":[]}],"aliasAssignedAt":null,"build":{"env":[]},"builds":[],"createdIn":"sfo1","env":[],"functions":null,"inspectorUrl":"https://vercel.com/joeladawah2-gmailcoms-projects/wksc-landing/4uk6JNSKKhwddD8sVKYyKbQ25Zq8","isInConcurrentBuildsQueue":false,"isInSystemBuildsQueue":true,"ownerId":"team_AeEOsU18dASRG5GYtIWCt24A","plan":"hobby","projectId":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","projectSettings":{"buildCommand":null,"devCommand":null,"framework":"nextjs","commandForIgnoringBuildStep":null,"installCommand":null,"outputDirectory":null,"speedInsights":{"id":"O2uKkKmYZkIyLi9U7YvGlOmsRjq","hasData":false},"webAnalytics":{"id":"2rwznRZStwvOQAa3BW1DWEz5R"},"nodeVersion":"24.x"},"routes":null,"config":{"version":1,"secureComputePrimaryRegion":null,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fluid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}},"attribution":{"commitMeta":{"name":"JOEL ADAWAH SANI","email":"joeladawahsani@Cybertron.local","isVerified":false}}}
+[client-debug] 2026-05-08T15:21:35.657Z Deployment created with a notice:  To deploy to production (wksc-landing.vercel.app), run `vercel --prod`
+[client-debug] 2026-05-08T15:21:35.657Z Yielding a 'notice' event
+[client-debug] 2026-05-08T15:21:35.657Z Deployment created
+[client-debug] 2026-05-08T15:21:35.657Z Yielding a 'created' event
+Inspect: https://vercel.com/joeladawah2-gmailcoms-projects/wksc-landing/4uk6JNSKKhwddD8sVKYyKbQ25Zq8 [5s]
+Preview: https://wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app [5s]
+https://wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app> [debug] [2026-05-08T15:21:35.658Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-05-08T15:21:35.659Z] #4 → GET https://api.vercel.com/v2/user
+[client-debug] 2026-05-08T15:21:35.659Z Waiting for deployment to be ready...
+[client-debug] 2026-05-08T15:21:35.660Z Waiting for builds and the deployment to complete...
+> [debug] [2026-05-08T15:21:36.034Z] #4 ← 200 OK: sfo1::wch79-1778253697725-bc096661fbbf [375ms]
+> [debug] [2026-05-08T15:21:36.037Z] #5 → GET https://api.vercel.com/v3/now/deployments/dpl_4uk6JNSKKhwddD8sVKYyKbQ25Zq8/events?direction=forward&follow=1&format=lines&teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:21:36.260Z Deployment state changed to BUILDING
+[client-debug] 2026-05-08T15:21:36.260Z Yielding a 'building' event
+> [debug] [2026-05-08T15:21:36.260Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-05-08T15:21:38.883Z] #5 ← 200 OK: sfo1::7ltdv-1778253698076-ba3d4aadd8b9 [2.85s]
+> [debug] [2026-05-08T15:21:38.885Z] Spinner invoked (Building: Running build in Washington, D.C., USA (East) – iad1) with a 0ms delay
+> [debug] [2026-05-08T15:21:38.885Z] Spinner invoked (Building: Build machine configuration: 2 cores, 8 GB) with a 0ms delay
+> [debug] [2026-05-08T15:21:38.885Z] Spinner invoked (Building: Retrieving list of deployment files...) with a 0ms delay
+> [debug] [2026-05-08T15:21:38.885Z] Spinner invoked (Building: Previous build caches not available.) with a 0ms delay
+> [debug] [2026-05-08T15:21:39.976Z] Spinner invoked (Building: Downloading 507 deployment files...) with a 0ms delay
+> [debug] [2026-05-08T15:21:43.143Z] Spinner invoked (Building: Running "vercel build") with a 0ms delay
+> [debug] [2026-05-08T15:21:43.143Z] Spinner invoked (Building: Vercel CLI 53.2.0) with a 0ms delay
+> [debug] [2026-05-08T15:21:45.343Z] Spinner invoked (Building: Installing dependencies...) with a 0ms delay
+> [debug] [2026-05-08T15:21:49.526Z] Spinner invoked (Building: npm warn deprecated @studio-freight/lenis@1.0.42: The '@studio-freight/lenis' package has been renamed to 'lenis'. Please update your dependencies: npm install lenis and visit the documentation: https://www.npmjs.com/package/lenis) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.979Z] Spinner invoked (Building: added 364 packages in 13s) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.979Z] Spinner invoked (Building: 147 packages are looking for funding) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.979Z] Spinner invoked (Building: run `npm fund` for details) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.979Z] Spinner invoked (Building: Detected Next.js version: 16.2.4) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.979Z] Spinner invoked (Building: Running "npm run build") with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: > wksc-landing@0.1.0 build) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: > next build) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: Applying modifyConfig from Vercel) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: Attention: Next.js now collects completely anonymous telemetry regarding usage.) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: This information is used to shape Next.js' roadmap and prioritize features.) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: https://nextjs.org/telemetry) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: ▲ Next.js 16.2.4 (Turbopack)) with a 0ms delay
+> [debug] [2026-05-08T15:21:56.980Z] Spinner invoked (Building: Creating an optimized production build ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:10.620Z] Spinner invoked (Building: ✓ Compiled successfully in 11.3s) with a 0ms delay
+> [debug] [2026-05-08T15:22:10.640Z] Spinner invoked (Building: Running TypeScript ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:10.640Z] Spinner invoked (Building: Finished TypeScript in 233ms ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:10.640Z] Spinner invoked (Building: Collecting page data using 1 worker ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:11.681Z] Spinner invoked (Building: Generating static pages using 1 worker (0/70) ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:11.682Z] Spinner invoked (Building: Generating static pages using 1 worker (17/70)) with a 0ms delay
+> [debug] [2026-05-08T15:22:13.174Z] Spinner invoked (Building: Generating static pages using 1 worker (34/70)) with a 0ms delay
+> [debug] [2026-05-08T15:22:13.174Z] Spinner invoked (Building: Generating static pages using 1 worker (52/70)) with a 0ms delay
+> [debug] [2026-05-08T15:22:13.174Z] Spinner invoked (Building: ✓ Generating static pages using 1 worker (70/70) in 1632ms) with a 0ms delay
+> [debug] [2026-05-08T15:22:13.174Z] Spinner invoked (Building: Finalizing page optimization ...) with a 0ms delay
+> [debug] [2026-05-08T15:22:13.174Z] Spinner invoked (Building: Running onBuildComplete from Vercel) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: Route (app)) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ┌ ○ /) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /_not-found) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /about) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /beverly-hills) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /beverly-hills/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /black-onyx) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.487Z] Spinner invoked (Building: ├ ○ /blue-sapphire) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /contact) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /epe-smart-city) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /epe-smart-city/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /faqs) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /fintiri-extension) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /fintiri-extension/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /gousa-idu-district) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /gousa-idu-district/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.488Z] Spinner invoked (Building: ├ ○ /guzape-estate) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /guzape-estate/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /hof-community) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /hof-community/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /house-template) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /house-types) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /imperial-emerald) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /jade-terrace) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /kaduna-smart-district) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /kaduna-smart-district/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /karsana-district) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /karsana-district/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /katampe-extension) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /katampe-extension/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /lakeside-view) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.489Z] Spinner invoked (Building: ├ ○ /lakeside-view/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /mabushi-district) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /mabushi-district/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /maitama-district) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /maitama-district/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /murg-city) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /murg-city-exclusive) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /murg-city-exclusive/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /murg-city/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /opal-smart) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /palm-haven) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /palm-haven/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /ph-rumu-olumeni) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /port-harcourt-estate) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.490Z] Spinner invoked (Building: ├ ○ /port-harcourt-estate/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects-abuja) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects-kaduna) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects-lagos) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects-ph) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /projects-yola) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /quartz-terrace) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /red-onyx) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /robots.txt) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /royal-city) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /royal-city/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /royal-emerald) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /silver-pearl) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.491Z] Spinner invoked (Building: ├ ○ /sitemap.xml) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ �� /star-sapphire) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /sunbrook-estate) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /sunbrook-estate/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /usulo-city) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /usulo-city/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /white-pearl) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /white-sapphire) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ├ ○ /wisdom-kwati-smart-city) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: └ ○ /wisdom-kwati-smart-city/updates) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: ○  (Static)  prerendered as static content) with a 0ms delay
+> [debug] [2026-05-08T15:22:14.492Z] Spinner invoked (Building: Build Completed in /vercel/output [29s]) with a 0ms delay
+> [debug] [2026-05-08T15:22:15.504Z] Spinner invoked (Building: Deploying outputs...) with a 0ms delay
+[client-debug] 2026-05-08T15:22:19.079Z Deployment state changed to READY
+[client-debug] 2026-05-08T15:22:19.080Z Yielding a 'ready' event
+[2K[1A[2K[GPreview: https://wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app [49s]
+> [debug] [2026-05-08T15:22:19.086Z] Spinner invoked (Completing...) with a 0ms delay
+[client-debug] 2026-05-08T15:22:19.086Z Deployment alias assigned
+[client-debug] 2026-05-08T15:22:19.086Z Deployment is ready
+[client-debug] 2026-05-08T15:22:19.086Z Yielding a 'alias-assigned' event
+> [debug] [2026-05-08T15:22:19.091Z] #6 → GET https://api.vercel.com/v13/deployments/dpl_4uk6JNSKKhwddD8sVKYyKbQ25Zq8?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:22:20.390Z] #6 ← 200 OK: sfo1::mt4dp-1778253741832-9768f1431e24 [1.30s]
+To deploy to production (wksc-landing.vercel.app), run `vercel --prod`
+
+Common next commands:
+- `vercel inspect wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app --logs`
+- `vercel redeploy wksc-landing-egjj6g47l-joeladawah2-gmailcoms-projects.vercel.app`
+- `vercel deploy --prod`
+> [debug] [2026-05-08T15:22:22.418Z] Telemetry subprocess killed due to timeout
+> [debug] [2026-05-08T15:22:22.429Z] Telemetry subprocess exited with code null

@@ -1,0 +1,91 @@
+> [debug] [2026-05-08T15:19:02.153Z] Vercel CLI 53.2.0
+> [debug] [2026-05-08T15:19:02.188Z] Agent/TTY/nonInteractive: isAgent=true agentName=antigravity stdin.isTTY=true --non-interactive=false explicitFalse=false => nonInteractive=false
+> [debug] [2026-05-08T15:19:02.188Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-05-08T15:19:02.199Z] failed to find extension command with name "vercel---yes"
+> [debug] [2026-05-08T15:19:02.273Z] Spinner invoked (Retrieving project…) with a 1000ms delay
+> [debug] [2026-05-08T15:19:02.274Z] Valid access token, skipping token refresh.
+> [debug] [2026-05-08T15:19:02.331Z] #1 → GET https://api.vercel.com/teams/team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:19:02.333Z] #2 → GET https://api.vercel.com/v9/projects/prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:19:03.938Z] #1 ← 200 OK: sfo1::g4g7v-1778253545531-5135c9a4619b [1.61s]
+> [debug] [2026-05-08T15:19:03.960Z] #2 ← 200 OK: sfo1::2mc76-1778253545530-a8c73f5cd256 [1.63s]
+> [debug] [2026-05-08T15:19:04.034Z] Spinner invoked (Deploying joeladawah2-gmailcoms-projects/wksc-landing) with a 0ms delay
+[client-debug] 2026-05-08T15:19:04.035Z Creating deployment...
+[client-debug] 2026-05-08T15:19:04.035Z Provided 'path' is a directory.
+[client-debug] 2026-05-08T15:19:04.038Z Found 26 rules in .vercelignore
+[client-debug] 2026-05-08T15:19:04.038Z Building file tree...
+[client-debug] 2026-05-08T15:19:04.066Z Found 505 files in the specified directory
+[client-debug] 2026-05-08T15:19:05.047Z Yielding a 'hashes-calculated' event with 483 hashes
+> [debug] [2026-05-08T15:19:05.054Z] #3 → GET https://api.vercel.com/v9/projects/wksc-landing?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:19:05.467Z] #3 ← 200 OK: sfo1::qgckc-1778253547084-2fb102fdd35c [413ms]
+[client-debug] 2026-05-08T15:19:05.470Z Using provided API URL: https://api.vercel.com
+[client-debug] 2026-05-08T15:19:05.470Z Using provided user agent: vercel 53.2.0 node-v22.13.1 darwin (x64)
+[client-debug] 2026-05-08T15:19:05.470Z Setting platform version to harcoded value 2
+[client-debug] 2026-05-08T15:19:05.470Z Creating the deployment and starting upload...
+[client-debug] 2026-05-08T15:19:05.470Z Determining necessary files for upload...
+[client-debug] 2026-05-08T15:19:05.471Z Creating deployment
+[client-debug] 2026-05-08T15:19:05.474Z Sending deployment creation API request
+[client-debug] 2026-05-08T15:19:06.287Z Deployment response: {"error":{"code":"missing_files","message":"Missing files","missing":["302da3232a97a1bed7fb94bf0ebe675fa359d422","6135f4a640a9db3f7c2b42aa8202f3ec6540d3c6"]}}
+[client-debug] 2026-05-08T15:19:06.287Z Error: Deployment request status is 400
+[client-debug] 2026-05-08T15:19:06.287Z 2 files are required to upload
+[client-debug] 2026-05-08T15:19:06.287Z Yielding a 'file-count' event
+> [debug] [2026-05-08T15:19:06.287Z] Total files 483, 2 changed
+> [debug] [2026-05-08T15:19:06.288Z] Spinner invoked (Uploading [--------------------] (0.0B/6.6KB)) with a 0ms delay
+[client-debug] 2026-05-08T15:19:06.288Z Building an upload list...
+[client-debug] 2026-05-08T15:19:06.289Z Starting upload
+[client-debug] 2026-05-08T15:19:06.289Z POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:19:06.290Z POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+> [debug] [2026-05-08T15:19:06.291Z] Spinner invoked (Uploading [===============-----] (5.1KB/6.6KB)) with a 0ms delay
+> [debug] [2026-05-08T15:19:06.291Z] Spinner invoked (Uploading [====================] (6.6KB/6.6KB)) with a 0ms delay
+[client-debug] 2026-05-08T15:19:06.905Z DONE in 615ms: POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:19:06.905Z File 6135f4a640a9db3f7c2b42aa8202f3ec6540d3c6 (/Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug.txt) uploaded
+[client-debug] 2026-05-08T15:19:06.905Z Yielding a 'file-uploaded' event
+> [debug] [2026-05-08T15:19:06.905Z] Uploaded: /Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_debug.txt (1.51KB)
+[client-debug] 2026-05-08T15:19:06.906Z DONE in 617ms: POST https://api.vercel.com/v2/files?teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:19:06.907Z File 302da3232a97a1bed7fb94bf0ebe675fa359d422 (/Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_log.txt) uploaded
+[client-debug] 2026-05-08T15:19:06.907Z Yielding a 'file-uploaded' event
+> [debug] [2026-05-08T15:19:06.907Z] Uploaded: /Users/joeladawahsani/Desktop/Wisdom Kwati Smart City PLC/vercel_log.txt (5.14KB)
+[client-debug] 2026-05-08T15:19:06.907Z All files uploaded
+[client-debug] 2026-05-08T15:19:06.907Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-05-08T15:19:06.907Z Starting deployment creation
+[client-debug] 2026-05-08T15:19:06.907Z Creating deployment
+[client-debug] 2026-05-08T15:19:06.910Z Sending deployment creation API request
+[client-debug] 2026-05-08T15:19:09.759Z Deployment response: {"alias":["wksc-landing-joeladawah2-7276-joeladawah2-gmailcoms-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":["wksc-landing-joeladawah2-7276-joeladawah2-gmailcoms-projects.vercel.app"],"bootedAt":1778253549815,"buildingAt":1778253549815,"buildSkipped":false,"createdAt":1778253549815,"creator":{"uid":"5BcAqyXxhNKxddf4dEiU75B0","username":"joeladawah2-7276"},"id":"dpl_6CELDE7YZVRm26HJ5U2XPBbP4zx4","name":"wksc-landing","meta":{"githubCommitAuthorName":"JOEL ADAWAH SANI","githubCommitAuthorEmail":"joeladawahsani@Cybertron.local","githubCommitMessage":"Comprehensive SEO, AEO, and GEO upgrade: JSON-LD schemas, OpenGraph metadata, and indexing optimizations","githubCommitOrg":"joey-stack","githubCommitRef":"main","githubCommitRepo":"Wisdom-Kwati-Smart-City-PLC","githubCommitSha":"040a8a091c383064420744b899e3eeea374b6370","githubDeployment":"1","githubOrg":"joey-stack","githubRepo":"Wisdom-Kwati-Smart-City-PLC","gitDirty":"1","actor":"antigravity"},"originCacheRegion":"iad1","project":{"id":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","name":"wksc-landing","framework":"vite"},"public":false,"readyState":"INITIALIZING","regions":["iad1"],"source":"cli","status":"INITIALIZING","target":null,"team":{"id":"team_AeEOsU18dASRG5GYtIWCt24A","name":"joeladawah2-gmailcom's projects","slug":"joeladawah2-gmailcoms-projects"},"type":"LAMBDAS","url":"wksc-landing-ofnh4gitc-joeladawah2-gmailcoms-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTokenClaims":{"sub":"owner:joeladawah2-gmailcoms-projects:project:wksc-landing:environment:preview","iss":"https://oidc.vercel.com/joeladawah2-gmailcoms-projects","scope":"owner:joeladawah2-gmailcoms-projects:project:wksc-landing:environment:preview","aud":"https://vercel.com/joeladawah2-gmailcoms-projects","owner":"joeladawah2-gmailcoms-projects","owner_id":"team_AeEOsU18dASRG5GYtIWCt24A","project":"wksc-landing","project_id":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","environment":"preview","plan":"hobby"},"lambdas":[{"id":"bld_6792q9yw9","createdAt":1778253550797,"entrypoint":".","readyState":"READY","readyStateAt":1778253550797,"output":[]}],"aliasAssignedAt":null,"build":{"env":[]},"builds":[],"createdIn":"sfo1","env":[],"functions":null,"inspectorUrl":"https://vercel.com/joeladawah2-gmailcoms-projects/wksc-landing/6CELDE7YZVRm26HJ5U2XPBbP4zx4","isInConcurrentBuildsQueue":false,"isInSystemBuildsQueue":true,"ownerId":"team_AeEOsU18dASRG5GYtIWCt24A","plan":"hobby","projectId":"prj_N7csT0k8K8ETMj6pIbqdCLkCNWVx","projectSettings":{"buildCommand":null,"devCommand":null,"framework":"vite","commandForIgnoringBuildStep":null,"installCommand":null,"outputDirectory":null,"speedInsights":{"id":"O2uKkKmYZkIyLi9U7YvGlOmsRjq","hasData":false},"webAnalytics":{"id":"2rwznRZStwvOQAa3BW1DWEz5R"},"nodeVersion":"24.x"},"routes":null,"config":{"version":1,"secureComputePrimaryRegion":null,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fluid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}},"attribution":{"commitMeta":{"name":"JOEL ADAWAH SANI","email":"joeladawahsani@Cybertron.local","isVerified":false}}}
+[client-debug] 2026-05-08T15:19:09.759Z Deployment created with a notice:  To deploy to production (wksc-landing.vercel.app), run `vercel --prod`
+[client-debug] 2026-05-08T15:19:09.759Z Yielding a 'notice' event
+[client-debug] 2026-05-08T15:19:09.759Z Deployment created
+[client-debug] 2026-05-08T15:19:09.759Z Yielding a 'created' event
+Inspect: https://vercel.com/joeladawah2-gmailcoms-projects/wksc-landing/6CELDE7YZVRm26HJ5U2XPBbP4zx4 [6s]
+Preview: https://wksc-landing-ofnh4gitc-joeladawah2-gmailcoms-projects.vercel.app [6s]
+https://wksc-landing-ofnh4gitc-joeladawah2-gmailcoms-projects.vercel.app> [debug] [2026-05-08T15:19:09.761Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-05-08T15:19:09.762Z] #4 → GET https://api.vercel.com/v2/user
+[client-debug] 2026-05-08T15:19:09.762Z Waiting for deployment to be ready...
+[client-debug] 2026-05-08T15:19:09.762Z Waiting for builds and the deployment to complete...
+> [debug] [2026-05-08T15:19:10.190Z] #4 ← 200 OK: sfo1::s6w72-1778253551818-1e91441e6f18 [428ms]
+> [debug] [2026-05-08T15:19:10.192Z] #5 → GET https://api.vercel.com/v3/now/deployments/dpl_6CELDE7YZVRm26HJ5U2XPBbP4zx4/events?direction=forward&follow=1&format=lines&teamId=team_AeEOsU18dASRG5GYtIWCt24A
+[client-debug] 2026-05-08T15:19:12.013Z Deployment state changed to BUILDING
+[client-debug] 2026-05-08T15:19:12.013Z Yielding a 'building' event
+> [debug] [2026-05-08T15:19:12.013Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-05-08T15:19:29.932Z] #5 ← 200 OK: sfo1::8zdbd-1778253552222-ad1fa36a867c [19.74s]
+[client-debug] 2026-05-08T15:19:59.323Z Yielding a 'error' event
+> [debug] [2026-05-08T15:19:59.336Z] Error: Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+    at Now.handleDeploymentError (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4756:12)
+    at processDeployment (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4499:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Now.create (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4647:24)
+    at async createDeploy (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:180:12)
+    at async handleDefaultDeploy (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:1644:18)
+    at async _Span.trace (/Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/@vercel/build-utils/dist/index.js:32198:14)
+    at async main (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:24393:18)
+> [debug] [2026-05-08T15:19:59.337Z] handling error: Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+    at Now.handleDeploymentError (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4756:12)
+    at processDeployment (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4499:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Now.create (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-4M7OEHTY.js:4647:24)
+    at async createDeploy (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:180:12)
+    at async handleDefaultDeploy (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:1644:18)
+    at async _Span.trace (/Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/@vercel/build-utils/dist/index.js:32198:14)
+    at async main (file:///Users/joeladawahsani/.npm/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:24393:18)
+Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+> [debug] [2026-05-08T15:20:01.366Z] Telemetry subprocess killed due to timeout
+> [debug] [2026-05-08T15:20:01.378Z] Telemetry subprocess exited with code null

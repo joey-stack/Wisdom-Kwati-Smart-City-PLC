@@ -1,0 +1,113 @@
+WARNING! `--confirm` is deprecated, please use `--yes` instead
+Retrieving project…
+Deploying joeladawah2-gmailcoms-projects/wksc-landing
+Uploading [--------------------] (0.0B/139B)
+Uploading [====================] (139.0B/139B)
+Inspect: https://vercel.com/joeladawah2-gmailcoms-projects/wksc-landing/AsKKhXhW7b647YrnsJaQNPSqkg9n [8s]
+Preview: https://wksc-landing-lmyry1mql-joeladawah2-gmailcoms-projects.vercel.app [8s]
+https://wksc-landing-lmyry1mql-joeladawah2-gmailcoms-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 504 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 53.2.0
+Building: Installing dependencies...
+Building: npm warn deprecated @studio-freight/lenis@1.0.42: The '@studio-freight/lenis' package has been renamed to 'lenis'. Please update your dependencies: npm install lenis and visit the documentation: https://www.npmjs.com/package/lenis
+Building: added 364 packages in 12s
+Building: 147 packages are looking for funding
+Building: run `npm fund` for details
+Building: Running "npm run build"
+Building: > wksc-landing@0.1.0 build
+Building: > next build
+Building: Attention: Next.js now collects completely anonymous telemetry regarding usage.
+Building: This information is used to shape Next.js' roadmap and prioritize features.
+Building: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+Building: https://nextjs.org/telemetry
+Building: ▲ Next.js 16.2.4 (Turbopack)
+Building: Creating an optimized production build ...
+Building: ✓ Compiled successfully in 10.8s
+Building: Running TypeScript ...
+Building: Finished TypeScript in 230ms ...
+Building: Collecting page data using 1 worker ...
+Building: Generating static pages using 1 worker (0/70) ...
+Building: Generating static pages using 1 worker (17/70)
+Building: Generating static pages using 1 worker (34/70)
+Building: Generating static pages using 1 worker (52/70)
+Building: ✓ Generating static pages using 1 worker (70/70) in 1752ms
+Building: Finalizing page optimization ...
+Building: Route (app)
+Building: ┌ ○ /
+Building: ├ ○ /_not-found
+Building: ├ ○ /about
+Building: ├ ○ /beverly-hills
+Building: ├ ○ /beverly-hills/updates
+Building: ├ ○ /black-onyx
+Building: ├ ○ /blue-sapphire
+Building: ├ ○ /contact
+Building: ├ ○ /epe-smart-city
+Building: ├ ○ /epe-smart-city/updates
+Building: ├ ○ /faqs
+Building: ├ ○ /fintiri-extension
+Building: ├ ○ /fintiri-extension/updates
+Building: ├ ○ /gousa-idu-district
+Building: ├ ○ /gousa-idu-district/updates
+Building: ├ ○ /guzape-estate
+Building: ├ ○ /guzape-estate/updates
+Building: ├ ○ /hof-community
+Building: ├ ○ /hof-community/updates
+Building: ├ ○ /house-template
+Building: ├ ○ /house-types
+Building: ├ ○ /imperial-emerald
+Building: ├ ○ /jade-terrace
+Building: ├ ○ /kaduna-smart-district
+Building: ├ ○ /kaduna-smart-district/updates
+Building: ├ ○ /karsana-district
+Building: ├ ○ /karsana-district/updates
+Building: ├ ○ /katampe-extension
+Building: ├ ○ /katampe-extension/updates
+Building: ├ ○ /lakeside-view
+Building: ├ ○ /lakeside-view/updates
+Building: ├ ○ /mabushi-district
+Building: ├ ○ /mabushi-district/updates
+Building: ├ ○ /maitama-district
+Building: ├ ○ /maitama-district/updates
+Building: ├ ○ /murg-city
+Building: ├ ○ /murg-city-exclusive
+Building: ├ ○ /murg-city-exclusive/updates
+Building: ├ ○ /murg-city/updates
+Building: ├ ○ /opal-smart
+Building: ├ ○ /palm-haven
+Building: ├ ○ /palm-haven/updates
+Building: ├ ○ /ph-rumu-olumeni
+Building: ├ ○ /port-harcourt-estate
+Building: ├ ○ /port-harcourt-estate/updates
+Building: ├ ○ /projects
+Building: ├ ○ /projects-abuja
+Building: ├ ○ /projects-kaduna
+Building: ├ ○ /projects-lagos
+Building: ├ ○ /projects-ph
+Building: ├ ○ /projects-yola
+Building: ├ ○ /quartz-terrace
+Building: ├ ○ /red-onyx
+Building: ├ ○ /robots.txt
+Building: ├ ○ /royal-city
+Building: ├ ○ /royal-city/updates
+Building: ├ ○ /royal-emerald
+Building: ├ ○ /silver-pearl
+Building: ├ ○ /sitemap.xml
+Building: ├ ○ /star-sapphire
+Building: ├ ○ /sunbrook-estate
+Building: ├ ○ /sunbrook-estate/updates
+Building: ├ ○ /usulo-city
+Building: ├ ○ /usulo-city/updates
+Building: ├ ○ /white-pearl
+Building: ├ ○ /white-sapphire
+Building: ├ ○ /wisdom-kwati-smart-city
+Building: └ ○ /wisdom-kwati-smart-city/updates
+Building: ○  (Static)  prerendered as static content
+Building: Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+Building: Learn More: https://vercel.link/missing-public-directory
+Error: No Output Directory named "dist" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.

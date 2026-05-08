@@ -1640,7 +1640,7 @@ body.menu-active .mobile-cta {
   .contact-social-section,
   .faq-hero-section,
   .faq-content-section {
-    padding: 70px 10px 0 !important;
+    padding: 70px 10px 10px !important;
   }
 
   .portfolio-container-main {
@@ -5356,7 +5356,11 @@ body.menu-active .mobile-cta {
 .ht-filter-section {
   position: relative;
   z-index: 10;
-  padding: 70px 10px 0 !important;
+  padding: 70px 10px 20px;
+}
+
+.ht-grid-section {
+  padding: 40px 10px 80px;
 }
 
 .ht-filter-bar {

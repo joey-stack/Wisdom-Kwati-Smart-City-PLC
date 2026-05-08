@@ -9,6 +9,19 @@ export default function Page() {
     
 
     <header className="hero">
+        {/* Background Video */}
+        <div className="hero-video-wrapper">
+            <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                className="hero-video"
+                poster="https://images.weserv.nl/?url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi"
+            >
+                <source src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" type="video/mp4" />
+            </video>
+        </div>
         {/*  Background Grid Overlay  */}
         <div className="grid-overlay"></div>
         
@@ -80,7 +93,7 @@ export default function Page() {
                 <a href="/mabushi-district" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img src="/assets/ellington_villas_project_card.jpg" alt="Mabushi District" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Mabushi District" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -98,7 +111,7 @@ export default function Page() {
                 <a href="/guzape-estate" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img src="/assets/nimi_hills_project_card.png" alt="Guzape II" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Guzape II" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -116,7 +129,7 @@ export default function Page() {
                 <a href="/palm-haven" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img src="/assets/palm_haven_project_card.jpg" alt="Apo Tafyi" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ" alt="Apo Tafyi" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -159,47 +172,57 @@ export default function Page() {
 
             <div className="portfolio-grid">
 
-                {/*  1. The Royal Emerald — Sunshine, Katampe Extension  */}
-                <a href="/royal-emerald" className="ht-card" data-name="The Royal Emerald" data-estate="Sunshine, Katampe Extension" data-type="5 Bedroom Luxury Villa" data-specs="5 Beds • 6 Baths • 8,200 SQ FT">
+                {/*  1. The Imperial Emerald  */}
+                <a href="/imperial-emerald" className="ht-card reveal-on-scroll"
+                     data-name="the imperial emerald"
+                     data-estate="maitama ii"
+                     data-neighborhood="maitama ii"
+                     data-type="detached"
+                     data-specs="7 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="The Imperial Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
-                            <h3 className="ht-card-name">The Royal Emerald</h3>
-                            <p className="ht-card-location">Sunshine, Katampe Extension</p>
+                            <h3 className="ht-card-name">The Imperial Emerald</h3>
+                            <p className="ht-card-location">Premium Class • 7BR Fully Detached</p>
                         </div>
                         <div className="ht-card-right">
-                            <p className="ht-card-type">5 Bedroom Luxury Villa</p>
+                            <p className="ht-card-type">Emerald Class Villa</p>
                             <div className="ht-card-specs">
-                                <span><i className="fa-solid fa-bed"></i> 5</span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 7</span>
                                 <span className="ht-dot"></span>
-                                <span><i className="fa-solid fa-bath"></i> 6</span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 8</span>
                                 <span className="ht-dot"></span>
-                                <span><i className="fa-solid fa-expand"></i> 8,200 SQ FT</span>
+                                <span>12,500 SQ FT</span>
                             </div>
                         </div>
                     </div>
                 </a>
 
-                {/*  2. The Blue Sapphire — Whispering Pines, Karsana  */}
-                <a href="/blue-sapphire" className="ht-card" data-name="The Blue Sapphire" data-estate="Whispering Pines, Karsana" data-type="4 Bedroom Terrace Smart Duplex" data-specs="4 Beds • 4.5 Baths • 3,200 SQ FT">
+                {/*  2. The Royal Emerald  */}
+                <a href="/royal-emerald" className="ht-card reveal-on-scroll"
+                     data-name="the royal emerald"
+                     data-estate="guzape ii"
+                     data-neighborhood="guzape ii"
+                     data-type="detached"
+                     data-specs="5 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
-                            <h3 className="ht-card-name">The Blue Sapphire</h3>
-                            <p className="ht-card-location">Whispering Pines, Karsana</p>
+                            <h3 className="ht-card-name">The Royal Emerald</h3>
+                            <p className="ht-card-location">Premium Class • 5BR Fully Detached</p>
                         </div>
                         <div className="ht-card-right">
-                            <p className="ht-card-type">4 Bedroom Terrace Smart Duplex</p>
+                            <p className="ht-card-type">Emerald Class Villa</p>
                             <div className="ht-card-specs">
-                                <span><i className="fa-solid fa-bed"></i> 4</span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 5</span>
                                 <span className="ht-dot"></span>
-                                <span><i className="fa-solid fa-bath"></i> 4.5</span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 6</span>
                                 <span className="ht-dot"></span>
-                                <span><i className="fa-solid fa-expand"></i> 3,200 SQ FT</span>
+                                <span>8,200 SQ FT</span>
                             </div>
                         </div>
                     </div>
@@ -313,7 +336,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper">
                         <div className="services-image-inner">
-                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB" alt="High-Fidelity Architectural Project" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB" alt="High-Fidelity Architectural Project" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB'; }} />
                         </div>
                     </div>
                 </div>
@@ -415,7 +438,7 @@ export default function Page() {
                 <div className="carousel-track">
                     {/*  Card 1: Image Variant (Chief Dr. Chidi Okafor)  */}
                     <div className="review-card image-card">
-                        <img src="/assets/reviewer_abuja_chief.png" alt="Chief Dr. Chidi Okafor Review" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Chief Dr. Chidi Okafor Review" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Correcting a continent, one smart home at a time. WKSC is building the infrastructure we've always deserved."</blockquote>
                             <div className="reviewer-identity-container">
@@ -424,7 +447,7 @@ export default function Page() {
                                     <span className="card-meta">HOME OWNER, ABUJA</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img src="/assets/reviewer_abuja_chief.png" alt="Chief Dr. Chidi Okafor" />
+                                    <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Mabushi District" />
                                 </div>
                             </div>
                         </div>
@@ -440,14 +463,14 @@ export default function Page() {
                                 <span className="card-meta">EPE SMART CITY, LAGOS</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img src="/assets/reviewer_lagos_family.png" alt="The Adewale Family" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0" alt="The Adewale Family" />
                             </div>
                         </div>
                     </div>
 
                     {/*  Card 3: Image Variant (Engr. Tunde Olayinka)  */}
                     <div className="review-card image-card">
-                        <img src="/assets/reviewer_ph_pro.png" alt="Engr. Tunde Olayinka Review" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="Engr. Tunde Olayinka Review" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Finally, a smart ecosystem that actually works. The IoT integration in Port Harcourt is world-class."</blockquote>
                             <div className="reviewer-identity-container">
@@ -456,7 +479,7 @@ export default function Page() {
                                     <span className="card-meta">PORT HARCOURT</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img src="/assets/reviewer_ph_pro.png" alt="Engr. Tunde Olayinka" />
+                                    <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="Engr. Tunde Olayinka" />
                                 </div>
                             </div>
                         </div>
@@ -472,7 +495,7 @@ export default function Page() {
                                 <span className="card-meta">HOME OWNER, YOLA</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img src="/assets/reviewer_yola_amina.png" alt="Amina Bello" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Katampe Extension" />
                             </div>
                         </div>
                     </div>
@@ -507,7 +530,7 @@ export default function Page() {
                 <div className="process-item" data-step="1">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img src="/assets/process_1_final.png" alt="Search & Explore" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Search & Explore" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -534,7 +557,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="2">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img src="/assets/process_2_highres.png" alt="Book a Tour" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Book a Tour" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -561,7 +584,7 @@ export default function Page() {
                 <div className="process-item" data-step="3">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img src="/assets/process_3_new.png" alt="Make Your Move" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Make Your Move" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -588,7 +611,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="4">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img src="/assets/process_4_new.png" alt="Close & Celebrate" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Close & Celebrate" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -631,7 +654,7 @@ export default function Page() {
                 {/*  Blog 1  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img src="/assets/blog_homebuyer.png" alt="First-time homebuyer's guide" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="First-time homebuyer's guide" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">
@@ -652,7 +675,7 @@ export default function Page() {
                 {/*  Blog 2  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img src="/assets/blog_renting.png" alt="Renting guide" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Renting guide" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">
@@ -673,7 +696,7 @@ export default function Page() {
                 {/*  Blog 3  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img src="/assets/blog_trends.png" alt="Real estate trends 2025" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Real estate trends 2025" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">

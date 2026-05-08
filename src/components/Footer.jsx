@@ -191,7 +191,7 @@ export default function Footer() {
                     <span className="copyright">©2026 WISDOM KWATI SMART CITY PLC. REG RC 1573033.</span>
                 </div>
                 <div className="bottom-right">
-                    <span className="signature">BUILT BY WISDOM KWATI</span>
+                    <span className="signature">BUILT BY CODESIGHT</span>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ export default function Page() {
             {/*  Hero Section  */}
     <section className="pd-hero">
         <div className="pd-hero-image">
-            <img src="/assets/beverly_hills_project_card_v2.jpg" alt="Beverly Hills" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1_bpQS7maFGuzsAYR3PkgR1Q6iv6H1ITz" alt="Beverly Hills" />
         </div>
         <div className="pd-hero-overlay"></div>
         <div className="pd-hero-content reveal-on-scroll">
@@ -31,7 +31,7 @@ export default function Page() {
         </div>
     </section>
 
-    <main className="container-1380">
+    <div className="container-1380">
         <div className="pd-main-layout">
             
             {/*  Left Column  */}
@@ -165,14 +165,14 @@ export default function Page() {
                     <a href="/katampe-extension" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="/assets/neighborhood_katampe_1776023833571.png" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Ext.</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="/assets/neighborhood_katampe_1776023833571.png" alt="Sunset Haven" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Sunset Haven" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Sunset Haven</h4>
                                     <p>Katampe Ext.</p>
@@ -184,14 +184,14 @@ export default function Page() {
                     <a href="/karsana-district" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="/assets/whispering_pine_card_text.jpg" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="/assets/whispering_pine_card_text.jpg" alt="Whispering Pines" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Whispering Pines" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Whispering Pines</h4>
                                     <p>Karsana</p>
@@ -203,14 +203,14 @@ export default function Page() {
                     <a href="/mabushi-district" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="/assets/ellington_villas_project_card.jpg" alt="Ellington Villa" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1RQV-zX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Ellington Villa</h4>
                                     <p>Mabushi</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="/assets/ellington_villas_project_card.jpg" alt="Ellington Villa" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1RQV-zX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Ellington Villa</h4>
                                     <p>Mabushi</p>
@@ -222,14 +222,14 @@ export default function Page() {
                     <a href="/guzape-estate" className="pd-compact-item">
                         <div className="pd-compact-flipper">
                             <div className="pd-compact-front">
-                                <img src="/assets/nimi_hills_project_card.png" alt="Nimi Hills" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Nimi Hills" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Nimi Hills</h4>
                                     <p>Guzape</p>
                                 </div>
                             </div>
                             <div className="pd-compact-back">
-                                <img src="/assets/nimi_hills_project_card.png" alt="Nimi Hills" className="pd-compact-thumb" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Nimi Hills" className="pd-compact-thumb" />
                                 <div className="pd-compact-info">
                                     <h4>Nimi Hills</h4>
                                     <p>Guzape</p>
@@ -242,7 +242,7 @@ export default function Page() {
                 <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                     <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                        <img src="/assets/about_company_bg.png" alt="Sarah Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h" alt="Sarah Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
                         <div>
                             <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>Sarah Kwati</h3>
                             <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>Beverly Hills Specialist</p>
@@ -263,7 +263,7 @@ export default function Page() {
             </aside>
 
         </div>
-    </main>
+    </div>
 
     {/*  House Types Section  */}
     <section className="pd-properties-section" style={{ background: "var(--bg-main)" }}>
@@ -284,7 +284,7 @@ export default function Page() {
                 
             <a href="/jade-terrace" className="pd-house-card reveal-on-scroll">
                 <div className="pd-house-image">
-                    <img src="/assets/terrace_4bed.png" alt="Jade Terrace" />
+                    <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Jade Terrace" />
                 </div>
                 <div className="pd-house-info">
                     <div className="pd-house-header">
@@ -303,7 +303,7 @@ export default function Page() {
             </a>
             <a href="/diamond-duplex" className="pd-house-card reveal-on-scroll">
                 <div className="pd-house-image">
-                    <img src="/assets/detached_5bed.png" alt="Diamond Duplex" />
+                    <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Diamond Duplex" />
                 </div>
                 <div className="pd-house-info">
                     <div className="pd-house-header">
@@ -322,7 +322,7 @@ export default function Page() {
             </a>
             <a href="/imperial-emerald" className="pd-house-card reveal-on-scroll">
                 <div className="pd-house-image">
-                    <img src="/assets/mansion_7bed.png" alt="Emerald Villa" />
+                    <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="Emerald Villa" />
                 </div>
                 <div className="pd-house-info">
                     <div className="pd-house-header">

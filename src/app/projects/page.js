@@ -130,7 +130,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="mabushi" data-estate="ellington villa">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/ellington_villas_project_card.jpg" alt="Ellington Villa, Mabushi" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa, Mabushi" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -147,7 +147,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="guzape" data-estate="nimi hills">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/nimi_hills_project_card.png" alt="Nimi Hills, Guzape" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills, Guzape" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -162,11 +162,11 @@ export default function Page() {
                     </a>
                     <a href="/palm-haven" className="neighborhood-card reveal-on-scroll" 
                        data-state="abuja" data-neighborhood="apo tafyi" data-estate="palm haven">
-                        <div className="neighborhood-image-wrapper">
-                            <div className="neighborhood-image-inner">
-                                <img src="/assets/palm_haven_project_card.jpg" alt="Palm Haven, Apo Tafyi" />
-                            </div>
-                        </div>
+                         <div className="neighborhood-image-wrapper">
+                             <div className="neighborhood-image-inner">
+                                 <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ" alt="Palm Haven, Apo Tafyi" />
+                             </div>
+                         </div>
                         <div className="neighborhood-info">
                             <div className="neighborhood-details">
                                 <h3 className="neighborhood-title">Palm Haven</h3>
@@ -181,7 +181,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="maitama ii" data-estate="kwati city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/kwati_city_project_card.jpg" alt="Kwati City, Maitama II" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Kwati City, Maitama II" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -198,7 +198,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="royal city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/royal_city_project_card.jpg" alt="Royal City, Kuje" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Royal City, Kuje" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -216,7 +216,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="beverly hills">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/beverly_hills_project_card_v2.jpg" alt="Beverly Hills, Kuje" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Beverly Hills, Kuje" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -233,7 +233,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="lakeside view">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/beverly_hills_project_card.jpg" alt="Lakeside View, Kuje" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Lakeside View, Kuje" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -251,7 +251,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="karsana" data-estate="whispering pines">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/whispering_pine_card_text.jpg" alt="Whispering Pines, Karsana" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Whispering Pines, Karsana" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -268,7 +268,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="karshi" data-estate="wisdom kwati smart city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/wisdom_kwati_karshi_card.jpg" alt="Wisdom Kwati Smart City, Karshi" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Wisdom Kwati Smart City, Karshi" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -302,11 +302,11 @@ export default function Page() {
                     {/*  Card 13: Fintiri Extension  */}
                     <a href="/fintiri-extension" className="neighborhood-card reveal-on-scroll" 
                        data-state="adamawa" data-neighborhood="yola" data-estate="fintiri extension">
-                        <div className="neighborhood-image-wrapper">
-                            <div className="neighborhood-image-inner">
-                                <img src="/assets/fintiri_extension_card.jpg" alt="Fintiri Extension, Yola" />
-                            </div>
-                        </div>
+                         <div className="neighborhood-image-wrapper">
+                             <div className="neighborhood-image-inner">
+                                 <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1KGLdqvAPmRLFCi_vYeKe8nJ0yms7idqb" alt="Fintiri Extension, Yola" />
+                             </div>
+                         </div>
                         <div className="neighborhood-info">
                             <div className="neighborhood-details">
                                 <h3 className="neighborhood-title">Fintiri Extension</h3>

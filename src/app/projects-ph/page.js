@@ -39,7 +39,7 @@ export default function Page() {
                        data-state="rivers" data-neighborhood="port harcourt" data-estate="garden city estate">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/whispering_pine_card_text.jpg" alt="Garden City Estate, Port Harcourt" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Garden City Estate, Port Harcourt" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -58,7 +58,7 @@ export default function Page() {
                        data-state="rivers" data-neighborhood="port harcourt" data-estate="rumu-olumeni">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/ph_projects.png" alt="PH Rumu-olumeni, Port Harcourt" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c" alt="PH Rumu-olumeni, Port Harcourt" />
                             </div>
                         </div>
                         <div className="neighborhood-info">

@@ -51,3 +51,4 @@ next-env.d.ts
 *.mp4
 *.docx
 _legacy_backup/
+/public/assets/

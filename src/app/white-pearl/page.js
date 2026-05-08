@@ -48,19 +48,19 @@ export default function Page() {
         {/*  Thumbnail strip  */}
         <div className="hd-lightbox-thumbs" id="lb-thumbs">
             <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="1" data-index="0" />
-            <img src="/assets/neighborhood_katampe_1776023833571.png" alt="2" data-index="1" />
-            <img src="/assets/about_company_bg.png" alt="3" data-index="2" />
-            <img src="/assets/services_project_image.png" alt="4" data-index="3" />
-            <img src="/assets/about_hero_bg.png"  alt="5" data-index="4" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="2" data-index="1" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="3" data-index="2" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="4" data-index="3" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL"  alt="5" data-index="4" />
         </div>
 
         {/*  Hidden full src list  */}
         <div id="lb-srcs" style={{ display: "none" }}>
             <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ</span>
-            <span>/assets/neighborhood_katampe_1776023833571.png</span>
-            <span>/assets/about_company_bg.png</span>
-            <span>/assets/services_project_image.png</span>
-            <span>/assets/about_hero_bg.png</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL</span>
         </div>
     </div>
         <div className="hd-hero-image">
@@ -278,7 +278,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="5 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -306,7 +306,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="4 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">

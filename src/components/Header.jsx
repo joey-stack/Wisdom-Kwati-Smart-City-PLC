@@ -67,7 +67,6 @@ export default function Header() {
                 <div className="mega-menu-grid-4">
                     <a href="/emerald-villa" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>The Emerald 2.0</h3>
                                 <p>Zenith of smart luxury. 7-bed villas with world-class automation.</p>
@@ -77,7 +76,6 @@ export default function Header() {
                     </a>
                     <a href="/sapphire-terrace" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>The Sapphire</h3>
                                 <p>Urban style redefined. 4-bed terrace duplexes for modern city life.</p>
@@ -87,7 +85,6 @@ export default function Header() {
                     </a>
                     <a href="/diamond-duplex" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>The Diamond</h3>
                                 <p>Balanced family living. 4-bed smart duplexes with automated features.</p>
@@ -97,7 +94,6 @@ export default function Header() {
                     </a>
                     <a href="/topaz-semi" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>The Topaz</h3>
                                 <p>Shared elegance. 4-bed semi-detached duplexes blending community & luxury.</p>
@@ -107,7 +103,6 @@ export default function Header() {
                     </a>
                     <a href="/onyx-flats" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>The Onyx</h3>
                                 <p>Modern comfort. 2-bed flats ideal for young professionals.</p>
@@ -140,7 +135,6 @@ export default function Header() {
                 <div className="mega-menu-grid-5">
                     <a href="/projects-abuja" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>Abuja Central</h3>
                                 <p>Flagship smart districts in Guzape II, Maitama II, and the eco-focused Whispering Pines.</p>
@@ -150,7 +144,6 @@ export default function Header() {
                     </a>
                     <a href="/projects-lagos" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>Lagos Urban</h3>
                                 <p>Emerging smart communities and strategic commercial land holdings in the heart of Epe.</p>
@@ -160,7 +153,6 @@ export default function Header() {
                     </a>
                     <a href="/projects-ph" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>Port Harcourt</h3>
                                 <p>Strategic coastal developments in Garden City Estate and Rumu-olumeni designed for the future.</p>
@@ -170,7 +162,6 @@ export default function Header() {
                     </a>
                     <a href="/projects-yola" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>Yola Heritage</h3>
                                 <p>Northern expansion bringing smart living to Adamawa meets traditional innovation.</p>
@@ -180,7 +171,6 @@ export default function Header() {
                     </a>
                     <a href="/projects-kaduna" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
-                            
                             <div className="card-content">
                                 <h3>Kaduna Smart District</h3>
                                 <p>Strategic Northern hub developments combining high-density residency and commercial integration.</p>
@@ -222,35 +212,30 @@ export default function Header() {
                     </a>
                     <div className="mobile-accordion-content">
                         <a href="/projects-abuja" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>Abuja Central</h4>
                                 <p>Flagship smart districts</p>
                             </div>
                         </a>
                         <a href="/projects-lagos" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>Lagos Urban</h4>
                                 <p>Emerging communities</p>
                             </div>
                         </a>
                         <a href="/projects-ph" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>Port Harcourt</h4>
                                 <p>Coastal developments</p>
                             </div>
                         </a>
                         <a href="/projects-yola" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>Yola Heritage</h4>
                                 <p>Northern expansion</p>
                             </div>
                         </a>
                         <a href="/projects-kaduna" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>Kaduna Smart District</h4>
                                 <p>Strategic Northern hub</p>
@@ -266,35 +251,30 @@ export default function Header() {
                     </a>
                     <div className="mobile-accordion-content">
                         <a href="/emerald-villa" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>The Emerald 2.0</h4>
                                 <p>Zenith of luxury</p>
                             </div>
                         </a>
                         <a href="/sapphire-terrace" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>The Sapphire</h4>
                                 <p>Urban style redefined</p>
                             </div>
                         </a>
                         <a href="/diamond-duplex" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>The Diamond</h4>
                                 <p>Balanced family living</p>
                             </div>
                         </a>
                         <a href="/topaz-semi" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>The Topaz</h4>
                                 <p>Shared elegance</p>
                             </div>
                         </a>
                         <a href="/onyx-flats" className="mobile-compact-card">
-                            
                             <div className="compact-info">
                                 <h4>The Onyx</h4>
                                 <p>Modern comfort</p>

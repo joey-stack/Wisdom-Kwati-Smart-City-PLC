@@ -1,4 +1,4 @@
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Montserrat } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
@@ -18,6 +18,12 @@ const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata = {
   title: "Wisdom Kwati Smart City PLC | buy. sell. rent.",
   description: "Dream large. Live smart. We are building the functional ecosystem Africa deserves.",
@@ -25,7 +31,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`}>
       <head>
         <link
           rel="stylesheet"

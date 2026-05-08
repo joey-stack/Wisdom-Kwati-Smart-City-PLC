@@ -7,14 +7,14 @@ export default function Page() {
         {/*  About Hero Section  */}
         <section className="about-hero">
             <div className="hero-bg-container">
-                <img src="/assets/about_hero_final.jpg" alt="WKSC Team Photo" className="hero-bg-blur" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="WKSC Team Photo" className="hero-bg-blur" />
                 <div className="hero-gradient-blur"></div>
                 <div className="hero-grid-overlay"></div>
             </div>
             
             <div className="hero-content">
                 <h1 className="hero-title">
-                    Nigeria has a 17-million-home deficit. <br />
+                    Nigeria has a 17-million-home deficit. 
                     We're not waiting for someone else to fix&nbsp;it.
                 </h1>
             </div>
@@ -77,7 +77,7 @@ export default function Page() {
                     
                     <div className="mission-right reveal-on-scroll">
                         <div className="mission-image-wrapper">
-                            <img src="/assets/about_mission_image_final.jpg" alt="WKSC Team in official hoodies" className="mission-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="WKSC Mission" className="mission-image" />
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Page() {
                 <div className="background-grid">
                     <div className="background-image-side reveal-on-scroll">
                         <div className="background-image-wrapper">
-                            <img src="/assets/about_company_background_new.png" alt="WKSC Safety and Quality Standards" className="background-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0" alt="WKSC Safety and Quality Standards" className="background-image" />
                         </div>
                     </div>
                     
@@ -369,14 +369,14 @@ export default function Page() {
                     </div>
                     <h2 className="team-headline">Get to know the team that's as passionate about your project as you are.</h2>
                 </div>                <div className="team-grid">
-                    {/*  Wisdom E. Kwati (Chairman & CEO)  */}
+                    {/*  Wisdom E. Kwati (Chairman WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Wisdom E. Kwati - Chairman & CEO" className="team-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Wisdom E. Kwati - Chairman WKSC PLC" className="team-image" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Wisdom E. Kwati</h3>
-                            <span className="team-location">CHAIRMAN & CEO</span>
+                            <span className="team-location">CHAIRMAN WKSC PLC</span>
                             
                             <div className="agent-contact-rows">
                                 <div className="agent-contact-row">
@@ -387,264 +387,115 @@ export default function Page() {
                                     <i className="fa-solid fa-award"></i>
                                     <span>Most Respected CEO in Real Estate</span>
                                 </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
                             </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
                         </div>
                     </div>
 
-                    {/*  Grace Chamah (Board Director)  */}
+                    {/*  Y.G. Ballah (COO, CEO WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img src="/assets/team_grace.png" alt="Grace Chamah - Board Director" className="team-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1cFMWWIyGiJ4lOW3XjoC2M9NQ3ZvRaw9u" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" />
                         </div>
                         <div className="team-details">
-                            <h3 className="team-name">Grace Chamah</h3>
-                            <span className="team-location">BOARD DIRECTOR</span>
-                            
-                            <div className="agent-contact-rows">
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-building-columns"></i>
-                                    <span>Office of the First Lady (2015–2018)</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-users-gear"></i>
-                                    <span>UNICEF & WHO Governance</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
-                            </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/*  Baba Y.G. Ballah (COO)  */}
-                    <div className="team-card">
-                        <div className="team-image-wrapper">
-                            <img src="/assets/team_baba.png" alt="Baba Y.G. Ballah - Chief Operating Officer" className="team-image" />
-                        </div>
-                        <div className="team-details">
-                            <h3 className="team-name">Baba Y.G. Ballah</h3>
-                            <span className="team-location">CHIEF OPERATING OFFICER</span>
+                            <h3 className="team-name">Y.G. Ballah</h3>
+                            <span className="team-location">COO, CEO WKSC PLC</span>
                             
                             <div className="agent-contact-rows">
                                 <div className="agent-contact-row">
                                     <i className="fa-solid fa-anchor"></i>
                                     <span>Former AGM, Nigeria Ports Authority</span>
                                 </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-graduation-cap"></i>
-                                    <span>University of Maiduguri</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
                             </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
                         </div>
                     </div>
 
-                    {/*  Isaiah Bulus (CCSO)  */}
+                    {/*  Zara Ruth Kwati (MD WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img src="/assets/team_julian.png" alt="Isaiah Bulus - Chief Communications & Strategy Officer" className="team-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1t5F9gOS8mxk5mFyanBk00NVSiyqZrK7M" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" />
                         </div>
                         <div className="team-details">
-                            <h3 className="team-name">Isaiah Bulus</h3>
-                            <span className="team-location">CHIEF STRATEGY OFFICER</span>
+                            <h3 className="team-name">Zara Ruth Kwati</h3>
+                            <span className="team-location">MD WKSC PLC</span>
                             
                             <div className="agent-contact-rows">
                                 <div className="agent-contact-row">
-                                    <i className="fa-solid fa-earth-africa"></i>
-                                    <span>9+ Countries Consultancy</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-briefcase"></i>
-                                    <span>Founder, EYE Initiative</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
+                                    <i className="fa-solid fa-users-gear"></i>
+                                    <span>Strategic Project Management</span>
                                 </div>
                             </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
                         </div>
                     </div>
 
-                    {/*  Samuel Adeolu (Legal Counsel)  */}
+                    {/*  Richard A. Igoche (MD WKSC Karshi)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img src="/assets/team_marcus.png" alt="Samuel Adeolu - Legal Counsel" className="team-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=19v15e89T7AL1DotSQ66-1z5UtfZgcmFz" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" />
                         </div>
                         <div className="team-details">
-                            <h3 className="team-name">Samuel Adeolu</h3>
-                            <span className="team-location">LEGAL COUNSEL</span>
+                            <h3 className="team-name">Richard A. Igoche</h3>
+                            <span className="team-location">MD WKSC KARSHI</span>
+                            
+                            <div className="agent-contact-rows">
+                                <div className="agent-contact-row">
+                                    <i className="fa-solid fa-building-circle-check"></i>
+                                    <span>Smart City Operations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/*  Bar. Samuel Adeolu (Legal Adviser, WKSC PLC)  */}
+                    <div className="team-card">
+                        <div className="team-image-wrapper">
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1is5fT1cRu4MenMbZAn34-V1FFsrTtOLz" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" />
+                        </div>
+                        <div className="team-details">
+                            <h3 className="team-name">Bar. Samuel Adeolu</h3>
+                            <span className="team-location">LEGAL ADVISER, WKSC PLC</span>
                             
                             <div className="agent-contact-rows">
                                 <div className="agent-contact-row">
                                     <i className="fa-solid fa-scale-balanced"></i>
-                                    <span>Member, Nigerian Bar Association</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-gavel"></i>
-                                    <span>LLB, University of Abuja</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
-                            </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/*  Engr. Julian Chamah (Advisory Director)  */}
-                    <div className="team-card">
-                        <div className="team-image-wrapper">
-                            <img src="/assets/team_julian.png" alt="Engr. Julian Chamah - Advisory Director" className="team-image" />
-                        </div>
-                        <div className="team-details">
-                            <h3 className="team-name">Engr. Julian Chamah</h3>
-                            <span className="team-location">ADVISORY DIRECTOR</span>
-                            
-                            <div className="agent-contact-rows">
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-compass-drafting"></i>
-                                    <span>Registered Engineer, COREN</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-diagram-project"></i>
-                                    <span>Ex-Director of Projects</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
-                            </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/*  Engr. Moses Ballah (Acting MD, Karabow Construction)  */}
-                    <div className="team-card">
-                        <div className="team-image-wrapper">
-                            <img src="https://i.pravatar.cc/400?u=moses" alt="Engr. Moses Ballah - Acting MD, Karabow Construction" className="team-image" />
-                        </div>
-                        <div className="team-details">
-                            <h3 className="team-name">Engr. Moses Ballah</h3>
-                            <span className="team-location">ACTING MD, KARABOW CONSTRUCTION</span>
-                            
-                            <div className="agent-contact-rows">
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-helmet-safety"></i>
-                                    <span>Infrastructure & Project Execution</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-compass-drafting"></i>
-                                    <span>Civil Engineering Specialist</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
-                            </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/*  Andrew Okpanachi (Head of Accounting)  */}
-                    <div className="team-card">
-                        <div className="team-image-wrapper">
-                            <img src="https://i.pravatar.cc/400?u=andrew" alt="Andrew Okpanachi - Head of Accounting" className="team-image" />
-                        </div>
-                        <div className="team-details">
-                            <h3 className="team-name">Andrew Okpanachi</h3>
-                            <span className="team-location">HEAD OF ACCOUNTING</span>
-                            
-                            <div className="agent-contact-rows">
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-calculator"></i>
-                                    <span>Financial Strategy & Management</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-file-invoice-dollar"></i>
                                     <span>Corporate Governance</span>
                                 </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
-                                </div>
                             </div>
-                            
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
                         </div>
                     </div>
 
-                    {/*  Mrs Ruth Onoja (Executive Assistant to the Chairman)  */}
+                    {/*  Mr Okpanachi Ogbelu (Accountant, WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img src="https://i.pravatar.cc/400?u=ruth" alt="Mrs Ruth Onoja - Executive Assistant to the Chairman" className="team-image" />
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" />
                         </div>
                         <div className="team-details">
-                            <h3 className="team-name">Mrs Ruth Onoja</h3>
-                            <span className="team-location">EXECUTIVE ASSISTANT TO THE CHAIRMAN</span>
+                            <h3 className="team-name">Mr Okpanachi Ogbelu</h3>
+                            <span className="team-location">ACCOUNTANT, WKSC PLC</span>
                             
                             <div className="agent-contact-rows">
                                 <div className="agent-contact-row">
-                                    <i className="fa-solid fa-user-tie"></i>
-                                    <span>Strategic Executive Coordination</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-calendar-check"></i>
-                                    <span>Stakeholder Management</span>
-                                </div>
-                                <div className="agent-contact-row agent-socials">
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" className="agent-social-icon"><i className="fa-brands fa-x-twitter"></i></a>
+                                    <i className="fa-solid fa-file-invoice-dollar"></i>
+                                    <span>Financial Auditing</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {/*  Miss Esther Izu (HR WKSC PLC)  */}
+                    <div className="team-card">
+                        <div className="team-image-wrapper">
+                            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1s3a4yhpY4w9WjhsZD0r3Zs6Q2G0CzQeZ" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" />
+                        </div>
+                        <div className="team-details">
+                            <h3 className="team-name">Miss Esther Izu</h3>
+                            <span className="team-location">HR WKSC PLC</span>
                             
-                            <a href="#" className="agent-cta">
-                                <span>VIEW FULL PROFILE</span>
-                                <i className="fa-solid fa-chevron-right"></i>
-                            </a>
+                            <div className="agent-contact-rows">
+                                <div className="agent-contact-row">
+                                    <i className="fa-solid fa-user-group"></i>
+                                    <span>Talent Management</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

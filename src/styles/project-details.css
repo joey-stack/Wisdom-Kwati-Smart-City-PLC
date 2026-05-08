@@ -6,6 +6,8 @@
 .pd-page {
   background-color: var(--bg-main);
   color: var(--text-primary);
+  overflow: visible; /* Crucial for sticky children */
+  position: relative;
 }
 
 /* --- Hero Section --- */
@@ -60,9 +62,9 @@
 
 .pd-hero-title {
   font-family: Inter, sans-serif;
-  font-size: clamp(48px, 10vw, 120px);
+  font-size: clamp(36px, 8vw, 120px); /* Reduced min-size for better phone fit */
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   margin-bottom: 24px;
@@ -80,15 +82,33 @@
 /* --- Main Layout --- */
 .pd-main-layout {
   display: grid;
-  grid-template-columns: 1fr 450px; /* Slightly wider sidebar for the new cards */
+  grid-template-columns: 1fr 450px;
   gap: 80px;
   padding: 100px 0;
-  align-items: start; /* Crucial for sticky to work correctly */
+  align-items: start;
+  position: relative;
+  overflow: visible; /* Ensure sticky context is not broken */
 }
 
 /* --- Content Sections --- */
+.pd-left-col {
+  position: relative;
+  min-height: 2800px; /* Specific height requirement for sidebar tracking */
+}
+
 .pd-section {
   margin-bottom: 80px;
+}
+
+.pd-section:last-child {
+  margin-bottom: 0 !important;
+}
+
+.pd-description-text {
+  font-size: clamp(18px, 2.5vw, 22px);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 40px;
 }
 
 .pd-section-title {
@@ -138,11 +158,13 @@
 
 /* --- Tables --- */
 .pd-table-container {
-  border: 1px dashed rgba(187, 227, 57, 0.4); /* Dashed border in accent-green */
+  border: 1px dashed rgba(187, 227, 57, 0.4);
   border-radius: 8px;
-  overflow: hidden;
-  background: var(--accent-green-light); /* Light green shade as requested */
+  background: var(--accent-green-light);
   margin-bottom: 40px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pd-table {
@@ -152,12 +174,7 @@
 }
 
 .pd-table th {
-  background: rgba(
-    187,
-    227,
-    57,
-    0.15
-  ); /* Slightly darker complementing green shade */
+  background: rgba(187, 227, 57, 0.15);
   padding: 24px;
   text-align: left;
   font-weight: 700;
@@ -185,8 +202,19 @@
 /* --- Sidebar --- */
 .pd-sidebar {
   position: sticky;
-  top: 120px; /* Distance from top when locked */
+  top: 100px;
   height: fit-content;
+  align-self: start;
+  z-index: 10;
+  will-change: transform;
+}
+
+.pd-neighborhoods-sticky-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px;
+  margin-bottom: 24px;
 }
 
 .pd-sidebar-header {
@@ -214,10 +242,10 @@
 
 .pd-sidebar-headline {
   font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
-  font-size: 26px;
+  font-size: clamp(22px, 3vw, 26px);
   font-style: normal;
   font-weight: 500;
-  line-height: 33.8px;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
@@ -304,6 +332,17 @@
   background: var(--bg-main);
 }
 
+.pd-properties-header {
+  margin-top: 60px;
+}
+
+.pd-properties-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
 /* --- Agent Section --- */
 .pd-agent-section {
   padding: 120px 0;
@@ -380,13 +419,127 @@
   .pd-sidebar {
     position: static;
   }
+  .pd-left-col {
+    min-height: 0 !important;
+    height: auto !important;
+  }
 }
 
 @media (max-width: 768px) {
+  .pd-hero,
+  .pd-main-layout {
+    padding: 70px 10px 20px !important;
+    gap: 40px !important; /* Reduced from 80px */
+  }
+
+  .pd-properties-section {
+    padding: 70px 10px 20px !important;
+  }
+
+  .pd-properties-section .section-line {
+    display: none; /* Hide decorative line on mobile to remove bulk */
+  }
+
+  .pd-properties-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 24px !important; /* Reduced from 40px */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Fix for house type card info on mobile */
+  .pd-properties-grid .ht-card-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pd-properties-header {
+    margin-top: 0;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    gap: 12px !important; /* Reduced from 24px */
+  }
+
+  .portfolio-headline {
+    margin-bottom: 0 !important;
+  }
+
+  .pd-section {
+    margin-bottom: 60px;
+    padding: 0 5px; /* Extra breathing room inside the main layout padding */
+  }
+
+  .pd-section-title {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .pd-description-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .pd-table,
+  .pd-table thead,
+  .pd-table tbody,
+  .pd-table th,
+  .pd-table td,
+  .pd-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .pd-table thead {
+    display: none; /* Hide headers on mobile as we will stack labels */
+  }
+
+  .pd-table tr {
+    padding: 20px 15px !important;
+    border-bottom: 1px dashed rgba(187, 227, 57, 0.3) !important;
+  }
+
+  .pd-table td {
+    padding: 4px 0;
+    border: none;
+  }
+
+  .pd-table .pd-label-cell {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .pd-table td:not(.pd-label-cell) {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .pd-table-container {
+    background: var(--accent-green-light) !important;
+    border: 1px dashed rgba(187, 227, 57, 0.4) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    margin: 20px 0 !important;
+  }
+
+
+  .pd-neighborhoods-sticky-wrapper {
+    margin: 0 !important;
+    padding: 20px 15px 20px !important;
+    border: none !important;
+    border-radius: 0;
+  }
+
   .pd-agent-card {
     grid-template-columns: 1fr;
     padding: 24px;
   }
+
   .pd-agent-img {
     height: 350px;
   }

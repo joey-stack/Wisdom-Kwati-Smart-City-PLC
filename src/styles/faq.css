@@ -159,6 +159,12 @@
 }
 
 @media (max-width: 768px) {
+    .pj-hero-section,
+    .faq-main-section,
+    .faq-cta-section {
+        padding: 70px 10px 0 !important;
+    }
+
     .pj-hero-title {
         font-size: 32px;
         line-height: 1.2;

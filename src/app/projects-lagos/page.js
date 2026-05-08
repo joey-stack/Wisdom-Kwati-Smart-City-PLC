@@ -39,7 +39,7 @@ export default function Page() {
                        data-state="lagos" data-neighborhood="epe" data-estate="lagos ekpe">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img src="/assets/neighborhood_epe_1776023888337.png" alt="Lagos Ekpe, Epe" />
+                                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1vdMFJGPHIiAOCtp5zqxqNvHRqR4Mr1da" alt="Lagos Ekpe, Epe" />
                             </div>
                         </div>
                         <div className="neighborhood-info">

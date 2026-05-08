@@ -41,39 +41,39 @@ export default function Page() {
         <div className="section-line"></div>
         <div className="gallery-grid">
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_1.jpg" alt="Lakeside View Site Update 1" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Lakeside View Site Update 1" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_2.jpg" alt="Lakeside View Site Update 2" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Lakeside View Site Update 2" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_3.jpg" alt="Lakeside View Site Update 3" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Lakeside View Site Update 3" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_4.jpg" alt="Lakeside View Site Update 4" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Lakeside View Site Update 4" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_5.jpg" alt="Lakeside View Site Update 5" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Lakeside View Site Update 5" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_6.jpg" alt="Lakeside View Site Update 6" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Lakeside View Site Update 6" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_7.jpg" alt="Lakeside View Site Update 7" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Lakeside View Site Update 7" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_8.jpg" alt="Lakeside View Site Update 8" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Lakeside View Site Update 8" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
             <div className="gallery-item skeleton reveal-on-scroll">
-                <img src="/assets/lakeside_view_updates/update_9.jpg" alt="Lakeside View Site Update 9" loading="lazy" />
+                <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Lakeside View Site Update 9" loading="lazy" />
                 <div className="gallery-item-label">Lakeside View Update</div>
             </div>
         </div>

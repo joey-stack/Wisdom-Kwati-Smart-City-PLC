@@ -48,25 +48,23 @@ export default function Page() {
         </button>
 
         {/*  Thumbnail strip  */}
-        <div className="hd-lightbox-thumbs" id="lb-thumbs">
-            <img src="/assets/services_project_image.png" alt="1" data-index="0" />
-            <img src="/assets/terrace_4bed.png" alt="2" data-index="1" />
-            <img src="/assets/smart_terraces_mega_menu_1775684386645.png" alt="3" data-index="2" />
-            <img src="/assets/about_company_bg.png" alt="4" data-index="3" />
-            <img src="/assets/services_project_image.png"  alt="5" data-index="4" />
-        </div>
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="1" data-index="0" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="2" data-index="1" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="3" data-index="2" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="4" data-index="3" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612"  alt="5" data-index="4" />
 
         {/*  Hidden full src list  */}
         <div id="lb-srcs" style={{ display: "none" }}>
-            <span>assets/services_project_image.png</span>
-            <span>assets/terrace_4bed.png</span>
-            <span>assets/smart_terraces_mega_menu_1775684386645.png</span>
-            <span>assets/about_company_bg.png</span>
-            <span>assets/services_project_image.png</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
+            <span>https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612</span>
         </div>
     </div>
         <div className="hd-hero-image">
-            <img src="/assets/services_project_image.png" alt="The Quartz" />
+            <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Quartz" />
         </div>
         <div className="hd-hero-overlay"></div>
         <div className="hd-hero-content reveal-on-scroll">
@@ -167,19 +165,19 @@ export default function Page() {
                 {/*  Bento Gallery  */}
                 <section className="hd-gallery reveal-on-scroll">
                     <div className="hd-gallery-item hd-gal-1">
-                        <img src="/assets/services_project_image.png" alt="Property View 1" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Property View 1" />
                     </div>
                     <div className="hd-gallery-item hd-gal-2">
-                        <img src="/assets/terrace_4bed.png" alt="Property View 2" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="Property View 2" />
                     </div>
                     <div className="hd-gallery-item hd-gal-3">
-                        <img src="/assets/smart_terraces_mega_menu_1775684386645.png" alt="Property View 3" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Property View 3" />
                     </div>
                     <div className="hd-gallery-item hd-gal-4">
-                        <img src="/assets/about_company_bg.png" alt="Property View 4" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Property View 4" />
                     </div>
                     <div className="hd-gallery-item hd-gal-5">
-                        <img src="/assets/services_project_image.png" alt="Property View 5" />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Property View 5" />
                     </div>
                     
                     <a href="#" className="hd-view-all-btn" id="view-all-images-btn">
@@ -457,7 +455,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="5 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -485,7 +483,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="4 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = '/assets/services_project_image.png'; }} />
+                        <img src="https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">

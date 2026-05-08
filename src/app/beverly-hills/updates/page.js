@@ -36,7 +36,7 @@ export default function Page() {
         </div>
     </section>
 
-    <main className="container-1380" style={{ padding: "60px 20px" }}>
+    <div className="container-1380" style={{ padding: "60px 20px" }}>
         
         <div className="section-line"></div>
         <div style={{ textAlign: "center", padding: "120px 20px", border: "1px dashed var(--border)", borderRadius: "12px", background: "rgba(0,0,0,0.02)", marginTop: "60px" }} className="reveal-on-scroll">
@@ -47,7 +47,7 @@ export default function Page() {
             <p style={{ color: "var(--text-secondary)", maxWidth: "500px", margin: "0 auto", lineHeight: "1.6" }}>Construction for Beverly Hills has not yet commenced. Check back later for high-fidelity photo and video updates from the site engineers.</p>
         </div>
 
-    </main>
+    </div>
 
     
 

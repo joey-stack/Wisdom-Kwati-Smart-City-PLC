@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
@@ -5,6 +7,7 @@ export default function ProjectDetailTemplate({
   title,
   heroImage,
   heroVideo,
+  heroPoster,
   heroDescription,
   updatesLink,
   description,
@@ -18,6 +21,28 @@ export default function ProjectDetailTemplate({
   houseTypesTitle,
   houseTypes // Array of { name, location, type, beds, baths, size, link, image }
 }) {
+  const videoRef = React.useRef(null);
+  React.useEffect(() => {
+    const playVideo = async () => {
+      if (videoRef.current && heroVideo) {
+        try {
+          videoRef.current.muted = true;
+          videoRef.current.defaultMuted = true;
+          videoRef.current.load();
+          const playPromise = videoRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              setTimeout(() => {
+                if (videoRef.current) videoRef.current.play().catch(() => {});
+              }, 1000);
+            });
+          }
+        } catch (err) {}
+      }
+    };
+    playVideo();
+  }, [heroVideo]);
+
   // AEO/GEO Schema for AI Citations
   const jsonLd = {
     "@context": "https://schema.org",
@@ -59,9 +84,58 @@ export default function ProjectDetailTemplate({
       <section className="pd-hero">
         <div className="pd-hero-image">
           {heroVideo ? (
-            <video autoPlay loop muted playsInline src={heroVideo} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: "0", left: "0" }} />
+            <div className="bg-video-wrapper" style={{ 
+              position: "absolute", 
+              top: "0", 
+              left: "0", 
+              width: "100%", 
+              height: "100%", 
+              overflow: "hidden",
+              zIndex: "0"
+            }}>
+              <video 
+                ref={videoRef}
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                crossOrigin="anonymous"
+                poster={heroPoster}
+                onLoadedData={(e) => {
+                    e.currentTarget.play().catch(() => {});
+                }}
+                style={{ 
+                  width: "100%", 
+                  height: "100%", 
+                  objectFit: "cover",
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  pointerEvents: "none"
+                }}
+              >
+                <source 
+                  src={heroVideo.includes('drive.google.com') 
+                    ? `https://drive.google.com/uc?export=download&id=${heroVideo.includes('/d/') ? heroVideo.split('/d/')[1].split('/')[0] : (heroVideo.includes('id=') ? heroVideo.split('id=')[1].split('&')[0] : heroVideo)}`
+                    : heroVideo} 
+                  type="video/mp4" 
+                />
+              </video>
+              
+              {/* Professional Interaction Shield */}
+              <div style={{ 
+                position: "absolute", 
+                top: "0", 
+                left: "0", 
+                width: "100%", 
+                height: "100%", 
+                background: "transparent", 
+                zIndex: "1",
+                pointerEvents: "all"
+              }}></div>
+            </div>
           ) : (
-            <img fetchPriority="high" src={heroImage} alt={title} />
+            <img fetchPriority="high" src={heroImage} alt={title} referrerPolicy="no-referrer" />
           )}
         </div>
         <div className="pd-hero-overlay"></div>
@@ -152,14 +226,14 @@ export default function ProjectDetailTemplate({
                   <Link key={idx} href={item.link} className="pd-compact-item">
                     <div className="pd-compact-flipper">
                       <div className="pd-compact-front">
-                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" />
+                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
                         </div>
                       </div>
                       <div className="pd-compact-back">
-                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" />
+                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
@@ -175,7 +249,7 @@ export default function ProjectDetailTemplate({
               <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                 <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                  <img loading="lazy" src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                  <img loading="lazy" src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
                   <div>
                     <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>{sidebarAdviser.name}</h3>
                     <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>{sidebarAdviser.role}</p>
@@ -220,7 +294,7 @@ export default function ProjectDetailTemplate({
             {houseTypes?.map((item, idx) => (
               <Link key={idx} href={item.link} className="ht-card reveal-on-scroll">
                 <div className="ht-card-image">
-                  <img loading="lazy" src={item.image} alt={item.name} />
+                  <img loading="lazy" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
                 </div>
                 <div className="ht-card-info">
                   <div className="ht-card-left">

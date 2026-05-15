@@ -84,7 +84,9 @@
   display: grid;
   grid-template-columns: 1fr 450px;
   gap: 80px;
-  padding: 100px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 0 0 0; /* Only top padding remains */
   align-items: start;
   position: relative;
   overflow: visible; /* Ensure sticky context is not broken */
@@ -93,7 +95,7 @@
 /* --- Content Sections --- */
 .pd-left-col {
   position: relative;
-  min-height: 2800px; /* Specific height requirement for sidebar tracking */
+  min-height: auto; /* Removed fixed 2800px height to allow container to wrap content */
 }
 
 .pd-section {
@@ -215,6 +217,8 @@
   border-radius: 4px;
   padding: 32px;
   margin-bottom: 24px;
+  height: auto;
+  display: block;
 }
 
 .pd-sidebar-header {
@@ -333,7 +337,7 @@
 }
 
 .pd-properties-header {
-  margin-top: 60px;
+  margin: 0 !important;
 }
 
 .pd-properties-grid {

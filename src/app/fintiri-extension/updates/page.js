@@ -42,38 +42,38 @@ export default function Page() {
                 <div className="gallery-grid reveal-on-scroll">
                     {/* Video Updates */}
                     <div className="gallery-item video-item skeleton">
-                        <video autoPlay={true} src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" poster="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" className="-video" controls muted={true} loop={true} playsInline={true} preload="metadata"></video>
+                        <video autoPlay={true} src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" poster="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" className="-video" controls muted={true} loop={true} playsInline={true} preload="metadata"></video>
                     </div>
                     {/* Image Updates */}
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                     <div className="gallery-item skeleton">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Fintiri Extension Site Update" loading="lazy" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Fintiri Extension Site Update" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                 </div>
             </div>

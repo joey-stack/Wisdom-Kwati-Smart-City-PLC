@@ -39,7 +39,7 @@ export default function Page() {
                        data-state="lagos" data-neighborhood="epe" data-estate="lagos ekpe">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1vdMFJGPHIiAOCtp5zqxqNvHRqR4Mr1da" alt="Lagos Ekpe, Epe" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1vdMFJGPHIiAOCtp5zqxqNvHRqR4Mr1da%26sz=w1200" alt="Lagos Ekpe, Epe" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">

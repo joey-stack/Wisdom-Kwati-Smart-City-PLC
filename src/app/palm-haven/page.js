@@ -12,7 +12,7 @@ export default function Page() {
             {/* Hero Section */}
             <section className="pd-hero">
                 <div className="pd-hero-image">
-                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ" alt="Palm Haven" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: "0", left: "0" }} />
+                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ%26sz=w1200" alt="Palm Haven" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: "0", left: "0" }} referrerPolicy="no-referrer" />
                 </div>
                 <div className="pd-hero-overlay"></div>
                 <div className="pd-hero-content reveal-on-scroll">
@@ -144,14 +144,14 @@ export default function Page() {
                             <a href="/katampe-extension" className="pd-compact-item">
                                 <div className="pd-compact-flipper">
                                     <div className="pd-compact-front">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Sunset Haven" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Sunset Haven</h4>
                                             <p>Katampe Ext.</p>
                                         </div>
                                     </div>
                                     <div className="pd-compact-back">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Sunset Haven" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Sunset Haven" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Sunset Haven</h4>
                                             <p>Katampe Ext.</p>
@@ -162,14 +162,14 @@ export default function Page() {
                             <a href="/karsana-district" className="pd-compact-item">
                                 <div className="pd-compact-flipper">
                                     <div className="pd-compact-front">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Whispering Pines</h4>
                                             <p>Karsana</p>
                                         </div>
                                     </div>
                                     <div className="pd-compact-back">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Whispering Pines</h4>
                                             <p>Karsana</p>
@@ -180,14 +180,14 @@ export default function Page() {
                             <a href="/mabushi-district" className="pd-compact-item">
                                 <div className="pd-compact-flipper">
                                     <div className="pd-compact-front">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Ellington Villa" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Ellington Villa</h4>
                                             <p>Mabushi</p>
                                         </div>
                                     </div>
                                     <div className="pd-compact-back">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Ellington Villa" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Ellington Villa</h4>
                                             <p>Mabushi</p>
@@ -198,14 +198,14 @@ export default function Page() {
                             <a href="/guzape-estate" className="pd-compact-item">
                                 <div className="pd-compact-flipper">
                                     <div className="pd-compact-front">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Nimi Hills" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Nimi Hills</h4>
                                             <p>Guzape</p>
                                         </div>
                                     </div>
                                     <div className="pd-compact-back">
-                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills" className="pd-compact-thumb" />
+                                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Nimi Hills" className="pd-compact-thumb"  referrerPolicy="no-referrer"/>
                                         <div className="pd-compact-info">
                                             <h4>Nimi Hills</h4>
                                             <p>Guzape</p>
@@ -217,7 +217,7 @@ export default function Page() {
                         <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
                             <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                             <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Samuel Kwati" style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
                                 <div>
                                     <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>Samuel Kwati</h3>
                                     <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>Palm Haven Specialist</p>
@@ -254,7 +254,49 @@ export default function Page() {
                     </div>
 
                     <div className="portfolio-grid" style={{ marginTop: "60px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "40px" }}>
+                <a href="/blue-sapphire" className="ht-card reveal-on-scroll">
+                    <div className="ht-card-image">
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200" alt="The Sapphire" referrerPolicy="no-referrer" />
                     </div>
+                    <div className="ht-card-info">
+                        <div className="ht-card-left">
+                            <h3 className="ht-card-name">The Sapphire</h3>
+                            <p className="ht-card-location">Premium Class • 4BR Smart Villa</p>
+                        </div>
+                        <div className="ht-card-right">
+                            <p className="ht-card-type">Sapphire Class Villa</p>
+                            <div className="ht-card-specs">
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 4</span>
+                                <span className="ht-dot"></span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 4.5</span>
+                                <span className="ht-dot"></span>
+                                <span>3,200 SQ FT</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/imperial-emerald" className="ht-card reveal-on-scroll">
+                    <div className="ht-card-image">
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200" alt="The Emerald" referrerPolicy="no-referrer" />
+                    </div>
+                    <div className="ht-card-info">
+                        <div className="ht-card-left">
+                            <h3 className="ht-card-name">The Emerald</h3>
+                            <p className="ht-card-location">Luxury Class • 5BR Smart Duplex</p>
+                        </div>
+                        <div className="ht-card-right">
+                            <p className="ht-card-type">Emerald Class Villa</p>
+                            <div className="ht-card-specs">
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 5</span>
+                                <span className="ht-dot"></span>
+                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 6</span>
+                                <span className="ht-dot"></span>
+                                <span>4,800 SQ FT</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
                     <div className="portfolio-footer" style={{ display: "flex", justifyContent: "center", marginTop: "80px", paddingBottom: "80px" }}>
                         <a href="/house-types" className="btn-pill" style={{ backgroundColor: "var(--accent-green)", border: "none", color: "#000", fontWeight: "600", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                             <div className="flip-text">

@@ -47,7 +47,7 @@ export const metadata = {
     siteName: 'Wisdom Kwati Smart City',
     images: [
       {
-        url: 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi',
+        url: 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200',
         width: 1200,
         height: 630,
         alt: 'Wisdom Kwati Smart City Hero View',
@@ -60,7 +60,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Wisdom Kwati Smart City PLC | buy. sell. rent.",
     description: "Building the functional ecosystem Africa deserves.",
-    images: ['https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi'],
+    images: ['https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200'],
   },
   alternates: {
     canonical: '/',
@@ -80,7 +80,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -95,7 +95,7 @@ export default function RootLayout({ children }) {
               "name": "Wisdom Kwati Smart City PLC",
               "alternateName": "WKSC PLC",
               "url": "https://wisdomkwati.com",
-              "logo": "https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi",
+              "logo": "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+234-800-WISDOM",

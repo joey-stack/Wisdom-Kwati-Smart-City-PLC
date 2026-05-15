@@ -1,8 +1,23 @@
 'use client';
 
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export default function Page() {
+    const videoRef = React.useRef(null);
+    React.useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.muted = true;
+            videoRef.current.defaultMuted = true;
+            videoRef.current.play().catch(() => {
+                // If it fails, try again once after a small delay
+                setTimeout(() => {
+                    if (videoRef.current) videoRef.current.play().catch(() => {});
+                }, 1000);
+            });
+        }
+    }, []);
+
     return (
         <main>
             
@@ -10,17 +25,21 @@ export default function Page() {
 
     <header className="hero">
         {/* Background Video */}
-        <div className="hero-video-wrapper">
+        <div className="hero-video-wrapper" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 0 }}>
             <video 
+                ref={videoRef}
                 autoPlay 
                 muted 
                 loop 
                 playsInline 
                 className="hero-video"
-                poster="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi"
+                poster="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200"
+                style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
             >
-                <source src="https://drive.google.com/uc?export=download&id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" type="video/mp4" />
+                <source src="/videos/nimi-hills-hero.mp4" type="video/mp4" />
             </video>
+            {/* Interaction Shield - Prevents accidental pausing */}
+            <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "transparent", zIndex: 1, pointerEvents: "all" }}></div>
         </div>
         {/*  Background Grid Overlay  */}
         <div className="grid-overlay"></div>
@@ -32,7 +51,7 @@ export default function Page() {
 
             <div className="hero-card glass-panel">
                 <p className="subheadline">
-                    We've built the infrastructure <br />other developers only promise.
+                    We've built the infrastructure other developers only promise.
                 </p>
                 
                 <button className="cta-button">
@@ -93,7 +112,7 @@ export default function Page() {
                 <a href="/mabushi-district" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Mabushi District" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Mabushi District" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -111,7 +130,7 @@ export default function Page() {
                 <a href="/guzape-estate" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Guzape II" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Guzape II" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -129,7 +148,7 @@ export default function Page() {
                 <a href="/palm-haven" className="neighborhood-card">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ" alt="Apo Tafyi" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ%26sz=w1200" alt="Apo Tafyi" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="neighborhood-info">
@@ -180,7 +199,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="7 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="The Imperial Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200" alt="The Imperial Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -208,7 +227,7 @@ export default function Page() {
                      data-type="detached"
                      data-specs="5 bedroom fully detached duplex">
                     <div className="ht-card-image">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200" alt="The Royal Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                     </div>
                     <div className="ht-card-info">
                         <div className="ht-card-left">
@@ -336,7 +355,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper">
                         <div className="services-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB" alt="High-Fidelity Architectural Project" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB'; }} />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200'; }} />
                         </div>
                     </div>
                 </div>
@@ -438,7 +457,7 @@ export default function Page() {
                 <div className="carousel-track">
                     {/*  Card 1: Image Variant (Chief Dr. Chidi Okafor)  */}
                     <div className="review-card image-card">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Chief Dr. Chidi Okafor Review" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="Chief Dr. Chidi Okafor Review" referrerPolicy="no-referrer" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Correcting a continent, one smart home at a time. WKSC is building the infrastructure we've always deserved."</blockquote>
                             <div className="reviewer-identity-container">
@@ -447,7 +466,7 @@ export default function Page() {
                                     <span className="card-meta">HOME OWNER, ABUJA</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Mabushi District" />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Mabushi District" referrerPolicy="no-referrer" />
                                 </div>
                             </div>
                         </div>
@@ -463,14 +482,14 @@ export default function Page() {
                                 <span className="card-meta">EPE SMART CITY, LAGOS</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0" alt="The Adewale Family" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="The Adewale Family" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                     </div>
 
                     {/*  Card 3: Image Variant (Engr. Tunde Olayinka)  */}
                     <div className="review-card image-card">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="Engr. Tunde Olayinka Review" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka Review" referrerPolicy="no-referrer" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Finally, a smart ecosystem that actually works. The IoT integration in Port Harcourt is world-class."</blockquote>
                             <div className="reviewer-identity-container">
@@ -479,7 +498,7 @@ export default function Page() {
                                     <span className="card-meta">PORT HARCOURT</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="Engr. Tunde Olayinka" />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka" referrerPolicy="no-referrer" />
                                 </div>
                             </div>
                         </div>
@@ -495,7 +514,7 @@ export default function Page() {
                                 <span className="card-meta">HOME OWNER, YOLA</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n" alt="Katampe Extension" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Katampe Extension" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                     </div>
@@ -530,7 +549,7 @@ export default function Page() {
                 <div className="process-item" data-step="1">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="Search & Explore" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Search & Explore" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -557,7 +576,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="2">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Book a Tour" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Book a Tour" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -584,7 +603,7 @@ export default function Page() {
                 <div className="process-item" data-step="3">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Make Your Move" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Make Your Move" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -611,7 +630,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="4">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r" alt="Close & Celebrate" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Close & Celebrate" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -654,7 +673,7 @@ export default function Page() {
                 {/*  Blog 1  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam" alt="First-time homebuyer's guide" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="First-time homebuyer's guide" referrerPolicy="no-referrer" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">
@@ -675,7 +694,7 @@ export default function Page() {
                 {/*  Blog 2  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK" alt="Renting guide" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Renting guide" referrerPolicy="no-referrer" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">
@@ -696,7 +715,7 @@ export default function Page() {
                 {/*  Blog 3  */}
                 <a href="#" className="blog-card">
                     <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk" alt="Real estate trends 2025" />
+                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Real estate trends 2025" referrerPolicy="no-referrer" />
                     </div>
                     <div className="blog-card-content">
                         <div className="blog-card-meta">

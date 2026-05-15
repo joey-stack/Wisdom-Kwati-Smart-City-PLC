@@ -111,7 +111,7 @@ export default function Page() {
                                  data-type="detached"
                                  data-specs="7 bedroom fully detached duplex">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT" alt="The Imperial Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200" alt="The Imperial Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -138,7 +138,7 @@ export default function Page() {
                                  data-type="detached"
                                  data-specs="5 bedroom fully detached duplex">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="The Royal Emerald" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200" alt="The Royal Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -166,7 +166,7 @@ export default function Page() {
                                  data-type="duplex"
                                  data-specs="4 bedroom fully detached pent-house">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-" alt="The Star Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200" alt="The Star Sapphire" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -193,7 +193,7 @@ export default function Page() {
                                  data-type="duplex"
                                  data-specs="4 bedroom fully detached duplex">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="The Blue Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200" alt="The Blue Sapphire" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -220,7 +220,7 @@ export default function Page() {
                                  data-type="duplex"
                                  data-specs="4 bedroom semi detached duplex">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow" alt="The White Sapphire" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200" alt="The White Sapphire" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -248,7 +248,7 @@ export default function Page() {
                                  data-type="bungalow"
                                  data-specs="3 bedroom bungalow">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX" alt="The Black Onyx" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200" alt="The Black Onyx" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -275,7 +275,7 @@ export default function Page() {
                                  data-type="bungalow"
                                  data-specs="2 bedroom bungalow">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EvTJIVwYq5NcbH33A3opCXBuNFyWNS92" alt="The Red Onyx" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EvTJIVwYq5NcbH33A3opCXBuNFyWNS92%26sz=w1200" alt="The Red Onyx" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -303,7 +303,7 @@ export default function Page() {
                                  data-type="flat"
                                  data-specs="3 bedroom apartment">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1cBO3as-XL4ecKLz_xur4TxlVn1eqbi4D" alt="The Silver Pearl" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cBO3as-XL4ecKLz_xur4TxlVn1eqbi4D%26sz=w1200" alt="The Silver Pearl" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">
@@ -330,7 +330,7 @@ export default function Page() {
                                  data-type="flat"
                                  data-specs="2 bedroom apartment">
                                 <div className="ht-card-image">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ" alt="The White Pearl" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL'; }} />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ%26sz=w1200" alt="The White Pearl" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
                                 </div>
                                 <div className="ht-card-info">
                                     <div className="ht-card-left">

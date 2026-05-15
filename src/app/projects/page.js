@@ -130,7 +130,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="mabushi" data-estate="ellington villa">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU" alt="Ellington Villa, Mabushi" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Ellington Villa, Mabushi" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -147,7 +147,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="guzape" data-estate="nimi hills">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP" alt="Nimi Hills, Guzape" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Nimi Hills, Guzape" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -164,7 +164,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="apo tafyi" data-estate="palm haven">
                          <div className="neighborhood-image-wrapper">
                              <div className="neighborhood-image-inner">
-                                 <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ" alt="Palm Haven, Apo Tafyi" />
+                                 <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ%26sz=w1200" alt="Palm Haven, Apo Tafyi" referrerPolicy="no-referrer" />
                              </div>
                          </div>
                         <div className="neighborhood-info">
@@ -181,7 +181,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="maitama ii" data-estate="kwati city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Kwati City, Maitama II" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1y65H-RgWhwbiZ0ZlJKay6Qj4bYtHZL6D%26sz=w1200" alt="Kwati City, Maitama II" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -198,7 +198,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="royal city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Royal City, Kuje" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200" alt="Royal City, Kuje" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -216,7 +216,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="beverly hills">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Beverly Hills, Kuje" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SMA1L09Z3xg6nV7hIpSs8BAOM70IHb8s%26sz=w1200" alt="Beverly Hills, Kuje" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -233,7 +233,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="lakeside view">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612" alt="Lakeside View, Kuje" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200" alt="Lakeside View, Kuje" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -251,7 +251,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="karsana" data-estate="whispering pines">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ" alt="Whispering Pines, Karsana" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Whispering Pines, Karsana" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -268,7 +268,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="karshi" data-estate="wisdom kwati smart city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="Wisdom Kwati Smart City, Karshi" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1s5vsiqmbnMMTONiebu1vG2r_Yvcfd6KL%26sz=w1200" alt="Wisdom Kwati Smart City, Karshi" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -286,7 +286,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="life camp" data-estate="the hof community">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz" alt="The HOF Community, Life Camp" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz%26sz=w1200" alt="The HOF Community, Life Camp" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -304,7 +304,7 @@ export default function Page() {
                        data-state="adamawa" data-neighborhood="yola" data-estate="fintiri extension">
                          <div className="neighborhood-image-wrapper">
                              <div className="neighborhood-image-inner">
-                                 <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1KGLdqvAPmRLFCi_vYeKe8nJ0yms7idqb" alt="Fintiri Extension, Yola" />
+                                 <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1KGLdqvAPmRLFCi_vYeKe8nJ0yms7idqb%26sz=w1200" alt="Fintiri Extension, Yola" referrerPolicy="no-referrer" />
                              </div>
                          </div>
                         <div className="neighborhood-info">
@@ -321,7 +321,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="katampe ext." data-estate="murg city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4" alt="Murg City, Katampe Ext." referrerPolicy="no-referrer" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4%26sz=w1200" alt="Murg City, Katampe Ext." referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -338,7 +338,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="katampe ext." data-estate="murg city exclusive">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1SgY9v0_USlmGyfIO1J9bE8TA4fbwYETM" alt="Murg City Exclusive" referrerPolicy="no-referrer" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SgY9v0_USlmGyfIO1J9bE8TA4fbwYETM%26sz=w1200" alt="Murg City Exclusive" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -356,7 +356,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="katampe ext." data-estate="sunset haven">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1dP8dOZmR2Fg7mUkXUDiByr06e64h50Lh" referrerPolicy="no-referrer" alt="Sunset Haven, Katampe Ext." />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1dP8dOZmR2Fg7mUkXUDiByr06e64h50Lh%26sz=w1200" referrerPolicy="no-referrer" alt="Sunset Haven, Katampe Ext." />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -373,7 +373,7 @@ export default function Page() {
                        data-state="abuja" data-neighborhood="kuje" data-estate="usulo city">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1W78PkCZEKS_smIJHqajeKCdtYev7yGpZ" alt="Usulo City, Kuje" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1W78PkCZEKS_smIJHqajeKCdtYev7yGpZ%26sz=w1200" alt="Usulo City, Kuje" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -391,7 +391,7 @@ export default function Page() {
                        data-state="lagos" data-neighborhood="epe" data-estate="lagos ekpe">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=11vBQAjvTsw6D_nR3Llikz7MLeCMUWJ34" alt="Lagos Ekpe, Epe" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=11vBQAjvTsw6D_nR3Llikz7MLeCMUWJ34%26sz=w1200" alt="Lagos Ekpe, Epe" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -411,7 +411,7 @@ export default function Page() {
                        data-state="adamawa" data-neighborhood="yola" data-estate="sunbrook estate">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1U1e8GB0DuhRemMH1LBYizaFHB9Gx-uLb" alt="Sunbrook Estate, Yola" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1U1e8GB0DuhRemMH1LBYizaFHB9Gx-uLb%26sz=w1200" alt="Sunbrook Estate, Yola" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -428,7 +428,7 @@ export default function Page() {
                        data-state="rivers" data-neighborhood="port harcourt" data-estate="garden eden estate">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1UlrWanL0sHutgi7BJQqadeXWXY9G3jLm" alt="Garden Eden Estate, Port Harcourt" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UlrWanL0sHutgi7BJQqadeXWXY9G3jLm%26sz=w1200" alt="Garden Eden Estate, Port Harcourt" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">
@@ -446,7 +446,7 @@ export default function Page() {
                        data-state="rivers" data-neighborhood="port harcourt" data-estate="ph rumu-olumeni">
                         <div className="neighborhood-image-wrapper">
                             <div className="neighborhood-image-inner">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/uc?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c" alt="PH Rumu-olumeni, Port Harcourt" />
+                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c%26sz=w1200" alt="PH Rumu-olumeni, Port Harcourt" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                         <div className="neighborhood-info">

@@ -7,7 +7,7 @@ export default function Page() {
         {/*  About Hero Section  */}
         <section className="about-hero">
             <div className="hero-bg-container">
-                <img fetchPriority="high" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL" alt="WKSC Team Photo" className="hero-bg-blur" />
+                <img fetchPriority="high" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
                 <div className="hero-gradient-blur"></div>
                 <div className="hero-grid-overlay"></div>
             </div>
@@ -77,7 +77,7 @@ export default function Page() {
                     
                     <div className="mission-right reveal-on-scroll">
                         <div className="mission-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne" alt="WKSC Mission" className="mission-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="WKSC Mission" className="mission-image" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Page() {
                 <div className="background-grid">
                     <div className="background-image-side reveal-on-scroll">
                         <div className="background-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0" alt="WKSC Safety and Quality Standards" className="background-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="WKSC Safety and Quality Standards" className="background-image" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     
@@ -112,7 +112,7 @@ export default function Page() {
                             </blockquote>
                             <div className="quote-author">
                                 <div className="author-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Wisdom E. Kwati — Chairman & CEO" />
+                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati — Chairman & CEO" referrerPolicy="no-referrer" />
                                 </div>
                                 <div className="author-info">
                                     <div className="author-signature">Wisdom E. Kwati</div>
@@ -372,7 +372,7 @@ export default function Page() {
                     {/*  Wisdom E. Kwati (Chairman WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa" alt="Wisdom E. Kwati - Chairman WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati - Chairman WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Wisdom E. Kwati</h3>
@@ -394,7 +394,7 @@ export default function Page() {
                     {/*  Y.G. Ballah (COO, CEO WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1cFMWWIyGiJ4lOW3XjoC2M9NQ3ZvRaw9u" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cFMWWIyGiJ4lOW3XjoC2M9NQ3ZvRaw9u%26sz=w1200" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Y.G. Ballah</h3>
@@ -412,7 +412,7 @@ export default function Page() {
                     {/*  Zara Ruth Kwati (MD WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1t5F9gOS8mxk5mFyanBk00NVSiyqZrK7M" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1t5F9gOS8mxk5mFyanBk00NVSiyqZrK7M%26sz=w1200" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Zara Ruth Kwati</h3>
@@ -430,7 +430,7 @@ export default function Page() {
                     {/*  Richard A. Igoche (MD WKSC Karshi)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=19v15e89T7AL1DotSQ66-1z5UtfZgcmFz" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19v15e89T7AL1DotSQ66-1z5UtfZgcmFz%26sz=w1200" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Richard A. Igoche</h3>
@@ -448,7 +448,7 @@ export default function Page() {
                     {/*  Bar. Samuel Adeolu (Legal Adviser, WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1is5fT1cRu4MenMbZAn34-V1FFsrTtOLz" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1is5fT1cRu4MenMbZAn34-V1FFsrTtOLz%26sz=w1200" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Bar. Samuel Adeolu</h3>
@@ -466,7 +466,7 @@ export default function Page() {
                     {/*  Mr Okpanachi Ogbelu (Accountant, WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu%26sz=w1200" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Mr Okpanachi Ogbelu</h3>
@@ -484,7 +484,7 @@ export default function Page() {
                     {/*  Miss Esther Izu (HR WKSC PLC)  */}
                     <div className="team-card">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=drive.google.com/uc?id=1s3a4yhpY4w9WjhsZD0r3Zs6Q2G0CzQeZ" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1s3a4yhpY4w9WjhsZD0r3Zs6Q2G0CzQeZ%26sz=w1200" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Miss Esther Izu</h3>

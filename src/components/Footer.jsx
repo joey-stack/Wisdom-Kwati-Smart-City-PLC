@@ -34,7 +34,7 @@ export default function Footer() {
                             </div>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a></li>
-                        <li><a href="/#blog">
+                        <li><a href="/blogs">
                             <div className="flip-text">
                                 <span>Blogs</span>
                                 <span aria-hidden="true">Blogs</span>

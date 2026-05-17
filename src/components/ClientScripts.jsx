@@ -93,8 +93,8 @@ export default function ClientScripts() {
 
             let reqId;
             const animateCursor = () => {
-                cursorX += (mouseX - cursorX) * 0.18;
-                cursorY += (mouseY - cursorY) * 0.18;
+                cursorX += (mouseX - cursorX) * 0.22;
+                cursorY += (mouseY - cursorY) * 0.22;
 
                 cardCursor.style.left = `${cursorX}px`;
                 cardCursor.style.top = `${cursorY}px`;
@@ -119,7 +119,38 @@ export default function ClientScripts() {
         gsap.ticker.lagSmoothing(0);
 
             // Timeline Fill Animation
+            const timelineSpine = document.querySelector('.timeline-spine');
+            const processItems = document.querySelectorAll('.process-item');
+            
             if (document.querySelector('.timeline-fill') && document.querySelector('.timeline-container')) {
+                if (timelineSpine && processItems.length > 0) {
+                    const updateHomeSpineHeight = () => {
+                        const firstItem = processItems[0];
+                        const lastItem = processItems[processItems.length - 1];
+                        const firstMarker = firstItem.querySelector('.process-marker');
+                        const lastMarker = lastItem.querySelector('.process-marker');
+                        
+                        if (firstMarker && lastMarker) {
+                            // marker is translate(-28px), so visual center is offsetTop - 28 + (56/2) = offsetTop
+                            const startY = firstItem.offsetTop + firstMarker.offsetTop;
+                            const endY = lastItem.offsetTop + lastMarker.offsetTop;
+                            const calculatedHeight = endY - startY;
+
+                            timelineSpine.style.top = `${startY}px`;
+                            timelineSpine.style.height = `${calculatedHeight}px`;
+                        }
+                    };
+                    
+                    updateHomeSpineHeight();
+                    
+                    // Use ResizeObserver to catch font loads and layout shifts
+                    const resizeObserver = new ResizeObserver(() => {
+                        updateHomeSpineHeight();
+                    });
+                    resizeObserver.observe(document.querySelector('.timeline-container'));
+                    window.addEventListener('resize', updateHomeSpineHeight);
+                }
+
                 gsap.to('.timeline-fill', {
                     height: '100%',
                     ease: 'none',
@@ -224,30 +255,153 @@ export default function ClientScripts() {
                 });
             });
 
-            // Hero Entrance Animations
+            // --- RELIST STYLE TEXT REVEAL ---
+            const splitReveal = (selector, type = 'chars', timeline = null) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    const content = el.innerHTML;
+                    gsap.set(el, { autoAlpha: 0 });
+                    
+                    if (type === 'chars') {
+                        const text = el.innerText;
+                        el.innerHTML = '';
+                        const chars = text.split('').map(char => {
+                            if (char === ' ') return '&nbsp;';
+                            return `<span class="reveal-char" style="display:inline-block; transform:translateY(105%); opacity:0;">${char}</span>`;
+                        }).join('');
+                        el.innerHTML = chars;
+                        
+                        const anim = {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.012,
+                            ease: 'power4.out',
+                            force3D: true,
+                            onStart: () => gsap.set(el, { autoAlpha: 1 })
+                        };
+
+                        if (timeline) timeline.to(el.querySelectorAll('.reveal-char'), anim, 0);
+                        else gsap.to(el.querySelectorAll('.reveal-char'), { ...anim, delay: 0.1 });
+
+                    } else if (type === 'lines') {
+                        const lines = content.split(/<br\s*\/?>/i);
+                        el.innerHTML = '';
+                        lines.forEach((line, index) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'reveal-line-wrapper';
+                            wrapper.style.overflow = 'hidden';
+                            wrapper.style.verticalAlign = 'top';
+                            wrapper.style.zIndex = lines.length - index;
+                            wrapper.style.position = 'relative';
+                            
+                            const inner = document.createElement('div');
+                            inner.className = 'reveal-line';
+                            inner.style.transform = 'translateY(100%)';
+                            inner.style.opacity = '0';
+                            inner.style.filter = 'blur(10px)';
+                            inner.innerHTML = line.trim();
+                            
+                            wrapper.appendChild(inner);
+                            el.appendChild(wrapper);
+                        });
+                        
+                        const anim = {
+                            y: 0,
+                            opacity: 1,
+                            filter: 'blur(0px)',
+                            duration: 1.0,
+                            stagger: 0.08,
+                            ease: 'power4.out',
+                            force3D: true,
+                            onStart: () => gsap.set(el, { autoAlpha: 1 })
+                        };
+
+                        if (timeline) timeline.to(el.querySelectorAll('.reveal-line'), anim, 0.05);
+                        else gsap.to(el.querySelectorAll('.reveal-line'), { ...anim, delay: 0.15 });
+                    }
+                });
+            };
+
+            // --- UNIFIED HERO TIMELINE ---
+            const heroTl = gsap.timeline({ delay: 0.05 });
+            
+            // 1. Text Reveals (Added to timeline)
+            splitReveal('.hero .headline, .pd-hero-title', 'lines', heroTl);
+            splitReveal('.hero .subheadline, .pd-hero-description', 'lines', heroTl);
+            splitReveal('.reveal-type-lines', 'lines', heroTl);
+
+            // 2. Hero Card & Other Elements
             const heroSelectors = [
-                { selector: '.about-page .hero-title', el: document.querySelector('.about-page .hero-title') },
-                { selector: '.house-types-page .ht-headline', el: document.querySelector('.house-types-page .ht-headline') },
-                { selector: '.contact-page .hero-title', el: document.querySelector('.contact-page .hero-title') },
-                { selector: '.projects-page .pj-hero-title', el: document.querySelector('.projects-page .pj-hero-title') },
-                { selector: '.hd-page .hd-hero-title', el: document.querySelector('.hd-page .hd-hero-title') },
-                { selector: '.hero .headline', el: document.querySelector('.hero .headline') },
-                { selector: '.hero .hero-card', el: document.querySelector('.hero .hero-card') }
+                { el: document.querySelector('.hero .hero-card') },
+                { el: document.querySelector('.about-page .hero-title') },
+                { el: document.querySelector('.house-types-page .ht-headline') },
+                { el: document.querySelector('.projects-page .pj-hero-title') }
             ];
 
             heroSelectors.forEach(({ el }) => {
                 if (el) {
-                    gsap.fromTo(el, 
-                        { y: 20, opacity: 0, filter: 'blur(10px)', clipPath: 'inset(0% 0% 100% 0%)' },
-                        { y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)', duration: 1.8, ease: 'expo.out', delay: 0.3 }
+                    heroTl.fromTo(el, 
+                        { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)', autoAlpha: 0 },
+                        { 
+                            y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)', autoAlpha: 1, 
+                            duration: 1.2, ease: 'power4.out', force3D: true 
+                        }, 
+                        0.2 // Slight delay within timeline
                     );
                 }
             });
 
-            // Multi-Page Reveal
+            // --- HERO SCROLL BLUR CLEAR & PARALLAX ---
+            const heroSections = document.querySelectorAll('.hero, .pd-hero');
+            heroSections.forEach(section => {
+                const overlay = section.querySelector('.grid-overlay, .pd-hero-overlay');
+                const wrapper = section.querySelector('.hero-video-wrapper, .bg-video-wrapper');
+                
+                if (overlay) {
+                    gsap.fromTo(overlay, 
+                        { backdropFilter: 'blur(0px)', backgroundColor: 'rgba(0,0,0,0)', opacity: 0 },
+                        {
+                            backdropFilter: 'blur(30px)',
+                            backgroundColor: 'rgba(0,0,0,0.3)',
+                            opacity: 1,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top top',
+                                end: 'bottom top',
+                                scrub: 1,
+                                invalidateOnRefresh: true
+                            }
+                        }
+                    );
+                }
+                
+                if (wrapper) {
+                    gsap.fromTo(wrapper,
+                        { scale: 1, y: '0%' },
+                        {
+                            scale: 1.2,
+                            y: '20%',
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top top',
+                                end: 'bottom top',
+                                scrub: 1,
+                                invalidateOnRefresh: true
+                            }
+                        }
+                    );
+                }
+            });
+
+            // Multi-Page Reveal - Architectural Staggered Reveal
             const gridSelectors = [
                 '.action-grid', '.ht-grid', '.locations-grid', '.neighborhood-grid', 
-                '.team-grid', '.career-grid', '.values-grid', '.recognition-list'
+                '.team-grid', '.career-grid', '.values-grid', '.recognition-list',
+                '.portfolio-grid', '.services-grid-body', '.uniqueness-grid', '.reviews-grid',
+                '.projects-grid', '.who-container', '.mission-grid', '.background-grid', '.stats-subgrid'
             ];
 
             gridSelectors.forEach(selector => {
@@ -257,13 +411,13 @@ export default function ClientScripts() {
                     if (items.length > 0) {
                         ScrollTrigger.batch(items, {
                             onEnter: batch => gsap.fromTo(batch, 
-                                { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)' },
+                                { y: 40, opacity: 0, filter: 'blur(12px)', autoAlpha: 0 },
                                 {
-                                    y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)',
-                                    duration: 1.2, stagger: 0.1, ease: 'expo.out', overwrite: true, clearProps: "filter,clipPath"
+                                    y: 0, opacity: 1, filter: 'blur(0px)', autoAlpha: 1,
+                                    duration: 1.2, stagger: 0.1, ease: 'power4.out', overwrite: true, clearProps: "filter"
                                 }
                             ),
-                            start: 'top 85%',
+                            start: 'top 95%',
                             once: true
                         });
                     }
@@ -275,12 +429,13 @@ export default function ClientScripts() {
                 const isInsideGrid = gridSelectors.some(sel => el.closest(sel));
                 if (!isInsideGrid) {
                     gsap.fromTo(el, 
-                        { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)' },
+                        { y: 30, opacity: 0, filter: 'blur(15px)', autoAlpha: 0 },
                         {
-                            y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)',
-                            duration: 1.2, ease: 'expo.out',
-                            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-                            clearProps: "filter,clipPath"
+                            y: 0, opacity: 1, filter: 'blur(0px)', autoAlpha: 1,
+                            duration: 1.2, ease: 'power4.out',
+                            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+                            force3D: true,
+                            clearProps: "filter"
                         }
                     );
                 }
@@ -317,7 +472,7 @@ export default function ClientScripts() {
                     
                     if (firstIndicator && lastIndicator) {
                         const startY = firstItem.offsetTop + firstIndicator.offsetTop; 
-                        const endY = lastItem.offsetTop + lastIndicator.offsetTop + (lastIndicator.offsetHeight / 2);
+                        const endY = lastItem.offsetTop + lastIndicator.offsetTop; // Spine ends exactly at visual center
                         const calculatedHeight = endY - startY;
 
                         historySpine.style.top = `${startY}px`;
@@ -326,6 +481,12 @@ export default function ClientScripts() {
                 };
 
                 updateSpineHeight();
+                
+                // Use ResizeObserver to catch font loads and layout shifts
+                const historyResizeObserver = new ResizeObserver(() => {
+                    updateSpineHeight();
+                });
+                historyResizeObserver.observe(historySpine.parentElement); // Observe the container
                 window.addEventListener('resize', updateSpineHeight);
 
                 gsap.to(historySpineFill, {
@@ -338,16 +499,16 @@ export default function ClientScripts() {
 
                 historyItems.forEach(item => {
                     const indicator = item.querySelector('.history-indicator');
-                    const card = item.querySelector('.history-card');
-                    const itemTl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 95%', toggleActions: 'play none none none' } });
+                    const card = item.querySelector('.history-process-card');
+                    const itemTl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' } });
 
-                    itemTl.from(indicator, { scale: 0, opacity: 0, duration: 0.8, ease: 'back.out(2)' });
+                    itemTl.from(indicator, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)' });
                     ScrollTrigger.create({
-                        trigger: indicator, start: "top 45%",
+                        trigger: indicator, start: "center 45%",
                         onEnter: () => indicator.classList.add('active'),
                         onLeaveBack: () => indicator.classList.remove('active'),
                     });
-                    itemTl.from(card, { x: 15, opacity: 0, filter: 'blur(8px)', clipPath: 'inset(0% 100% 0% 0%)', duration: 1.4, ease: 'expo.out' }, "-=0.4");
+                    itemTl.from(card, { x: 15, opacity: 0, filter: 'blur(8px)', clipPath: 'inset(0% 100% 0% 0%)', duration: 1.2, ease: 'expo.out' }, "-=0.4");
                 });
             }
         

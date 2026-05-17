@@ -5,16 +5,16 @@ export default function Page() {
         <main className="about-page">
 
         {/*  About Hero Section  */}
-        <section className="about-hero">
-            <div className="hero-bg-container">
+        <section className="about-hero hero">
+            <div className="hero-bg-container hero-video-wrapper">
                 <img fetchPriority="high" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
                 <div className="hero-gradient-blur"></div>
-                <div className="hero-grid-overlay"></div>
+                <div className="hero-grid-overlay grid-overlay"></div>
             </div>
             
             <div className="hero-content">
-                <h1 className="hero-title">
-                    Nigeria has a 17-million-home deficit. 
+                <h1 className="hero-title reveal-type-lines">
+                    Nigeria has a 17-million-home deficit. <br />
                     We're not waiting for someone else to fix&nbsp;it.
                 </h1>
             </div>
@@ -26,7 +26,7 @@ export default function Page() {
                 <div className="mission-grid">
                     <div className="mission-left reveal-on-scroll">
                         <div className="mission-intro-wrapper">
-                            <p className="mission-intro">
+                            <p className="mission-intro reveal-on-scroll">
                                 Since 2019, WKSC has built far beyond walls. We build smart city ecosystems across Nigeria, closing the 17-million-home deficit with 1 million homes by 2035.
                             </p>
                         </div>
@@ -89,11 +89,11 @@ export default function Page() {
             <div className="background-container container-1380">
                 <div className="section-line"></div>
                 <div className="background-header sidebar-layout reveal-on-scroll">
-                    <div className="background-label">
+                    <div className="background-label reveal-on-scroll">
                         <div className="label-square"></div>
                         <span className="label-text">COMPANY BACKGROUND</span>
                     </div>
-                    <h2 className="background-headline">
+                    <h2 className="background-headline reveal-on-scroll">
                         A Pan-African smart city developer building technologically integrated communities across Nigeria today.
                     </h2>
                 </div>
@@ -106,7 +106,7 @@ export default function Page() {
                     </div>
                     
                     <div className="background-content-side reveal-on-scroll">
-                        <div className="quote-card">
+                        <div className="quote-card reveal-on-scroll">
                             <blockquote className="background-quote">
                                 “We don’t just build homes. We build the smart infrastructure of energy, water, and security that every African deserves.”
                             </blockquote>
@@ -137,12 +137,12 @@ export default function Page() {
                 <div className="history-content-layout">
                     <div className="history-sidebar">
                         <div className="history-sidebar-inner reveal-on-scroll">
-                            <div className="history-label">
+                            <div className="history-label reveal-on-scroll">
                                 <div className="label-square"></div>
                                 <span className="label-text">OUR JOURNEY</span>
                             </div>
-                            <h2 className="history-sticky-headline">Our journey through the years</h2>
-                            <p className="history-subheadline">
+                            <h2 className="history-sticky-headline reveal-on-scroll">Our journey through the years</h2>
+                            <p className="history-subheadline reveal-on-scroll">
                                 From private group into Africa's leading smart city developer across Nigeria
                             </p>
                         </div>
@@ -156,112 +156,114 @@ export default function Page() {
 
                         {/*  2019 Milestone  */}
                         <div className="history-item reveal-on-scroll">
-                            <div className="history-indicator"></div>
+                            <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
-                            <div className="history-card">
-                                <div className="history-card-niche">
-                                    <div className="joiner-niche-top">
+                            
+                            <div className="process-card history-process-card">
+                                <div className="card-step-niche">
+                                    <div className="joiner-step-top">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="joiner-niche-bottom">
+                                    <div className="joiner-step-bottom">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="history-card-badge">2019</div>
+                                    <div className="card-step-badge">2019</div>
                                 </div>
-                                <h3 className="history-card-title">Company founding</h3>
-                                <p className="history-card-text">
+                                <h3 className="process-card-title">Company founding</h3>
+                                <p className="process-card-description">
                                     Wisdom E. Kwati officially registered Wisdom Kwati Group with the CAC of Nigeria. His vision was to bridge the housing deficit by building self-sustaining cities. Armed with a deep software engineering background, smart city journey begins.
                                 </p>
-
                             </div>
                         </div>
 
                         {/*  2021 Milestone  */}
                         <div className="history-item reveal-on-scroll">
-                            <div className="history-indicator"></div>
+                            <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
-                            <div className="history-card">
-                                <div className="history-card-niche">
-                                    <div className="joiner-niche-top">
+                            
+                            <div className="process-card history-process-card">
+                                <div className="card-step-niche">
+                                    <div className="joiner-step-top">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="joiner-niche-bottom">
+                                    <div className="joiner-step-bottom">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="history-card-badge">2021</div>
+                                    <div className="card-step-badge">2021</div>
                                 </div>
-                                <h3 className="history-card-title">Major regional scaleup</h3>
-                                <p className="history-card-text">
-                                    By 2021, WKSC had expanded its land acquisition drive beyond Abuja. We began developing sustainable residential ecosystems in Adamawa State, Lagos, and Port Harcourt for all Nigerians
+                                <h3 className="process-card-title">Major regional scaleup</h3>
+                                <p className="process-card-description">
+                                    By 2021, WKSC had expanded its land acquisition drive beyond Abuja. We began developing sustainable residential ecosystems in Adamawa State, Lagos, and Port Harcourt for all Nigerians.
                                 </p>
                             </div>
                         </div>
 
                         {/*  2022 Milestone  */}
                         <div className="history-item reveal-on-scroll">
-                            <div className="history-indicator"></div>
+                            <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
-                            <div className="history-card">
-                                <div className="history-card-niche">
-                                    <div className="joiner-niche-top">
+                            
+                            <div className="process-card history-process-card">
+                                <div className="card-step-niche">
+                                    <div className="joiner-step-top">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="joiner-niche-bottom">
+                                    <div className="joiner-step-bottom">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="history-card-badge">2022</div>
+                                    <div className="card-step-badge">2022</div>
                                 </div>
-                                <h3 className="history-card-title">Infrastructure leadership</h3>
-                                <p className="history-card-text">
-                                    We moved beyond simple home building. WKSC began owning and operating the entire smart city utility chain—providing independent power, water, and security..
+                                <h3 className="process-card-title">Infrastructure leadership</h3>
+                                <p className="process-card-description">
+                                    We moved beyond simple home building. WKSC began owning and operating the entire smart city utility chain—providing independent power, water, and security.
                                 </p>
-
                             </div>
                         </div>
 
                         {/*  2023 Milestone  */}
                         <div className="history-item reveal-on-scroll">
-                            <div className="history-indicator"></div>
+                            <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
-                            <div className="history-card">
-                                <div className="history-card-niche">
-                                    <div className="joiner-niche-top">
+                            
+                            <div className="process-card history-process-card">
+                                <div className="card-step-niche">
+                                    <div className="joiner-step-top">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="joiner-niche-bottom">
+                                    <div className="joiner-step-bottom">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="history-card-badge">2023</div>
+                                    <div className="card-step-badge">2023</div>
                                 </div>
-                                <h3 className="history-card-title">Global ecosystem hub</h3>
-                                <p className="history-card-text">
-                                    WKSC established Singapore as its global operational hub. This strategic move strengthens technology integration and streamlines supply chains for smart city projects across Africa..
+                                <h3 className="process-card-title">Global ecosystem hub</h3>
+                                <p className="process-card-description">
+                                    WKSC established Singapore as its global operational hub. This strategic move strengthens technology integration and streamlines supply chains for smart city projects across Africa.
                                 </p>
-
                             </div>
                         </div>
 
                         {/*  2035 Milestone  */}
                         <div className="history-item reveal-on-scroll">
-                            <div className="history-indicator"></div>
+                            <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
-                            <div className="history-card">
-                                <div className="history-card-niche">
-                                    <div className="joiner-niche-top">
+                            
+                            <div className="process-card history-process-card">
+                                <div className="card-step-niche">
+                                    <div className="joiner-step-top">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="joiner-niche-bottom">
+                                    <div className="joiner-step-bottom">
                                         <svg viewBox="0 0 8 8"><path d="M8 0H3A5 5 0 0 1 8 5V0Z"></path></svg>
                                     </div>
-                                    <div className="history-card-badge">2035</div>
+                                    <div className="card-step-badge">2035</div>
                                 </div>
-                                <h3 className="history-card-title">The one million homes journey</h3>
-                                <p className="history-card-text">
-                                    WKSC remains grounded in its mission to build one million African homes by 2035. Every smart city project is more than a transaction; it is a step toward closing the 17-million-home deficit and creating six million jobs for the continent
+                                <h3 className="process-card-title">The one million homes journey</h3>
+                                <p className="process-card-description">
+                                    WKSC remains grounded in its mission to build one million African homes by 2035. Every smart city project is more than a transaction; it is a step toward closing the 17-million-home deficit and creating six million jobs for the continent.
                                 </p>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>        </section>
 
@@ -275,11 +277,11 @@ export default function Page() {
                     <div className="diff-top-row">
                         {/*  Left: Headline and Label  */}
                         <div className="diff-intro-col reveal-on-scroll">
-                            <div className="differences-label">
+                            <div className="differences-label reveal-on-scroll">
                                 <div className="label-square"></div>
                                 <span className="label-text">OUR DIFFERENCES</span>
                             </div>
-                            <h2 className="differences-headline">
+                            <h2 className="differences-headline reveal-on-scroll">
                                 We don't just build walls. We are a vision of what cities can become when intelligent infrastructure meets innovation.
                             </h2>
                         </div>
@@ -370,7 +372,7 @@ export default function Page() {
                     <h2 className="team-headline">Get to know the team that's as passionate about your project as you are.</h2>
                 </div>                <div className="team-grid">
                     {/*  Wisdom E. Kwati (Chairman WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati - Chairman WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -392,7 +394,7 @@ export default function Page() {
                     </div>
 
                     {/*  Y.G. Ballah (COO, CEO WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cFMWWIyGiJ4lOW3XjoC2M9NQ3ZvRaw9u%26sz=w1200" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -410,7 +412,7 @@ export default function Page() {
                     </div>
 
                     {/*  Zara Ruth Kwati (MD WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1t5F9gOS8mxk5mFyanBk00NVSiyqZrK7M%26sz=w1200" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -428,7 +430,7 @@ export default function Page() {
                     </div>
 
                     {/*  Richard A. Igoche (MD WKSC Karshi)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19v15e89T7AL1DotSQ66-1z5UtfZgcmFz%26sz=w1200" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -446,7 +448,7 @@ export default function Page() {
                     </div>
 
                     {/*  Bar. Samuel Adeolu (Legal Adviser, WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1is5fT1cRu4MenMbZAn34-V1FFsrTtOLz%26sz=w1200" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -464,7 +466,7 @@ export default function Page() {
                     </div>
 
                     {/*  Mr Okpanachi Ogbelu (Accountant, WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu%26sz=w1200" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -482,7 +484,7 @@ export default function Page() {
                     </div>
 
                     {/*  Miss Esther Izu (HR WKSC PLC)  */}
-                    <div className="team-card">
+                    <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1s3a4yhpY4w9WjhsZD0r3Zs6Q2G0CzQeZ%26sz=w1200" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
@@ -517,7 +519,7 @@ export default function Page() {
 
                 <div className="career-grid">
                     {/*  Marketing Coordinator  */}
-                    <div className="career-card">
+                    <div className="career-card reveal-on-scroll">
                         <h3 className="job-title">Marketing Coordinator</h3>
                         
                         <div className="job-info-list">
@@ -553,7 +555,7 @@ export default function Page() {
                     </div>
 
                     {/*  Real Estate Agent  */}
-                    <div className="career-card">
+                    <div className="career-card reveal-on-scroll">
                         <h3 className="job-title">Real Estate Agent</h3>
                         
                         <div className="job-info-list">
@@ -589,7 +591,7 @@ export default function Page() {
                     </div>
 
                     {/*  Property Manager  */}
-                    <div className="career-card">
+                    <div className="career-card reveal-on-scroll">
                         <h3 className="job-title">Property Manager</h3>
                         
                         <div className="job-info-list">

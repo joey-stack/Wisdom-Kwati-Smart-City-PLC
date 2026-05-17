@@ -1,0 +1,220 @@
+/* ========================================
+   BLOG ARCHIVE PAGE STYLING
+   ======================================== */
+
+.blogs-page {
+  background: var(--bg-main);
+  padding: 160px 0 120px 0; /* Space for navbar */
+  min-height: 100vh;
+}
+
+.blogs-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blogs-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.07);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+}
+
+.blogs-label .label-square {
+  width: 8px;
+  height: 8px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.blogs-headline {
+  font-family: var(--font-header);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+}
+
+.blogs-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.filter-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.1);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.filter-pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.filter-pill:hover {
+  background: var(--bg-surface);
+  border-color: rgba(0,0,0,0.2);
+  color: var(--text-primary);
+}
+
+.filter-pill.active {
+  background: var(--text-primary);
+  color: var(--bg-main);
+  border-color: var(--text-primary);
+}
+
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+}
+
+.blog-card-image {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 5px; /* Matched the project-details request */
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.blog-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+  transform: scale(1.05);
+}
+
+.blog-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.blog-card-title {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.blog-card-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blog-author-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.blog-author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-author-name {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .blogs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .blogs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .blogs-page {
+    padding-top: 120px;
+  }
+  .blogs-header {
+    margin-bottom: 40px;
+  }
+  .blogs-headline {
+    font-size: 28px;
+  }
+  .blogs-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

@@ -224,21 +224,10 @@ export default function ProjectDetailTemplate({
               <div className="pd-compact-list reveal-on-scroll">
                 {otherNeighborhoods?.map((item, idx) => (
                   <Link key={idx} href={item.link} className="pd-compact-item">
-                    <div className="pd-compact-flipper">
-                      <div className="pd-compact-front">
-                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
-                        <div className="pd-compact-info">
-                          <h4>{item.name}</h4>
-                          <p>{item.district}</p>
-                        </div>
-                      </div>
-                      <div className="pd-compact-back">
-                        <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
-                        <div className="pd-compact-info">
-                          <h4>{item.name}</h4>
-                          <p>{item.district}</p>
-                        </div>
-                      </div>
+                    <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
+                    <div className="pd-compact-info">
+                      <h4>{item.name}</h4>
+                      {item.district && <p>, {item.district}</p>}
                     </div>
                   </Link>
                 ))}

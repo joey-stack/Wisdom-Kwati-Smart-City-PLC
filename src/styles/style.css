@@ -4,17 +4,17 @@
    ======================================== */
 
 :root {
-  /* Using WKSC brand colors from wksc-colors.css */
-  --font-main: "Outfit", sans-serif;
+  /* WKSC Design System - Premium Brutalist Typography (2026) */
+  --font-header: "Inter Display", "Inter Display Placeholder", sans-serif;
+  --font-body: "Outfit", "Outfit Placeholder", sans-serif;
+  
+  --font-main: var(--font-body);
   --ease-soft: cubic-bezier(0.7, 0, 0.3, 1);
 
-  /* Advanced Responsive Tokens (2026 Standards) */
+  /* Advanced Responsive Tokens */
   --fluid-gap: clamp(2rem, 5vw, 5rem);
   --container-padding: 0;
-  --safe-area-top: env(safe-area-inset-top, 0px);
-  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-area-left: env(safe-area-inset-left, 0px);
-  --safe-area-right: env(safe-area-inset-right, 0px);
+  --section-gap: 160px; /* Massive architectural gaps from Realisting */
 }
 
 * {
@@ -30,7 +30,7 @@ a {
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
   background: var(--bg-main);
@@ -104,7 +104,7 @@ body.no-scroll {
 
 .nav-links li a {
   text-decoration: none;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-body);
   color: var(--text-primary);
   font-weight: 600;
   font-size: 14px;
@@ -533,7 +533,7 @@ body.no-scroll {
   border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   line-height: normal;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -695,7 +695,7 @@ body.menu-active .mobile-nav-links li:nth-child(4) {
 }
 
 .mobile-nav-links a {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-body);
   font-size: 42px;
   font-weight: 600;
   color: var(--text-primary);
@@ -819,7 +819,7 @@ body.menu-active .mobile-nav-links li:nth-child(4) {
   color: var(--text-primary);
   border: none;
   padding: 20px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-weight: 600;
   font-size: 14px;
   line-height: normal;
@@ -903,12 +903,16 @@ body.menu-active .mobile-cta {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-direction: row; /* Changed from column to row */
   justify-content: space-between;
-  align-items: flex-start; /* Reverted to top-alignment for balanced layout */
+  align-items: flex-end;
+  text-align: left;
   width: 100%;
   max-width: 1380px;
-  padding: 140px 0 100px 0; /* Expanded headroom for 120px headline */
+  padding: 0 0 100px 0; /* Left and right padding removed per user request */
+  margin: 0 auto;
   align-self: center;
+  gap: 60px;
 }
 
 .hero-video-wrapper {
@@ -925,31 +929,78 @@ body.menu-active .mobile-cta {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8; /* Subtle darkening */
+  filter: contrast(1.05) brightness(1.05); /* Premium fidelity pop */
+  will-change: transform;
 }
 
-/* Grid Overlay Overlay */
+/* Grid Overlay for Architectural Feel */
 .grid-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image:
-    linear-gradient(to right, rgba(26, 26, 26, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(26, 26, 26, 0.05) 1px, transparent 1px);
-  background-size: 100px 100px; /* Adjust grid size */
-  z-index: 1;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px; /* Precise architectural grid size */
+  z-index: 2;
   pointer-events: none;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  opacity: 0; /* Clean start for reversed blur animation */
 }
+
+/* Blooming Animation Tokens */
+@keyframes bloomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.concave-card {
+  --radius: 20px;
+  --bg: var(--bg-main);
+  background: var(--bg);
+  mask: radial-gradient(var(--radius) at 0 0, #0000 98%, #000) 0 0 / 51% 51% no-repeat,
+        radial-gradient(var(--radius) at 100% 0, #0000 98%, #000) 100% 0 / 51% 51% no-repeat,
+        radial-gradient(var(--radius) at 0 100%, #0000 98%, #000) 0 100% / 51% 51% no-repeat,
+        radial-gradient(var(--radius) at 100% 100%, #0000 98%, #000) 100% 100% / 51% 51% no-repeat;
+  -webkit-mask: radial-gradient(var(--radius) at 0 0, #0000 98%, #000) 0 0 / 51% 51% no-repeat,
+                radial-gradient(var(--radius) at 100% 0, #0000 98%, #000) 100% 0 / 51% 51% no-repeat,
+                radial-gradient(var(--radius) at 0 100%, #0000 98%, #000) 0 100% / 51% 51% no-repeat,
+                radial-gradient(var(--radius) at 100% 100%, #0000 98%, #000) 100% 100% / 51% 51% no-repeat;
+}
+
+.reveal-on-scroll,
+.reveal-type-lines {
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity, filter;
+}
+
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
 
 .hero-content {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: flex-start;
   text-align: left;
-  gap: 24px;
-  max-width: 800px;
+  gap: 32px;
+  flex: 1;
+  max-width: 1100px; /* Increased to allow Dream Large to fit on one line */
+  z-index: 5;
+  padding-left: 0; /* Removed left padding per user request */
 }
 
 .hero-tag {
@@ -960,7 +1011,7 @@ body.menu-active .mobile-cta {
   padding: 6px 14px;
   border-radius: 100px;
   color: var(--bg-main);
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -981,26 +1032,29 @@ body.menu-active .mobile-cta {
 }
 
 .headline {
-  font-family: Inter, "Inter Placeholder", sans-serif;
-  font-size: clamp(48px, 8vw, 110px);
+  font-family: var(--font-body);
+  font-size: clamp(50px, 8.5vw, 115px); /* Slightly reduced to help with layout/overlap */
   font-weight: 500;
   letter-spacing: -0.04em;
   color: var(--bg-main);
-  line-height: 121px; /* Precise 1.1 ratio for 110px scale */
+  line-height: 1.15; /* Increased further to clear descenders */
   margin-bottom: 0;
-  text-transform: uppercase;
+  text-transform: none; 
   text-align: left;
-  max-width: 950px;
+  max-width: 1100px;
+  white-space: nowrap; 
+  opacity: 0; 
+  visibility: hidden;
 }
 
 .hero-card .subheadline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--bg-main);
   max-width: 100%;
-  line-height: 1.6;
+  line-height: 1.95; /* Increased by approx 5px for better vertical rhythm */
   text-transform: uppercase; /* Reverting to uppercase for architectural punch */
   opacity: 0.85;
   text-align: left;
@@ -1067,12 +1121,17 @@ body.menu-active .mobile-cta {
 }
 
 .hero-card {
-  width: 500px;
+  width: 100%;
+  max-width: 350px; /* Reduced to 350px per user request */
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
   text-align: left;
-  margin-bottom: 20px; /* Slight offset from bottom */
+  margin-bottom: 0;
+  opacity: 0; /* Hidden for entrance animation */
+  visibility: hidden;
 }
 
 .mission-header {
@@ -1120,7 +1179,7 @@ body.menu-active .mobile-cta {
    WHO WE ARE SECTION
    ======================== */
 .who-we-are {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
   position: relative;
   z-index: 10;
@@ -1257,7 +1316,7 @@ body.menu-active .mobile-cta {
    HOUSE PORTFOLIO SECTION
    ======================== */
 .house-portfolio {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -1369,6 +1428,7 @@ body.menu-active .mobile-cta {
   transition: transform 0.8s var(--ease-soft);
 }
 
+/* Property card hover refinements */
 .property-card:hover .property-image {
   outline-color: var(--accent-green);
 }
@@ -1415,7 +1475,7 @@ body.menu-active .mobile-cta {
   font-size: 11px;
   font-weight: 600;
   color: #555;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1441,7 +1501,7 @@ body.menu-active .mobile-cta {
   font-size: 11px;
   font-weight: 600;
   color: var(--text-primary);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
 }
 
 .stat-dot {
@@ -1456,7 +1516,7 @@ body.menu-active .mobile-cta {
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
 }
 
 .property-description {
@@ -1490,9 +1550,24 @@ body.menu-active .mobile-cta {
 @media (max-width: 1200px) {
   .headline {
     font-size: clamp(3rem, 7.5vw, 80px);
+    text-align: center;
+    white-space: normal; /* Allow wrapping on mobile */
   }
   .hero-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 140px 0 80px;
     gap: 40px;
+  }
+  .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-card {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
   }
 }
 
@@ -1526,8 +1601,9 @@ body.menu-active .mobile-cta {
   }
 
   .who-headline {
-    font-size: 1.6rem; /* Scaled down for mobile architectural elegance */
-    line-height: 1.3;
+    font-size: 2.2rem; /* Increased for architectural punch */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   .portfolio-grid {
@@ -1566,7 +1642,7 @@ body.menu-active .mobile-cta {
   }
 
   .hero-container {
-    padding: 0 32px 60px 32px;
+    padding: 20px 20px 60px 20px; /* Reduced top padding for mobile */
   }
 }
 
@@ -1606,7 +1682,7 @@ body.menu-active .mobile-cta {
 
   .hero {
     padding: 0;
-    height: 100vh;
+    height: 85vh; /* Reduced for better mobile accessibility */
   }
 
   /* Standardized Mobile Vertical Rhythm (70/10/0) */
@@ -1647,10 +1723,10 @@ body.menu-active .mobile-cta {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 32px; /* Slightly tighter gap for bottom alignment */
-    justify-content: flex-end; /* Drop to bottom */
+    justify-content: flex-end; /* Anchor content to bottom */
+    padding-bottom: 60px !important;
     height: 100%;
-    padding-bottom: 40px !important; /* Refined breathing room from the bottom edge */
+    gap: 32px !important; /* Standardized gap */
   }
 
   .portfolio-container-main {
@@ -1676,10 +1752,10 @@ body.menu-active .mobile-cta {
   .location-header,
   .background-header,
   .pd-sidebar-header {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    margin-bottom: 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important; /* Tighter gap for architectural look */
+    margin-bottom: 32px !important;
     padding: 0 !important;
   }
 
@@ -1707,9 +1783,10 @@ body.menu-active .mobile-cta {
   }
 
   .portfolio-headline {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.4rem; /* Increased for impact */
+    font-weight: 600;
     line-height: 1.05;
+    letter-spacing: -0.03em;
   }
 
   .property-description {
@@ -1777,7 +1854,7 @@ body.menu-active .mobile-cta {
   .blog-container,
   .faq-container,
   .newsletter-container {
-    gap: 20px !important;
+    gap: 60px !important; /* Increased for premium feel */
     padding: 0 !important;
   }
 
@@ -1791,7 +1868,7 @@ body.menu-active .mobile-cta {
   }
 
   .ht-card-name {
-    font-family: var(--font-montserrat), sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 15px !important;
     font-weight: 500 !important;
   }
@@ -1818,7 +1895,7 @@ body.menu-active .mobile-cta {
   }
 
   .ht-card-type {
-    font-family: var(--font-montserrat), sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 15px !important;
     font-weight: 500 !important;
     color: var(--text-primary);
@@ -1842,26 +1919,26 @@ body.menu-active .mobile-cta {
   position: fixed;
   top: 0;
   left: 0;
-  width: 110px; /* Restored from 85px for premium architectural impact */
-  height: 110px;
+  width: 100px;
+  height: 100px;
   background: var(--accent-green);
-  color: var(--text-primary);
+  color: #000;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   pointer-events: none;
   z-index: 10000;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
   transition:
-    transform 0.3s var(--ease-soft),
-    opacity 0.2s ease;
-  font-family: "Inter", sans-serif;
-  font-size: 11px; /* Scaled down typography for balance */
-  font-weight: 900;
-  letter-spacing: 0.12em;
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.3s ease;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  mix-blend-mode: normal;
 }
 
 .card-cursor.active {
@@ -1884,7 +1961,7 @@ body.menu-active .mobile-cta {
    NEIGHBORHOOD SECTION
    ======================== */
 .neighborhood-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -1903,7 +1980,7 @@ body.menu-active .mobile-cta {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -1922,7 +1999,7 @@ body.menu-active .mobile-cta {
 }
 
 .neighborhood-headline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 52.8px;
@@ -1975,6 +2052,9 @@ body.menu-active .mobile-cta {
   border-radius: 3px; /* Inner image radius */
 }
 
+
+
+
 .neighborhood-image-wrapper img {
   width: 100%;
   height: 100%;
@@ -2000,7 +2080,7 @@ body.menu-active .mobile-cta {
 }
 
 .neighborhood-title {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 20px;
   font-weight: 500;
   line-height: 26px;
@@ -2102,7 +2182,7 @@ body.menu-active .mobile-cta {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -2120,7 +2200,7 @@ body.menu-active .mobile-cta {
 }
 
 .services-headline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 52.8px;
@@ -2315,7 +2395,7 @@ body.menu-active .mobile-cta {
 }
 /* Uniqueness Section */
 .uniqueness-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   width: 100%;
   position: relative;
   background: var(--bg-main);
@@ -2331,7 +2411,7 @@ body.menu-active .mobile-cta {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -2349,7 +2429,7 @@ body.menu-active .mobile-cta {
 }
 
 .uniqueness-headline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 52.8px;
@@ -2485,7 +2565,7 @@ body.menu-active .mobile-cta {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -2504,7 +2584,7 @@ body.menu-active .mobile-cta {
 }
 
 .reviews-headline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 1.1;
@@ -2617,7 +2697,7 @@ body.menu-active .mobile-cta {
 }
 
 .review-card.image-card .card-quote {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 20px;
   font-weight: 500;
   line-height: 26px;
@@ -2649,7 +2729,7 @@ body.menu-active .mobile-cta {
 }
 
 .card-name {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 18px;
   font-weight: 600;
   line-height: 1.2;
@@ -2657,7 +2737,7 @@ body.menu-active .mobile-cta {
 }
 
 .card-meta {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2691,7 +2771,7 @@ body.menu-active .mobile-cta {
 }
 
 .review-card.text-card .card-quote-main {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 20px;
   font-weight: 500;
   line-height: 26px;
@@ -2755,7 +2835,7 @@ body.menu-active .mobile-cta {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -2774,7 +2854,7 @@ body.menu-active .mobile-cta {
 }
 
 .process-headline {
-  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-family: var(--font-header);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 52.8px;
@@ -2797,7 +2877,6 @@ body.menu-active .mobile-cta {
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 1260px;
   background-color: transparent; /* Seamless timeline integration */
   z-index: 1;
 }
@@ -2809,6 +2888,7 @@ body.menu-active .mobile-cta {
   width: 100%;
   height: 0%; /* Controlled by GSAP */
   background-color: var(--text-primary);
+  will-change: height;
 }
 
 .process-item {
@@ -3090,7 +3170,7 @@ body.menu-active .mobile-cta {
    BLOG SECTION — STORIES & INSIGHTS
    ======================================== */
 .blog-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -3156,6 +3236,8 @@ body.menu-active .mobile-cta {
   border-color: var(--accent-green);
   transform: translateY(0);
 }
+
+
 
 .blog-image-wrapper {
   width: 100%;
@@ -3255,6 +3337,7 @@ body.menu-active .mobile-cta {
 .blog-cta-container {
   display: flex;
   justify-content: center;
+  margin-top: 64px;
 }
 
 .blog-cta-btn {
@@ -3336,7 +3419,7 @@ body.menu-active .mobile-cta {
    FAQ & CONTACT SECTION
    ======================================== */
 .faq-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   width: 100%;
   background: var(--bg-main);
   position: relative;
@@ -4024,11 +4107,12 @@ body.menu-active .mobile-cta {
 .about-hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* Set to 100vh per user request for full-screen impact */
   display: flex;
-  align-items: flex-end; /* Moved text to bottom to reveal team faces */
-  justify-content: center;
-  padding-bottom: 10vh; /* Controlled distance from bottom */
+  flex-direction: column;
+  align-items: center; 
+  justify-content: flex-end;
+  padding-bottom: 100px; /* Added 100px bottom padding per user request */
   overflow: hidden;
   background: #000;
 }
@@ -4097,10 +4181,22 @@ body.menu-active .mobile-cta {
 .hero-content {
   position: relative;
   z-index: 4;
+  text-align: center;
   max-width: 1100px;
-  width: 90%;
+  padding: 0; /* Removed horizontal padding to fix alignment */
+}
+
+.hero-title {
+  font-family: var(--font-body);
+  font-size: clamp(48px, 9vw, 110px); /* Massive, high-fidelity scale */
+  font-weight: 400;
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: -0.04em;
+  margin: 0;
   text-align: center;
 }
+
 
 .hero-title {
   font-family: "Inter", sans-serif;
@@ -4137,7 +4233,7 @@ body.menu-active .mobile-cta {
    ABOUT PAGE MISSION & STATS
    ======================== */
 .about-mission {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -4305,7 +4401,7 @@ body.menu-active .mobile-cta {
    COMPANY BACKGROUND SECTION
    ======================== */
 .company-background {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main); /* Harmonious withAbout page flow */
 }
 
@@ -4548,7 +4644,7 @@ body.menu-active .mobile-cta {
    OUR HISTORY SECTION (TIMELINE)
    ========================================================================== */
 .our-history {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
   overflow: visible;
 }
@@ -4564,14 +4660,19 @@ body.menu-active .mobile-cta {
   grid-template-columns: 1fr 1fr; /* Precisely balanced 50/50 split */
   gap: 80px;
   margin-top: 64px;
-  align-items: start;
 }
 
 /* Sticky Sidebar Column */
 .history-sidebar {
+  height: 100%;
+}
+
+.history-sidebar-inner {
+  position: -webkit-sticky;
   position: sticky;
-  top: 100px; /* Aligns with cinematic header gap */
-  height: fit-content;
+  top: 150px; /* Offset to clear the transparent navbar cleanly */
+  height: max-content;
+  will-change: transform;
 }
 
 .history-label {
@@ -4596,19 +4697,24 @@ body.menu-active .mobile-cta {
   max-width: 450px;
 }
 
-/* Timeline Column */
+/* ==========================================================================
+   TIMELINE — Realisting Design System
+   Structure: spine | dot | dashed-line | badge-pill | card
+   ========================================================================== */
+
+/* Timeline Column — 55px gap from spine to content (matches Realisting) */
 .history-timeline {
   position: relative;
-  padding-left: 60px; /* Room for spine and indicators */
+  padding-left: 55px;
 }
 
 .history-spine {
   position: absolute;
   left: 0;
-  top: 0; /* Managed with mathematical exactness in main.js */
-  height: 0; /* Precisely calculated and set by GSAP in main.js */
+  top: 0;
+  height: 100%;
   width: 2px;
-  background: transparent; /* Background track removed per user request */
+  background: var(--border);
   z-index: 1;
 }
 
@@ -4617,167 +4723,105 @@ body.menu-active .mobile-cta {
   top: 0;
   left: 0;
   width: 100%;
-  height: 0%; /* Animates with GSAP */
+  height: 0%;
   background: var(--text-primary);
+  will-change: height; /* Optimize for GSAP frame-locked animation */
 }
 
 .history-item {
   position: relative;
-  margin-bottom: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  z-index: 5; /* Ensure milestone is on top of the vertical spine */
+  margin-bottom: 56px;
+  display: block; /* Removed flex-column to allow absolute positioning of indicators */
+  z-index: 5;
 }
 
 .history-item:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
-/* Indicator Circle on Spine — Architecturally Scaled */
+/* Indicator square — centered on spine */
 .history-indicator {
   position: absolute;
-  left: -60px; /* Centered on spine */
-  top: 3px;
-  width: 22px;
-  height: 22px;
-  background: var(--bg-surface); /* Matches card surface */
-  border: 2px solid var(--text-primary); /* Bold architectural border */
-  border-radius: 6px; /* Squircle shape from screenshot */
+  left: -55px;   /* spine is at x=0 of timeline; -55px from item edge = at spine */
+  top: 13px;     /* Vertically centered on the 28px height of the niche */
+  width: 24px;
+  height: 24px;
+  background: var(--bg-main);
+  border: 2px solid var(--text-primary);
+  border-radius: 6px;
   z-index: 10;
-  transform: translateX(-10px); /* Center on 2px spine */
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.4s ease;
 }
 
-/* Central Activation Dot */
-.history-indicator::after {
-  content: "";
-  width: 10px;
-  height: 10px;
+.history-indicator .indicator-dot {
+  width: 12px;
+  height: 12px;
   background: var(--text-primary);
   border-radius: 50%;
   opacity: 0;
   transform: scale(0.4);
-  transition: all 0.3s var(--ease-soft); /* Snappier response for precise sync */
+  transition: all 0.3s var(--ease-soft);
 }
 
-.history-indicator.active::after {
+.history-indicator.active .indicator-dot {
   opacity: 1;
   transform: scale(1);
 }
 
+/* Dashed connector — 55px fixed width (spine → card) */
 .history-marker-line {
   position: absolute;
-  left: -46px;
-  top: 14px; /* Centered on 22px indicator center */
-  width: 32px;
-  height: 1px;
-  border-top: 2px dotted var(--border); /* Dotted line per screenshot */
-  opacity: 1; /* Pure white/visible dots */
+  left: -55px;
+  top: 13px; /* Align with center of the niche */
+  width: 55px;
+  height: 0;
+  border-top: 2px dashed var(--text-primary);
+  opacity: 0.35;
+  z-index: 1;
 }
 
-/* Year Badge with Architectural Notch (Replaced with Card-Based Niche) */
-.history-card {
-  background: var(
-    --bg-surface
-  ); /* Signature surface background synced with footer */
-  padding: 45px 10px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
+/* History Process Card specific modifiers */
+.history-process-card {
   width: 100%;
-  max-width: 650px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-  position: relative;
-  overflow: visible; /* Required for niche joiners */
+  margin-left: 0;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
+  padding: 32px 36px 36px 36px;
+  height: auto;
+  min-height: 150px;
+  justify-content: flex-start;
 }
 
-.history-card-niche {
-  position: absolute;
-  top: -1px;
+/* Move the niche to the Top Left */
+.history-process-card .card-step-niche {
+  right: auto;
   left: -1px;
-  width: 88px;
-  height: 28px;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border);
+  border-left: none;
   border-right: 1px solid var(--border);
+  border-bottom-left-radius: 0;
   border-bottom-right-radius: 5px;
-  z-index: 2;
 }
 
-.history-card-badge {
-  position: absolute;
-  top: 0;
+.history-process-card .card-step-badge {
   right: 2px;
-  bottom: 2px;
   left: 0;
-  background-color: var(--text-primary);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-top-right-radius: 0;
   border-top-left-radius: 5px;
+  border-bottom-left-radius: 0;
   border-bottom-right-radius: 5px;
-  letter-spacing: 0.1em;
-  z-index: 5;
-  white-space: nowrap;
 }
 
-/* Precision Inverted-Radius Joiners for History Card */
-.joiner-niche-top,
-.joiner-niche-bottom {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  fill: var(--bg-surface); /* Matches .history-card background */
-  pointer-events: none;
-  z-index: 10;
-}
-
-.joiner-niche-top {
-  top: 0;
+.history-process-card .joiner-step-top,
+.history-process-card .joiner-step-bottom {
+  right: auto;
   left: 100%;
   transform: scaleX(-1);
 }
 
-.joiner-niche-bottom {
-  bottom: 0;
-  left: 100%;
+.history-process-card .joiner-step-bottom {
   transform: scale(-1); /* Flips both X and Y */
-}
-
-.history-card-title {
-  font-family: "Inter Display", sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-}
-
-.history-card-text {
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 0;
-}
-
-.history-image-wrapper {
-  margin-top: 24px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  aspect-ratio: 16 / 9;
-}
-
-.history-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 /* Responsive History */
@@ -4787,7 +4831,8 @@ body.menu-active .mobile-cta {
     gap: 60px;
   }
 
-  .history-sidebar {
+  .history-sidebar,
+  .history-sidebar-inner {
     position: static;
   }
 
@@ -4796,16 +4841,39 @@ body.menu-active .mobile-cta {
   }
 
   .history-timeline {
-    padding-left: 20px;
-    margin-left: 10px !important;
+    padding-left: 55px;
   }
-
   .history-indicator {
-    left: -20px;
+    left: -55px;
+    width: 18px;
+    height: 18px;
   }
-
   .history-marker-line {
-    left: -26px;
+    left: -55px;
+    width: 55px;
+  }
+  .history-process-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .history-timeline {
+    padding-left: 40px;
+  }
+  .history-indicator {
+    left: -40px;
+  }
+  .history-marker-line {
+    left: -40px;
+    width: 40px;
+  }
+  .history-process-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .history-card-title {
+    font-size: 20px;
   }
 }
 
@@ -4813,7 +4881,7 @@ body.menu-active .mobile-cta {
    OUR DIFFERENCES SECTION
    ========================================================================== */
 .our-differences {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -4978,7 +5046,7 @@ body.menu-active .mobile-cta {
    OUR TEAM SECTION
    ========================================================================== */
 .our-team {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
 }
 
@@ -5155,7 +5223,7 @@ body.menu-active .mobile-cta {
 
 /* --- Careers Section --- */
 .career-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
 }
 
 @media (max-width: 768px) {
@@ -5267,7 +5335,7 @@ body.menu-active .mobile-cta {
    RECOGNITION SECTION
    ======================================== */
 .recognition-section {
-  padding: 120px 0;
+  padding: var(--section-gap) 0;
   background: var(--bg-main);
   border-top: 1px solid var(--border);
 }
@@ -5559,15 +5627,16 @@ body.menu-active .mobile-cta {
   transition: outline-color 0.4s var(--ease-soft);
 }
 
-.ht-card:hover .ht-card-image {
-  outline-color: var(--accent-green);
-}
-
 .ht-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.8s var(--ease-soft);
+}
+
+/* House Type card hover refinements */
+.ht-card:hover .ht-card-image {
+  outline-color: var(--accent-green);
 }
 
 .ht-card:hover .ht-card-image img {

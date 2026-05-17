@@ -2,6 +2,46 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import '../styles/blogs.css';
+
+const getSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+};
+
+const recentBlogs = [
+  {
+    title: "7 simple upgrades that make your home feel luxurious",
+    category: "LIFESTYLE",
+    date: "FEB 5, 2025",
+    author: "RYAN MILFORD",
+    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200",
+  },
+  {
+    title: "Clever ways to make small spaces feel brighter, airier, and bigger",
+    category: "LIFESTYLE",
+    date: "JAN 20, 2025",
+    author: "JAMES MILLER",
+    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200",
+  },
+  {
+    title: "Real estate trends 2025 — what's shaping the property market this year",
+    category: "NEWS",
+    date: "JAN 3, 2025",
+    author: "JAMES MILLER",
+    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200",
+  },
+  {
+    title: "The future of smart homes — what's trending in home tech for 2025",
+    category: "NEWS",
+    date: "DEC 11, 2024",
+    author: "RYAN MILFORD",
+    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200",
+  }
+];
 
 export default function Page() {
     const videoRef = React.useRef(null);
@@ -46,12 +86,12 @@ export default function Page() {
         
         <div className="hero-container">
             <div className="hero-content">
-                <h1 className="headline">DREAM LARGE. <br /> LIVE SMART.</h1>
+                <h1 className="headline reveal-type-lines">Dream Large. <br /> Live Smart.</h1>
             </div>
 
-            <div className="hero-card glass-panel">
-                <p className="subheadline">
-                    We've built the infrastructure other developers only promise.
+            <div className="hero-card glass-panel bloom-element delay-1">
+                <p className="subheadline reveal-type-lines">
+                    We've built the infrastructure <br />other developers only promise.
                 </p>
                 
                 <button className="cta-button">
@@ -74,13 +114,13 @@ export default function Page() {
                 WHO WE ARE
             </div>
             <div className="who-content">
-                <h2 className="who-headline">
+                <h2 className="who-headline reveal-on-scroll">
                     With a foundation in software engineering and infrastructure, we are building the functional ecosystem Africa deserves.
                 </h2>
-                <p className="who-text">
+                <p className="who-text reveal-on-scroll">
                     Founded in 2019, WKSC is more than a real estate developer. We are ecosystem builders on a mission to deliver 1 million smart homes by 2035. By integrating IoT-ready infrastructure, solar grids, and water treatment plants from the ground up, we ensure every community is ready for the future.
                 </p>
-                <a href="#about-full" className="btn-pill">
+                <a href="#about-full" className="btn-pill reveal-on-scroll">
                     <div className="flip-text">
                         <span>LEARN MORE</span>
                         <span aria-hidden="true">LEARN MORE</span>
@@ -98,18 +138,18 @@ export default function Page() {
             <div className="section-line"></div>
             
             <div className="neighborhood-header sidebar-layout">
-                <div className="neighborhood-label">
+                <div className="neighborhood-label reveal-on-scroll">
                     <div className="label-square"></div>
                     NEIGHBORHOOD
                 </div>
-                <h2 className="neighborhood-headline">
+                <h2 className="neighborhood-headline reveal-on-scroll">
                     Where you live matters — pick the perfect spot
                 </h2>
             </div>
 
             <div className="neighborhood-grid">
                 {/*  1. Mabushi District (Ellington Villa)  */}
-                <a href="/mabushi-district" className="neighborhood-card">
+                <a href="/mabushi-district" className="neighborhood-card reveal-on-scroll">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Mabushi District" referrerPolicy="no-referrer" />
@@ -127,7 +167,7 @@ export default function Page() {
                 </a>
 
                 {/*  2. Guzape II (Nimi Hills)  */}
-                <a href="/guzape-estate" className="neighborhood-card">
+                <a href="/guzape-estate" className="neighborhood-card reveal-on-scroll">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Guzape II" referrerPolicy="no-referrer" />
@@ -145,7 +185,7 @@ export default function Page() {
                 </a>
 
                 {/*  3. Apo Tafyi (Palm Haven)  */}
-                <a href="/palm-haven" className="neighborhood-card">
+                <a href="/palm-haven" className="neighborhood-card reveal-on-scroll">
                     <div className="neighborhood-image-wrapper">
                         <div className="neighborhood-image-inner">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ%26sz=w1200" alt="Apo Tafyi" referrerPolicy="no-referrer" />
@@ -164,7 +204,7 @@ export default function Page() {
             </div>
 
             <div className="neighborhood-footer">
-                <a href="/projects" className="btn-pill btn-black">
+                <a href="/projects" className="btn-pill btn-black reveal-on-scroll">
                     <span className="flip-text">
                         <span className="original">VIEW ALL NEIGHBORHOODS</span>
                         <span className="remix">VIEW ALL NEIGHBORHOODS</span>
@@ -180,11 +220,11 @@ export default function Page() {
             <div className="section-line"></div>
             
             <div className="portfolio-header sidebar-layout">
-                <div className="portfolio-label">
+                <div className="portfolio-label reveal-on-scroll">
                     <div className="label-square"></div>
                     RECENT LISTINGS
                 </div>
-                <h2 className="portfolio-headline">
+                <h2 className="portfolio-headline reveal-on-scroll">
                     Take a peek at hottest homes and discover what could be yours
                 </h2>
             </div>
@@ -250,7 +290,7 @@ export default function Page() {
             </div>
 
             <div className="portfolio-footer">
-                <a href="/house-types" className="btn-pill">
+                <a href="/house-types" className="btn-pill reveal-on-scroll">
                     <div className="flip-text">
                         <span>VIEW PROPERTIES</span>
                         <span aria-hidden="true">VIEW PROPERTIES</span>
@@ -273,11 +313,11 @@ export default function Page() {
             <div className="section-line"></div>
             
             <div className="services-header sidebar-layout">
-                <div className="services-label">
+                <div className="services-label reveal-on-scroll">
                     <div className="label-square"></div>
                     SERVICES
                 </div>
-                <h2 className="services-headline">
+                <h2 className="services-headline reveal-on-scroll">
                     Service, support, and strategy — made simple from start to finish.
                 </h2>
             </div>
@@ -286,7 +326,7 @@ export default function Page() {
                 <div className="services-list-column">
                     <div className="services-cards-stack">
                         {/*  1. Consultation  */}
-                        <div className="service-card">
+                        <div className="service-card reveal-on-scroll">
                             <div className="service-card-header">
                                 <div className="service-icon">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -299,7 +339,7 @@ export default function Page() {
                         </div>
 
                         {/*  2. Design & Automation  */}
-                        <div className="service-card">
+                        <div className="service-card reveal-on-scroll">
                             <div className="service-card-header">
                                 <div className="service-icon">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
@@ -312,7 +352,7 @@ export default function Page() {
                         </div>
 
                         {/*  3. Construction  */}
-                        <div className="service-card">
+                        <div className="service-card reveal-on-scroll">
                             <div className="service-card-header">
                                 <div className="service-icon">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="10" width="20" height="12" rx="2"></rect><path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6"></path><path d="M12 10V2"></path></svg>
@@ -325,7 +365,7 @@ export default function Page() {
                         </div>
 
                         {/*  4. Project Management  */}
-                        <div className="service-card">
+                        <div className="service-card reveal-on-scroll">
                             <div className="service-card-header">
                                 <div className="service-icon">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
@@ -338,7 +378,7 @@ export default function Page() {
                         </div>
 
                         {/*  5. Smart Investment  */}
-                        <div className="service-card">
+                        <div className="service-card reveal-on-scroll">
                             <div className="service-card-header">
                                 <div className="service-icon">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
@@ -353,7 +393,7 @@ export default function Page() {
                 </div>
 
                 <div className="services-image-column">
-                    <div className="services-image-wrapper">
+                    <div className="services-image-wrapper reveal-on-scroll">
                         <div className="services-image-inner">
                             <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200'; }} />
                         </div>
@@ -369,18 +409,18 @@ export default function Page() {
             <div className="section-line"></div>
             
             <div className="uniqueness-header sidebar-layout">
-                <div className="uniqueness-label">
+                <div className="uniqueness-label reveal-on-scroll">
                     <div className="label-square"></div>
                     OUR UNIQUENESS
                 </div>
-                <h2 className="uniqueness-headline">
+                <h2 className="uniqueness-headline reveal-on-scroll">
                     Why we're not just another agency — we're your real estate sidekick
                 </h2>
             </div>
 
             <div className="uniqueness-grid">
                 {/*  1. Verified Listings  */}
-                <div className="uniqueness-card">
+                <div className="uniqueness-card reveal-on-scroll">
                     <div className="uniqueness-top">
                         <div className="uniqueness-pill">Verified listings you can trust</div>
                     </div>
@@ -394,7 +434,7 @@ export default function Page() {
                 </div>
 
                 {/*  2. Local Experts  */}
-                <div className="uniqueness-card">
+                <div className="uniqueness-card reveal-on-scroll">
                     <div className="uniqueness-top">
                         <div className="uniqueness-pill">Local experts, real guidance</div>
                     </div>
@@ -408,7 +448,7 @@ export default function Page() {
                 </div>
 
                 {/*  3. Stress-free  */}
-                <div className="uniqueness-card">
+                <div className="uniqueness-card reveal-on-scroll">
                     <div className="uniqueness-top">
                         <div className="uniqueness-pill">Stress-free buying & selling</div>
                     </div>
@@ -422,7 +462,7 @@ export default function Page() {
                 </div>
 
                 {/*  4. Fast Tours  */}
-                <div className="uniqueness-card">
+                <div className="uniqueness-card reveal-on-scroll">
                     <div className="uniqueness-top">
                         <div className="uniqueness-pill">Fast tours & easy contact</div>
                     </div>
@@ -669,79 +709,38 @@ export default function Page() {
                 <h2 className="blog-headline">News, stories, and inspiration for better living every day</h2>
             </header>
 
-            <div className="blog-grid">
-                {/*  Blog 1  */}
-                <a href="#" className="blog-card">
-                    <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="First-time homebuyer's guide" referrerPolicy="no-referrer" />
-                    </div>
-                    <div className="blog-card-content">
-                        <div className="blog-card-meta">
-                            <span>DEC 5, 2024</span>
-                            <span className="separator">•</span>
-                            <span>GUIDE</span>
+            <div className="blogs-grid">
+                {recentBlogs.map((blog, idx) => (
+                    <Link href={`/blogs/${getSlug(blog.title)}`} key={idx} className="blog-card reveal-on-scroll">
+                        <div className="blog-card-image">
+                            <img loading="lazy" src={blog.image} alt={blog.title} referrerPolicy="no-referrer" />
                         </div>
-                        <h3 className="blog-card-title">First-time homebuyer's guide — everything you need to know before...</h3>
-                        <div className="blog-author">
-                            <div className="author-avatar">
-                                <img loading="lazy" src="https://i.pravatar.cc/100?u=james" alt="James Miller" />
+                        <div className="blog-card-content">
+                            <div className="blog-card-meta">
+                                <span className="blog-date">{blog.date}</span>
+                                <span className="blog-dot">•</span>
+                                <span className="blog-category">{blog.category}</span>
                             </div>
-                            <span className="author-name">JAMES MILLER</span>
-                        </div>
-                    </div>
-                </a>
-
-                {/*  Blog 2  */}
-                <a href="#" className="blog-card">
-                    <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Renting guide" referrerPolicy="no-referrer" />
-                    </div>
-                    <div className="blog-card-content">
-                        <div className="blog-card-meta">
-                            <span>DEC 16, 2024</span>
-                            <span className="separator">•</span>
-                            <span>GUIDE</span>
-                        </div>
-                        <h3 className="blog-card-title">How to rent out your property safely and successfully — a complete owner's guide</h3>
-                        <div className="blog-author">
-                            <div className="author-avatar">
-                                <img loading="lazy" src="https://i.pravatar.cc/100?u=james" alt="James Miller" />
+                            <h3 className="blog-card-title">{blog.title}</h3>
+                            <div className="blog-card-author">
+                                <div className="blog-author-avatar">
+                                    <img src={`https://ui-avatars.com/api/?name=${blog.author.replace(' ', '+')}&background=random`} alt={blog.author} />
+                                </div>
+                                <span className="blog-author-name">{blog.author}</span>
                             </div>
-                            <span className="author-name">JAMES MILLER</span>
                         </div>
-                    </div>
-                </a>
-
-                {/*  Blog 3  */}
-                <a href="#" className="blog-card">
-                    <div className="blog-image-wrapper">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Real estate trends 2025" referrerPolicy="no-referrer" />
-                    </div>
-                    <div className="blog-card-content">
-                        <div className="blog-card-meta">
-                            <span>JUL 5, 2024</span>
-                            <span className="separator">•</span>
-                            <span>NEWS</span>
-                        </div>
-                        <h3 className="blog-card-title">Real estate trends 2025 — what's shaping the property market this year</h3>
-                        <div className="blog-author">
-                            <div className="author-avatar">
-                                <img loading="lazy" src="https://i.pravatar.cc/100?u=james" alt="James Miller" />
-                            </div>
-                            <span className="author-name">JAMES MILLER</span>
-                        </div>
-                    </div>
-                </a>
+                    </Link>
+                ))}
             </div>
 
             <div className="blog-cta-container">
-                <a href="#" className="blog-cta-btn">
+                <Link href="/blogs" className="blog-cta-btn">
                     <div className="flip-text">
                         <span>READ ALL BLOGS</span>
                         <span aria-hidden="true">READ ALL BLOGS</span>
                     </div>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </a>
+                </Link>
             </div>
         </div>
     </section>

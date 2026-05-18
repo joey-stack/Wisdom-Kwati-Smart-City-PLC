@@ -8,8 +8,13 @@ import Lenis from 'lenis';
 export default function ClientScripts() {
     const pathname = usePathname();
 
+    if (pathname && pathname.startsWith('/admin')) {
+        return null;
+    }
+
     useEffect(() => {
         if (typeof window === 'undefined') return;
+        if (pathname && pathname.startsWith('/admin')) return;
 
         // --- 1. TEARDOWN EXISTING SCRIPT LIFECYCLES (PREVENTS ACCUMULATING DUPLICATES) ---
         ScrollTrigger.getAll().forEach(t => t.kill());

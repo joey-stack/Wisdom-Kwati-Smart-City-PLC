@@ -1,26 +1,179 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export default function ProjectDetailTemplate({
-  title,
-  heroImage,
-  heroVideo,
-  heroPoster,
-  heroDescription,
-  updatesLink,
-  description,
-  highlights,
-  realEstateVibe, // Array of { category, details }
-  nearbyFacilities, // Array of { category, establishment, travelTime }
-  marketSnapshot, // Array of { plotCategory, priceRange, outlook }
-  plotSizes, // Array of { plotType, dimensions, area, availability }
-  sidebarAdviser, // { name, role, quote, phone, email, image }
-  otherNeighborhoods, // Array of { name, district, link, image }
-  houseTypesTitle,
-  houseTypes // Array of { name, location, type, beds, baths, size, link, image }
+  title: initialTitle,
+  heroImage: initialHeroImage,
+  heroVideo: initialHeroVideo,
+  heroPoster: initialHeroPoster,
+  heroDescription: initialHeroDescription,
+  updatesLink: initialUpdatesLink,
+  description: initialDescription,
+  highlights: initialHighlights,
+  realEstateVibe: initialRealEstateVibe,
+  nearbyFacilities: initialNearbyFacilities,
+  marketSnapshot: initialMarketSnapshot,
+  plotSizes: initialPlotSizes,
+  sidebarAdviser: initialSidebarAdviser,
+  otherNeighborhoods: initialOtherNeighborhoods,
+  houseTypesTitle: initialHouseTypesTitle,
+  houseTypes: initialHouseTypes,
+  mapEmbedUrl: initialMapEmbedUrl
 }) {
+  const [title, setTitle] = useState(initialTitle);
+  const [heroImage, setHeroImage] = useState(initialHeroImage);
+  const [heroVideo, setHeroVideo] = useState(initialHeroVideo);
+  const [heroPoster, setHeroPoster] = useState(initialHeroPoster);
+  const [heroDescription, setHeroDescription] = useState(initialHeroDescription);
+  const [updatesLink, setUpdatesLink] = useState(initialUpdatesLink);
+  const [description, setDescription] = useState(initialDescription);
+  const [highlights, setHighlights] = useState(initialHighlights);
+  const [realEstateVibe, setRealEstateVibe] = useState(initialRealEstateVibe);
+  const [nearbyFacilities, setNearbyFacilities] = useState(initialNearbyFacilities);
+  const [marketSnapshot, setMarketSnapshot] = useState(initialMarketSnapshot);
+  const [plotSizes, setPlotSizes] = useState(initialPlotSizes);
+  const [sidebarAdviser, setSidebarAdviser] = useState(initialSidebarAdviser);
+  const [otherNeighborhoods, setOtherNeighborhoods] = useState(initialOtherNeighborhoods);
+  const [houseTypesTitle, setHouseTypesTitle] = useState(initialHouseTypesTitle);
+  const [houseTypes, setHouseTypes] = useState(initialHouseTypes);
+  const [mapEmbedUrl, setMapEmbedUrl] = useState(initialMapEmbedUrl);
+
+  // Sync state if props change
+  useEffect(() => {
+    setTitle(initialTitle);
+    setHeroImage(initialHeroImage);
+    setHeroVideo(initialHeroVideo);
+    setHeroPoster(initialHeroPoster);
+    setHeroDescription(initialHeroDescription);
+    setUpdatesLink(initialUpdatesLink);
+    setDescription(initialDescription);
+    setHighlights(initialHighlights);
+    setRealEstateVibe(initialRealEstateVibe);
+    setNearbyFacilities(initialNearbyFacilities);
+    setMarketSnapshot(initialMarketSnapshot);
+    setPlotSizes(initialPlotSizes);
+    setSidebarAdviser(initialSidebarAdviser);
+    setOtherNeighborhoods(initialOtherNeighborhoods);
+    setHouseTypesTitle(initialHouseTypesTitle);
+    setHouseTypes(initialHouseTypes);
+    setMapEmbedUrl(initialMapEmbedUrl);
+  }, [
+    initialTitle, initialHeroImage, initialHeroVideo, initialHeroPoster,
+    initialHeroDescription, initialUpdatesLink, initialDescription, initialHighlights,
+    initialRealEstateVibe, initialNearbyFacilities, initialMarketSnapshot,
+    initialPlotSizes, initialSidebarAdviser, initialOtherNeighborhoods,
+    initialHouseTypesTitle, initialHouseTypes, initialMapEmbedUrl
+  ]);
+
+  // Load from CMS on mount if document exists
+  useEffect(() => {
+    async function fetchCmsData() {
+      try {
+        const path = window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop();
+        if (!path) return;
+
+        const projectDoc = await getDoc(doc(db, 'projects', path));
+        if (projectDoc.exists()) {
+          const project = projectDoc.data();
+
+          if (project.name) setTitle(project.name);
+          if (project.heroImage) {
+            setHeroImage(project.heroImage);
+            setHeroVideo(null);
+            setHeroPoster(null);
+          }
+          if (project.tagline) setHeroDescription(project.tagline);
+          if (project.description) setDescription(project.description);
+          if (project.mapEmbedUrl) setMapEmbedUrl(project.mapEmbedUrl);
+          if (project.updatesLink) setUpdatesLink(project.updatesLink);
+          
+          if (project.highlights && project.highlights.length > 0) {
+            setHighlights(project.highlights);
+          }
+
+          if (project.realEstateVibe && project.realEstateVibe.length > 0) {
+            setRealEstateVibe(project.realEstateVibe.map(v => ({
+              category: v.title || v.category || '',
+              details: v.description || v.details || ''
+            })));
+          }
+
+          if (project.nearbyFacilities && project.nearbyFacilities.length > 0) {
+            setNearbyFacilities(project.nearbyFacilities.map(f => ({
+              category: f.category || 'Location',
+              establishment: f.name || f.establishment || '',
+              travelTime: f.distance || f.travelTime || ''
+            })));
+          }
+
+          if (project.marketSnapshot && project.marketSnapshot.length > 0) {
+            setMarketSnapshot(project.marketSnapshot.map(s => ({
+              plotCategory: s.metric || s.plotCategory || '',
+              priceRange: s.value || s.priceRange || '',
+              outlook: s.outlook || 'Stable Growth'
+            })));
+          }
+
+          if (project.plotSizes && project.plotSizes.length > 0) {
+            setPlotSizes(project.plotSizes.map(p => ({
+              plotType: p.size || p.plotType || '',
+              dimensions: p.dimensions || '',
+              area: p.size || p.area || '',
+              availability: p.availability || 'Available'
+            })));
+          }
+
+          // Resolve relational advisor
+          if (project.advisorId) {
+            const advisorDoc = await getDoc(doc(db, 'advisors', project.advisorId));
+            if (advisorDoc.exists()) {
+              const advisor = advisorDoc.data();
+              setSidebarAdviser({
+                name: advisor.name || '',
+                role: advisor.role || '',
+                quote: advisor.quote || '',
+                phone: advisor.phone || '',
+                email: advisor.email || '',
+                image: advisor.image || ''
+              });
+            }
+          }
+
+          // Resolve house specifications
+          if (project.houseTypeIds && project.houseTypeIds.length > 0) {
+            const houseTypesList = [];
+            for (const htId of project.houseTypeIds) {
+              const htDoc = await getDoc(doc(db, 'houseTypes', htId));
+              if (htDoc.exists()) {
+                const ht = htDoc.data();
+                houseTypesList.push({
+                  name: ht.classType || htId,
+                  location: `${ht.beds || 0}BR Smart Villa`,
+                  type: ht.classType || 'Villa spec',
+                  beds: String(ht.beds || 0),
+                  baths: String(ht.baths || 0),
+                  size: ht.size || '',
+                  link: `/house-types/${htId}`,
+                  image: ht.images && ht.images.length > 0 ? ht.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec'
+                });
+              }
+            }
+            if (houseTypesList.length > 0) {
+              setHouseTypes(houseTypesList);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('CMS Frontend Fetch error:', err);
+      }
+    }
+    fetchCmsData();
+  }, []);
+
   const videoRef = React.useRef(null);
   React.useEffect(() => {
     const playVideo = async () => {
@@ -140,7 +293,7 @@ export default function ProjectDetailTemplate({
         </div>
         <div className="pd-hero-overlay"></div>
         <div className="pd-hero-content reveal-on-scroll">
-          <h1 className="pd-hero-title">{title}</h1>
+          <h1 className="pd-hero-title" style={{ textTransform: 'uppercase' }}>{title}</h1>
           <p className="pd-hero-description">{heroDescription}</p>
           <Link href={updatesLink || "#"} className="btn-pill" style={{ marginTop: "30px", display: "inline-flex", background: "var(--accent-green)", color: "var(--text-primary)", border: "none" }}>
             <div className="flip-text">
@@ -205,10 +358,28 @@ export default function ProjectDetailTemplate({
 
             {/* Plot Sizes */}
             {plotSizes && (
-              <section className="pd-section reveal-on-scroll" style={{ marginBottom: 0 }}>
+              <section className="pd-section reveal-on-scroll">
                 <div className="pd-section-title">Available Plot Sizes</div>
                 <div className="pd-table-container">
                   <table className="pd-table"><thead><tr><th>Plot Type</th><th>Dimensions</th><th>Area</th><th>Availability</th></tr></thead><tbody>{plotSizes.map((row, idx) => (<tr key={idx}><td className="pd-label-cell">{row.plotType}</td><td>{row.dimensions}</td><td>{row.area}</td><td>{row.availability}</td></tr>))}</tbody></table>
+                </div>
+              </section>
+            )}
+
+            {/* Estate Map */}
+            {mapEmbedUrl && (
+              <section className="pd-section reveal-on-scroll" style={{ marginBottom: 0 }}>
+                <div className="pd-section-title">Location Map</div>
+                <div style={{ width: '100%', height: '400px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+                  <iframe 
+                    src={mapEmbedUrl} 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </section>
             )}
@@ -287,8 +458,8 @@ export default function ProjectDetailTemplate({
                 </div>
                 <div className="ht-card-info">
                   <div className="ht-card-left">
-                    <h3 className="ht-card-name">{item.name}</h3>
-                    <p className="ht-card-location">{item.location}</p>
+                    <h3 className="ht-card-name" style={{ textTransform: 'capitalize' }}>{item.name}</h3>
+                    <p className="ht-card-location" style={{ textTransform: 'capitalize' }}>{item.location}</p>
                   </div>
                   <div className="ht-card-right">
                     <p className="ht-card-type">{item.type}</p>

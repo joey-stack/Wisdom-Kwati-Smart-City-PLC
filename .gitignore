@@ -52,3 +52,6 @@ next-env.d.ts
 *.docx
 _legacy_backup/
 /public/assets/
+
+# Credentials
+service-account.json

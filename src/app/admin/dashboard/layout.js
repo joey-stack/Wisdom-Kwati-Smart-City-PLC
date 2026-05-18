@@ -1,0 +1,143 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import '@/styles/admin.css';
+
+export default function AdminDashboardLayout({ children }) {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (!authUser) {
+        // Not logged in, redirect to login gate
+        router.replace('/admin');
+      } else {
+        setUser(authUser);
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/admin');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="admin-skeleton-screen">
+        <div className="admin-skeleton-spinner"></div>
+      </div>
+    );
+  }
+
+  // Sidebar navigation options
+  const navItems = [
+    {
+      label: 'Main Dashboard',
+      items: [
+        { name: 'Overview Stats', path: '/admin/dashboard', icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6z M14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z M4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z M14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z' },
+        { name: 'Inquiries (Leads)', path: '/admin/dashboard/inquiries', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+      ]
+    },
+    {
+      label: 'Content Management',
+      items: [
+        { name: 'Projects / Estates', path: '/admin/dashboard/projects', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' },
+        { name: 'House Specifications', path: '/admin/dashboard/house-types', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+        { name: 'Project Advisors', path: '/admin/dashboard/advisors', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75' },
+      ]
+    }
+  ];
+
+  return (
+    <div className="admin-shell">
+      {/* Sidebar Navigation */}
+      <aside className="admin-sidebar">
+        <div className="admin-sidebar-header">
+          <span className="admin-sidebar-logo">WK Smart City</span>
+          <span className="admin-sidebar-tag">Admin Console</span>
+        </div>
+
+        <nav className="admin-sidebar-nav">
+          {navItems.map((group, gIdx) => (
+            <div key={gIdx} className="mb-6" style={{ marginBottom: '24px' }}>
+              <span className="admin-nav-label">{group.label}</span>
+              {group.items.map((item, iIdx) => {
+                const isActive = pathname === item.path;
+                return (
+                  <Link 
+                    key={iIdx} 
+                    href={item.path} 
+                    className={`admin-nav-link ${isActive ? 'active' : ''}`}
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d={item.icon}></path>
+                    </svg>
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
+
+        <div className="admin-sidebar-footer">
+          <div className="admin-user-info">
+            <span className="admin-user-name">Administrator</span>
+            <span className="admin-user-role">{user?.email?.split('@')[0]}</span>
+          </div>
+          <button 
+            onClick={handleLogout} 
+            className="admin-logout-btn"
+            title="Sign out of administrative session"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Panel Content */}
+      <main className="admin-viewport">
+        {children}
+      </main>
+    </div>
+  );
+}

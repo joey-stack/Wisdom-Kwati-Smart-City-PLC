@@ -609,6 +609,8 @@ body.no-scroll {
   padding: 60px 40px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  visibility: hidden;
+  pointer-events: none;
 }
 @media (max-width: 1024px) {
   .mobile-menu-overlay {
@@ -633,6 +635,8 @@ body.no-scroll {
 
 body.menu-active .mobile-menu-overlay {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .menu-close {

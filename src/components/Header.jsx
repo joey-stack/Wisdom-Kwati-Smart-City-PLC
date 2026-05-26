@@ -16,7 +16,7 @@ export default function Header() {
         <div className="nav-container">
             <a href="/" className="logo" aria-label="Wisdom Kwati Smart City Home">
                 <img 
-                    src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1Cbq8uEoaWUwfhLTjwc2Oc6IoT-soIbJ4" 
+                    src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g" 
                     alt="Wisdom Kwati Smart City Logo"
                 />
             </a>

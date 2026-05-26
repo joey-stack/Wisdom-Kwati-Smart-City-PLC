@@ -104,7 +104,7 @@ export default function RootLayout({ children }) {
               "name": "Wisdom Kwati Smart City PLC",
               "alternateName": "WKSC PLC",
               "url": "https://wisdomkwati.com",
-              "logo": "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200",
+              "logo": "https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1Cbq8uEoaWUwfhLTjwc2Oc6IoT-soIbJ4",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+234-800-WISDOM",

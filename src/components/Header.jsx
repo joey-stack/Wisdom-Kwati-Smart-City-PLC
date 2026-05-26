@@ -15,17 +15,10 @@ export default function Header() {
     <nav className="navbar">
         <div className="nav-container">
             <a href="/" className="logo" aria-label="Wisdom Kwati Smart City Home">
-                <svg width="280" height="60" viewBox="0 0 550 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/*  Mountain/Icon  */}
-                    <path d="M40 90L90 40L140 90H40Z" fill="#1E8FC4"/>
-                    <path d="M70 90L120 40L170 90H70Z" fill="#4BB7EB" fillOpacity="0.8"/>
-                    <path d="M100 90L150 40L200 90H100Z" fill="#0F4B94"/>
-                    <rect x="30" y="100" width="180" height="6" rx="3" fill="#BBE339"/>
-                    
-                    {/*  Text  */}
-                    <text x="220" y="60" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="34" fill="#1A1A1A">Wisdom Kwati</text>
-                    <text x="220" y="95" fontFamily="Outfit, sans-serif" fontWeight="600" fontSize="30" fill="#1A1A1A">Smart City PLC</text>
-                </svg>
+                <img 
+                    src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1Cbq8uEoaWUwfhLTjwc2Oc6IoT-soIbJ4" 
+                    alt="Wisdom Kwati Smart City Logo"
+                />
             </a>
             
             <ul className="nav-links">

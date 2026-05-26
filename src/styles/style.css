@@ -91,9 +91,11 @@ body.no-scroll {
   text-decoration: none;
 }
 
-.logo svg {
+.logo svg,
+.logo img {
   height: 100%;
   width: auto;
+  object-fit: contain;
 }
 
 .nav-links {

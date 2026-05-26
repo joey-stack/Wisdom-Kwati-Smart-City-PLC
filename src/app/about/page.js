@@ -1,6 +1,65 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export default function Page() {
+    const [jobs, setJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchJobs() {
+            try {
+                const q = query(collection(db, 'careers'), orderBy('createdAt', 'desc'));
+                const snap = await getDocs(q);
+                const list = snap.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setJobs(list);
+            } catch (err) {
+                console.error('Error fetching dynamic careers:', err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchJobs();
+    }, []);
+
+    const getSalaryIcon = (salary = '') => {
+        if (salary.toLowerCase().includes('commission')) return 'fa-solid fa-percent';
+        if (salary.includes('₦')) return 'fa-solid fa-naira-sign';
+        return 'fa-solid fa-wallet';
+    };
+
+    const getWorkplaceIcon = (loc = '', type = '') => {
+        const val = (loc + ' ' + type).toLowerCase();
+        if (val.includes('hybrid')) return 'fa-solid fa-laptop-house';
+        return 'fa-solid fa-building';
+    };
+
+    const getWorkplaceLabel = (loc = '', type = '') => {
+        const val = (loc + ' ' + type).toLowerCase();
+        if (val.includes('hybrid')) return 'HYBRID';
+        return 'ON SITE';
+    };
+
+    const formatSummaryDate = (dateStr = '') => {
+        if (!dateStr) return 'AVAILABLE NOW';
+        const parts = dateStr.split(', ');
+        if (parts.length >= 2) {
+            const datePart = parts[1];
+            const yearPart = parts[2]?.split(' at ')[0];
+            if (datePart && yearPart) {
+                const month = datePart.split(' ')[0].slice(0, 3).toUpperCase();
+                const day = datePart.split(' ')[1];
+                return `${month} ${day}, ${yearPart}`;
+            }
+        }
+        return dateStr.toUpperCase();
+    };
     return (
         <main className="about-page">
 
@@ -518,113 +577,52 @@ export default function Page() {
                 </div>
 
                 <div className="career-grid">
-                    {/*  Marketing Coordinator  */}
-                    <div className="career-card reveal-on-scroll">
-                        <h3 className="job-title">Marketing Coordinator</h3>
-                        
-                        <div className="job-info-list">
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-calendar-days"></i>
-                                <span>JAN 7, 2026</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-clock"></i>
-                                <span>FULL TIME</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-naira-sign"></i>
-                                <span>₦1.2M - ₦1.8M / YEAR</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-location-dot"></i>
-                                <span>ABUJA (HYBRID)</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-laptop-house"></i>
-                                <span>HYBRID</span>
-                            </div>
+                    {loading ? (
+                        <div style={{ gridColumn: '1 / -1', padding: '40px', textAlign: 'center', width: '100%' }}>
+                            <div className="admin-skeleton-spinner" style={{ margin: '0 auto' }}></div>
                         </div>
-
-                        <a href="/careers/marketing-coordinator" className="job-cta">
-                            <div className="flip-text">
-                                <span>VIEW JOB DETAILS</span>
-                                <span aria-hidden="true">VIEW JOB DETAILS</span>
-                            </div>
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </a>
-                    </div>
-
-                    {/*  Real Estate Agent  */}
-                    <div className="career-card reveal-on-scroll">
-                        <h3 className="job-title">Real Estate Agent</h3>
-                        
-                        <div className="job-info-list">
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-calendar-days"></i>
-                                <span>JAN 16, 2026</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-clock"></i>
-                                <span>FULL TIME</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-percent"></i>
-                                <span>COMMISSION-BASED</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-location-dot"></i>
-                                <span>LAGOS, NIGERIA</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-building"></i>
-                                <span>ON SITE</span>
-                            </div>
+                    ) : jobs.length === 0 ? (
+                        <div style={{ gridColumn: '1 / -1', padding: '40px', textAlign: 'center', color: 'var(--text-secondary)', width: '100%' }}>
+                            No active positions found. Please check back later.
                         </div>
+                    ) : (
+                        jobs.map((job) => (
+                            <div key={job.id} className="career-card reveal-on-scroll">
+                                <h3 className="job-title">{job.title}</h3>
+                                
+                                <div className="job-info-list">
+                                    <div className="job-info-pill">
+                                        <i className="fa-solid fa-calendar-days"></i>
+                                        <span>{formatSummaryDate(job.date)}</span>
+                                    </div>
+                                    <div className="job-info-pill">
+                                        <i className="fa-solid fa-clock"></i>
+                                        <span>{job.employmentType?.toUpperCase()}</span>
+                                    </div>
+                                    <div className="job-info-pill">
+                                        <i className={getSalaryIcon(job.salaryRange)}></i>
+                                        <span>{job.salaryRange?.toUpperCase()}</span>
+                                    </div>
+                                    <div className="job-info-pill">
+                                        <i className="fa-solid fa-location-dot"></i>
+                                        <span>{job.location?.toUpperCase()}</span>
+                                    </div>
+                                    <div className="job-info-pill">
+                                        <i className={getWorkplaceIcon(job.location, job.employmentType)}></i>
+                                        <span>{getWorkplaceLabel(job.location, job.employmentType)}</span>
+                                    </div>
+                                </div>
 
-                        <a href="/careers/real-estate-agent" className="job-cta">
-                            <div className="flip-text">
-                                <span>VIEW JOB DETAILS</span>
-                                <span aria-hidden="true">VIEW JOB DETAILS</span>
+                                <Link href={`/careers/${job.slug}`} className="job-cta">
+                                    <div className="flip-text">
+                                        <span>VIEW JOB DETAILS</span>
+                                        <span aria-hidden="true">VIEW JOB DETAILS</span>
+                                    </div>
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </Link>
                             </div>
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </a>
-                    </div>
-
-                    {/*  Property Manager  */}
-                    <div className="career-card reveal-on-scroll">
-                        <h3 className="job-title">Property Manager</h3>
-                        
-                        <div className="job-info-list">
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-calendar-days"></i>
-                                <span>JUN 8, 2026</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-clock"></i>
-                                <span>FULL TIME</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-naira-sign"></i>
-                                <span>₦2M - ₦3.5M / YEAR</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-location-dot"></i>
-                                <span>PORT HARCOURT</span>
-                            </div>
-                            <div className="job-info-pill">
-                                <i className="fa-solid fa-building"></i>
-                                <span>ON SITE</span>
-                            </div>
-                        </div>
-
-                        <a href="/careers/property-manager" className="job-cta">
-                            <div className="flip-text">
-                                <span>VIEW JOB DETAILS</span>
-                                <span aria-hidden="true">VIEW JOB DETAILS</span>
-                            </div>
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </a>
-                    </div>
+                        ))
+                    )}
                 </div>
             </div>
         </section>

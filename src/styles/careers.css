@@ -1,0 +1,401 @@
+/* ========================================
+   WKSC CAREERS DETAILS STYLE SHEET
+   ======================================== */
+
+.careers-page {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  position: relative;
+  overflow: visible;
+  padding-top: 100px;
+}
+
+/* --- Hero Header Section --- */
+.careers-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.careers-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.careers-title {
+  font-family: var(--font-header);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.careers-intro {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* --- Main Layout --- */
+.careers-main-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 40px 20px 80px 20px;
+  align-items: start;
+}
+
+/* --- Left Column --- */
+.careers-left-col {
+  position: relative;
+}
+
+.careers-section {
+  margin-bottom: 60px;
+}
+
+.careers-section-title {
+  font-family: var(--font-header);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.careers-section-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--accent-green);
+  border-radius: 2px;
+}
+
+/* --- Tables & Lists --- */
+.careers-table-wrapper {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--bg-surface);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.careers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.careers-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.careers-table tr:last-child {
+  border-bottom: none;
+}
+
+.careers-table td {
+  padding: 16px 20px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.careers-table td.careers-label-cell {
+  width: 240px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border);
+  background-color: rgba(237, 237, 223, 0.3); /* Transparent step using bg-section */
+}
+
+/* List details */
+.careers-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.careers-list li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 24px;
+}
+
+.careers-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+/* --- Sticky Sidebar --- */
+.careers-sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  align-self: start;
+}
+
+.careers-sidebar-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.careers-sidebar-card h3 {
+  font-family: var(--font-header);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: -5px;
+}
+
+.careers-sidebar-detail {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.careers-sidebar-detail strong {
+  color: var(--text-primary);
+}
+
+.careers-apply-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 30px;
+  background-color: var(--text-primary);
+  color: var(--bg-main);
+  border: none;
+  border-radius: 5px;
+  font-family: var(--font-header);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.careers-apply-btn:hover {
+  background-color: var(--accent-green);
+  color: var(--text-primary);
+}
+
+/* --- Global Company Benefits Section --- */
+.company-perks-section {
+  background-color: rgba(237, 237, 223, 0.4); /* section background */
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 100px 20px;
+  margin-top: 60px;
+}
+
+.company-perks-container {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.company-perks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.company-perk-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.company-perk-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-section);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 20px;
+}
+
+.company-perk-card h3 {
+  font-family: var(--font-header);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.company-perk-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* --- Bottom Open Positions Section --- */
+.other-positions-section {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.other-positions-headline {
+  font-family: var(--font-header);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.other-positions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+/* Careers card match with style.css but styled specifically */
+.careers-rec-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.careers-rec-card h3 {
+  font-family: var(--font-header);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.careers-rec-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.careers-rec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: var(--bg-section);
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.careers-rec-pill i {
+  font-size: 10px;
+}
+
+.careers-rec-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-header);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.careers-rec-link svg {
+  transition: transform 0.3s ease;
+}
+
+.careers-rec-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* --- Responsive Settings --- */
+@media (max-width: 1024px) {
+  .careers-main-layout {
+    grid-template-columns: 1fr;
+  }
+  .careers-sidebar {
+    position: static;
+  }
+  .company-perks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .careers-hero {
+    padding: 40px 15px;
+  }
+  .careers-main-layout {
+    padding: 20px 15px 60px 15px;
+    gap: 40px;
+  }
+  .careers-table td.careers-label-cell {
+    width: 140px;
+    padding: 12px 14px;
+  }
+  .careers-table td {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .company-perks-grid {
+    grid-template-columns: 1fr;
+  }
+  .other-positions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .careers-rec-card {
+    padding: 24px;
+  }
+}

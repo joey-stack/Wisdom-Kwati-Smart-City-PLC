@@ -545,7 +545,7 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <a href="/careers" className="job-cta">
+                        <a href="/careers/marketing-coordinator" className="job-cta">
                             <div className="flip-text">
                                 <span>VIEW JOB DETAILS</span>
                                 <span aria-hidden="true">VIEW JOB DETAILS</span>
@@ -581,7 +581,7 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <a href="/careers" className="job-cta">
+                        <a href="/careers/real-estate-agent" className="job-cta">
                             <div className="flip-text">
                                 <span>VIEW JOB DETAILS</span>
                                 <span aria-hidden="true">VIEW JOB DETAILS</span>
@@ -617,7 +617,7 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <a href="/careers" className="job-cta">
+                        <a href="/careers/property-manager" className="job-cta">
                             <div className="flip-text">
                                 <span>VIEW JOB DETAILS</span>
                                 <span aria-hidden="true">VIEW JOB DETAILS</span>

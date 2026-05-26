@@ -73,47 +73,65 @@ export default function Header() {
         <div className="mega-menu-wrapper house-types-menu">
             <div className="mega-menu">
                 <div className="mega-menu-grid-4">
-                    <a href="/emerald-villa" className="mega-menu-card">
+                    <a href="/house-types/black-onyx" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
                             <div className="card-content">
-                                <h3>The Emerald 2.0</h3>
-                                <p>Zenith of smart luxury. 7-bed villas with world-class automation.</p>
+                                <h3>The Black Onyx</h3>
+                                <p>Elegant 3-bedroom smart bungalow featuring integrated automation and premium finishes.</p>
                                 <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                             </div>
                         </div>
                     </a>
-                    <a href="/sapphire-terrace" className="mega-menu-card">
+                    <a href="/house-types/blue-sapphire" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
                             <div className="card-content">
-                                <h3>The Sapphire</h3>
-                                <p>Urban style redefined. 4-bed terrace duplexes for modern city life.</p>
+                                <h3>The Blue Sapphire</h3>
+                                <p>Spacious 4-bedroom detached duplex designed for modern family living in secure estates.</p>
                                 <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                             </div>
                         </div>
                     </a>
-                    <a href="/diamond-duplex" className="mega-menu-card">
+                    <a href="/house-types/imperial-emerald" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
                             <div className="card-content">
-                                <h3>The Diamond</h3>
-                                <p>Balanced family living. 4-bed smart duplexes with automated features.</p>
+                                <h3>The Imperial Emerald</h3>
+                                <p>Ultra-luxury 7-bedroom smart villa with panoramic views and bespoke premium amenities.</p>
                                 <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                             </div>
                         </div>
                     </a>
-                    <a href="/topaz-semi" className="mega-menu-card">
+                    <a href="/house-types/red-onyx" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
                             <div className="card-content">
-                                <h3>The Topaz</h3>
-                                <p>Shared elegance. 4-bed semi-detached duplexes blending community & luxury.</p>
+                                <h3>The Red Onyx</h3>
+                                <p>Intelligent 2-bedroom bungalow offering clean energy integration and modern design.</p>
                                 <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                             </div>
                         </div>
                     </a>
-                    <a href="/onyx-flats" className="mega-menu-card">
+                    <a href="/house-types/royal-emerald" className="mega-menu-card">
                         <div className="mega-menu-card-inner">
                             <div className="card-content">
-                                <h3>The Onyx</h3>
-                                <p>Modern comfort. 2-bed flats ideal for young professionals.</p>
+                                <h3>The Royal Emerald</h3>
+                                <p>Exquisite 5-bedroom premium villa combining grand architectural design and smart grid tech.</p>
+                                <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/house-types/silver-pearl" className="mega-menu-card">
+                        <div className="mega-menu-card-inner">
+                            <div className="card-content">
+                                <h3>The Silver Pearl</h3>
+                                <p>Stunning 3-bedroom luxury apartment featuring state-of-the-art layout and community parks.</p>
+                                <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/house-types/star-sapphire" className="mega-menu-card">
+                        <div className="mega-menu-card-inner">
+                            <div className="card-content">
+                                <h3>The Star Sapphire</h3>
+                                <p>Executive 4-bedroom smart penthouse engineered for high-privacy, automated living.</p>
                                 <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                             </div>
                         </div>
@@ -122,7 +140,7 @@ export default function Header() {
                         <div className="mega-menu-card-inner" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <div className="card-content" style={{ padding: '0', gap: '8px' }}>
                                 <h3 style={{ fontSize: '20px', marginBottom: '4px' }}>The Complete Portfolio</h3>
-                                <p style={{ maxWidth: '100%', fontSize: '13px', lineHeight: '1.5', color: 'rgba(255,248,237,0.6)', marginBottom: '4px' }}>From smart flats for urban professionals to sprawling seven-bedroom luxury villas, every WKSC property runs on our proprietary infrastructure ecosystem.</p>
+                                <p style={{ maxWidth: '100%', fontSize: '13px', lineHeight: '1.5', color: 'rgba(255,248,237,0.6)', marginBottom: '4px' }}>From smart bungalows and apartments to sprawling seven-bedroom luxury villas, every WKSC property runs on our smart infrastructure ecosystem.</p>
                                 <a href="/house-types" className="btn-pill" style={{ alignSelf: 'flex-start', transform: 'scale(0.85)', transformOrigin: 'left center' }}>
                                     <div className="flip-text">
                                         <span>VIEW ALL TYPES</span>

@@ -324,7 +324,7 @@
 .admin-metric-card {
   background-color: var(--admin-surface);
   border: 1px solid var(--admin-border);
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -372,7 +372,7 @@
 .admin-section-card {
   background-color: var(--admin-surface);
   border: 1px solid var(--admin-border);
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 28px;
   margin-bottom: 30px;
 }
@@ -565,3 +565,280 @@
 @keyframes admin-spin {
   to { transform: rotate(360deg); }
 }
+
+/* ==========================================================================
+   INTERACTIVE SVG VISUAL CHARTS & GLASSMORPHIC DATA ANALYTICS
+   ========================================================================== */
+
+.admin-charts-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1200px) {
+  .admin-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--admin-border);
+  padding-bottom: 12px;
+}
+
+.chart-card-title {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+  color: var(--admin-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-card-subtitle {
+  font-size: 12px;
+  color: var(--admin-text-secondary);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+/* Donut & Interactive Pie Chart CSS */
+.donut-chart-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+}
+
+.donut-segment {
+  transition: stroke-width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              stroke 0.3s ease, 
+              opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.donut-segment:hover {
+  opacity: 0.95;
+}
+
+.donut-center-group {
+  pointer-events: none;
+}
+
+.donut-center-value {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  fill: var(--admin-text-primary);
+}
+
+.donut-center-label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  fill: var(--admin-text-secondary);
+  text-transform: uppercase;
+}
+
+/* Elegant Chart Legend */
+.chart-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-top: 24px;
+  border-top: 1px solid var(--admin-border);
+  padding-top: 16px;
+}
+
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  background-color: var(--admin-surface-light);
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.legend-item:hover {
+  border-color: var(--admin-border-focus);
+  background-color: rgba(30, 143, 196, 0.04);
+}
+
+.legend-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+
+.legend-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-value {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--admin-text-primary);
+  margin-top: 4px;
+}
+
+.legend-percentage {
+  font-size: 10px;
+  color: var(--admin-text-secondary);
+  margin-top: 2px;
+}
+
+/* Line / Area Chart CSS */
+.trend-chart-container {
+  width: 100%;
+  position: relative;
+}
+
+.chart-gridline {
+  stroke: var(--admin-border);
+  stroke-width: 1;
+  stroke-dasharray: 4, 6;
+}
+
+.chart-axis-line {
+  stroke: var(--admin-border);
+  stroke-width: 1.5;
+}
+
+.chart-axis-label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 10px;
+  fill: var(--admin-text-secondary);
+  font-weight: 500;
+}
+
+.chart-line-path {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.8s ease-in-out;
+  filter: drop-shadow(0px 8px 16px rgba(30, 143, 196, 0.25));
+}
+
+.chart-area-path {
+  opacity: 0.08;
+  transition: opacity 0.3s ease;
+}
+
+.chart-interactive-point {
+  stroke-width: 2.5;
+  cursor: pointer;
+  transition: r 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              fill 0.2s ease, 
+              stroke 0.2s ease;
+}
+
+.chart-interactive-point:hover {
+  filter: drop-shadow(0px 0px 8px rgba(187, 227, 57, 0.8));
+}
+
+/* Glassmorphic SVG Floating Tooltip */
+.chart-html-tooltip {
+  position: absolute;
+  background: rgba(18, 18, 21, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  pointer-events: none;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  color: var(--admin-text-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+              0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+  z-index: 10;
+  transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-html-tooltip-date {
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chart-html-tooltip-value {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--admin-accent);
+}
+
+/* Horizontal Estate Performance Bars */
+.estate-performance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.estate-performance-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.estate-performance-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.estate-performance-name {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.estate-performance-count {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  color: var(--admin-accent);
+}
+
+.estate-performance-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: var(--admin-surface-light);
+  border: 1px solid var(--admin-border);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.estate-performance-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1E8FC4 0%, var(--admin-accent) 100%);
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 0 8px rgba(187, 227, 57, 0.2);
+}
+

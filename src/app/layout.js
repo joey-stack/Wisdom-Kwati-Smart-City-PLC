@@ -1,27 +1,34 @@
 import { Outfit, Inter, Montserrat } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SiteVisitModal from "../components/SiteVisitModal";
 import ClientScripts from "../components/ClientScripts";
+import FontAwesomeLoader from "../components/FontAwesomeLoader";
+import BraveShieldFix from "../components/BraveShieldFix";
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
-  weight: ["300", "400", "600", "700"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata = {
@@ -82,11 +89,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
+        {/* Warm up CDN connections before the browser discovers image URLs in markup */}
+        <link rel="preconnect" href="https://images.weserv.nl" />
+        <link rel="preconnect" href="https://lh3.googleusercontent.com" crossOrigin="anonymous" />
+        {/* Preload the LCP hero image */}
+        <link rel="preload" as="image" href="https://images.weserv.nl/?url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" />
         <script
+          suppressHydrationWarning
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -114,13 +123,17 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
+        {/* Strip bis_skin_checked attributes injected by Brave browser/extensions before React hydrates to prevent console hydration errors */}
+        <BraveShieldFix />
         <Header />
-        
+
         {children}
 
         <Footer />
         <SiteVisitModal />
         <ClientScripts />
+        {/* Font Awesome loads asynchronously — not on the critical path */}
+        <FontAwesomeLoader />
 
       </body>
     </html>

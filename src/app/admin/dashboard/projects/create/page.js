@@ -56,6 +56,8 @@ export default function AdminCreateProjectPage() {
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [state, setState] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
   const [mapEmbedUrl, setMapEmbedUrl] = useState('');
   const [heroImage, setHeroImage] = useState('');
   const [heroVideo, setHeroVideo] = useState('');
@@ -63,6 +65,55 @@ export default function AdminCreateProjectPage() {
   const [updatesLink, setUpdatesLink] = useState('');
   const [advisorId, setAdvisorId] = useState('');
   const [selectedHouseTypeIds, setSelectedHouseTypeIds] = useState([]);
+
+  // Auto-detect State and Neighborhood on location change
+  useEffect(() => {
+    if (!location) return;
+    
+    // Resolve State
+    let resolvedState = ''; 
+    const locLower = location.toLowerCase();
+
+    if (
+      locLower.includes('abuja') ||
+      locLower.includes('fct')
+    ) {
+      resolvedState = 'Abuja';
+    } else if (locLower.includes('lagos')) {
+      resolvedState = 'Lagos';
+    } else if (locLower.includes('kaduna')) {
+      resolvedState = 'Kaduna';
+    } else if (
+      locLower.includes('rivers') ||
+      locLower.includes('ph') ||
+      locLower.includes('port')
+    ) {
+      resolvedState = 'Rivers';
+    } else if (
+      locLower.includes('yola') ||
+      locLower.includes('adamawa')
+    ) {
+      resolvedState = 'Adamawa';
+    }
+    
+    if (resolvedState) {
+      setState(resolvedState);
+    }
+
+    // Resolve Neighborhood
+    const parts = location.split(',');
+    if (parts.length > 0) {
+      const first = parts[0].trim();
+      if (
+        first.toLowerCase() !== 'abuja' &&
+        first.toLowerCase() !== 'lagos' &&
+        first.toLowerCase() !== 'nigeria' &&
+        first.toLowerCase() !== 'multiple states'
+      ) {
+        setNeighborhood(first);
+      }
+    }
+  }, [location]);
 
   // Multi-array specs (Dynamic Row Builders)
   const [realEstateVibe, setRealEstateVibe] = useState([
@@ -197,8 +248,8 @@ export default function AdminCreateProjectPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!slug || !name || !location) {
-      setError('Please fill in required fields: Routing Slug, Name, and District Location.');
+    if (!slug || !name || !location || !state || !neighborhood) {
+      setError('Please fill in required fields: Routing Slug, Name, District Location, State, and Neighborhood.');
       return;
     }
 
@@ -218,6 +269,8 @@ export default function AdminCreateProjectPage() {
         tagline: tagline || '',
         description: description || '',
         location,
+        state,
+        neighborhood,
         mapEmbedUrl: mapEmbedUrl || '',
         heroImage: heroImage || '',
         heroVideo: heroVideo || '',
@@ -331,6 +384,41 @@ export default function AdminCreateProjectPage() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="e.g. Katampe Ext., Abuja"
+                required
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                State *
+              </label>
+              <select
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              >
+                <option value="">Select State</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Adamawa">Adamawa</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Neighborhood *
+              </label>
+              <input
+                type="text"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+                placeholder="e.g. Kuje, Asokoro, Katampe"
                 required
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />

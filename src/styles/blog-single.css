@@ -285,6 +285,16 @@
   margin: 0;
 }
 
+.blog-single-tip-content::first-letter {
+  float: left;
+  font-size: 48px;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 8px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 /* Feedback Widget */
 .feedback-widget {
   margin-top: 64px;

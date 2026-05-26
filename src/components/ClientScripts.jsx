@@ -8,10 +8,6 @@ import Lenis from 'lenis';
 export default function ClientScripts() {
     const pathname = usePathname();
 
-    if (pathname && pathname.startsWith('/admin')) {
-        return null;
-    }
-
     useEffect(() => {
         if (typeof window === 'undefined') return;
         if (pathname && pathname.startsWith('/admin')) return;
@@ -334,7 +330,7 @@ export default function ClientScripts() {
         });
 
         // --- 7. PREMIUM TEXT REVEAL SCENARIO ---
-        const splitReveal = (selector, type = 'chars', timeline = null) => {
+        const splitReveal = (selector, type = 'chars', timeline = null, position = 0.05) => {
             const elements = document.querySelectorAll(selector);
             elements.forEach(el => {
                 if (el.hasAttribute('data-split-reveal')) return;
@@ -398,16 +394,16 @@ export default function ClientScripts() {
                         onStart: () => gsap.set(el, { autoAlpha: 1 })
                     };
 
-                    if (timeline) timeline.to(el.querySelectorAll('.reveal-line'), anim, 0.05);
+                    if (timeline) timeline.to(el.querySelectorAll('.reveal-line'), anim, position);
                     else gsap.to(el.querySelectorAll('.reveal-line'), { ...anim, delay: 0.15 });
                 }
             });
         };
 
         const heroTl = gsap.timeline({ delay: 0.05 });
-        splitReveal('.hero .headline, .pd-hero-title', 'lines', heroTl);
-        splitReveal('.hero .subheadline, .pd-hero-description', 'lines', heroTl);
-        splitReveal('.reveal-type-lines', 'lines', heroTl);
+        splitReveal('.hero .headline, .pd-hero-title', 'lines', heroTl, 0.05);
+        splitReveal('.hero .subheadline, .pd-hero-description', 'lines', heroTl, 0.5);
+        splitReveal('.reveal-type-lines', 'lines', heroTl, 0.05);
 
         const heroSelectors = [
             { el: document.querySelector('.hero .hero-card') },

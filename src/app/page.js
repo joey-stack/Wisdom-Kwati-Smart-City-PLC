@@ -1,62 +1,15 @@
-'use client';
-
-import React, { useEffect, useRef } from 'react';
+// Server Component — no 'use client' needed.
+// Only the dynamic client islands import Firebase:
+//   HeroVideo, NeighborhoodSection, RecentListingsSection, RecentBlogsSection
 import Link from 'next/link';
 import '../styles/blogs.css';
+import HeroVideo from '../components/HeroVideo';
+import NeighborhoodSection from '../components/NeighborhoodSection';
+import RecentListingsSection from '../components/RecentListingsSection';
+import RecentBlogsSection from '../components/RecentBlogsSection';
 
-const getSlug = (title) => {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .trim();
-};
-
-const recentBlogs = [
-  {
-    title: "7 simple upgrades that make your home feel luxurious",
-    category: "LIFESTYLE",
-    date: "FEB 5, 2025",
-    author: "RYAN MILFORD",
-    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200",
-  },
-  {
-    title: "Clever ways to make small spaces feel brighter, airier, and bigger",
-    category: "LIFESTYLE",
-    date: "JAN 20, 2025",
-    author: "JAMES MILLER",
-    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200",
-  },
-  {
-    title: "Real estate trends 2025 — what's shaping the property market this year",
-    category: "NEWS",
-    date: "JAN 3, 2025",
-    author: "JAMES MILLER",
-    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200",
-  },
-  {
-    title: "The future of smart homes — what's trending in home tech for 2025",
-    category: "NEWS",
-    date: "DEC 11, 2024",
-    author: "RYAN MILFORD",
-    image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200",
-  }
-];
 
 export default function Page() {
-    const videoRef = React.useRef(null);
-    React.useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.muted = true;
-            videoRef.current.defaultMuted = true;
-            videoRef.current.play().catch(() => {
-                // If it fails, try again once after a small delay
-                setTimeout(() => {
-                    if (videoRef.current) videoRef.current.play().catch(() => {});
-                }, 1000);
-            });
-        }
-    }, []);
 
     return (
         <main>
@@ -64,23 +17,8 @@ export default function Page() {
     
 
     <header className="hero">
-        {/* Background Video */}
-        <div className="hero-video-wrapper" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 0 }}>
-            <video 
-                ref={videoRef}
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                className="hero-video"
-                poster="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200"
-                style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
-            >
-                <source src="/videos/nimi-hills-hero.mp4" type="video/mp4" />
-            </video>
-            {/* Interaction Shield - Prevents accidental pausing */}
-            <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "transparent", zIndex: 1, pointerEvents: "all" }}></div>
-        </div>
+        {/* Background Video – client island (needs useRef + play()) */}
+        <HeroVideo />
         {/*  Background Grid Overlay  */}
         <div className="grid-overlay"></div>
         
@@ -90,7 +28,7 @@ export default function Page() {
             </div>
 
             <div className="hero-card glass-panel bloom-element delay-1">
-                <p className="subheadline reveal-type-lines">
+                <p className="subheadline">
                     We've built the infrastructure <br />other developers only promise.
                 </p>
                 
@@ -147,61 +85,8 @@ export default function Page() {
                 </h2>
             </div>
 
-            <div className="neighborhood-grid">
-                {/*  1. Mabushi District (Ellington Villa)  */}
-                <a href="/mabushi-district" className="neighborhood-card reveal-on-scroll">
-                    <div className="neighborhood-image-wrapper">
-                        <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Mabushi District" referrerPolicy="no-referrer" />
-                        </div>
-                    </div>
-                    <div className="neighborhood-info">
-                        <div className="neighborhood-details">
-                            <h3 className="neighborhood-title">Ellington Villa</h3>
-                            <p className="neighborhood-location">Mabushi, Abuja</p>
-                        </div>
-                        <div className="neighborhood-arrow">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </a>
-
-                {/*  2. Guzape II (Nimi Hills)  */}
-                <a href="/guzape-estate" className="neighborhood-card reveal-on-scroll">
-                    <div className="neighborhood-image-wrapper">
-                        <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP%26sz=w1200" alt="Guzape II" referrerPolicy="no-referrer" />
-                        </div>
-                    </div>
-                    <div className="neighborhood-info">
-                        <div className="neighborhood-details">
-                            <h3 className="neighborhood-title">Nimi Hills</h3>
-                            <p className="neighborhood-location">Guzape II, Abuja</p>
-                        </div>
-                        <div className="neighborhood-arrow">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </a>
-
-                {/*  3. Apo Tafyi (Palm Haven)  */}
-                <a href="/palm-haven" className="neighborhood-card reveal-on-scroll">
-                    <div className="neighborhood-image-wrapper">
-                        <div className="neighborhood-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ%26sz=w1200" alt="Apo Tafyi" referrerPolicy="no-referrer" />
-                        </div>
-                    </div>
-                    <div className="neighborhood-info">
-                        <div className="neighborhood-details">
-                            <h3 className="neighborhood-title">Palm Haven</h3>
-                            <p className="neighborhood-location">Apo Tafyi, Abuja</p>
-                        </div>
-                        <div className="neighborhood-arrow">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {/* Neighbourhood cards – client island (Firestore data) */}
+            <NeighborhoodSection />
 
             <div className="neighborhood-footer">
                 <a href="/projects" className="btn-pill btn-black reveal-on-scroll">
@@ -229,65 +114,8 @@ export default function Page() {
                 </h2>
             </div>
 
-            <div className="portfolio-grid">
-
-                {/*  1. The Imperial Emerald  */}
-                <a href="/imperial-emerald" className="ht-card reveal-on-scroll"
-                     data-name="the imperial emerald"
-                     data-estate="maitama ii"
-                     data-neighborhood="maitama ii"
-                     data-type="detached"
-                     data-specs="7 bedroom fully detached duplex">
-                    <div className="ht-card-image">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200" alt="The Imperial Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
-                    </div>
-                    <div className="ht-card-info">
-                        <div className="ht-card-left">
-                            <h3 className="ht-card-name">The Imperial Emerald</h3>
-                            <p className="ht-card-location">Premium Class • 7BR Fully Detached</p>
-                        </div>
-                        <div className="ht-card-right">
-                            <p className="ht-card-type">Emerald Class Villa</p>
-                            <div className="ht-card-specs">
-                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 7</span>
-                                <span className="ht-dot"></span>
-                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 8</span>
-                                <span className="ht-dot"></span>
-                                <span>12,500 SQ FT</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                {/*  2. The Royal Emerald  */}
-                <a href="/royal-emerald" className="ht-card reveal-on-scroll"
-                     data-name="the royal emerald"
-                     data-estate="guzape ii"
-                     data-neighborhood="guzape ii"
-                     data-type="detached"
-                     data-specs="5 bedroom fully detached duplex">
-                    <div className="ht-card-image">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200" alt="The Royal Emerald" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200'; }} />
-                    </div>
-                    <div className="ht-card-info">
-                        <div className="ht-card-left">
-                            <h3 className="ht-card-name">The Royal Emerald</h3>
-                            <p className="ht-card-location">Premium Class • 5BR Fully Detached</p>
-                        </div>
-                        <div className="ht-card-right">
-                            <p className="ht-card-type">Emerald Class Villa</p>
-                            <div className="ht-card-specs">
-                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg> 5</span>
-                                <span className="ht-dot"></span>
-                                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg> 6</span>
-                                <span className="ht-dot"></span>
-                                <span>8,200 SQ FT</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+            {/* Recent listings cards – client island (Firestore data) */}
+            <RecentListingsSection />
 
             <div className="portfolio-footer">
                 <a href="/house-types" className="btn-pill reveal-on-scroll">
@@ -395,7 +223,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper reveal-on-scroll">
                         <div className="services-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200'; }} />
+                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>
@@ -709,29 +537,7 @@ export default function Page() {
                 <h2 className="blog-headline">News, stories, and inspiration for better living every day</h2>
             </header>
 
-            <div className="blogs-grid">
-                {recentBlogs.map((blog, idx) => (
-                    <Link href={`/blogs/${getSlug(blog.title)}`} key={idx} className="blog-card reveal-on-scroll">
-                        <div className="blog-card-image">
-                            <img loading="lazy" src={blog.image} alt={blog.title} referrerPolicy="no-referrer" />
-                        </div>
-                        <div className="blog-card-content">
-                            <div className="blog-card-meta">
-                                <span className="blog-date">{blog.date}</span>
-                                <span className="blog-dot">•</span>
-                                <span className="blog-category">{blog.category}</span>
-                            </div>
-                            <h3 className="blog-card-title">{blog.title}</h3>
-                            <div className="blog-card-author">
-                                <div className="blog-author-avatar">
-                                    <img src={`https://ui-avatars.com/api/?name=${blog.author.replace(' ', '+')}&background=random`} alt={blog.author} />
-                                </div>
-                                <span className="blog-author-name">{blog.author}</span>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
+            <RecentBlogsSection />
 
             <div className="blog-cta-container">
                 <Link href="/blogs" className="blog-cta-btn">

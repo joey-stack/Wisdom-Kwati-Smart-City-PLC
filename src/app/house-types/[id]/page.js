@@ -5,12 +5,39 @@ import Link from 'next/link';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
+// After Firestore data loads, re-initialize GSAP ScrollTrigger so reveal
+// animations pick up the newly rendered DOM elements.
+function useRefreshScrollTrigger(ready) {
+  useEffect(() => {
+    if (!ready) return;
+    // Small timeout lets React flush the new DOM before GSAP scans it
+    const t = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.ScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
+      // Also manually reveal any still-hidden reveal-on-scroll elements on this page
+      document.querySelectorAll('.hd-container, .hd-left-col, .hd-right-col, .hd-hero-content, .hd-specs-bar-wrapper, .hd-description, .hd-gallery, .hd-amenities-section, .hd-interior-section, .hd-video-section, .hd-estate-section, .hd-related-section, .hd-agent-card, .hd-inquiry-box').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.filter = 'none';
+        el.style.clipPath = 'none';
+        el.style.visibility = 'visible';
+      });
+    }, 80);
+    return () => clearTimeout(t);
+  }, [ready]);
+}
+
 export default function Page({ params }) {
   const { id } = use(params);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [parentProject, setParentProject] = useState(null);
   const [relatedProperties, setRelatedProperties] = useState([]);
+  const [advisor, setAdvisor] = useState(null);
+
+  // Refresh GSAP ScrollTrigger once data is ready so all sections render visible
+  useRefreshScrollTrigger(!!data);
 
   useEffect(() => {
     async function loadHouseType() {
@@ -19,46 +46,38 @@ export default function Page({ params }) {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const ht = docSnap.data();
-          setData(ht);
+          const docData = docSnap.data();
+          setData(docData);
 
           // Find the parent project where this house type is listed
-          const projectsRef = collection(db, 'projects');
-          const projectsSnap = await getDocs(projectsRef);
+          const projectsSnap = await getDocs(collection(db, 'projects'));
           let foundProject = null;
-          
           projectsSnap.forEach((projDoc) => {
             const projData = projDoc.data();
-            if (projData.houseTypeIds && projData.houseTypeIds.includes(id)) {
-              foundProject = {
-                id: projDoc.id,
-                name: projData.name || 'Premium District',
-                ...projData
-              };
+            if (Array.isArray(projData.houseTypeIds) && projData.houseTypeIds.includes(id)) {
+              foundProject = { id: projDoc.id, name: projData.name || 'Premium District', ...projData };
             }
           });
+          if (foundProject) setParentProject(foundProject);
 
-          if (foundProject) {
-            setParentProject(foundProject);
+          // Load linked advisor if set
+          if (docData.advisorId) {
+            try {
+              const advSnap = await getDoc(doc(db, 'advisors', docData.advisorId));
+              if (advSnap.exists()) setAdvisor({ id: advSnap.id, ...advSnap.data() });
+            } catch {}
           }
 
-          // Load other house types for related properties listing
+          // Load related house types
+          const htSnap = await getDocs(collection(db, 'houseTypes'));
           const houseTypesList = [];
-          const htRef = collection(db, 'houseTypes');
-          const htSnap = await getDocs(htRef);
           htSnap.forEach((htDoc) => {
-            if (htDoc.id !== id) {
-              const htData = htDoc.data();
-              houseTypesList.push({
-                id: htDoc.id,
-                ...htData
-              });
-            }
+            if (htDoc.id !== id) houseTypesList.push({ id: htDoc.id, ...htDoc.data() });
           });
           setRelatedProperties(houseTypesList.slice(0, 2));
         }
       } catch (err) {
-        console.error('Error fetching dynamic house type:', err);
+        console.error('Error fetching house type:', err);
       } finally {
         setLoading(false);
       }
@@ -90,13 +109,36 @@ export default function Page({ params }) {
     );
   }
 
+  // Helper: safely extract text from amenity item (supports string or {name} object)
+  const getAmenityName = (item) => {
+    if (!item) return '';
+    if (typeof item === 'string') return item;
+    return item.name || item.label || '';
+  };
+
   // Gallery fallbacks
-  const heroImage = data.images && data.images.length > 0 ? data.images[0] : 'https://placehold.co/1200x800/111/fff?text=Smart+Villa+Hero';
-  const galImage1 = data.images && data.images.length > 1 ? data.images[1] : heroImage;
-  const galImage2 = data.images && data.images.length > 2 ? data.images[2] : heroImage;
-  const galImage3 = data.images && data.images.length > 3 ? data.images[3] : heroImage;
-  const galImage4 = data.images && data.images.length > 4 ? data.images[4] : heroImage;
-  const galImage5 = heroImage;
+  const images = data.images || [];
+  const heroImage   = images[0] || 'https://placehold.co/1200x800/111/fff?text=Smart+Villa';
+  const galImage1   = images[0] || heroImage;
+  const galImage2   = images[1] || heroImage;
+  const galImage3   = images[2] || heroImage;
+  const galImage4   = images[3] || heroImage;
+  const galImage5   = images[4] || heroImage;
+
+  // Interior and exterior specs - support both {metric, details} (from CMS) and {title, description} (legacy)
+  const interiorRows = (data.interiorSpecs || []).map(row => ({
+    label: row.metric || row.title || '',
+    value: row.details || row.description || ''
+  }));
+  const exteriorRows = (data.exteriorSpecs || []).map(row => ({
+    label: row.metric || row.title || '',
+    value: row.details || row.description || ''
+  }));
+
+  const amenities = data.amenities || [];
+  const hasAmenities = amenities.length > 0;
+  const hasInterior  = interiorRows.length > 0;
+  const hasExterior  = exteriorRows.length > 0;
 
   return (
     <main>
@@ -108,7 +150,8 @@ export default function Page({ params }) {
 
       {/* Hero Section */}
       <section className="hd-hero">
-        {/* Gallery Lightbox (Fullscreen) */}
+
+        {/* Gallery Lightbox */}
         <div id="gallery-lightbox" className="hd-lightbox" aria-hidden="true">
           <div className="hd-lightbox-backdrop"></div>
           <button className="hd-lightbox-close" aria-label="Close gallery">
@@ -143,7 +186,7 @@ export default function Page({ params }) {
           <img loading="lazy" src={heroImage} alt={data.classType} referrerPolicy="no-referrer" />
         </div>
         <div className="hd-hero-overlay"></div>
-        <div className="hd-hero-content reveal-on-scroll">
+        <div className="hd-hero-content">
           <div className="hd-hero-location">
             <div className="hd-location-dot"></div>
             {parentProject ? parentProject.name : 'Abuja, Nigeria'}
@@ -157,7 +200,7 @@ export default function Page({ params }) {
       </section>
 
       {/* Specs Bar */}
-      <div className="hd-container reveal-on-scroll">
+      <div className="hd-container">
         <div className="hd-specs-bar-wrapper">
           <div className="hd-specs-bar">
             {/* ROW 1 */}
@@ -211,12 +254,12 @@ export default function Page({ params }) {
             <div className="hd-spec-item">
               <i className="fa-solid fa-id-badge hd-spec-icon"></i>
               <span className="hd-spec-label">Property ID</span>
-              <span className="hd-spec-value">{data.propertyId || `WKSC-SPEC-${id.toUpperCase().slice(0, 3)}`}</span>
+              <span className="hd-spec-value">{data.propertyId || `WKSC-${id.toUpperCase().slice(0, 6)}`}</span>
             </div>
           </div>
 
           <div className="hd-download-wrapper">
-            <a href="#" className="hd-download-btn">
+            <a href={data.brochureUrl || '#'} className="hd-download-btn" target={data.brochureUrl ? '_blank' : '_self'} rel="noreferrer">
               <div className="flip-text">
                 <span>DOWNLOAD BROCHURE</span>
                 <span aria-hidden="true">DOWNLOAD BROCHURE</span>
@@ -230,17 +273,19 @@ export default function Page({ params }) {
       {/* Main Content */}
       <main className="hd-container">
         <div className="hd-main-grid">
-          
+
           {/* Left Column */}
           <div className="hd-left-col">
-            
+
             {/* Description */}
-            <section className="hd-description reveal-on-scroll">
-              <p className="hd-description-text">{data.description}</p>
+            <section className="hd-description">
+              <p className="hd-description-text">
+                {data.description || `${data.classType} is a premium smart villa offering world-class living standards with intelligent automation and sustainable design.`}
+              </p>
             </section>
 
             {/* Bento Gallery */}
-            <section className="hd-gallery reveal-on-scroll">
+            <section className="hd-gallery">
               <div className="hd-gallery-item hd-gal-1">
                 <img loading="lazy" src={galImage1} alt="Property View 1" referrerPolicy="no-referrer" />
               </div>
@@ -256,7 +301,6 @@ export default function Page({ params }) {
               <div className="hd-gallery-item hd-gal-5">
                 <img loading="lazy" src={galImage5} alt="Property View 5" referrerPolicy="no-referrer" />
               </div>
-              
               <a href="#" className="hd-view-all-btn" id="view-all-images-btn">
                 <div className="flip-text">
                   <span>VIEW ALL IMAGES</span>
@@ -266,8 +310,8 @@ export default function Page({ params }) {
             </section>
 
             {/* Amenities Section */}
-            {data.amenities && data.amenities.length > 0 && (
-              <section className="hd-amenities-section reveal-on-scroll">
+            {hasAmenities && (
+              <section className="hd-amenities-section">
                 <div className="hd-section-line"></div>
                 <div className="hd-section-header">
                   <div className="hd-section-label">
@@ -277,18 +321,24 @@ export default function Page({ params }) {
                   <h2 className="hd-section-headline">Property Amenities</h2>
                 </div>
                 <div className="hd-amenities-grid">
-                  {data.amenities.map((item, idx) => (
+                  {amenities.map((item, idx) => (
                     <div key={idx} className="hd-amenity-tag">
-                      <i className="fa-solid fa-circle-check" style={{ color: 'var(--accent-green)', marginRight: '6px' }}></i> {item}
+                      <i className="fa-solid fa-circle-check" style={{ color: 'var(--accent-green)', marginRight: '6px' }}></i>
+                      {getAmenityName(item)}
                     </div>
                   ))}
                 </div>
+                {data.amenitiesNote && (
+                  <div className="hd-amenities-description">
+                    <p>{data.amenitiesNote}</p>
+                  </div>
+                )}
               </section>
             )}
 
             {/* Interior Features Section */}
-            {data.interiorSpecs && data.interiorSpecs.length > 0 && (
-              <section className="hd-interior-section reveal-on-scroll">
+            {hasInterior && (
+              <section className="hd-interior-section">
                 <div className="hd-section-line"></div>
                 <div className="hd-section-header">
                   <div className="hd-section-label">
@@ -298,64 +348,81 @@ export default function Page({ params }) {
                   <h2 className="hd-section-headline">Interior Features</h2>
                 </div>
                 <p className="hd-section-subtitle">Below are the key interior specifications:</p>
-                
                 <div className="hd-interior-table">
                   <div className="hd-int-table-header">
                     <span>Feature</span>
                     <span>Details</span>
                   </div>
-                  {data.interiorSpecs.map((row, idx) => (
+                  {interiorRows.map((row, idx) => (
                     <div key={idx} className="hd-int-table-row">
-                      <span className="hd-int-label">{row.title}</span>
-                      <span className="hd-int-value">{row.description}</span>
+                      <span className="hd-int-label">{row.label}</span>
+                      <span className="hd-int-value">{row.value}</span>
                     </div>
                   ))}
                 </div>
+                {data.interiorNote && (
+                  <div className="hd-interior-description">
+                    <p>{data.interiorNote}</p>
+                  </div>
+                )}
               </section>
             )}
 
             {/* Exterior & Building Features Section */}
-            {data.exteriorSpecs && data.exteriorSpecs.length > 0 && (
-              <section className="hd-interior-section reveal-on-scroll">
+            {hasExterior && (
+              <section className="hd-interior-section">
                 <div className="hd-section-line"></div>
                 <div className="hd-section-header">
                   <div className="hd-section-label">
                     <div className="label-square"></div>
                     <span className="label-text">EXTERIOR</span>
                   </div>
-                  <h2 className="hd-section-headline">Exterior Features</h2>
+                  <h2 className="hd-section-headline">Exterior &amp; Building Features</h2>
                 </div>
                 <p className="hd-section-subtitle">Key details of the property exterior:</p>
-                
                 <div className="hd-interior-table">
                   <div className="hd-int-table-header">
                     <span>Feature</span>
                     <span>Details</span>
                   </div>
-                  {data.exteriorSpecs.map((row, idx) => (
+                  {exteriorRows.map((row, idx) => (
                     <div key={idx} className="hd-int-table-row">
-                      <span className="hd-int-label">{row.title}</span>
-                      <span className="hd-int-value">{row.description}</span>
+                      <span className="hd-int-label">{row.label}</span>
+                      <span className="hd-int-value">{row.value}</span>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-            {/* 360 Video placeholder */}
-            <section className="hd-video-section reveal-on-scroll">
-              <div className="hd-video-placeholder">
-                <div className="hd-video-play">
-                  <i className="fa-solid fa-play" style={{ fontSize: "24px", marginLeft: "5px" }}></i>
+
+            {/* 360 Video / Virtual Tour */}
+            <section className="hd-video-section">
+              {data.videoUrl ? (
+                <iframe
+                  src={data.videoUrl}
+                  title="360° Virtual Tour"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  style={{ width: '100%', height: '100%', border: 'none', borderRadius: '16px' }}
+                />
+              ) : (
+                <div className="hd-video-placeholder">
+                  <div className="hd-video-play">
+                    <i className="fa-solid fa-play" style={{ fontSize: '24px', marginLeft: '5px' }}></i>
+                  </div>
+                  <h3>360° Virtual Tour</h3>
+                  <p style={{ opacity: '0.7', maxWidth: '300px', fontSize: '14px' }}>
+                    Cinematic high-fidelity walkthrough coming soon. Experience the future of living.
+                  </p>
                 </div>
-                <h3>360° Virtual Tour</h3>
-                <p style={{ opacity: "0.7", maxWidth: "300px", fontSize: "14px" }}>Cinematic high-fidelity walkthrough coming soon. Experience the future of living.</p>
-              </div>
+              )}
             </section>
-            
+
+
             {/* Featured Estate */}
             {parentProject && (
-              <section className="hd-estate-section reveal-on-scroll">
+              <section className="hd-estate-section">
                 <div className="hd-section-line"></div>
                 <div className="hd-section-header">
                   <div className="hd-section-label">
@@ -378,47 +445,116 @@ export default function Page({ params }) {
           {/* Right Column (Sidebar) */}
           <aside className="hd-right-col">
             <div className="hd-sidebar">
-              
-              {/* Contact Card */}
-              <div className="hd-agent-card reveal-on-scroll">
-                <div className="hd-agent-header">
-                  <span className="hd-agent-listed-by">CONTACT US</span>
-                  <h4 className="hd-agent-name">Customer Experience Centre</h4>
-                  <p className="hd-agent-subtext">Reach our team directly for inquiries, viewing bookings, and investment consultations.</p>
-                </div>
 
-                <hr className="hd-agent-divider" />
+              {/* Agent / Advisor Card */}
+              <div className="hd-agent-card">
+                {advisor ? (
+                  <>
+                    <div className="hd-agent-header">
+                      <span className="hd-agent-listed-by">YOUR PROJECT ADVISOR</span>
+                      <div className="hd-agent-top">
+                        <img
+                          src={advisor.image || 'https://placehold.co/100x100/111/fff?text=Advisor'}
+                          alt={advisor.name}
+                          className="hd-agent-img"
+                          onError={e => { e.target.src = 'https://placehold.co/100x100/111/fff?text=Advisor'; }}
+                        />
+                        <div className="hd-agent-identity">
+                          <h4 className="hd-agent-name">{advisor.name}</h4>
+                          <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500 }}>{advisor.role}</span>
+                        </div>
+                      </div>
+                      {advisor.quote && (
+                        <p className="hd-agent-subtext" style={{ fontStyle: 'italic' }}>"{advisor.quote}"</p>
+                      )}
+                    </div>
 
-                {/* Email row */}
-                <div className="hd-agent-contact-row">
-                  <div className="hd-agent-contact-info">
-                    <span className="hd-contact-label">Email</span>
-                    <a href="mailto:hello@wisdomkwatismartcity.com" className="hd-contact-value">hello@wisdomkwatismartcity.com</a>
-                  </div>
-                  <div className="hd-agent-contact-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="2,4 12,13 22,4"></polyline></svg>
-                  </div>
-                </div>
+                    <hr className="hd-agent-divider" />
 
-                <hr className="hd-agent-divider" />
+                    {advisor.email && (
+                      <>
+                        <div className="hd-agent-contact-row">
+                          <div className="hd-agent-contact-info">
+                            <span className="hd-contact-label">Email</span>
+                            <a href={`mailto:${advisor.email}`} className="hd-contact-value">{advisor.email}</a>
+                          </div>
+                          <div className="hd-agent-contact-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="2,4 12,13 22,4"></polyline></svg>
+                          </div>
+                        </div>
+                        <hr className="hd-agent-divider" />
+                      </>
+                    )}
 
-                {/* Phone row */}
-                <div className="hd-agent-contact-row">
-                  <div className="hd-agent-contact-info">
-                    <span className="hd-contact-label">Phone</span>
-                    <a href="tel:+2348100015555" className="hd-contact-value">+234 810 001 5555</a>
-                  </div>
-                  <div className="hd-agent-contact-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
-                  </div>
-                </div>
+                    {advisor.phone && (
+                      <>
+                        <div className="hd-agent-contact-row">
+                          <div className="hd-agent-contact-info">
+                            <span className="hd-contact-label">Phone</span>
+                            <a href={`tel:${advisor.phone}`} className="hd-contact-value">{advisor.phone}</a>
+                          </div>
+                          <div className="hd-agent-contact-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
+                          </div>
+                        </div>
+                        {advisor.whatsapp && <hr className="hd-agent-divider" />}
+                      </>
+                    )}
+
+                    {advisor.whatsapp && (
+                      <div className="hd-agent-contact-row">
+                        <div className="hd-agent-contact-info">
+                          <span className="hd-contact-label">WhatsApp</span>
+                          <a href={advisor.whatsapp} target="_blank" rel="noreferrer" className="hd-contact-value">Chat on WhatsApp</a>
+                        </div>
+                        <div className="hd-agent-contact-icon">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </div>
+                      </div>
+                    )}
+
+                    {advisor.whatsapp && (
+                      <a href={advisor.whatsapp} target="_blank" rel="noreferrer" className="hd-agent-cta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Message on WhatsApp
+                      </a>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="hd-agent-header">
+                      <span className="hd-agent-listed-by">CONTACT US</span>
+                      <h4 className="hd-agent-name">Customer Experience Centre</h4>
+                      <p className="hd-agent-subtext">Reach our team directly for inquiries, viewing bookings, and investment consultations.</p>
+                    </div>
+                    <hr className="hd-agent-divider" />
+                    <div className="hd-agent-contact-row">
+                      <div className="hd-agent-contact-info">
+                        <span className="hd-contact-label">Email</span>
+                        <a href="mailto:hello@wisdomkwatismartcity.com" className="hd-contact-value">hello@wisdomkwatismartcity.com</a>
+                      </div>
+                      <div className="hd-agent-contact-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="2,4 12,13 22,4"></polyline></svg>
+                      </div>
+                    </div>
+                    <hr className="hd-agent-divider" />
+                    <div className="hd-agent-contact-row">
+                      <div className="hd-agent-contact-info">
+                        <span className="hd-contact-label">Phone</span>
+                        <a href="tel:+2348100015555" className="hd-contact-value">+234 810 001 5555</a>
+                      </div>
+                      <div className="hd-agent-contact-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Inquiry Form */}
-              <div className="hd-inquiry-box reveal-on-scroll">
+              <div className="hd-inquiry-box">
                 <h3>Inquire about this property</h3>
                 <p>Our dedicated advisors will contact you shortly to arrange a private viewing or site tour.</p>
-                
                 <form className="hd-inquiry-form">
                   <div className="hd-form-group">
                     <input type="text" placeholder="Full Name" required />
@@ -449,7 +585,7 @@ export default function Page({ params }) {
 
       {/* Related Listings */}
       {relatedProperties.length > 0 && (
-        <section className="hd-related-section reveal-on-scroll">
+        <section className="hd-related-section">
           <div className="hd-container">
             <div className="hd-section-line"></div>
             <div className="hd-section-header">
@@ -461,10 +597,10 @@ export default function Page({ params }) {
                 If this one caught your eye,<br /> these might just seal the deal.
               </h2>
             </div>
-            
+
             <div className="portfolio-grid" id="related-properties-grid">
               {relatedProperties.map((row, idx) => (
-                <Link key={idx} href={`/house-types/${row.id}`} className="ht-card reveal-on-scroll">
+                <Link key={idx} href={`/house-types/${row.id}`} className="ht-card">
                   <div className="ht-card-image">
                     <img loading="lazy" src={row.images && row.images.length > 0 ? row.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec'} alt={row.classType} referrerPolicy="no-referrer" />
                   </div>
@@ -477,16 +613,13 @@ export default function Page({ params }) {
                       <p className="ht-card-type">{row.classType}</p>
                       <div className="ht-card-specs">
                         <span>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                            <path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path>
-                          </svg> {row.beds || 0}
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg>
+                          {row.beds || 0}
                         </span>
                         <span className="ht-dot"></span>
                         <span>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                            <path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
-                            <path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path>
-                          </svg> {row.baths || 0}
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg>
+                          {row.baths || 0}
                         </span>
                         <span className="ht-dot"></span>
                         <span>{row.size || 'N/A'}</span>

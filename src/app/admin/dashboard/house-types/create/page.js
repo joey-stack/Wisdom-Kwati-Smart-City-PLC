@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDocs, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export default function AdminCreateHouseTypePage() {
@@ -12,6 +12,9 @@ export default function AdminCreateHouseTypePage() {
   // Core properties
   const [slug, setSlug] = useState('');
   const [classType, setClassType] = useState('');
+  const [tagline, setTagline] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [beds, setBeds] = useState('');
   const [baths, setBaths] = useState('');
   const [size, setSize] = useState('');
@@ -21,6 +24,18 @@ export default function AdminCreateHouseTypePage() {
   const [parking, setParking] = useState('');
   const [propertyId, setPropertyId] = useState('');
   const [brochureUrl, setBrochureUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
+  const [amenitiesNote, setAmenitiesNote] = useState('');
+  const [interiorNote, setInteriorNote] = useState('');
+  const [advisorId, setAdvisorId] = useState('');
+  const [advisorsList, setAdvisorsList] = useState([]);
+
+  // Load advisors list on mount
+  useEffect(() => {
+    getDocs(collection(db, 'advisors')).then(snap => {
+      setAdvisorsList(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    }).catch(() => {});
+  }, []);
 
   // 5 Bento gallery images (individual strings mapped to array)
   const [galleryImages, setGalleryImages] = useState({
@@ -48,7 +63,15 @@ export default function AdminCreateHouseTypePage() {
     { id: 'fibre', name: 'Fibre Optic Internet', iconClass: 'icon-internet' },
     { id: 'drainage', name: 'Underground Drainage', iconClass: 'icon-drainage' },
     { id: 'ev-charging', name: 'Electric Vehicle Charging', iconClass: 'icon-ev' },
-    { id: 'kitchen', name: 'Fully Fitted Kitchen', iconClass: 'icon-kitchen' }
+    { id: 'kitchen', name: 'Fully Fitted Kitchen', iconClass: 'icon-kitchen' },
+    { id: 'gym', name: 'Private Gym & Fitness', iconClass: 'icon-gym' },
+    { id: 'lake-view', name: 'Lake / Green View', iconClass: 'icon-lake' },
+    { id: 'balcony', name: 'Balcony / Terrace', iconClass: 'icon-balcony' },
+    { id: 'wine-cellar', name: 'Wine Cellar', iconClass: 'icon-wine' },
+    { id: 'home-theater', name: 'Home Theater / Cinema', iconClass: 'icon-cinema' },
+    { id: 'bbq', name: 'BBQ & Outdoor Kitchen', iconClass: 'icon-bbq' },
+    { id: 'concierge', name: '24/7 Concierge Service', iconClass: 'icon-concierge' },
+    { id: 'backup-power', name: 'Full Power Backup', iconClass: 'icon-power' }
   ];
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
@@ -121,6 +144,9 @@ export default function AdminCreateHouseTypePage() {
 
       const houseTypePayload = {
         classType,
+        tagline: tagline || '',
+        price: price || '',
+        description: description || '',
         beds: Number(beds) || 0,
         baths: Number(baths) || 0,
         size: size || '',
@@ -130,6 +156,10 @@ export default function AdminCreateHouseTypePage() {
         parking: parking || '',
         propertyId: propertyId || '',
         brochureUrl: brochureUrl || '',
+        videoUrl: videoUrl || '',
+        amenitiesNote: amenitiesNote || '',
+        interiorNote: interiorNote || '',
+        advisorId: advisorId || '',
         images: imagesArray,
         amenities: selectedAmenities,
         interiorSpecs,
@@ -203,6 +233,46 @@ export default function AdminCreateHouseTypePage() {
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Hero Tagline
+              </label>
+              <input
+                type="text"
+                value={tagline}
+                onChange={(e) => setTagline(e.target.value)}
+                placeholder="e.g. 5 Bedroom Fully Detached Smart Villa"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Price / Starting From
+              </label>
+              <input
+                type="text"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                placeholder="e.g. ₦350,000,000 or Contact for Price"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
+          </div>
+
+          <div className="form-group" style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+              Property Description
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Write a compelling description of this property. This appears prominently on the public detail page..."
+              rows={4}
+              style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
+            />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', marginBottom: '20px' }}>
@@ -311,6 +381,49 @@ export default function AdminCreateHouseTypePage() {
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                360° Virtual Tour / Video URL
+              </label>
+              <input
+                type="url"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="https://...youtube/matterport/vimeo embed URL"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+              <p style={{ fontSize: '11px', color: 'var(--admin-text-secondary)', marginTop: '6px', lineHeight: 1.5 }}>
+                Paste a YouTube embed, Matterport, or Vimeo URL. Displays as an embedded 360° tour on the property page.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Amenities Note (optional subtitle)
+              </label>
+              <textarea
+                value={amenitiesNote}
+                onChange={(e) => setAmenitiesNote(e.target.value)}
+                placeholder="e.g. All amenities are subject to estate phase and availability."
+                rows={3}
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
+              />
+            </div>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Interior Specs Note (optional subtitle)
+              </label>
+              <textarea
+                value={interiorNote}
+                onChange={(e) => setInteriorNote(e.target.value)}
+                placeholder="e.g. All finishes are bespoke and subject to buyer selection."
+                rows={3}
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
+              />
+            </div>
           </div>
 
           <div className="form-group">
@@ -325,6 +438,46 @@ export default function AdminCreateHouseTypePage() {
               style={{ width: '100%', maxWidth: '300px', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
             />
           </div>
+        </div>
+
+        {/* Project Advisor Selector */}
+        <div className="admin-section-card" style={{ padding: '32px' }}>
+          <h3 className="admin-section-title" style={{ marginBottom: '8px', borderBottom: '1px solid var(--admin-border)', paddingBottom: '12px' }}>
+            Project Advisor
+          </h3>
+          <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)', marginBottom: '20px', lineHeight: 1.6 }}>
+            Link a registered advisor to this house type. Their photo, name, role, and contact details will appear in the sidebar on the property detail page.
+          </p>
+          <select
+            value={advisorId}
+            onChange={(e) => setAdvisorId(e.target.value)}
+            style={{ width: '100%', maxWidth: '480px', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', cursor: 'pointer' }}
+          >
+            <option value="">— No advisor assigned (shows company contact) —</option>
+            {advisorsList.map(adv => (
+              <option key={adv.id} value={adv.id}>
+                {adv.name}{adv.role ? ` · ${adv.role}` : ''}
+              </option>
+            ))}
+          </select>
+          {advisorId && advisorsList.find(a => a.id === advisorId) && (() => {
+            const adv = advisorsList.find(a => a.id === advisorId);
+            return (
+              <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: 'var(--admin-bg)', borderRadius: '4px', border: '1px solid var(--admin-border)' }}>
+                <img
+                  src={adv.image || 'https://placehold.co/48x48/111/fff?text=A'}
+                  alt={adv.name}
+                  style={{ width: '48px', height: '48px', borderRadius: '4px', objectFit: 'cover', flexShrink: 0 }}
+                  onError={e => { e.target.src = 'https://placehold.co/48x48/111/fff?text=A'; }}
+                />
+                <div>
+                  <p style={{ fontSize: '13px', fontWeight: 700, color: 'var(--admin-text-primary)', margin: '0 0 2px' }}>{adv.name}</p>
+                  <p style={{ fontSize: '11px', color: 'var(--admin-accent)', margin: 0 }}>{adv.role}</p>
+                  {adv.phone && <p style={{ fontSize: '11px', color: 'var(--admin-text-secondary)', margin: '2px 0 0' }}>{adv.phone}</p>}
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         {/* 5 Bento Grid Images Pasteur */}

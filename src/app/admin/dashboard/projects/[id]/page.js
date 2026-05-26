@@ -462,6 +462,8 @@ export default function AdminEditProjectPage({ params }) {
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [state, setState] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
   const [mapEmbedUrl, setMapEmbedUrl] = useState('');
   const [heroImage, setHeroImage] = useState('');
   const [detailsImage, setDetailsImage] = useState('');
@@ -535,6 +537,80 @@ export default function AdminEditProjectPage({ params }) {
           setHeroImage(data.heroImage || '');
           setDetailsImage(data.detailsImage || '');
           setUpdatesLink(data.updatesLink || '');
+
+          // Resolve State
+          let resolvedState = 'Abuja'; 
+          const locLower = (data.location || '').toLowerCase();
+          const stateFieldLower = (data.state || '').toLowerCase();
+
+          if (
+            stateFieldLower.includes('abuja') ||
+            stateFieldLower.includes('fct') ||
+            locLower.includes('abuja') ||
+            locLower.includes('fct') ||
+            id === 'beverly-hills' ||
+            id === 'royal-city' ||
+            id === 'sunset-haven' ||
+            id === 'garden-eden'
+          ) {
+            resolvedState = 'Abuja';
+          } else if (stateFieldLower.includes('lagos') || locLower.includes('lagos') || id.includes('lagos')) {
+            resolvedState = 'Lagos';
+          } else if (stateFieldLower.includes('kaduna') || locLower.includes('kaduna')) {
+            resolvedState = 'Kaduna';
+          } else if (
+            stateFieldLower.includes('rivers') ||
+            stateFieldLower.includes('ph') ||
+            stateFieldLower.includes('port') ||
+            locLower.includes('rivers') ||
+            locLower.includes('ph') ||
+            locLower.includes('port')
+          ) {
+            resolvedState = 'Rivers';
+          } else if (
+            stateFieldLower.includes('yola') ||
+            stateFieldLower.includes('adamawa') ||
+            locLower.includes('yola') ||
+            locLower.includes('adamawa') ||
+            id === 'kwati-city' ||
+            id === 'wisdom-kwati-smart-city'
+          ) {
+            resolvedState = 'Adamawa';
+          }
+
+          // Resolve Neighborhood
+          let resolvedNeighborhood = 'General';
+          if (id === 'beverly-hills') resolvedNeighborhood = 'Kuje';
+          else if (id === 'garden-eden') resolvedNeighborhood = 'Asokoro';
+          else if (id === 'kwati-city') resolvedNeighborhood = 'Jimeta';
+          else if (id === 'wisdom-kwati-smart-city') resolvedNeighborhood = 'Demsa';
+          else {
+            const parts = (data.location || '').split(',');
+            if (parts.length > 0) {
+              const first = parts[0].trim();
+              if (
+                first.toLowerCase() !== 'abuja' &&
+                first.toLowerCase() !== 'lagos' &&
+                first.toLowerCase() !== 'nigeria' &&
+                first.toLowerCase() !== 'multiple states'
+              ) {
+                resolvedNeighborhood = first;
+              }
+            }
+          }
+          if (resolvedNeighborhood === 'General') {
+            const nameLower = (data.name || '').toLowerCase();
+            if (nameLower.includes('katampe')) resolvedNeighborhood = 'Katampe Extension';
+            else if (nameLower.includes('karsana')) resolvedNeighborhood = 'Karsana';
+            else if (nameLower.includes('mabushi')) resolvedNeighborhood = 'Mabushi';
+            else if (nameLower.includes('guzape')) resolvedNeighborhood = 'Guzape';
+            else if (nameLower.includes('maitama')) resolvedNeighborhood = 'Maitama';
+            else if (nameLower.includes('rumu-olumeni') || nameLower.includes('port court')) resolvedNeighborhood = 'Rumu-Olumeni';
+            else if (nameLower.includes('ekpe') || nameLower.includes('epe')) resolvedNeighborhood = 'Epe';
+          }
+
+          setState(data.state || resolvedState);
+          setNeighborhood(data.neighborhood || resolvedNeighborhood);
           
           // Determine default advisor based on project slug if not set in Firestore
           let defaultAdvisorId = '';
@@ -669,8 +745,8 @@ export default function AdminEditProjectPage({ params }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !location) {
-      setError('Please fill in required fields: Name and District Location.');
+    if (!name || !location || !state || !neighborhood) {
+      setError('Please fill in required fields: Name, District Location, State, and Neighborhood.');
       return;
     }
 
@@ -684,6 +760,8 @@ export default function AdminEditProjectPage({ params }) {
         tagline: tagline || '',
         description: description || '',
         location,
+        state,
+        neighborhood,
         mapEmbedUrl: mapEmbedUrl || '',
         heroImage: heroImage || '',
         detailsImage: detailsImage || '',
@@ -800,6 +878,41 @@ export default function AdminEditProjectPage({ params }) {
             </div>
           </div>
 
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                State *
+              </label>
+              <select
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              >
+                <option value="">Select State</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Adamawa">Adamawa</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Neighborhood *
+              </label>
+              <input
+                type="text"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+                placeholder="e.g. Kuje, Asokoro, Katampe"
+                required
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
+          </div>
+
           <div className="form-group" style={{ marginBottom: '20px' }}>
             <label style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
               <span>Estate Overview / Description</span>
@@ -831,7 +944,7 @@ export default function AdminEditProjectPage({ params }) {
 
             <div className="form-group">
               <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
-                Specs/Detail Page Image URL
+                Archive Card Thumbnail
               </label>
               <input
                 type="url"

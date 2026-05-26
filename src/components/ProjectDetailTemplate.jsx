@@ -2,8 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import HouseTypeCard from './cards/HouseTypeCard';
+
+const DEFAULT_ADVISER = {
+  name: "Sarah Kwati",
+  role: "Project Advisor",
+  quote: "We are committed to delivering the ultimate standard in smart urban residential living.",
+  phone: "+234 810 001 7777",
+  email: "sarah.k@wisdomkwati.com",
+  image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200"
+};
 
 export default function ProjectDetailTemplate({
   title: initialTitle,
@@ -22,7 +32,8 @@ export default function ProjectDetailTemplate({
   otherNeighborhoods: initialOtherNeighborhoods,
   houseTypesTitle: initialHouseTypesTitle,
   houseTypes: initialHouseTypes,
-  mapEmbedUrl: initialMapEmbedUrl
+  mapEmbedUrl: initialMapEmbedUrl,
+  projectId
 }) {
   const [title, setTitle] = useState(initialTitle);
   const [heroImage, setHeroImage] = useState(initialHeroImage);
@@ -36,31 +47,34 @@ export default function ProjectDetailTemplate({
   const [nearbyFacilities, setNearbyFacilities] = useState(initialNearbyFacilities);
   const [marketSnapshot, setMarketSnapshot] = useState(initialMarketSnapshot);
   const [plotSizes, setPlotSizes] = useState(initialPlotSizes);
-  const [sidebarAdviser, setSidebarAdviser] = useState(initialSidebarAdviser);
+  const [sidebarAdviser, setSidebarAdviser] = useState(initialSidebarAdviser || DEFAULT_ADVISER);
   const [otherNeighborhoods, setOtherNeighborhoods] = useState(initialOtherNeighborhoods);
   const [houseTypesTitle, setHouseTypesTitle] = useState(initialHouseTypesTitle);
   const [houseTypes, setHouseTypes] = useState(initialHouseTypes);
   const [mapEmbedUrl, setMapEmbedUrl] = useState(initialMapEmbedUrl);
 
+  const resolvedProjectId = projectId || (typeof window !== 'undefined' ? window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop() : '');
+
   // Sync state if props change
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    setTitle(initialTitle);
-    setHeroImage(initialHeroImage);
-    setHeroVideo(initialHeroVideo);
-    setHeroPoster(initialHeroPoster);
-    setHeroDescription(initialHeroDescription);
-    setUpdatesLink(initialUpdatesLink);
-    setDescription(initialDescription);
-    setHighlights(initialHighlights);
-    setRealEstateVibe(initialRealEstateVibe);
-    setNearbyFacilities(initialNearbyFacilities);
-    setMarketSnapshot(initialMarketSnapshot);
-    setPlotSizes(initialPlotSizes);
-    setSidebarAdviser(initialSidebarAdviser);
-    setOtherNeighborhoods(initialOtherNeighborhoods);
-    setHouseTypesTitle(initialHouseTypesTitle);
-    setHouseTypes(initialHouseTypes);
-    setMapEmbedUrl(initialMapEmbedUrl);
+    if (initialTitle) setTitle(initialTitle);
+    if (initialHeroImage) setHeroImage(initialHeroImage);
+    if (initialHeroVideo) setHeroVideo(initialHeroVideo);
+    if (initialHeroPoster) setHeroPoster(initialHeroPoster);
+    if (initialHeroDescription) setHeroDescription(initialHeroDescription);
+    if (initialUpdatesLink) setUpdatesLink(initialUpdatesLink);
+    if (initialDescription) setDescription(initialDescription);
+    if (initialHighlights && initialHighlights.length > 0) setHighlights(initialHighlights);
+    if (initialRealEstateVibe && initialRealEstateVibe.length > 0) setRealEstateVibe(initialRealEstateVibe);
+    if (initialNearbyFacilities && initialNearbyFacilities.length > 0) setNearbyFacilities(initialNearbyFacilities);
+    if (initialMarketSnapshot && initialMarketSnapshot.length > 0) setMarketSnapshot(initialMarketSnapshot);
+    if (initialPlotSizes && initialPlotSizes.length > 0) setPlotSizes(initialPlotSizes);
+    if (initialSidebarAdviser) setSidebarAdviser(initialSidebarAdviser);
+    if (initialOtherNeighborhoods && initialOtherNeighborhoods.length > 0) setOtherNeighborhoods(initialOtherNeighborhoods);
+    if (initialHouseTypesTitle) setHouseTypesTitle(initialHouseTypesTitle);
+    if (initialHouseTypes && initialHouseTypes.length > 0) setHouseTypes(initialHouseTypes);
+    if (initialMapEmbedUrl) setMapEmbedUrl(initialMapEmbedUrl);
   }, [
     initialTitle, initialHeroImage, initialHeroVideo, initialHeroPoster,
     initialHeroDescription, initialUpdatesLink, initialDescription, initialHighlights,
@@ -68,17 +82,23 @@ export default function ProjectDetailTemplate({
     initialPlotSizes, initialSidebarAdviser, initialOtherNeighborhoods,
     initialHouseTypesTitle, initialHouseTypes, initialMapEmbedUrl
   ]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Load from CMS on mount if document exists
   useEffect(() => {
     async function fetchCmsData() {
       try {
         const path = window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop();
+        console.log("[CMS Debug] pathname:", window.location.pathname, "-> parsed path:", path);
         if (!path) return;
 
         const projectDoc = await getDoc(doc(db, 'projects', path));
+        console.log("[CMS Debug] projectDoc exists:", projectDoc.exists());
         if (projectDoc.exists()) {
           const project = projectDoc.data();
+          console.log("[CMS Debug] project data:", project);
+          console.log("[CMS Debug] project.agent:", project.agent);
+          console.log("[CMS Debug] project.advisorId:", project.advisorId);
 
           if (project.name) setTitle(project.name);
           if (project.heroImage) {
@@ -127,20 +147,48 @@ export default function ProjectDetailTemplate({
             })));
           }
 
-          // Resolve relational advisor
+          // Resolve relational or embedded advisor/agent (Prioritizing advisorId)
           if (project.advisorId) {
+            console.log("[CMS Debug] Fetching advisor from collection with advisorId:", project.advisorId);
             const advisorDoc = await getDoc(doc(db, 'advisors', project.advisorId));
+            console.log("[CMS Debug] advisorDoc exists:", advisorDoc.exists());
             if (advisorDoc.exists()) {
               const advisor = advisorDoc.data();
+              console.log("[CMS Debug] Setting sidebar advisor from advisors collection:", advisor);
               setSidebarAdviser({
                 name: advisor.name || '',
                 role: advisor.role || '',
-                quote: advisor.quote || '',
-                phone: advisor.phone || '',
-                email: advisor.email || '',
-                image: advisor.image || ''
+                quote: advisor.quote || 'We are committed to delivering the ultimate standard in smart urban residential living.',
+                phone: advisor.phone || '+234 810 001 7777',
+                email: advisor.email || 'sarah.k@wisdomkwati.com',
+                image: advisor.image || 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200'
               });
+            } else if (project.agent && project.agent.name) {
+              console.log("[CMS Debug] Assigned advisorId doc does not exist. Falling back to project.agent:", project.agent);
+              setSidebarAdviser({
+                name: project.agent.name || '',
+                role: project.agent.role || '',
+                quote: project.agent.quote || 'We are committed to delivering the ultimate standard in smart urban residential living.',
+                phone: project.agent.phone || '+234 810 001 7777',
+                email: project.agent.email || 'sarah.k@wisdomkwati.com',
+                image: project.agent.image || 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200'
+              });
+            } else {
+              setSidebarAdviser(DEFAULT_ADVISER);
             }
+          } else if (project.agent && project.agent.name) {
+            console.log("[CMS Debug] No advisorId set. Using legacy project.agent:", project.agent);
+            setSidebarAdviser({
+              name: project.agent.name || '',
+              role: project.agent.role || '',
+              quote: project.agent.quote || 'We are committed to delivering the ultimate standard in smart urban residential living.',
+              phone: project.agent.phone || '+234 810 001 7777',
+              email: project.agent.email || 'sarah.k@wisdomkwati.com',
+              image: project.agent.image || 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200'
+            });
+          } else {
+            console.log("[CMS Debug] No agent or advisorId defined in Firestore project doc, setting default adviser");
+            setSidebarAdviser(DEFAULT_ADVISER);
           }
 
           // Resolve house specifications
@@ -151,14 +199,14 @@ export default function ProjectDetailTemplate({
               if (htDoc.exists()) {
                 const ht = htDoc.data();
                 houseTypesList.push({
+                  id: htId,
                   name: ht.classType || htId,
-                  location: `${ht.beds || 0}BR Smart Villa`,
-                  type: ht.classType || 'Villa spec',
-                  beds: String(ht.beds || 0),
-                  baths: String(ht.baths || 0),
-                  size: ht.size || '',
-                  link: `/house-types/${htId}`,
-                  image: ht.images && ht.images.length > 0 ? ht.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec'
+                  tagline: ht.tagline || `${ht.beds || 0} Bedroom Smart Villa`,
+                  beds: ht.beds || 0,
+                  baths: ht.baths || 0,
+                  size: ht.size || 'N/A',
+                  image: ht.images && ht.images.length > 0 ? ht.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec',
+                  estate: '',
                 });
               }
             }
@@ -172,6 +220,32 @@ export default function ProjectDetailTemplate({
       }
     }
     fetchCmsData();
+  }, []);
+
+  // Fetch other neighborhoods dynamically from Firestore
+  useEffect(() => {
+    async function fetchOtherNeighborhoods() {
+      try {
+        const path = window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop();
+        const snap = await getDocs(collection(db, 'projects'));
+        const list = [];
+        snap.forEach((doc) => {
+          const d = doc.data();
+          if (!d.name || doc.id === path) return;
+          list.push({
+            id: doc.id,
+            name: d.name,
+            district: d.location || d.tagline || 'Nigeria',
+            image: d.detailsImage || d.heroImage || 'https://placehold.co/1200x800/111/fff?text=Estate',
+            link: `/projects/${doc.id}`
+          });
+        });
+        setOtherNeighborhoods(list.slice(0, 4));
+      } catch (err) {
+        console.error('Error fetching other neighborhoods:', err);
+      }
+    }
+    fetchOtherNeighborhoods();
   }, []);
 
   const videoRef = React.useRef(null);
@@ -295,7 +369,7 @@ export default function ProjectDetailTemplate({
         <div className="pd-hero-content reveal-on-scroll">
           <h1 className="pd-hero-title" style={{ textTransform: 'uppercase' }}>{title}</h1>
           <p className="pd-hero-description">{heroDescription}</p>
-          <Link href={updatesLink || "#"} className="btn-pill" style={{ marginTop: "30px", display: "inline-flex", background: "var(--accent-green)", color: "var(--text-primary)", border: "none" }}>
+          <Link href={`/projects/${resolvedProjectId}/updates`} className="btn-pill" style={{ marginTop: "30px", display: "inline-flex", backgroundColor: "var(--accent-green)", color: "var(--text-primary)", borderWidth: 0 }}>
             <div className="flip-text">
               <span>VIEW SITE UPDATES</span>
               <span aria-hidden="true">VIEW SITE UPDATES</span>
@@ -370,12 +444,12 @@ export default function ProjectDetailTemplate({
             {mapEmbedUrl && (
               <section className="pd-section reveal-on-scroll" style={{ marginBottom: 0 }}>
                 <div className="pd-section-title">Location Map</div>
-                <div style={{ width: '100%', height: '400px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+                <div style={{ width: '100%', height: '400px', borderRadius: '8px', overflow: 'hidden', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--border)' }}>
                   <iframe 
                     src={mapEmbedUrl} 
                     width="100%" 
                     height="100%" 
-                    style={{ border: 0 }} 
+                    style={{ borderWidth: 0 }} 
                     allowFullScreen="" 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
@@ -406,7 +480,7 @@ export default function ProjectDetailTemplate({
             </div>
             
             {sidebarAdviser && (
-              <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "40px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "4px", padding: "24px" }}>
+              <div className="pd-sidebar-card" suppressHydrationWarning={true}>
                 <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
                   <img loading="lazy" src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
@@ -437,7 +511,7 @@ export default function ProjectDetailTemplate({
       </main>
 
       {/* House Types Section */}
-      <section className="pd-properties-section" style={{ background: "var(--bg-main)" }}>
+      <section className="pd-properties-section">
         <div className="portfolio-container-main">
           <div className="section-line"></div>
           <div className="portfolio-header sidebar-layout pd-properties-header">
@@ -450,38 +524,9 @@ export default function ProjectDetailTemplate({
             </h2>
           </div>
 
-          <div className="portfolio-grid pd-properties-grid">
+          <div className="wksc-ht-grid pd-properties-grid">
             {houseTypes?.map((item, idx) => (
-              <Link key={idx} href={item.link} className="ht-card reveal-on-scroll">
-                <div className="ht-card-image">
-                  <img loading="lazy" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
-                </div>
-                <div className="ht-card-info">
-                  <div className="ht-card-left">
-                    <h3 className="ht-card-name" style={{ textTransform: 'capitalize' }}>{item.name}</h3>
-                    <p className="ht-card-location" style={{ textTransform: 'capitalize' }}>{item.location}</p>
-                  </div>
-                  <div className="ht-card-right">
-                    <p className="ht-card-type">{item.type}</p>
-                    <div className="ht-card-specs">
-                      <span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path>
-                        </svg> {item.beds}
-                      </span>
-                      <span className="ht-dot"></span>
-                      <span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
-                          <path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path>
-                        </svg> {item.baths}
-                      </span>
-                      <span className="ht-dot"></span>
-                      <span>{item.size}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <HouseTypeCard key={item.id || idx} {...item} />
             ))}
           </div>
           <div className="portfolio-footer" style={{ display: "flex", justifyContent: "center", marginTop: "80px", paddingBottom: "0" }}>

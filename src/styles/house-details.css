@@ -3,6 +3,34 @@
    High-Fidelity Realist Layout
    ======================================== */
 
+/*
+ * IMPORTANT: This page loads data asynchronously from Firestore.
+ * GSAP ScrollTrigger initialises before data arrives and hides elements
+ * with autoAlpha:0. These overrides ensure all content is always visible
+ * on the house-types detail page regardless of animation state.
+ */
+.hd-container,
+.hd-specs-bar-wrapper,
+.hd-main-grid,
+.hd-left-col,
+.hd-right-col,
+.hd-description,
+.hd-gallery,
+.hd-amenities-section,
+.hd-interior-section,
+.hd-video-section,
+.hd-estate-section,
+.hd-related-section,
+.hd-agent-card,
+.hd-inquiry-box,
+.hd-hero-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  clip-path: none !important;
+}
+
 .hd-page {
   background-color: var(--bg-main);
 }
@@ -104,7 +132,7 @@
 .hd-specs-bar {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 60px 40px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -216,7 +244,7 @@
 }
 
 .hd-gallery-item {
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
@@ -340,7 +368,7 @@
 .hd-agent-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -372,7 +400,7 @@
 .hd-agent-img {
   width: 100px;
   height: 100px;
-  border-radius: 10px;
+  border-radius: 5px;
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -473,7 +501,7 @@
 .hd-inquiry-box {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 32px;
 }
 
@@ -498,7 +526,7 @@
   padding: 14px 18px;
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 5px;
   font-family: var(--font-main);
   font-size: 14px;
   transition: all 0.3s ease;
@@ -557,7 +585,7 @@
   position: relative;
   width: 100%;
   height: 500px;
-  border-radius: 16px;
+  border-radius: 5px;
   overflow: hidden;
   background: #000;
 }

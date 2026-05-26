@@ -1,0 +1,383 @@
+/* ============================================================
+   WKSC CARD SYSTEM — cards.css
+   Reusable premium card templates used across all pages.
+   Tokens come from wksc-colors.css + style.css :root.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SHARED GRID LAYOUTS
+---------------------------------------------------------- */
+
+/* House-type grid: 2-col on desktop, 1-col on mobile */
+.wksc-ht-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  width: 100%;
+}
+
+/* Homepage variant — same 2-col but with tighter gap */
+.wksc-ht-grid--home {
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .wksc-ht-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* 3-col to 2-col to 1-col responsive grid for project cards */
+.wksc-proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .wksc-proj-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+@media (max-width: 640px) {
+  .wksc-proj-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ----------------------------------------------------------
+   SKELETON PULSE (shared by both card types)
+---------------------------------------------------------- */
+@keyframes wksc-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.6;  }
+}
+
+.wksc-skeleton {
+  animation: wksc-pulse 1.7s ease-in-out infinite;
+  background: var(--bg-surface);
+}
+
+/* ----------------------------------------------------------
+   HOUSE TYPE CARD  (.wksc-ht-card)
+   Used on: homepage Recent Listings + /house-types archive
+---------------------------------------------------------- */
+.wksc-ht-card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  gap: 12px;
+}
+
+/* Image Wrapper with rounded corners and border on hover */
+.wksc-ht-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  border: 1.5px solid transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: border-color 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.wksc-ht-card:hover .wksc-ht-card__image-wrapper {
+  border-color: var(--accent-green);
+}
+
+.wksc-ht-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.wksc-ht-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.wksc-ht-card:hover .wksc-ht-card__image img {
+  transform: scale(1.05);
+}
+
+/* Hover overlay with center circle */
+.wksc-ht-card__hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.15); /* very light dimming */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.wksc-ht-card:hover .wksc-ht-card__hover-overlay {
+  opacity: 1;
+}
+
+.wksc-ht-view-circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transform: scale(0.85);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wksc-ht-card:hover .wksc-ht-view-circle {
+  transform: scale(1);
+}
+
+/* Body: Two-row layout under the image */
+.wksc-ht-card__body {
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Each row is a flex row between left and right */
+.wksc-ht-card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+/* Row 1 elements */
+.wksc-ht-card__name {
+  font-family: var(--font-header);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.wksc-ht-card__class {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Row 2 elements */
+.wksc-ht-card__tagline {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* Specs layout (horizontal with dot separators) */
+.wksc-ht-card__specs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.wksc-ht-card__spec {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.wksc-ht-card__spec svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.wksc-ht-card__dot {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.wksc-ht-spec--size {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+/* Responsive: on very small screens, stack the rows vertically */
+@media (max-width: 480px) {
+  .wksc-ht-card__row {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+  .wksc-ht-card__class {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+}
+
+/* ==========================================================
+   PROJECT CARD (.wksc-proj-card)
+   Used on: homepage Neighborhood + /projects archive
+   ========================================================== */
+.wksc-proj-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  gap: 12px;
+  background: transparent;
+  border: none;
+}
+
+/* Image Wrapper with green/yellow border and padding */
+.wksc-proj-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(187, 227, 57, 0.45);
+  border-radius: 5px;
+  padding: 8px;
+  background: transparent;
+  transition: border-color 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.wksc-proj-card:hover .wksc-proj-card__image-wrapper {
+  border-color: var(--accent-green);
+}
+
+.wksc-proj-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 5px;
+  background: var(--bg-surface);
+}
+
+.wksc-proj-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.wksc-proj-card:hover .wksc-proj-card__image img {
+  transform: scale(1.05);
+}
+
+/* Info below image */
+.wksc-proj-card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  gap: 12px;
+}
+
+.wksc-proj-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.wksc-proj-card__name {
+  font-family: var(--font-header);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wksc-proj-card__location {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Square chevron button */
+.wksc-proj-card__btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: #fdfef8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-primary);
+  transition: all 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.wksc-proj-card:hover .wksc-proj-card__btn {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #000;
+}
+
+/* ============================================================
+   REVEAL ON SCROLL VIA INTERSECTION OBSERVER
+   ============================================================ */
+.wksc-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(8px);
+  pointer-events: none;
+  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.0s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.wksc-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+  pointer-events: auto;
+}

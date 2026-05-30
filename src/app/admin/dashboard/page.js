@@ -21,7 +21,8 @@ export default function AdminDashboardPage() {
       houseTypesCount: cached.houseTypesCount || 0,
       advisorsCount: cached.advisorsCount || 0,
       careersCount: cached.careersCount || 0,
-      applicationsCount: cached.applicationsCount || 0
+      applicationsCount: cached.applicationsCount || 0,
+      reviewsCount: cached.reviewsCount || 0
     };
   });
   const [recentInquiries, setRecentInquiries] = useState(() => globalDashboardCache?.recentInquiries || []);
@@ -44,6 +45,7 @@ export default function AdminDashboardPage() {
           advisorsCountSnap,
           careersCountSnap,
           applicationsCountSnap,
+          reviewsCountSnap,
           leadsSnap
         ] = await Promise.all([
           getCountFromServer(collection(db, 'leads')),
@@ -53,6 +55,7 @@ export default function AdminDashboardPage() {
           getCountFromServer(collection(db, 'advisors')),
           getCountFromServer(collection(db, 'careers')),
           getCountFromServer(collection(db, 'applications')),
+          getCountFromServer(collection(db, 'reviews')),
           getDocs(query(collection(db, 'leads'), orderBy('createdAt', 'desc'), limit(100)))
         ]);
 
@@ -77,7 +80,8 @@ export default function AdminDashboardPage() {
           houseTypesCount: houseTypesCountSnap.data().count,
           advisorsCount: advisorsCountSnap.data().count,
           careersCount: careersCountSnap.data().count,
-          applicationsCount: applicationsCountSnap.data().count
+          applicationsCount: applicationsCountSnap.data().count,
+          reviewsCount: reviewsCountSnap.data().count
         };
 
         // Cache the result in memory
@@ -265,6 +269,13 @@ export default function AdminDashboardPage() {
       trend: `${stats.applicationsCount} total applications`,
       icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
       link: '/admin/dashboard/applications'
+    },
+    {
+      title: 'Customer Reviews',
+      value: `${stats.reviewsCount} / 8`,
+      trend: 'Marquee slider loop',
+      icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
+      link: '/admin/dashboard/reviews'
     }
   ];
 
@@ -417,6 +428,9 @@ export default function AdminDashboardPage() {
               </Link>
               <Link href="/admin/dashboard/careers" className="admin-btn" style={{ fontSize: '11px', textDecoration: 'none', background: 'var(--admin-surface-light)', border: '1px solid var(--admin-border)', color: 'var(--admin-text-primary)' }}>
                 Post New Jobs
+              </Link>
+              <Link href="/admin/dashboard/reviews" className="admin-btn" style={{ fontSize: '11px', textDecoration: 'none', background: 'var(--admin-surface-light)', border: '1px solid var(--admin-border)', color: 'var(--admin-text-primary)' }}>
+                Manage Customer Reviews
               </Link>
             </div>
           </div>

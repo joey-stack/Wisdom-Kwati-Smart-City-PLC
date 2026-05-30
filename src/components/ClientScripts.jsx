@@ -267,80 +267,35 @@ export default function ClientScripts() {
             });
         }
 
-        // Seamless Reviews Marquee
-        const track = document.querySelector('.carousel-track');
-        if (track) {
-            const setupMarquee = () => {
-                const originalCards = Array.from(track.children);
-                if (!track.hasAttribute('data-cloned')) {
-                    originalCards.forEach(card => {
-                        const clone = card.cloneNode(true);
-                        track.appendChild(clone);
-                    });
-                    track.setAttribute('data-cloned', 'true');
-                }
+        // Lock/Unlock Scroll when navbar menus open/close, pausing reviews marquee if active
+        const lockScroll = () => {
+            if (window.reviewsMarquee) {
+                gsap.to(window.reviewsMarquee, { timeScale: 0, duration: 0.4, ease: "power1.out" });
+            }
+            if (lenis) lenis.stop();
+            body.classList.add('no-scroll');
+        };
 
-                const moveDistance = track.scrollWidth / 2;
+        const unlockScroll = () => {
+            if (window.reviewsMarquee) {
+                gsap.to(window.reviewsMarquee, { timeScale: 1, duration: 0.4, ease: "power1.out" });
+            }
+            if (lenis) lenis.start();
+            body.classList.remove('no-scroll');
+        };
 
-                const marquee = gsap.to(track, {
-                    x: -moveDistance,
-                    duration: 45,
-                    ease: "none",
-                    repeat: -1,
-                    overwrite: "auto",
-                    force3D: true
-                });
+        const navItems = document.querySelectorAll('.nav-item.has-dropdown');
+        const megaWrappers = document.querySelectorAll('.mega-menu-wrapper');
 
-                const wrapper = document.querySelector('.carousel-wrapper');
-                if (wrapper) {
-                    addTrackedListener(wrapper, 'mouseenter', () => {
-                        gsap.to(marquee, { timeScale: 0, duration: 0.6, ease: "power2.out" });
-                    });
-                    addTrackedListener(wrapper, 'mouseleave', () => {
-                        gsap.to(marquee, { timeScale: 1, duration: 0.6, ease: "power2.out" });
-                    });
-                }
+        navItems.forEach(item => {
+            addTrackedListener(item, 'mouseenter', lockScroll);
+            addTrackedListener(item, 'mouseleave', unlockScroll);
+        });
 
-                const lockScroll = () => {
-                    gsap.to(marquee, { timeScale: 0, duration: 0.4, ease: "power1.out" });
-                    if (lenis) lenis.stop();
-                    body.classList.add('no-scroll');
-                };
-
-                const unlockScroll = () => {
-                    gsap.to(marquee, { timeScale: 1, duration: 0.4, ease: "power1.out" });
-                    if (lenis) lenis.start();
-                    body.classList.remove('no-scroll');
-                };
-
-                const navItems = document.querySelectorAll('.nav-item.has-dropdown');
-                const megaWrappers = document.querySelectorAll('.mega-menu-wrapper');
-
-                navItems.forEach(item => {
-                    addTrackedListener(item, 'mouseenter', lockScroll);
-                    addTrackedListener(item, 'mouseleave', unlockScroll);
-                });
-
-                megaWrappers.forEach(menu => {
-                    addTrackedListener(menu, 'mouseenter', lockScroll);
-                    addTrackedListener(menu, 'mouseleave', unlockScroll);
-                });
-
-                const handleMarqueeResize = () => {
-                    marquee.kill();
-                    gsap.set(track, { x: 0 });
-                    const newDistance = track.scrollWidth / 2;
-                    gsap.to(track, {
-                        x: -newDistance,
-                        duration: 45,
-                        ease: "none",
-                        repeat: -1
-                    });
-                };
-                addTrackedListener(window, 'resize', handleMarqueeResize);
-            };
-            setupMarquee();
-        }
+        megaWrappers.forEach(menu => {
+            addTrackedListener(menu, 'mouseenter', lockScroll);
+            addTrackedListener(menu, 'mouseleave', unlockScroll);
+        });
 
         // FAQ Accordion
         const faqItems = document.querySelectorAll('.faq-item');

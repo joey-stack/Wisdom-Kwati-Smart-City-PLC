@@ -9,6 +9,7 @@ import NeighborhoodSection from '../components/NeighborhoodSection';
 import RecentListingsSection from '../components/RecentListingsSection';
 import RecentBlogsSection from '../components/RecentBlogsSection';
 import ContactForm from '../components/ContactForm';
+import ReviewsSection from '../components/ReviewsSection';
 
 
 export default function Page() {
@@ -309,90 +310,7 @@ export default function Page() {
     </section>
 
     {/*  Reviews Section: Infinite Cinematic Carousel  */}
-    <section id="reviews" className="reviews-section">
-        <div className="reviews-container">
-            <div className="section-line"></div>
-            
-            <div className="reviews-header sidebar-layout">
-                <div className="reviews-label">
-                    <div className="label-square"></div>
-                    REVIEWS
-                </div>
-                <h2 className="reviews-headline">
-                    Stories from people who found their place with us
-                </h2>
-            </div>
-
-            <div className="carousel-wrapper">
-                <div className="carousel-track">
-                    {/*  Card 1: Image Variant (Chief Dr. Chidi Okafor)  */}
-                    <div className="review-card image-card">
-                        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="Chief Dr. Chidi Okafor Review" referrerPolicy="no-referrer" />
-                        <div className="card-overlay">
-                            <blockquote className="card-quote">"Correcting a continent, one smart home at a time. WKSC is building the infrastructure we've always deserved."</blockquote>
-                            <div className="reviewer-identity-container">
-                                <div className="reviewer-meta-group">
-                                    <span className="card-name">Chief Dr. Chidi Okafor</span>
-                                    <span className="card-meta">HOME OWNER, ABUJA</span>
-                                </div>
-                                <div className="reviewer-avatar">
-                                    <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Chief Dr. Chidi Okafor" referrerPolicy="no-referrer" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/*  Card 2: Text Variant (The Adewale Family)  */}
-                    <div className="review-card text-card">
-                        <blockquote className="card-quote-main">"I realized I didn't have to leave to arrive."</blockquote>
-                        <p className="card-body">"I used to think my best future lay outside Nigeria, but working with WKSC changed that. Their smart ecosystem in Lagos Epe mirrors the quality I saw in the UK, but with the warmth of home."</p>
-                        <div className="reviewer-identity-container">
-                            <div className="reviewer-meta-group">
-                                <span className="card-name">The Adewale Family</span>
-                                <span className="card-meta">EPE SMART CITY, LAGOS</span>
-                            </div>
-                            <div className="reviewer-avatar">
-                                <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="The Adewale Family" referrerPolicy="no-referrer" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/*  Card 3: Image Variant (Engr. Tunde Olayinka)  */}
-                    <div className="review-card image-card">
-                        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka Review" referrerPolicy="no-referrer" />
-                        <div className="card-overlay">
-                            <blockquote className="card-quote">"Finally, a smart ecosystem that actually works. The IoT integration in Port Harcourt is world-class."</blockquote>
-                            <div className="reviewer-identity-container">
-                                <div className="reviewer-meta-group">
-                                    <span className="card-name">Engr. Tunde Olayinka</span>
-                                    <span className="card-meta">PORT HARCOURT</span>
-                                </div>
-                                <div className="reviewer-avatar">
-                                    <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka" referrerPolicy="no-referrer" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/*  Card 4: Text Variant (Amina Bello)  */}
-                    <div className="review-card text-card">
-                        <blockquote className="card-quote-main">"Bringing the future of healthy living to Adamawa."</blockquote>
-                        <p className="card-body">"I thought modern living would take decades to reach Yola, but WKSC delivered. From the solar grids to the water treatment plants, every detail ensures my family is safe and ready for the future."</p>
-                        <div className="reviewer-identity-container">
-                            <div className="reviewer-meta-group">
-                                <span className="card-name">Amina Bello</span>
-                                <span className="card-meta">HOME OWNER, YOLA</span>
-                            </div>
-                            <div className="reviewer-avatar">
-                                <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Amina Bello" referrerPolicy="no-referrer" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
+    <ReviewsSection />
 
     {/*  Process Section: Vertical Alternating Timeline  */}
     <section id="process" className="process-section">

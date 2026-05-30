@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Synchronize Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
+    window.lenis = lenis;
 
     gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
@@ -68,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Custom Card Cursor Tracking Logic
     const cardCursor = document.getElementById('card-cursor');
-    const hoverableCards = document.querySelectorAll('.property-card, .neighborhood-card, .blog-card, .ht-card');
 
     if (cardCursor) {
         let mouseX = 0;
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const animateCursor = () => {
             // High-performance smooth tracking (lerp effect)
-            cursorX += (mouseX - cursorX) * 0.18;
-            cursorY += (mouseY - cursorY) * 0.18;
+            cursorX += (mouseX - cursorX) * 0.12;
+            cursorY += (mouseY - cursorY) * 0.12;
 
             cardCursor.style.left = `${cursorX}px`;
             cardCursor.style.top = `${cursorY}px`;
@@ -94,14 +94,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         animateCursor();
 
-        hoverableCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                cardCursor.classList.add('active');
-            });
+        // Event delegation for card hovers (handles dynamically loaded Firestore cards)
+        const cardSelector = '.property-card, .neighborhood-card, .blog-card, .ht-card, .wksc-ht-card, .wksc-proj-card';
+        
+        let activeTimeout = null;
 
-            card.addEventListener('mouseleave', () => {
+        document.addEventListener('mouseover', (e) => {
+            const card = e.target.closest(cardSelector);
+            const fromCard = e.relatedTarget ? e.relatedTarget.closest(cardSelector) : null;
+            if (card && card !== fromCard) {
+                if (activeTimeout) clearTimeout(activeTimeout);
+                activeTimeout = setTimeout(() => {
+                    cardCursor.classList.add('active');
+                }, 50);
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            const card = e.target.closest(cardSelector);
+            const relatedCard = e.relatedTarget ? e.relatedTarget.closest(cardSelector) : null;
+            if (card && card !== relatedCard) {
+                if (activeTimeout) clearTimeout(activeTimeout);
                 cardCursor.classList.remove('active');
-            });
+            }
         });
     }
 
@@ -333,23 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (grid) {
                 const items = grid.querySelectorAll('.reveal-on-scroll');
                 if (items.length > 0) {
-                    // Use batch for better performance on long pages
                     ScrollTrigger.batch(items, {
                         onEnter: batch => gsap.fromTo(batch, 
-                            { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)' },
+                            { y: 35, opacity: 0, autoAlpha: 0 },
                             {
-                                y: 0,
-                                opacity: 1,
-                                filter: 'blur(0px)',
-                                clipPath: 'inset(0% 0% 0% 0%)',
-                                duration: 1.2,
-                                stagger: 0.1,
-                                ease: 'expo.out',
-                                overwrite: true,
-                                clearProps: "filter,clipPath"
+                                y: 0, opacity: 1, autoAlpha: 1,
+                                duration: 0.85, stagger: 0.08, ease: 'power3.out', overwrite: true
                             }
                         ),
-                        start: 'top 85%',
+                        start: 'top 90%',
                         once: true
                     });
                 }
@@ -362,20 +369,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const isInsideGrid = gridSelectors.some(sel => el.closest(sel));
             if (!isInsideGrid) {
                 gsap.fromTo(el, 
-                    { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)' },
+                    { y: 35, opacity: 0, autoAlpha: 0 },
                     {
-                        y: 0,
-                        opacity: 1,
-                        filter: 'blur(0px)',
-                        clipPath: 'inset(0% 0% 0% 0%)',
-                        duration: 1.2,
-                        ease: 'expo.out',
+                        y: 0, opacity: 1, autoAlpha: 1,
+                        duration: 0.85, ease: 'power3.out',
                         scrollTrigger: {
                             trigger: el,
-                            start: 'top 85%',
+                            start: 'top 88%',
                             toggleActions: 'play none none none'
                         },
-                        clearProps: "filter,clipPath"
+                        force3D: true
                     }
                 );
             }
@@ -461,44 +464,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- Our History: Sequencing Timeline Node Reveals ---
         historyItems.forEach(item => {
             const indicator = item.querySelector('.history-indicator');
-            const card = item.querySelector('.history-card');
-            
-            const itemTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 95%', 
-                    toggleActions: 'play none none none'
-                }
-            });
-
-            // 1. Reveal Indicator Node
-            itemTl.from(indicator, {
-                scale: 0,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'back.out(2)'
-            });
-
-            // 2. Precise Border-Touch Activation
-            ScrollTrigger.create({
-                trigger: indicator,
-                start: "top 45%", // Activates as soon as top border hits center focus
-                onEnter: () => indicator.classList.add('active'),
-                onLeaveBack: () => indicator.classList.remove('active'),
-            });
-
-            // 2. Reveal Content Card with cinematic mask from left
-            itemTl.from(card, {
-                x: 15,
-                opacity: 0,
-                filter: 'blur(8px)',
-                clipPath: 'inset(0% 100% 0% 0%)',
-                duration: 1.4,
-                ease: 'expo.out'
-            }, "-=0.4");
+            if (indicator) {
+                ScrollTrigger.create({
+                    trigger: indicator, start: "center 45%",
+                    onEnter: () => indicator.classList.add('active'),
+                    onLeaveBack: () => indicator.classList.remove('active'),
+                });
+            }
         });
 
         // --- Our Differences: Staggered Entrance ---
@@ -670,37 +644,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================
-    // SITE VISIT MODAL LOGIC
+    // SITE VISIT & CONSULTATION MODAL LOGIC
     // ========================================
     const siteVisitModal = document.getElementById('siteVisitModal');
+    
+    const closeSiteVisitModal = () => {
+        if (siteVisitModal) {
+            siteVisitModal.classList.remove('active');
+        }
+        if (typeof lenis !== 'undefined' && !document.body.classList.contains('menu-active') && !document.getElementById('consultationModal')?.classList.contains('active')) {
+            lenis.start();
+        }
+        if (!document.body.classList.contains('menu-active')) {
+            document.body.classList.remove('no-scroll');
+        }
+    };
+
     if (siteVisitModal) {
         const modalCloseBtn = siteVisitModal.querySelector('.site-visit-modal-close');
-        const visitButtons = document.querySelectorAll('.nav-cta, .mobile-cta, .cta-button, .btn-pill, .action-link');
-        
-        const openSiteVisitModal = (e) => {
-            const text = e.currentTarget.textContent.toLowerCase();
-            if (text.includes('request a site visit') || text.includes('site visit')) {
-                e.preventDefault();
-                siteVisitModal.classList.add('active');
-                if (typeof lenis !== 'undefined') lenis.stop();
-                document.body.classList.add('no-scroll');
-            }
-        };
-
-        const closeSiteVisitModal = () => {
-            siteVisitModal.classList.remove('active');
-            if (typeof lenis !== 'undefined' && !document.body.classList.contains('menu-active')) {
-                lenis.start();
-            }
-            if (!document.body.classList.contains('menu-active')) {
-                document.body.classList.remove('no-scroll');
-            }
-        };
-
-        visitButtons.forEach(btn => {
-            btn.addEventListener('click', openSiteVisitModal);
-        });
-
         if (modalCloseBtn) {
             modalCloseBtn.addEventListener('click', closeSiteVisitModal);
         }
@@ -717,6 +678,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Delegated click listener for modals (handles both site visit and consultation)
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.nav-cta, .mobile-cta, .cta-button, .btn-pill, .action-link, .btn-book-consultation');
+        if (!trigger) return;
+
+        const text = trigger.textContent.toLowerCase();
+        
+        if (text.includes('request a site visit') || text.includes('site visit')) {
+            if (siteVisitModal) {
+                e.preventDefault();
+                siteVisitModal.classList.add('active');
+                if (typeof lenis !== 'undefined') lenis.stop();
+                document.body.classList.add('no-scroll');
+            }
+        } else if (text.includes('book a consultation') || text.includes('consultation') || trigger.classList.contains('btn-book-consultation')) {
+            e.preventDefault();
+            const email = trigger.getAttribute('data-advisor-email') || '';
+            const name = trigger.getAttribute('data-advisor-name') || '';
+            window.dispatchEvent(new CustomEvent('open-consultation-modal', {
+                detail: { email, name }
+            }));
+        }
+    });
 
 });
 

@@ -67,6 +67,7 @@
   color: inherit;
   cursor: pointer;
   gap: 12px;
+  position: relative;
 }
 
 /* Image Wrapper with rounded corners and border on hover */
@@ -99,51 +100,7 @@
   transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
-.wksc-ht-card:hover .wksc-ht-card__image img {
-  transform: scale(1.05);
-}
 
-/* Hover overlay with center circle */
-.wksc-ht-card__hover-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.15); /* very light dimming */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.45s cubic-bezier(0.7, 0, 0.3, 1);
-}
-
-.wksc-ht-card:hover .wksc-ht-card__hover-overlay {
-  opacity: 1;
-}
-
-.wksc-ht-view-circle {
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  background: var(--accent-green);
-  color: #000;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-family: var(--font-main);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  transform: scale(0.85);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.wksc-ht-card:hover .wksc-ht-view-circle {
-  transform: scale(1);
-}
 
 /* Body: Two-row layout under the image */
 .wksc-ht-card__body {
@@ -296,9 +253,6 @@
   transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
-.wksc-proj-card:hover .wksc-proj-card__image img {
-  transform: scale(1.05);
-}
 
 /* Info below image */
 .wksc-proj-card__info {

@@ -5,13 +5,16 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectCard from '@/components/cards/ProjectCard';
 
-export default function Page() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+// Global in-memory cache for Lagos projects
+let globalLagosProjectsCache = null;
 
+export default function Page() {
+  const [projects, setProjects] = useState(() => globalLagosProjectsCache || []);
+  const [loading, setLoading] = useState(() => !globalLagosProjectsCache);
+  const [mounted, setMounted] = useState(false);
+ 
   useEffect(() => {
-    setMounted(true);
+    Promise.resolve().then(() => setMounted(true));
     async function loadProjects() {
       try {
         const snap = await getDocs(collection(db, 'projects'));
@@ -30,6 +33,7 @@ export default function Page() {
           });
         });
         list.sort((a, b) => a.name.localeCompare(b.name));
+        globalLagosProjectsCache = list;
         setProjects(list);
       } catch (err) {
         console.error('Error fetching Lagos projects:', err);

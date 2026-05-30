@@ -5,9 +5,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectCard from '@/components/cards/ProjectCard';
 
+// Global in-memory cache for projects
+let globalProjectsCache = null;
+
 export default function Page() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(() => globalProjectsCache || []);
+  const [loading, setLoading] = useState(() => !globalProjectsCache);
   const [filterState, setFilterState] = useState('');
   const [filterNeighborhood, setFilterNeighborhood] = useState('');
   const [filterEstateName, setFilterEstateName] = useState('');
@@ -15,7 +18,7 @@ export default function Page() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    Promise.resolve().then(() => setMounted(true));
     async function loadProjects() {
       try {
         const snap = await getDocs(collection(db, 'projects'));
@@ -115,6 +118,7 @@ export default function Page() {
         });
         // Alphabetical sort
         list.sort((a, b) => a.name.localeCompare(b.name));
+        globalProjectsCache = list;
         setProjects(list);
       } catch (err) {
         console.error('Error fetching projects:', err);

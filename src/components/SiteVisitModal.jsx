@@ -1,8 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 
 export default function SiteVisitModal() {
     const pathname = usePathname();
@@ -13,6 +11,7 @@ export default function SiteVisitModal() {
     const [email, setEmail] = useState('');
     const [estate, setEstate] = useState('');
     const [date, setDate] = useState('');
+    const [budget, setBudget] = useState('');
     const [message, setMessage] = useState('');
     
     // UI Pipeline states
@@ -26,48 +25,39 @@ export default function SiteVisitModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !phone || !email || !estate || !date) {
+        if (!name || !phone || !email || !estate || !date || !budget) {
             setError('Please fill out all required fields.');
             return;
         }
 
         setError('');
         setSubmitting(true);
+        setSuccess(false);
 
         try {
-            // 1. Submit lead details to Firestore 'leads' collection
-            const leadData = {
-                name,
-                phone,
-                email,
-                estate,
-                preferredDate: date,
-                message: message || '',
-                status: 'pending',
-                createdAt: new Date().toISOString()
-            };
+            const response = await fetch('/api/inquiry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'site-visit',
+                    name,
+                    phone,
+                    email,
+                    estate,
+                    preferredDate: date,
+                    budget,
+                    message: message || ''
+                })
+            });
 
-            await addDoc(collection(db, 'leads'), leadData);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to submit booking inquiry.');
+            }
 
             // 2. Transition state to success
             setSuccess(true);
-            setSubmitting(false);
-
-            // 3. Trigger native mailto client dispatch fallback alongside as instant backup
-            const mailtoSubject = encodeURIComponent(`Site Visit Request: ${name} - ${estate}`);
-            const mailtoBody = encodeURIComponent(
-                `Wisdom Kwati Smart City - Site Visit Request\n\n` +
-                `Name: ${name}\n` +
-                `Phone: ${phone}\n` +
-                `Email: ${email}\n` +
-                `Selected Estate: ${estate}\n` +
-                `Preferred Date: ${date}\n` +
-                `Message: ${message || 'None'}\n\n` +
-                `Submitted via smart portal.`
-            );
-
-            // Dispatch mailto intent trigger
-            window.location.href = `mailto:hello@wisdomkwatismartcity.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 
             // Reset form fields
             setName('');
@@ -75,9 +65,10 @@ export default function SiteVisitModal() {
             setEmail('');
             setEstate('');
             setDate('');
+            setBudget('');
             setMessage('');
 
-            // 4. Close the modal gracefully after showing success check
+            // 3. Close the modal gracefully after showing success check
             setTimeout(() => {
                 const overlay = document.getElementById('siteVisitModal');
                 if (overlay) {
@@ -89,7 +80,8 @@ export default function SiteVisitModal() {
 
         } catch (err) {
             console.error('Failed to submit site visit inquiry:', err);
-            setError('Inquiry submission failed. Please check your network and try again.');
+            setError(err.message || 'Inquiry submission failed. Please check your network and try again.');
+        } finally {
             setSubmitting(false);
         }
     };
@@ -97,11 +89,11 @@ export default function SiteVisitModal() {
     return (
         <>
             {/* Site Visit Modal */}
-            <div className="site-visit-modal-overlay" id="siteVisitModal">
+            <div className="site-visit-modal-overlay" id="siteVisitModal" role="dialog" aria-modal="true" aria-label="Request a site visit">
                 <div className="site-visit-modal-container">
                     <button className="site-visit-modal-close" aria-label="Close Modal">&times;</button>
                     <div className="form-card" style={{ boxShadow: 'none', border: 'none', padding: '40px', margin: '0', width: '100%' }}>
-                        <h3 className="form-title" style={{ marginBottom: '12px', fontSize: '24px' }}>Request a Site Visit</h3>
+                        <h2 className="form-title" style={{ marginBottom: '12px', fontSize: '24px' }}>Request a Site Visit</h2>
                         <p style={{ fontFamily: 'var(--font-main)', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '32px' }}>Fill out the details below and our team will get in touch to schedule your visit.</p>
                         
                         {error && (
@@ -140,18 +132,45 @@ export default function SiteVisitModal() {
                                 </div>
                             </div>
                             
-                            <div className="form-group">
-                                <label htmlFor="modal-email">EMAIL</label>
-                                <input 
-                                    type="email" 
-                                    id="modal-email" 
-                                    name="email" 
-                                    placeholder="jane@example.com" 
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    disabled={submitting || success}
-                                    required 
-                                />
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label htmlFor="modal-email">EMAIL</label>
+                                    <input 
+                                        type="email" 
+                                        id="modal-email" 
+                                        name="email" 
+                                        placeholder="jane@example.com" 
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        disabled={submitting || success}
+                                        required 
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="modal-budget">BUDGET RANGE</label>
+                                    <div style={{ position: 'relative', width: '100%' }}>
+                                        <select 
+                                            id="modal-budget" 
+                                            name="budget" 
+                                            required 
+                                            value={budget}
+                                            onChange={(e) => setBudget(e.target.value)}
+                                            disabled={submitting || success}
+                                            style={{ width: '100%', padding: '16px 20px', paddingRight: '45px', border: '1px solid var(--border)', borderRadius: '4px', backgroundColor: 'var(--bg-surface)', fontFamily: 'var(--font-main)', fontSize: '15px', color: 'var(--text-primary)', outline: 'none', transition: 'border-color 0.3s ease, background-color 0.3s ease', appearance: 'none', cursor: 'pointer' }}
+                                        >
+                                            <option value="" disabled>Select Budget Range</option>
+                                            <option value="Under ₦50M">Under ₦50M</option>
+                                            <option value="₦50M - ₦100M">₦50M - ₦100M</option>
+                                            <option value="₦100M - ₦250M">₦100M - ₦250M</option>
+                                            <option value="₦250M - ₦500M">₦250M - ₦500M</option>
+                                            <option value="₦500M - ₦1B">₦500M - ₦1B</option>
+                                            <option value="Above ₦1B">Above ₦1B</option>
+                                        </select>
+                                        <div style={{ position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="form-row">

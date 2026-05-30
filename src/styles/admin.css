@@ -457,6 +457,21 @@
   color: var(--admin-text-secondary);
 }
 
+.admin-inquiry-status.reviewing {
+  background-color: rgba(30, 143, 196, 0.1);
+  color: var(--admin-border-focus);
+}
+
+.admin-inquiry-status.hired {
+  background-color: rgba(187, 227, 57, 0.1);
+  color: var(--admin-accent);
+}
+
+.admin-inquiry-status.rejected {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--admin-danger);
+}
+
 /* Inquiries Panel details and actions */
 .inquiries-panel-layout {
   display: grid;

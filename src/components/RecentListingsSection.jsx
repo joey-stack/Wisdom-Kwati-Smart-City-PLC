@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import HouseTypeCard from './cards/HouseTypeCard';
 
@@ -20,12 +20,23 @@ export default function RecentListingsSection() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    getDocs(collection(db, 'houseTypes'))
+
+    const getGlobalCache = () => {
+      if (typeof window !== 'undefined' && window.wkscCache) return window.wkscCache;
+      return null;
+    };
+
+    getDocs(query(collection(db, 'houseTypes'), limit(15)))
       .then(snap => {
         const list = [];
+        const cache = getGlobalCache();
         snap.forEach(doc => {
           const d = doc.data();
           if (!d.classType) return; // skip shell documents
+
+          if (cache) {
+            cache.houseTypes[doc.id] = d;
+          }
 
           // Parse createdAt supporting both Timestamp objects and ISO strings
           let createdAtDate = new Date(0);

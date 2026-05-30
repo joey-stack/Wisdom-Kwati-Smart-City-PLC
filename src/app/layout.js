@@ -2,8 +2,11 @@ import { Outfit, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import SiteVisitModal from "../components/SiteVisitModal";
-import ClientScripts from "../components/ClientScripts";
+import dynamic from "next/dynamic";
+
+const SiteVisitModal = dynamic(() => import("../components/SiteVisitModal"));
+const ConsultationModal = dynamic(() => import("../components/ConsultationModal"));
+const ClientScripts = dynamic(() => import("../components/ClientScripts"));
 import FontAwesomeLoader from "../components/FontAwesomeLoader";
 import BraveShieldFix from "../components/BraveShieldFix";
 
@@ -12,7 +15,6 @@ const outfit = Outfit({
   variable: "--font-outfit",
   weight: ["400", "600", "700"],
   display: "swap",
-  preload: false,
 });
 
 const inter = Inter({
@@ -20,7 +22,6 @@ const inter = Inter({
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  preload: false,
 });
 
 const montserrat = Montserrat({
@@ -28,7 +29,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  preload: false,
 });
 
 export const metadata = {
@@ -89,11 +89,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
-        {/* Warm up CDN connections before the browser discovers image URLs in markup */}
-        <link rel="preconnect" href="https://images.weserv.nl" />
-        <link rel="preconnect" href="https://lh3.googleusercontent.com" crossOrigin="anonymous" />
-        {/* Preload the LCP hero image */}
-        <link rel="preload" as="image" href="https://images.weserv.nl/?url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi" />
+        {/* DNS-prefetch for image CDNs used on inner pages (non-critical) */}
+        <link rel="dns-prefetch" href="https://images.weserv.nl" />
+        <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />
         <script
           suppressHydrationWarning
           type="application/ld+json"
@@ -129,8 +127,11 @@ export default function RootLayout({ children }) {
 
         {children}
 
-        <Footer />
+        <div className="defer-render">
+          <Footer />
+        </div>
         <SiteVisitModal />
+        <ConsultationModal />
         <ClientScripts />
         {/* Font Awesome loads asynchronously — not on the critical path */}
         <FontAwesomeLoader />

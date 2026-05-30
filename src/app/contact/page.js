@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import ContactForm from '@/components/ContactForm';
+
+export const metadata = {
+  title: 'Contact Us',
+  description: 'Get in touch with Wisdom Kwati Smart City PLC. Visit our offices in Abuja, Lagos, Yola, and Port Harcourt, or reach us via phone and email.',
+  alternates: { canonical: '/contact' },
+};
 
 export default function Page() {
     return (
@@ -29,41 +36,12 @@ export default function Page() {
                         <div className="form-card">
                             <h3 className="form-title">We're just a form away—send us your question, and we'll be happy to help!</h3>
                             
-                            <form action="mailto:hello@wisdomkwatismartcity.com" method="post" encType="text/plain" className="contact-form">
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="name">NAME</label>
-                                        <input type="text" id="name" name="name" placeholder="Jane Smith" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="phone">PHONE</label>
-                                        <input type="tel" id="phone" name="phone" placeholder="+234 810 001 5555" />
-                                    </div>
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label htmlFor="email">EMAIL</label>
-                                    <input type="email" id="email" name="email" placeholder="jane@example.com" required />
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label htmlFor="message">MESSAGE</label>
-                                    <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
-                                </div>
-
-                                <button type="submit" className="submit-btn">
-                                    <div className="flip-text">
-                                        <span>SEND MESSAGE</span>
-                                        <span aria-hidden="true">SEND MESSAGE</span>
-                                    </div>
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </button>
-                            </form>
+                            <ContactForm buttonClassName="submit-btn" defaultPhonePlaceholder="+234 810 001 5555" />
                         </div>
                     </div>
                     <div className="map-column">
                         <div className="map-wrapper">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.4913346513365!2d7.408233300000001!3d9.1009167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7516d2524d77%3A0x6b4f7a22eb2877a!2s10%20Dutse%20St%2C%20War%20College%2C%20Gwarinpa%2C%20Abuja%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1713710729729!5m2!1sen!2sng" width="100%" height="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.4913346513365!2d7.408233300000001!3d9.1009167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7516d2524d77%3A0x6b4f7a22eb2877a!2s10%20Dutse%20St%2C%20War%20College%2C%20Gwarinpa%2C%20Abuja%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1713710729729!5m2!1sen!2sng" title="Google Maps showing Wisdom Kwati Smart City Abuja office location" width="100%" height="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -119,12 +97,12 @@ export default function Page() {
                 <div className="social-container">
                     <span className="social-label">Social Media:</span>
                     <div className="social-strip">
-                        <a href="#" className="social-link"><i className="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" className="social-link"><i className="fa-brands fa-x-twitter"></i></a>
-                        <a href="#" className="social-link"><i className="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" className="social-link"><i className="fa-brands fa-youtube"></i></a>
-                        <a href="#" className="social-link"><i className="fa-brands fa-instagram"></i></a>
-                        <a href="#" className="social-link"><i className="fa-brands fa-tiktok"></i></a>
+                        <a href="#" className="social-link" aria-label="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" className="social-link" aria-label="X (Twitter)"><i className="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" className="social-link" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" className="social-link" aria-label="YouTube"><i className="fa-brands fa-youtube"></i></a>
+                        <a href="#" className="social-link" aria-label="Instagram"><i className="fa-brands fa-instagram"></i></a>
+                        <a href="#" className="social-link" aria-label="TikTok"><i className="fa-brands fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>

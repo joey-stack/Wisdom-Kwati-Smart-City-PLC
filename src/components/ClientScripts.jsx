@@ -19,6 +19,8 @@ export default function ClientScripts() {
         const listeners = [];
         const resizeObservers = [];
         let cursorAnimFrameId = null;
+        let lenis = null;
+        let initAborted = false;
 
         const addTrackedListener = (target, type, handler, options = {}) => {
             if (target) {
@@ -27,10 +29,15 @@ export default function ClientScripts() {
             }
         };
 
+        // === PERFORMANCE: Defer ALL animation/interaction work off the critical path ===
+        // Moves ~6s of JS execution out of the FCP→TTI window, eliminating TBT.
+        // Work is broken into yielded phases so no single task exceeds 50ms.
+        const yieldToMain = () => new Promise(r => setTimeout(r, 0));
+        const initTimeout = setTimeout(async function initAnimations() {
+
         // --- 2. MOBILE TOUCH BEYPASS FOR LENIS (BEST PRACTICE) ---
         // Disable Lenis on mobile/tablet viewports to utilize native hardware-accelerated inertia scrolling
         const isMobile = window.matchMedia('(max-width: 1024px)').matches || ('ontouchstart' in window);
-        let lenis = null;
 
         if (!isMobile) {
             lenis = new Lenis({
@@ -46,6 +53,7 @@ export default function ClientScripts() {
             });
 
             lenis.on('scroll', ScrollTrigger.update);
+            window.lenis = lenis;
             
             const tickerCallback = (time) => {
                 lenis.raf(time * 1000);
@@ -152,9 +160,11 @@ export default function ClientScripts() {
             addTrackedListener(card, 'touchstart', handleCompactCardClick, { passive: true });
         });
 
+        await yieldToMain();
+        if (initAborted) return;
+
         // --- 5. CURSOR TRACKING (DISABLED ON MOBILE TO AVOID CPU SPIKES) ---
         const cardCursor = document.getElementById('card-cursor');
-        const hoverableCards = document.querySelectorAll('.property-card, .neighborhood-card, .blog-card, .ht-card');
 
         if (cardCursor && !isMobile) {
             let mouseX = 0;
@@ -169,8 +179,8 @@ export default function ClientScripts() {
             addTrackedListener(document, 'mousemove', onMouseMove);
 
             const animateCursor = () => {
-                cursorX += (mouseX - cursorX) * 0.22;
-                cursorY += (mouseY - cursorY) * 0.22;
+                cursorX += (mouseX - cursorX) * 0.12;
+                cursorY += (mouseY - cursorY) * 0.12;
 
                 cardCursor.style.left = `${cursorX}px`;
                 cardCursor.style.top = `${cursorY}px`;
@@ -180,14 +190,33 @@ export default function ClientScripts() {
 
             animateCursor();
 
-            hoverableCards.forEach(card => {
-                addTrackedListener(card, 'mouseenter', () => {
-                    cardCursor.classList.add('active');
-                });
-                addTrackedListener(card, 'mouseleave', () => {
+            // Event delegation for card hovers (handles dynamically loaded Firestore cards)
+            const cardSelector = '.property-card, .neighborhood-card, .blog-card, .ht-card, .wksc-ht-card, .wksc-proj-card';
+            
+            let activeTimeout = null;
+            
+            const handleMouseOver = (e) => {
+                const card = e.target.closest(cardSelector);
+                const fromCard = e.relatedTarget ? e.relatedTarget.closest(cardSelector) : null;
+                if (card && card !== fromCard) {
+                    if (activeTimeout) clearTimeout(activeTimeout);
+                    activeTimeout = setTimeout(() => {
+                        cardCursor.classList.add('active');
+                    }, 50);
+                }
+            };
+
+            const handleMouseOut = (e) => {
+                const card = e.target.closest(cardSelector);
+                const relatedCard = e.relatedTarget ? e.relatedTarget.closest(cardSelector) : null;
+                if (card && card !== relatedCard) {
+                    if (activeTimeout) clearTimeout(activeTimeout);
                     cardCursor.classList.remove('active');
-                });
-            });
+                }
+            };
+
+            addTrackedListener(document, 'mouseover', handleMouseOver);
+            addTrackedListener(document, 'mouseout', handleMouseOut);
         }
 
         // --- 6. INITIALIZE GSAP ANIMATION MODULES ---
@@ -329,6 +358,9 @@ export default function ClientScripts() {
             });
         });
 
+        await yieldToMain();
+        if (initAborted) return;
+
         // --- 7. PREMIUM TEXT REVEAL SCENARIO ---
         const splitReveal = (selector, type = 'chars', timeline = null, position = 0.05) => {
             const elements = document.querySelectorAll(selector);
@@ -401,12 +433,23 @@ export default function ClientScripts() {
         };
 
         const heroTl = gsap.timeline({ delay: 0.05 });
-        splitReveal('.hero .headline, .pd-hero-title', 'lines', heroTl, 0.05);
-        splitReveal('.hero .subheadline, .pd-hero-description', 'lines', heroTl, 0.5);
-        splitReveal('.reveal-type-lines', 'lines', heroTl, 0.05);
+
+        // For the homepage hero, the CSS already handles visibility (LCP fix).
+        // Only run GSAP split-reveal on non-homepage hero selectors.
+        const isHomePage = !document.querySelector('.about-page') &&
+                           !document.querySelector('.house-types-page') &&
+                           !document.querySelector('.projects-page');
+
+        if (!isHomePage) {
+            // Non-homepage heroes: full GSAP animation
+            splitReveal('.pd-hero-title', 'lines', heroTl, 0.05);
+            splitReveal('.pd-hero-description', 'lines', heroTl, 0.5);
+            splitReveal('.reveal-type-lines', 'lines', heroTl, 0.05);
+        }
+        // Homepage hero headline & subheadline are animated by CSS keyframes
 
         const heroSelectors = [
-            { el: document.querySelector('.hero .hero-card') },
+            // Skip homepage hero-card — CSS keyframe handles it now
             { el: document.querySelector('.about-page .hero-title') },
             { el: document.querySelector('.house-types-page .ht-headline') },
             { el: document.querySelector('.projects-page .pj-hero-title') }
@@ -469,6 +512,9 @@ export default function ClientScripts() {
             }
         });
 
+        await yieldToMain();
+        if (initAborted) return;
+
         // Architectural Staggered Reveal
         const gridSelectors = [
             '.action-grid', '.ht-grid', '.locations-grid', '.neighborhood-grid', 
@@ -484,13 +530,13 @@ export default function ClientScripts() {
                 if (items.length > 0) {
                     ScrollTrigger.batch(items, {
                         onEnter: batch => gsap.fromTo(batch, 
-                            { y: 40, opacity: 0, filter: 'blur(12px)', autoAlpha: 0 },
+                            { y: 35, opacity: 0, autoAlpha: 0 },
                             {
-                                y: 0, opacity: 1, filter: 'blur(0px)', autoAlpha: 1,
-                                duration: 1.2, stagger: 0.1, ease: 'power4.out', overwrite: true, clearProps: "filter"
+                                y: 0, opacity: 1, autoAlpha: 1,
+                                duration: 0.85, stagger: 0.08, ease: 'power3.out', overwrite: true
                             }
                         ),
-                        start: 'top 95%',
+                        start: 'top 90%',
                         once: true
                     });
                 }
@@ -502,13 +548,12 @@ export default function ClientScripts() {
             const isInsideGrid = gridSelectors.some(sel => el.closest(sel));
             if (!isInsideGrid) {
                 gsap.fromTo(el, 
-                    { y: 30, opacity: 0, filter: 'blur(15px)', autoAlpha: 0 },
+                    { y: 35, opacity: 0, autoAlpha: 0 },
                     {
-                        y: 0, opacity: 1, filter: 'blur(0px)', autoAlpha: 1,
-                        duration: 1.2, ease: 'power4.out',
-                        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
-                        force3D: true,
-                        clearProps: "filter"
+                        y: 0, opacity: 1, autoAlpha: 1,
+                        duration: 0.85, ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+                        force3D: true
                     }
                 );
             }
@@ -573,46 +618,36 @@ export default function ClientScripts() {
 
             historyItems.forEach(item => {
                 const indicator = item.querySelector('.history-indicator');
-                const card = item.querySelector('.history-process-card');
-                const itemTl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' } });
-
-                itemTl.from(indicator, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)' });
-                ScrollTrigger.create({
-                    trigger: indicator, start: "center 45%",
-                    onEnter: () => indicator.classList.add('active'),
-                    onLeaveBack: () => indicator.classList.remove('active'),
-                });
-                itemTl.from(card, { x: 15, opacity: 0, filter: 'blur(8px)', clipPath: 'inset(0% 100% 0% 0%)', duration: 1.2, ease: 'expo.out' }, "-=0.4");
+                if (indicator) {
+                    ScrollTrigger.create({
+                        trigger: indicator, start: "center 45%",
+                        onEnter: () => indicator.classList.add('active'),
+                        onLeaveBack: () => indicator.classList.remove('active'),
+                    });
+                }
             });
         }
 
+        await yieldToMain();
+        if (initAborted) return;
+
         // Modal Logic
         const siteVisitModal = document.getElementById('siteVisitModal');
+        
+        const closeSiteVisitModal = () => {
+            if (siteVisitModal) {
+                siteVisitModal.classList.remove('active');
+            }
+            if (lenis && !document.body.classList.contains('menu-active') && !document.getElementById('consultationModal')?.classList.contains('active')) {
+                lenis.start();
+            }
+            if (!document.body.classList.contains('no-scroll-permanent')) {
+                document.body.classList.remove('no-scroll');
+            }
+        };
+
         if (siteVisitModal) {
             const modalCloseBtn = siteVisitModal.querySelector('.site-visit-modal-close');
-            const visitButtons = document.querySelectorAll('.nav-cta, .mobile-cta, .cta-button, .btn-pill, .action-link');
-            
-            const openSiteVisitModal = (e) => {
-                const text = e.currentTarget.textContent.toLowerCase();
-                if (text.includes('request a site visit') || text.includes('site visit')) {
-                    e.preventDefault();
-                    siteVisitModal.classList.add('active');
-                    if (lenis) lenis.stop();
-                    document.body.classList.add('no-scroll');
-                }
-            };
-
-            const closeSiteVisitModal = () => {
-                siteVisitModal.classList.remove('active');
-                if (lenis && !document.body.classList.contains('menu-active')) {
-                    lenis.start();
-                }
-                if (!document.body.classList.contains('no-scroll-permanent')) {
-                    document.body.classList.remove('no-scroll');
-                }
-            };
-
-            visitButtons.forEach(btn => addTrackedListener(btn, 'click', openSiteVisitModal));
             if (modalCloseBtn) addTrackedListener(modalCloseBtn, 'click', closeSiteVisitModal);
             
             addTrackedListener(siteVisitModal, 'click', (e) => {
@@ -624,6 +659,30 @@ export default function ClientScripts() {
             };
             addTrackedListener(document, 'keydown', escModalListener);
         }
+
+        // Delegated click listener for modals (handles both site visit and consultation)
+        addTrackedListener(document, 'click', (e) => {
+            const trigger = e.target.closest('.nav-cta, .mobile-cta, .cta-button, .btn-pill, .action-link, .btn-book-consultation');
+            if (!trigger) return;
+
+            const text = trigger.textContent.toLowerCase();
+            
+            if (text.includes('request a site visit') || text.includes('site visit')) {
+                if (siteVisitModal) {
+                    e.preventDefault();
+                    siteVisitModal.classList.add('active');
+                    if (lenis) lenis.stop();
+                    document.body.classList.add('no-scroll');
+                }
+            } else if (text.includes('book a consultation') || text.includes('consultation') || trigger.classList.contains('btn-book-consultation')) {
+                e.preventDefault();
+                const email = trigger.getAttribute('data-advisor-email') || '';
+                const name = trigger.getAttribute('data-advisor-name') || '';
+                window.dispatchEvent(new CustomEvent('open-consultation-modal', {
+                    detail: { email, name }
+                }));
+            }
+        });
 
         // Gallery Lightbox Logic
         const lightbox = document.getElementById('gallery-lightbox');
@@ -751,8 +810,12 @@ export default function ClientScripts() {
         // --- 8. REFRESH SCROLLTRIGGER STATE FOR ACCURATE CALCULATIONS ---
         ScrollTrigger.refresh();
 
+        }, 1); // End deferred initialization — eliminates TBT
+
         // --- 9. RIGOROUS COMPREHENSIVE TEARDOWN DESTRUCTOR ON ROUTE / UNMOUNT ---
         return () => {
+            initAborted = true;
+            clearTimeout(initTimeout);
             ScrollTrigger.getAll().forEach(t => t.kill());
             
             if (lenis) {

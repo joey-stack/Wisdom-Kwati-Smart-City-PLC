@@ -4,11 +4,16 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
+// Global in-memory cache for inquiries list
+let globalInquiriesCache = null;
+
 export default function AdminInquiriesPage() {
-  const [inquiries, setInquiries] = useState([]);
-  const [selectedInquiry, setSelectedInquiry] = useState(null);
+  const [inquiries, setInquiries] = useState(() => globalInquiriesCache || []);
+  const [selectedInquiryId, setSelectedInquiryId] = useState(() => globalInquiriesCache?.[0]?.id || null);
   const [filter, setFilter] = useState('all'); // 'all' | 'pending' | 'contacted' | 'archived'
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !globalInquiriesCache);
+
+  const selectedInquiry = inquiries.find(lead => lead.id === selectedInquiryId) || inquiries[0] || null;
 
   // Real-time listener for leads collection
   useEffect(() => {
@@ -19,16 +24,14 @@ export default function AdminInquiriesPage() {
         id: doc.id,
         ...doc.data()
       }));
+      globalInquiriesCache = leadsList;
       setInquiries(leadsList);
       
-      // Auto-select the first lead if none is selected
-      if (leadsList.length > 0 && !selectedInquiry) {
-        setSelectedInquiry(leadsList[0]);
-      } else if (selectedInquiry) {
-        // Keep the selected inquiry updated in real-time
-        const updated = leadsList.find(lead => lead.id === selectedInquiry.id);
-        if (updated) setSelectedInquiry(updated);
-      }
+      // Auto-select first ID if none is set
+      setSelectedInquiryId(prevId => {
+        if (!prevId && leadsList.length > 0) return leadsList[0].id;
+        return prevId;
+      });
       setLoading(false);
     }, (err) => {
       console.error('Error fetching leads:', err);
@@ -36,7 +39,7 @@ export default function AdminInquiriesPage() {
     });
 
     return () => unsubscribe();
-  }, [selectedInquiry]);
+  }, []);
 
   const updateStatus = async (inquiryId, newStatus) => {
     try {
@@ -101,10 +104,10 @@ export default function AdminInquiriesPage() {
         {/* Left Side: Roster Listing */}
         <div className="admin-section-card" style={{ padding: '20px' }}>
           <div className="admin-inquiry-list">
-            <div className="admin-inquiry-row header" style={{ gridTemplateColumns: '1.2fr 1.2fr 1fr 0.8fr' }}>
+            <div className="admin-inquiry-row header" style={{ gridTemplateColumns: '1.2fr 1.2fr 1.5fr 0.8fr' }}>
               <span>Date</span>
               <span>Sender</span>
-              <span>Estate Interest</span>
+              <span>Estate / Service</span>
               <span>Status</span>
             </div>
 
@@ -124,17 +127,19 @@ export default function AdminInquiriesPage() {
                     key={idx}
                     className={`admin-inquiry-row`} 
                     style={{ 
-                      gridTemplateColumns: '1.2fr 1.2fr 1fr 0.8fr',
+                      gridTemplateColumns: '1.2fr 1.2fr 1.5fr 0.8fr',
                       cursor: 'pointer',
                       backgroundColor: isSelected ? 'rgba(30, 143, 196, 0.08)' : 'transparent',
                       borderLeft: isSelected ? '3px solid var(--admin-border-focus)' : 'none',
                       paddingLeft: isSelected ? '13px' : '16px'
                     }}
-                    onClick={() => setSelectedInquiry(inquiry)}
+                    onClick={() => setSelectedInquiryId(inquiry.id)}
                   >
                     <span className="admin-inquiry-date">{dateStr}</span>
                     <span style={{ fontWeight: 600 }}>{inquiry.name}</span>
-                    <span style={{ color: 'var(--admin-accent)' }}>{inquiry.estate || 'General'}</span>
+                    <span style={{ color: 'var(--admin-accent)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {inquiry.serviceInterest || inquiry.estate || 'General'}
+                    </span>
                     <span>
                       <span className={`admin-inquiry-status ${inquiry.status || 'pending'}`}>
                         {inquiry.status || 'pending'}
@@ -176,12 +181,60 @@ export default function AdminInquiriesPage() {
                   </a>
                 </div>
 
-                <div className="inquiry-detail-field">
-                  <div className="inquiry-detail-label">Estates / District Interest</div>
-                  <div className="inquiry-detail-value" style={{ fontWeight: 600, color: 'var(--admin-accent)' }}>
-                    {selectedInquiry.estate || 'General Site Visit / Inquiry'}
+                {selectedInquiry.budget && (
+                  <div className="inquiry-detail-field">
+                    <div className="inquiry-detail-label">Budget Range</div>
+                    <div className="inquiry-detail-value" style={{ fontWeight: 600 }}>
+                      {selectedInquiry.budget}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {selectedInquiry.type === 'consultation' ? (
+                  <>
+                    <div className="inquiry-detail-field">
+                      <div className="inquiry-detail-label">Service Interest</div>
+                      <div className="inquiry-detail-value" style={{ fontWeight: 600, color: 'var(--admin-accent)' }}>
+                        {selectedInquiry.serviceInterest || 'General Consultation'}
+                      </div>
+                    </div>
+
+                    <div className="inquiry-detail-field">
+                      <div className="inquiry-detail-label">Preferred Method</div>
+                      <div className="inquiry-detail-value" style={{ fontWeight: 600 }}>
+                        {selectedInquiry.consultationMethod || 'N/A'}
+                      </div>
+                    </div>
+
+                    <div className="inquiry-detail-field">
+                      <div className="inquiry-detail-label">Preferred Time Slot</div>
+                      <div className="inquiry-detail-value" style={{ fontWeight: 600 }}>
+                        {selectedInquiry.preferredTime || 'N/A'}
+                      </div>
+                    </div>
+
+                    {(selectedInquiry.advisorName || selectedInquiry.advisorEmail) && (
+                      <div className="inquiry-detail-field">
+                        <div className="inquiry-detail-label">Assigned Advisor</div>
+                        <div className="inquiry-detail-value" style={{ fontSize: '13px' }}>
+                          {selectedInquiry.advisorName || 'N/A'}{' '}
+                          {selectedInquiry.advisorEmail ? (
+                            <a href={`mailto:${selectedInquiry.advisorEmail}`} style={{ color: 'var(--admin-border-focus)', textDecoration: 'underline' }}>
+                              ({selectedInquiry.advisorEmail})
+                            </a>
+                          ) : ''}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="inquiry-detail-field">
+                    <div className="inquiry-detail-label">Estates / District Interest</div>
+                    <div className="inquiry-detail-value" style={{ fontWeight: 600, color: 'var(--admin-accent)' }}>
+                      {selectedInquiry.estate || 'General Site Visit / Inquiry'}
+                    </div>
+                  </div>
+                )}
 
                 {selectedInquiry.preferredDate && (
                   <div className="inquiry-detail-field">

@@ -2,11 +2,13 @@
 // Only the dynamic client islands import Firebase:
 //   HeroVideo, NeighborhoodSection, RecentListingsSection, RecentBlogsSection
 import Link from 'next/link';
+import Image from 'next/image';
 import '../styles/blogs.css';
 import HeroVideo from '../components/HeroVideo';
 import NeighborhoodSection from '../components/NeighborhoodSection';
 import RecentListingsSection from '../components/RecentListingsSection';
 import RecentBlogsSection from '../components/RecentBlogsSection';
+import ContactForm from '../components/ContactForm';
 
 
 export default function Page() {
@@ -16,7 +18,7 @@ export default function Page() {
             
     
 
-    <header className="hero">
+    <div className="hero" role="banner">
         {/* Background Video – client island (needs useRef + play()) */}
         <HeroVideo />
         {/*  Background Grid Overlay  */}
@@ -42,7 +44,7 @@ export default function Page() {
             </div>
         </div>
         
-    </header>
+    </div>
 
     {/*  Who We Are Section  */}
     <section id="about" className="who-we-are">
@@ -58,7 +60,7 @@ export default function Page() {
                 <p className="who-text reveal-on-scroll">
                     Founded in 2019, WKSC is more than a real estate developer. We are ecosystem builders on a mission to deliver 1 million smart homes by 2035. By integrating IoT-ready infrastructure, solar grids, and water treatment plants from the ground up, we ensure every community is ready for the future.
                 </p>
-                <a href="#about-full" className="btn-pill reveal-on-scroll">
+                <a href="/about" className="btn-pill reveal-on-scroll">
                     <div className="flip-text">
                         <span>LEARN MORE</span>
                         <span aria-hidden="true">LEARN MORE</span>
@@ -223,7 +225,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper reveal-on-scroll">
                         <div className="services-image-inner">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>
@@ -325,7 +327,7 @@ export default function Page() {
                 <div className="carousel-track">
                     {/*  Card 1: Image Variant (Chief Dr. Chidi Okafor)  */}
                     <div className="review-card image-card">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="Chief Dr. Chidi Okafor Review" referrerPolicy="no-referrer" />
+                        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="Chief Dr. Chidi Okafor Review" referrerPolicy="no-referrer" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Correcting a continent, one smart home at a time. WKSC is building the infrastructure we've always deserved."</blockquote>
                             <div className="reviewer-identity-container">
@@ -334,7 +336,7 @@ export default function Page() {
                                     <span className="card-meta">HOME OWNER, ABUJA</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Mabushi District" referrerPolicy="no-referrer" />
+                                    <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200" alt="Chief Dr. Chidi Okafor" referrerPolicy="no-referrer" />
                                 </div>
                             </div>
                         </div>
@@ -350,14 +352,14 @@ export default function Page() {
                                 <span className="card-meta">EPE SMART CITY, LAGOS</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="The Adewale Family" referrerPolicy="no-referrer" />
+                                <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="The Adewale Family" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                     </div>
 
                     {/*  Card 3: Image Variant (Engr. Tunde Olayinka)  */}
                     <div className="review-card image-card">
-                        <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka Review" referrerPolicy="no-referrer" />
+                        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka Review" referrerPolicy="no-referrer" />
                         <div className="card-overlay">
                             <blockquote className="card-quote">"Finally, a smart ecosystem that actually works. The IoT integration in Port Harcourt is world-class."</blockquote>
                             <div className="reviewer-identity-container">
@@ -366,7 +368,7 @@ export default function Page() {
                                     <span className="card-meta">PORT HARCOURT</span>
                                 </div>
                                 <div className="reviewer-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka" referrerPolicy="no-referrer" />
+                                    <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="Engr. Tunde Olayinka" referrerPolicy="no-referrer" />
                                 </div>
                             </div>
                         </div>
@@ -382,7 +384,7 @@ export default function Page() {
                                 <span className="card-meta">HOME OWNER, YOLA</span>
                             </div>
                             <div className="reviewer-avatar">
-                                <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Katampe Extension" referrerPolicy="no-referrer" />
+                                <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1xYCnvanRHqSsdCeheY75jtAM5QS3AS0n%26sz=w1200" alt="Amina Bello" referrerPolicy="no-referrer" />
                             </div>
                         </div>
                     </div>
@@ -417,7 +419,7 @@ export default function Page() {
                 <div className="process-item" data-step="1">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Search & Explore" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Search & Explore" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -444,7 +446,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="2">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://lh3.googleusercontent.com/u/0/d/1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN" alt="Book a Tour" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK%26sz=w1200" alt="Book a Tour" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -471,7 +473,7 @@ export default function Page() {
                 <div className="process-item" data-step="3">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Make Your Move" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Make Your Move" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -498,7 +500,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="4">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Close & Celebrate" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Close & Celebrate" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -529,13 +531,13 @@ export default function Page() {
          ========================================  */}
     <section className="blog-section" id="blog">
         <div className="blog-container">
-            <header className="blog-header sidebar-layout">
+            <div className="blog-header sidebar-layout">
                 <div className="blog-label">
                     <div className="label-square"></div>
                     BLOGS
                 </div>
                 <h2 className="blog-headline">News, stories, and inspiration for better living every day</h2>
-            </header>
+            </div>
 
             <RecentBlogsSection />
 
@@ -572,36 +574,7 @@ export default function Page() {
                     <div className="contact-card">
                         <h3 className="contact-title">We're just a form away—send us your question, and we'll be happy to help!</h3>
                         
-                        <form action="mailto:info@wksc.com.ng" method="post" encType="text/plain" className="contact-form">
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <label htmlFor="name">NAME</label>
-                                    <input type="text" id="name" name="name" placeholder="Jane Smith" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="phone">PHONE</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" />
-                                </div>
-                            </div>
-                            
-                            <div className="form-group">
-                                <label htmlFor="email">EMAIL</label>
-                                <input type="email" id="email" name="email" placeholder="jane@framer.com" required />
-                            </div>
-                            
-                            <div className="form-group">
-                                <label htmlFor="message">MESSAGE</label>
-                                <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
-                            </div>
-                            
-                            <button type="submit" className="form-submit-btn">
-                                <div className="flip-text">
-                                    <span>SEND MESSAGE</span>
-                                    <span aria-hidden="true">SEND MESSAGE</span>
-                                </div>
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </button>
-                        </form>
+                        <ContactForm buttonClassName="form-submit-btn" defaultPhonePlaceholder="(123) 456-7890" />
                     </div>
                 </div>
 

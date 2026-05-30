@@ -71,6 +71,7 @@ export default function HouseTypeCard({ id, name, tagline, beds, baths, size, im
 
   useEffect(() => {
     let timer;
+    const currentRef = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -82,22 +83,22 @@ export default function HouseTypeCard({ id, name, tagline, beds, baths, size, im
       { threshold: 0.01, rootMargin: '50px 0px 50px 0px' }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     // Failsafe backup timeout: force reveal after 250ms in case observer fails to trigger due to smooth scrolling or mounting delays
     timer = setTimeout(() => {
       setIsVisible(true);
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     }, 250);
 
     return () => {
       if (timer) clearTimeout(timer);
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -111,28 +112,21 @@ export default function HouseTypeCard({ id, name, tagline, beds, baths, size, im
       className={`wksc-ht-card wksc-reveal ${isVisible ? 'is-visible' : ''}`}
     >
 
-      {/* ─── Image with Hover Overlay ─── */}
+      {/* ─── Image ─── */}
       <div className="wksc-ht-card__image-wrapper">
         <div className="wksc-ht-card__image">
           <img
             loading="lazy"
             src={image}
             alt={name}
+            width="800"
+            height="500"
             referrerPolicy="no-referrer"
             onError={e => {
               e.target.onerror = null;
               e.target.src = 'https://placehold.co/800x600/eaeaea/999?text=Smart+Villa';
             }}
           />
-          {/* Hover Circle Overlay */}
-          <div className="wksc-ht-card__hover-overlay">
-            <div className="wksc-ht-view-circle">
-              <span>VIEW</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
 

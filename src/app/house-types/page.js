@@ -5,9 +5,36 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import HouseTypeCard from '@/components/cards/HouseTypeCard';
 
+// Global in-memory cache for house types
+let globalHouseTypesCache = null;
+
+const getGlobalCache = () => {
+  if (typeof window !== 'undefined') {
+    if (!window.wkscCache) {
+      window.wkscCache = {
+        houseTypes: {},
+        projects: {},
+        advisors: {},
+        parentProjects: {},
+        relatedHouseTypes: {},
+        otherNeighborhoodsCache: null
+      };
+    }
+    return window.wkscCache;
+  }
+  return {
+    houseTypes: {},
+    projects: {},
+    advisors: {},
+    parentProjects: {},
+    relatedHouseTypes: {},
+    otherNeighborhoodsCache: null
+  };
+};
+
 export default function Page() {
-  const [houseTypes, setHouseTypes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [houseTypes, setHouseTypes] = useState(() => globalHouseTypesCache || []);
+  const [loading, setLoading] = useState(() => !globalHouseTypesCache);
   const [mounted, setMounted] = useState(false);
 
   /* ── Filter state ── */
@@ -17,7 +44,7 @@ export default function Page() {
   const [filterType, setFilterType] = useState('');
 
   useEffect(() => {
-    setMounted(true);
+    Promise.resolve().then(() => setMounted(true));
     async function loadHouseTypes() {
       try {
         const snap = await getDocs(collection(db, 'houseTypes'));
@@ -26,6 +53,10 @@ export default function Page() {
           const d = doc.data();
           // Only include documents that have at least a classType (name)
           if (!d.classType) return;
+          
+          // Populate the global cache for instant route navigation
+          getGlobalCache().houseTypes[doc.id] = d;
+
           list.push({
             id: doc.id,
             name: d.classType,
@@ -42,6 +73,7 @@ export default function Page() {
         });
         // Sort alphabetically by name
         list.sort((a, b) => a.name.localeCompare(b.name));
+        globalHouseTypesCache = list;
         setHouseTypes(list);
       } catch (err) {
         console.error('Error fetching house types:', err);

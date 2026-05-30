@@ -24,7 +24,7 @@ export default function Header() {
             <ul className="nav-links">
                 <li><a href="/about"><div className="flip-text"><span>About</span><span aria-hidden="true">About</span></div></a></li>
                 <li className="nav-item has-dropdown">
-                    <a href="/projects" className="projects-trigger">
+                    <a href="/projects" className="projects-trigger" aria-haspopup="true" aria-expanded="false">
                         <div className="flip-text">
                             <span>Projects</span>
                             <span aria-hidden="true">Projects</span>
@@ -34,7 +34,7 @@ export default function Header() {
                 </li>
 
                 <li className="nav-item has-dropdown">
-                    <a href="/house-types" className="house-trigger">
+                    <a href="/house-types" className="house-trigger" aria-haspopup="true" aria-expanded="false">
                         <div className="flip-text">
                             <span>House Types</span>
                             <span aria-hidden="true">House Types</span>
@@ -54,7 +54,7 @@ export default function Header() {
             </button>
 
             {/*  Mobile Menu Toggle  */}
-            <button className="menu-toggle" aria-label="Toggle Menu">
+            <button className="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
                 <span className="hamburger-line line-1"></span>
                 <span className="hamburger-line line-2"></span>
             </button>
@@ -219,7 +219,7 @@ export default function Header() {
     </nav>
 
     {/* Mobile Menu Overlay */}
-    <div className="mobile-menu-overlay">
+    <div className="mobile-menu-overlay" role="dialog" aria-label="Mobile navigation menu">
         <button className="menu-close" aria-label="Close Menu">&times;</button>
         <div className="mobile-menu-content">
             <ul className="mobile-nav-links">

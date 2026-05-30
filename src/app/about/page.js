@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export default function Page() {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const careerGridRef = useRef(null);
 
     useEffect(() => {
         async function fetchJobs() {
@@ -27,6 +29,21 @@ export default function Page() {
         }
         fetchJobs();
     }, []);
+
+    // Make career cards visible after async load — they can't use reveal-on-scroll
+    // because GSAP ScrollTrigger runs once at page load before these elements exist
+    useEffect(() => {
+        if (jobs.length === 0 || !careerGridRef.current) return;
+        const cards = careerGridRef.current.querySelectorAll('.career-card');
+        requestAnimationFrame(() => {
+            cards.forEach((card, i) => {
+                card.style.transition = `opacity 0.6s ease ${i * 0.08}s, transform 0.6s ease ${i * 0.08}s`;
+                card.style.opacity = '1';
+                card.style.visibility = 'visible';
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    }, [jobs]);
 
     const getSalaryIcon = (salary = '') => {
         if (salary.toLowerCase().includes('commission')) return 'fa-solid fa-percent';
@@ -66,7 +83,7 @@ export default function Page() {
         {/*  About Hero Section  */}
         <section className="about-hero hero">
             <div className="hero-bg-container hero-video-wrapper">
-                <img fetchPriority="high" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
+                <Image width={1200} height={800} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
                 <div className="hero-gradient-blur"></div>
                 <div className="hero-grid-overlay grid-overlay"></div>
             </div>
@@ -136,7 +153,7 @@ export default function Page() {
                     
                     <div className="mission-right reveal-on-scroll">
                         <div className="mission-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="WKSC Mission" className="mission-image" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EphZaDQ0d9sHKHve7TNmmsr_pFGEjzne%26sz=w1200" alt="WKSC Mission" className="mission-image" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>
@@ -160,7 +177,7 @@ export default function Page() {
                 <div className="background-grid">
                     <div className="background-image-side reveal-on-scroll">
                         <div className="background-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="WKSC Safety and Quality Standards" className="background-image" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1O3Z8A1oKWR8Dhd6b-42nbpVkHv4Zpzm0%26sz=w1200" alt="WKSC Safety and Quality Standards" className="background-image" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     
@@ -171,7 +188,7 @@ export default function Page() {
                             </blockquote>
                             <div className="quote-author">
                                 <div className="author-avatar">
-                                    <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati — Chairman & CEO" referrerPolicy="no-referrer" />
+                                    <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati — Chairman & CEO" referrerPolicy="no-referrer" />
                                 </div>
                                 <div className="author-info">
                                     <div className="author-signature">Wisdom E. Kwati</div>
@@ -214,7 +231,7 @@ export default function Page() {
                         </div>
 
                         {/*  2019 Milestone  */}
-                        <div className="history-item reveal-on-scroll">
+                        <div className="history-item">
                             <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
                             
@@ -236,7 +253,7 @@ export default function Page() {
                         </div>
 
                         {/*  2021 Milestone  */}
-                        <div className="history-item reveal-on-scroll">
+                        <div className="history-item">
                             <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
                             
@@ -258,7 +275,7 @@ export default function Page() {
                         </div>
 
                         {/*  2022 Milestone  */}
-                        <div className="history-item reveal-on-scroll">
+                        <div className="history-item">
                             <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
                             
@@ -280,7 +297,7 @@ export default function Page() {
                         </div>
 
                         {/*  2023 Milestone  */}
-                        <div className="history-item reveal-on-scroll">
+                        <div className="history-item">
                             <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
                             
@@ -302,7 +319,7 @@ export default function Page() {
                         </div>
 
                         {/*  2035 Milestone  */}
-                        <div className="history-item reveal-on-scroll">
+                        <div className="history-item">
                             <div className="history-indicator"><div className="indicator-dot"></div></div>
                             <div className="history-marker-line"></div>
                             
@@ -430,32 +447,10 @@ export default function Page() {
                     </div>
                     <h2 className="team-headline">Get to know the team that's as passionate about your project as you are.</h2>
                 </div>                <div className="team-grid">
-                    {/*  Wisdom E. Kwati (Chairman WKSC PLC)  */}
-                    <div className="team-card reveal-on-scroll">
-                        <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1goE51ZAEevUwmkKAEARqbVFdtDyFCvLa%26sz=w1200" alt="Wisdom E. Kwati - Chairman WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
-                        </div>
-                        <div className="team-details">
-                            <h3 className="team-name">Wisdom E. Kwati</h3>
-                            <span className="team-location">CHAIRMAN WKSC PLC</span>
-                            
-                            <div className="agent-contact-rows">
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-envelope"></i>
-                                    <span>ceo@wksmartcity.com</span>
-                                </div>
-                                <div className="agent-contact-row">
-                                    <i className="fa-solid fa-award"></i>
-                                    <span>Most Respected CEO in Real Estate</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     {/*  Y.G. Ballah (COO, CEO WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cFMWWIyGiJ4lOW3XjoC2M9NQ3ZvRaw9u%26sz=w1200" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=17xSHAVA59On-Ch4lTAh7PNlIU5KGK4oL%26sz=w1200" alt="Y.G. Ballah - COO, CEO WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Y.G. Ballah</h3>
@@ -473,7 +468,7 @@ export default function Page() {
                     {/*  Zara Ruth Kwati (MD WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1t5F9gOS8mxk5mFyanBk00NVSiyqZrK7M%26sz=w1200" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1IGLhksjLyFbfyYnTwYGXS9XWFmr2fFO8%26sz=w1200" alt="Zara Ruth Kwati - MD WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Zara Ruth Kwati</h3>
@@ -491,7 +486,7 @@ export default function Page() {
                     {/*  Richard A. Igoche (MD WKSC Karshi)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19v15e89T7AL1DotSQ66-1z5UtfZgcmFz%26sz=w1200" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1Olh2V7y5WWFgcJvpi3LnCSx9XMS1odK9%26sz=w1200" alt="Richard A. Igoche - MD WKSC Karshi" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Richard A. Igoche</h3>
@@ -509,7 +504,7 @@ export default function Page() {
                     {/*  Bar. Samuel Adeolu (Legal Adviser, WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1is5fT1cRu4MenMbZAn34-V1FFsrTtOLz%26sz=w1200" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1CrUKQZ_6xPzgg9aC2QyYBDPi7LEsrRgQ%26sz=w1200" alt="Bar. Samuel Adeolu - Legal Adviser, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Bar. Samuel Adeolu</h3>
@@ -527,7 +522,7 @@ export default function Page() {
                     {/*  Mr Okpanachi Ogbelu (Accountant, WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu%26sz=w1200" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1Apgzo8_xMD2ul-fccqJlO9EFkkzmGUhu%26sz=w1200" alt="Mr Okpanachi Ogbelu - Accountant, WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Mr Okpanachi Ogbelu</h3>
@@ -545,7 +540,7 @@ export default function Page() {
                     {/*  Miss Esther Izu (HR WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">
                         <div className="team-image-wrapper">
-                            <img loading="lazy" src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1s3a4yhpY4w9WjhsZD0r3Zs6Q2G0CzQeZ%26sz=w1200" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
+                            <Image width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=13mLeAAkyqV8Um-1bRoGhHsEgNzJV-oS4%26sz=w1200" alt="Miss Esther Izu - HR WKSC PLC" className="team-image" referrerPolicy="no-referrer" />
                         </div>
                         <div className="team-details">
                             <h3 className="team-name">Miss Esther Izu</h3>
@@ -576,7 +571,7 @@ export default function Page() {
                     <h2 className="career-headline">Join a company where ideas matter, growth is real, and Mondays actually feel good.</h2>
                 </div>
 
-                <div className="career-grid">
+                <div className="career-grid" ref={careerGridRef}>
                     {loading ? (
                         <div style={{ gridColumn: '1 / -1', padding: '40px', textAlign: 'center', width: '100%' }}>
                             <div className="admin-skeleton-spinner" style={{ margin: '0 auto' }}></div>
@@ -587,7 +582,7 @@ export default function Page() {
                         </div>
                     ) : (
                         jobs.map((job) => (
-                            <div key={job.id} className="career-card reveal-on-scroll">
+                            <div key={job.id} className="career-card" style={{ opacity: 0, visibility: 'hidden', transform: 'translateY(35px)' }}>
                                 <h3 className="job-title">{job.title}</h3>
                                 
                                 <div className="job-info-list">
@@ -613,7 +608,7 @@ export default function Page() {
                                     </div>
                                 </div>
 
-                                <Link href={`/careers/${job.slug}`} className="job-cta">
+                                <Link href={`/careers/${job.slug}`} className="btn-pill" style={{ width: '100%' }}>
                                     <div className="flip-text">
                                         <span>VIEW JOB DETAILS</span>
                                         <span aria-hidden="true">VIEW JOB DETAILS</span>

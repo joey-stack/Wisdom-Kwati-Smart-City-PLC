@@ -28,6 +28,7 @@ export default function ProjectCard({ id, name, location, image }) {
 
   useEffect(() => {
     let timer;
+    const currentRef = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -39,22 +40,22 @@ export default function ProjectCard({ id, name, location, image }) {
       { threshold: 0.01, rootMargin: '50px 0px 50px 0px' }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     // Failsafe backup timeout: force reveal after 250ms in case observer fails to trigger due to smooth scrolling or mounting delays
     timer = setTimeout(() => {
       setIsVisible(true);
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     }, 250);
 
     return () => {
       if (timer) clearTimeout(timer);
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -73,6 +74,8 @@ export default function ProjectCard({ id, name, location, image }) {
             loading="lazy"
             src={image}
             alt={name}
+            width="800"
+            height="500"
             referrerPolicy="no-referrer"
             onError={e => {
               e.target.onerror = null;

@@ -6,12 +6,160 @@ import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/
 import { db } from '@/lib/firebase';
 import '@/styles/careers.css';
 
+const getSalaryIcon = (salary = '') => {
+  if (salary.toLowerCase().includes('commission')) return 'fa-solid fa-percent';
+  if (salary.includes('₦')) return 'fa-solid fa-naira-sign';
+  return 'fa-solid fa-wallet';
+};
+
+const getWorkplaceIcon = (loc = '', type = '') => {
+  const val = (loc + ' ' + type).toLowerCase();
+  if (val.includes('hybrid')) return 'fa-solid fa-laptop-house';
+  return 'fa-solid fa-building';
+};
+
+const getWorkplaceLabel = (loc = '', type = '') => {
+  const val = (loc + ' ' + type).toLowerCase();
+  if (val.includes('hybrid')) return 'HYBRID';
+  return 'ON SITE';
+};
+
+const formatSummaryDate = (dateStr = '') => {
+  if (!dateStr) return 'AVAILABLE NOW';
+  const parts = dateStr.split(', ');
+  if (parts.length >= 2) {
+    const datePart = parts[1];
+    const yearPart = parts[2]?.split(' at ')[0];
+    if (datePart && yearPart) {
+      const month = datePart.split(' ')[0].slice(0, 3).toUpperCase();
+      const day = datePart.split(' ')[1];
+      return `${month} ${day}, ${yearPart}`;
+    }
+  }
+  return dateStr.toUpperCase();
+};
+
+const getPerkIcon = (perkText = '') => {
+  const text = perkText.toLowerCase();
+  if (text.includes('health') || text.includes('medical') || text.includes('insurance') || text.includes('dental') || text.includes('vision')) return 'fa-solid fa-heart-pulse';
+  if (text.includes('vacation') || text.includes('leave') || text.includes('holiday') || text.includes('time off') || text.includes('recharge')) return 'fa-solid fa-umbrella-beach';
+  if (text.includes('bonus') || text.includes('salary') || text.includes('commission') || text.includes('pay') || text.includes('allowance') || text.includes('allowances') || text.includes('equity') || text.includes('stock')) return 'fa-solid fa-coins';
+  if (text.includes('learning') || text.includes('development') || text.includes('course') || text.includes('training') || text.includes('education') || text.includes('mentor') || text.includes('certif')) return 'fa-solid fa-graduation-cap';
+  if (text.includes('gym') || text.includes('wellness') || text.includes('fitness') || text.includes('sport')) return 'fa-solid fa-dumbbell';
+  if (text.includes('flexible') || text.includes('hybrid') || text.includes('remote') || text.includes('home') || text.includes('schedule')) return 'fa-solid fa-laptop-house';
+  if (text.includes('snack') || text.includes('lunch') || text.includes('coffee') || text.includes('food') || text.includes('beverage')) return 'fa-solid fa-cookie-bite';
+  if (text.includes('laptop') || text.includes('device') || text.includes('computer') || text.includes('equipment') || text.includes('tool')) return 'fa-solid fa-laptop';
+  if (text.includes('retirement') || text.includes('pension') || text.includes('401') || text.includes('saving')) return 'fa-solid fa-piggy-bank';
+  if (text.includes('team') || text.includes('event') || text.includes('retreat') || text.includes('bonding') || text.includes('social') || text.includes('celebrat')) return 'fa-solid fa-people-group';
+  return 'fa-solid fa-gift'; // default generic perk icon
+};
+
 export default function CareerDetailPage({ params }) {
   const { slug } = use(params);
 
   const [job, setJob] = useState(null);
   const [otherJobs, setOtherJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Direct Apply Form States
+  const [showApplyModal, setShowApplyModal] = useState(false);
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formLinkedin, setFormLinkedin] = useState('');
+  const [formPortfolio, setFormPortfolio] = useState('');
+  const [formCoverLetter, setFormCoverLetter] = useState('');
+  const [formFile, setFormFile] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleApplySubmit = async (e) => {
+    e.preventDefault();
+    if (!formFile) {
+      setSubmitError('Please upload your Resume/CV to apply.');
+      return;
+    }
+    
+    if (formFile.size > 700 * 1024) {
+      setSubmitError('File size must be under 700KB to fit on our free hosting plan. Please compress your PDF or choose a smaller file.');
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      setSubmitError('');
+
+      // Helper function to read file as Base64
+      const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      };
+
+      const base64Data = await fileToBase64(formFile);
+
+      // Submit to API Route
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          candidateName: formName,
+          candidateEmail: formEmail,
+          candidatePhone: formPhone,
+          linkedinUrl: formLinkedin,
+          portfolioUrl: formPortfolio,
+          coverLetter: formCoverLetter,
+          resumeBase64: base64Data,
+          resumeName: formFile.name,
+          resumeType: formFile.type,
+          jobTitle: job.title,
+          jobId: job.id || slug,
+          appliedAt: new Date().toISOString(),
+          status: 'pending'
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit application.');
+      }
+
+      setSubmitSuccess(true);
+      setFormName('');
+      setFormEmail('');
+      setFormPhone('');
+      setFormLinkedin('');
+      setFormPortfolio('');
+      setFormCoverLetter('');
+      setFormFile(null);
+    } catch (err) {
+      console.error('[Apply Form Submit] Error:', err);
+      setSubmitError(err.message || 'Failed to submit application. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Lock body & html scroll when modal is active
+  useEffect(() => {
+    if (showApplyModal) {
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+    }
+    return () => {
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+    };
+  }, [showApplyModal]);
 
   useEffect(() => {
     async function loadJobData() {
@@ -105,42 +253,42 @@ export default function CareerDetailPage({ params }) {
           {/* Position Details Table */}
           <div className="careers-section">
             <h2 className="careers-section-title">Position Details</h2>
-            <div className="careers-table-wrapper">
-              <table className="careers-table">
+            <div className="pd-table-container">
+              <table className="pd-table">
                 <tbody>
                   <tr>
-                    <td className="careers-label-cell">Role</td>
+                    <td className="pd-label-cell">Role</td>
                     <td>{job.role || job.title}</td>
                   </tr>
                   <tr>
-                    <td className="careers-label-cell">Location</td>
+                    <td className="pd-label-cell">Location</td>
                     <td>{job.location || 'Abuja (Hybrid)'}</td>
                   </tr>
                   <tr>
-                    <td className="careers-label-cell">Employment Type</td>
+                    <td className="pd-label-cell">Employment Type</td>
                     <td>{job.employmentType || 'Full time'}</td>
                   </tr>
                   {job.experienceLevel && (
                     <tr>
-                      <td className="careers-label-cell">Experience Level</td>
+                      <td className="pd-label-cell">Experience Level</td>
                       <td>{job.experienceLevel}</td>
                     </tr>
                   )}
                   {job.salaryRange && (
                     <tr>
-                      <td className="careers-label-cell">Salary Range</td>
+                      <td className="pd-label-cell">Salary Range</td>
                       <td>{job.salaryRange}</td>
                     </tr>
                   )}
                   {job.workingHours && (
                     <tr>
-                      <td className="careers-label-cell">Working Hours</td>
+                      <td className="pd-label-cell">Working Hours</td>
                       <td>{job.workingHours}</td>
                     </tr>
                   )}
                   {job.reportsTo && (
                     <tr>
-                      <td className="careers-label-cell">Reports to</td>
+                      <td className="pd-label-cell">Reports to</td>
                       <td>{job.reportsTo}</td>
                     </tr>
                   )}
@@ -165,12 +313,12 @@ export default function CareerDetailPage({ params }) {
           {job.requirements && job.requirements.length > 0 && (
             <div className="careers-section">
               <h2 className="careers-section-title">What we're looking for</h2>
-              <div className="careers-table-wrapper">
-                <table className="careers-table">
+              <div className="pd-table-container">
+                <table className="pd-table">
                   <tbody>
                     {job.requirements.map((req, idx) => (
                       <tr key={idx}>
-                        <td className="careers-label-cell" style={{ fontWeight: '600' }}>
+                        <td className="pd-label-cell" style={{ fontWeight: '600' }}>
                           {req.skill}
                         </td>
                         <td>{req.description}</td>
@@ -186,12 +334,19 @@ export default function CareerDetailPage({ params }) {
           {job.perks && job.perks.length > 0 && (
             <div className="careers-section">
               <h2 className="careers-section-title">Perks & benefits</h2>
-              <ul className="careers-list">
+              <div className="company-perks-grid" style={{ marginTop: '24px', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px 20px' }}>
                 {job.perks.map((item, idx) => (
-                  <li key={idx}>{item}</li>
+                  <div key={idx} className="company-perk-card">
+                    <div className="company-perk-icon">
+                      <i className={getPerkIcon(item)} style={{ color: '#000000' }}></i>
+                    </div>
+                    <div className="company-perk-info" style={{ justifyContent: 'center' }}>
+                      <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>{item}</h3>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '16px', fontStyle: 'italic' }}>
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '24px', fontStyle: 'italic' }}>
                 * Eligibility criteria applies — details handled during final contract review.
               </p>
             </div>
@@ -200,16 +355,35 @@ export default function CareerDetailPage({ params }) {
           {/* How to Apply Section */}
           <div className="careers-section">
             <h2 className="careers-section-title">How to apply</h2>
-            <ul className="careers-list">
-              <li>
-                Submit your CV/Resume and Portfolio directly to{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>
-                  {job.howToApply || 'careers@wisdomkwati.com'}
-                </strong>.
-              </li>
-              <li>Ensure the subject line reads exactly: <strong>Application: {job.title}</strong></li>
-              <li>Include a short cover letter explaining why you are excited to join Wisdom Kwati Smart City.</li>
-            </ul>
+            <p style={{ marginBottom: '20px', color: 'var(--text-secondary)', fontSize: '15px', lineHeight: '1.5' }}>
+              We offer two ways to submit your application. Please choose <strong>only one</strong> method:
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ background: 'rgba(0,0,0,0.02)', padding: '24px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <h4 style={{ margin: '0 0 10px 0', fontSize: '16px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  Option A: Apply Directly Online (Recommended)
+                </h4>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+                  Click the <strong>"Apply For This Job"</strong> button on the sidebar to fill in your application form and upload your CV/Resume directly from this page.
+                </p>
+              </div>
+
+              <div style={{ background: 'rgba(0,0,0,0.02)', padding: '24px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <h4 style={{ margin: '0 0 10px 0', fontSize: '16px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  Option B: Apply via Email
+                </h4>
+                <ul className="careers-list" style={{ margin: 0, paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}>
+                    Send your CV/Resume and Portfolio link to{' '}
+                    <strong style={{ color: 'var(--text-primary)' }}>
+                      {job.howToApply || 'careers@wisdomkwati.com'}
+                    </strong>.
+                  </li>
+                  <li style={{ marginBottom: '8px' }}>Ensure the email subject line reads exactly: <strong>Application: {job.title}</strong></li>
+                  <li>Include a short cover letter explaining why you are excited to join Wisdom Kwati Smart City.</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -240,78 +414,25 @@ export default function CareerDetailPage({ params }) {
               <strong>{job.date || 'Available Now'}</strong>
             </div>
 
-            <a
-              href={`mailto:${job.howToApply || 'careers@wisdomkwati.com'}?subject=Application:%20${encodeURIComponent(job.title)}`}
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', textAlign: 'center', margin: '20px 0 12px 0', lineHeight: '1.4' }}>
+              Apply directly online or via email (please choose <strong>only one</strong> method).
+            </p>
+
+            <button
+              onClick={() => {
+                setShowApplyModal(true);
+                setSubmitSuccess(false);
+                setSubmitError('');
+              }}
               className="careers-apply-btn"
+              style={{ width: '100%', border: 'none', cursor: 'pointer' }}
             >
               Apply For This Job
-            </a>
+            </button>
           </div>
         </aside>
       </div>
 
-      {/* 3. Global Company Perks Grid (Full Width) */}
-      <section className="company-perks-section">
-        <div className="company-perks-container">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-primary)' }}>
-            <div className="label-square" style={{ width: '8px', height: '8px', backgroundColor: 'var(--accent-green)', borderRadius: '2px' }}></div>
-            WKSC Ecosystem Perks
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-header)', fontSize: '32px', fontWeight: '700', marginTop: '16px', color: 'var(--text-primary)' }}>
-            Why you'll love working with us
-          </h2>
-          
-          <div className="company-perks-grid">
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-heart-pulse"></i>
-              </div>
-              <h3>Comprehensive Health</h3>
-              <p>Top-tier private health coverages including comprehensive medical, dental, and optical packages for employees.</p>
-            </div>
-
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-brain"></i>
-              </div>
-              <h3>Wellness & Care</h3>
-              <p>Dedicated access to local mental wellness programs, counseling pathways, and fitness memberships.</p>
-            </div>
-
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-umbrella-beach"></i>
-              </div>
-              <h3>Paid Time Off</h3>
-              <p>Generous vacation parameters, sick leave buffers, and public holidays to make sure you stay fully rested.</p>
-            </div>
-
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-lightbulb"></i>
-              </div>
-              <h3>Growth & Courses</h3>
-              <p>Direct sponsorship for certifications, professional lectures, and career courses related to smart city planning.</p>
-            </div>
-
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-laptop-code"></i>
-              </div>
-              <h3>Modern Workspace</h3>
-              <p>Equipped with state-of-the-art developer systems, hybrid schedules, and collaborative workspace designs.</p>
-            </div>
-
-            <div className="company-perk-card">
-              <div className="company-perk-icon">
-                <i className="fa-solid fa-piggy-bank"></i>
-              </div>
-              <h3>Financial Planning</h3>
-              <p>Retirement savings match, performance bonuses, and direct incentives tied to community target milestones.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 4. Bottom Open Positions Recommendations */}
       {otherJobs.length > 0 && (
@@ -319,39 +440,204 @@ export default function CareerDetailPage({ params }) {
           <h2 className="other-positions-headline">
             If you're passionate, curious, and love making real impact, you'll fit right in.
           </h2>
-          <div className="other-positions-grid">
+          <div className="career-grid">
             {otherJobs.map((item) => (
-              <div key={item.id} className="careers-rec-card">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  <h3>{item.title}</h3>
-                  <div className="careers-rec-pills">
-                    <span className="careers-rec-pill">
-                      <i className="fa-solid fa-location-dot"></i>
-                      <span>{item.location || 'Abuja'}</span>
-                    </span>
-                    <span className="careers-rec-pill">
-                      <i className="fa-solid fa-clock"></i>
-                      <span>{item.employmentType || 'Full time'}</span>
-                    </span>
-                    {item.salaryRange && (
-                      <span className="careers-rec-pill">
-                        <i className="fa-solid fa-wallet"></i>
-                        <span>{item.salaryRange}</span>
-                      </span>
-                    )}
+              <div key={item.id} className="career-card">
+                <h3 className="job-title">{item.title}</h3>
+                
+                <div className="job-info-list">
+                  <div className="job-info-pill">
+                    <i className="fa-solid fa-calendar-days"></i>
+                    <span>{formatSummaryDate(item.date)}</span>
+                  </div>
+                  <div className="job-info-pill">
+                    <i className="fa-solid fa-clock"></i>
+                    <span>{item.employmentType?.toUpperCase()}</span>
+                  </div>
+                  <div className="job-info-pill">
+                    <i className={getSalaryIcon(item.salaryRange)}></i>
+                    <span>{item.salaryRange?.toUpperCase()}</span>
+                  </div>
+                  <div className="job-info-pill">
+                    <i className="fa-solid fa-location-dot"></i>
+                    <span>{item.location?.toUpperCase()}</span>
+                  </div>
+                  <div className="job-info-pill">
+                    <i className={getWorkplaceIcon(item.location, item.employmentType)}></i>
+                    <span>{getWorkplaceLabel(item.location, item.employmentType)}</span>
                   </div>
                 </div>
-                <Link href={`/careers/${item.slug}`} className="careers-rec-link">
-                  <span>View Job Details</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
+
+                <Link href={`/careers/${item.slug}`} className="btn-pill" style={{ width: '100%' }}>
+                  <div className="flip-text">
+                    <span>VIEW JOB DETAILS</span>
+                    <span aria-hidden="true">VIEW JOB DETAILS</span>
+                  </div>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </Link>
               </div>
             ))}
           </div>
         </section>
+      )}
+      {/* Apply Modal popup */}
+      {showApplyModal && (
+        <div className="site-visit-modal-overlay active" style={{ zIndex: 10000, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', overflowY: 'auto', padding: '40px 20px' }}>
+          <div className="site-visit-modal-container" style={{ maxWidth: '600px', padding: '40px', maxHeight: 'none', overflowY: 'visible', margin: '0 auto' }}>
+            <button 
+              className="site-visit-modal-close" 
+              onClick={() => setShowApplyModal(false)}
+              style={{ cursor: 'pointer' }}
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+            
+            {submitSuccess ? (
+              <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'rgba(187, 227, 57, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+                  <i className="fa-solid fa-check" style={{ color: 'var(--accent-green)', fontSize: '28px' }}></i>
+                </div>
+                <h3 style={{ fontFamily: 'var(--font-header)', fontSize: '24px', fontWeight: '700', marginBottom: '12px' }}>Application Submitted!</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '15px', lineHeight: '1.6', marginBottom: '32px' }}>
+                  Thank you for applying. We have received your application and resume. Our recruitment team will review your profile and contact you if your qualifications match the role.
+                </p>
+                <button 
+                  onClick={() => setShowApplyModal(false)} 
+                  className="btn-pill" 
+                  style={{ margin: '0 auto' }}
+                >
+                  <div className="flip-text">
+                    <span>CLOSE</span>
+                    <span aria-hidden="true">CLOSE</span>
+                  </div>
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleApplySubmit}>
+                <h3 style={{ fontFamily: 'var(--font-header)', fontSize: '24px', fontWeight: '700', marginBottom: '8px' }}>Apply Directly</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '24px' }}>
+                  Role: <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{job.title}</span>
+                </p>
+
+                {submitError && (
+                  <div style={{ padding: '12px 16px', backgroundColor: 'rgba(235, 87, 87, 0.1)', color: '#eb5757', borderRadius: '6px', fontSize: '13px', marginBottom: '20px', fontWeight: '600' }}>
+                    {submitError}
+                  </div>
+                )}
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div className="form-group">
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Full Name *</label>
+                    <input 
+                      type="text" 
+                      required 
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      placeholder="e.g. Joey Stack" 
+                      style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px' }} 
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div className="form-group">
+                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Email Address *</label>
+                      <input 
+                        type="email" 
+                        required 
+                        value={formEmail}
+                        onChange={(e) => setFormEmail(e.target.value)}
+                        placeholder="e.g. joey@stack.com" 
+                        style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px' }} 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Phone Number *</label>
+                      <input 
+                        type="tel" 
+                        required 
+                        value={formPhone}
+                        onChange={(e) => setFormPhone(e.target.value)}
+                        placeholder="e.g. +234 810 001 7777" 
+                        style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px' }} 
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div className="form-group">
+                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>LinkedIn Profile</label>
+                      <input 
+                        type="url" 
+                        value={formLinkedin}
+                        onChange={(e) => setFormLinkedin(e.target.value)}
+                        placeholder="https://linkedin.com/in/..." 
+                        style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px' }} 
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Portfolio / Website</label>
+                      <input 
+                        type="url" 
+                        value={formPortfolio}
+                        onChange={(e) => setFormPortfolio(e.target.value)}
+                        placeholder="https://mywork.com" 
+                        style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px' }} 
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Resume / CV (PDF, Word, max 700KB) *</label>
+                    <input 
+                      type="file" 
+                      required 
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => setFormFile(e.target.files[0])}
+                      style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px dashed var(--border)', background: 'rgba(0,0,0,0.02)', color: 'var(--text-secondary)', fontSize: '13px' }} 
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', color: 'var(--text-secondary)' }}>Cover Letter / Message</label>
+                    <textarea 
+                      rows="4" 
+                      value={formCoverLetter}
+                      onChange={(e) => setFormCoverLetter(e.target.value)}
+                      placeholder="Tell us briefly why you want to join our smart city team..." 
+                      style={{ width: '100%', padding: '14px 16px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-primary)', fontSize: '14px', resize: 'vertical' }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                  <button 
+                    type="button" 
+                    onClick={() => setShowApplyModal(false)}
+                    className="btn-pill" 
+                    style={{ backgroundColor: 'transparent', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
+                  >
+                    <div className="flip-text">
+                      <span>CANCEL</span>
+                      <span aria-hidden="true">CANCEL</span>
+                    </div>
+                  </button>
+                  <button 
+                    type="submit" 
+                    disabled={submitting}
+                    className="btn-pill"
+                  >
+                    <div className="flip-text">
+                      <span>{submitting ? 'SUBMITTING...' : 'SUBMIT APPLICATION'}</span>
+                      <span aria-hidden="true">{submitting ? 'SUBMITTING...' : 'SUBMIT APPLICATION'}</span>
+                    </div>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
       )}
     </main>
   );

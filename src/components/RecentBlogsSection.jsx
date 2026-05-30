@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 const getSlug = (title) => {
@@ -63,6 +63,8 @@ function BlogCard({ blog }) {
           loading="lazy"
           src={blog.image || 'https://placehold.co/600x400/111/fff?text=Blog'}
           alt={blog.title}
+          width="800"
+          height="500"
           referrerPolicy="no-referrer"
           onError={(e) => {
             e.target.onerror = null;
@@ -79,7 +81,12 @@ function BlogCard({ blog }) {
         <h3 className="blog-card-title">{blog.title}</h3>
         <div className="blog-card-author">
           <div className="blog-author-avatar">
-            <img src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`} alt={blog.author} />
+            <img
+              src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`}
+              alt={blog.author}
+              width="24"
+              height="24"
+            />
           </div>
           <span className="blog-author-name">{blog.author || 'James Miller'}</span>
         </div>
@@ -98,7 +105,7 @@ export default function RecentBlogsSection() {
     setMounted(true);
     async function loadRecentBlogs() {
       try {
-        const snap = await getDocs(collection(db, 'blogs'));
+        const snap = await getDocs(query(collection(db, 'blogs'), limit(12)));
         const list = [];
         snap.forEach((doc) => {
           const data = doc.data();

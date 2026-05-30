@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import '../../styles/blogs.css';
@@ -50,7 +51,7 @@ function BlogCard({ blog }) {
       className={`blog-card wksc-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="blog-card-image">
-        <img loading="lazy" src={blog.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" />
+        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={blog.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" />
       </div>
       <div className="blog-card-content">
         <div className="blog-card-meta">
@@ -66,7 +67,7 @@ function BlogCard({ blog }) {
         )}
         <div className="blog-card-author">
           <div className="blog-author-avatar">
-            <img src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`} alt={blog.author} />
+            <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`} alt={blog.author} />
           </div>
           <span className="blog-author-name">{blog.author || 'James Miller'}</span>
         </div>

@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import Image from 'next/image';
+import { doc, getDoc, collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import HouseTypeCard from './cards/HouseTypeCard';
+import SocialShare from './SocialShare';
 
 const DEFAULT_ADVISER = {
   name: "Sarah Kwati",
@@ -13,6 +15,31 @@ const DEFAULT_ADVISER = {
   phone: "+234 810 001 7777",
   email: "sarah.k@wisdomkwati.com",
   image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200"
+};
+
+// Global module-level cache helper to optimize page-to-page navigation and share fetched Firestore documents globally
+const getGlobalCache = () => {
+  if (typeof window !== 'undefined') {
+    if (!window.wkscCache) {
+      window.wkscCache = {
+        houseTypes: {},
+        projects: {},
+        advisors: {},
+        parentProjects: {},
+        relatedHouseTypes: {},
+        otherNeighborhoodsCache: null
+      };
+    }
+    return window.wkscCache;
+  }
+  return {
+    houseTypes: {},
+    projects: {},
+    advisors: {},
+    parentProjects: {},
+    relatedHouseTypes: {},
+    otherNeighborhoodsCache: null
+  };
 };
 
 export default function ProjectDetailTemplate({
@@ -35,6 +62,11 @@ export default function ProjectDetailTemplate({
   mapEmbedUrl: initialMapEmbedUrl,
   projectId
 }) {
+  const cache = getGlobalCache();
+  const projectCache = cache.projects;
+  const houseTypesCache = cache.houseTypes;
+  const advisorsCache = cache.advisors;
+
   const [title, setTitle] = useState(initialTitle);
   const [heroImage, setHeroImage] = useState(initialHeroImage);
   const [heroVideo, setHeroVideo] = useState(initialHeroVideo);
@@ -86,20 +118,32 @@ export default function ProjectDetailTemplate({
 
   // Load from CMS on mount if document exists
   useEffect(() => {
+    // If the data was pre-rendered and pre-fetched on the server, skip client-side Firestore queries
+    if (initialTitle && initialTitle !== "Loading Estate...") {
+      console.log("[CMS Server Render Hit] Skipping client-side database queries for project data.");
+      return;
+    }
+
     async function fetchCmsData() {
       try {
         const path = window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop();
         console.log("[CMS Debug] pathname:", window.location.pathname, "-> parsed path:", path);
         if (!path) return;
 
-        const projectDoc = await getDoc(doc(db, 'projects', path));
-        console.log("[CMS Debug] projectDoc exists:", projectDoc.exists());
-        if (projectDoc.exists()) {
-          const project = projectDoc.data();
-          console.log("[CMS Debug] project data:", project);
-          console.log("[CMS Debug] project.agent:", project.agent);
-          console.log("[CMS Debug] project.advisorId:", project.advisorId);
+        let project;
+        if (projectCache[path]) {
+          project = projectCache[path];
+          console.log("[CMS Cache Hit] project data:", project);
+        } else {
+          const projectDoc = await getDoc(doc(db, 'projects', path));
+          console.log("[CMS Debug] projectDoc exists:", projectDoc.exists());
+          if (projectDoc.exists()) {
+            project = projectDoc.data();
+            projectCache[path] = project;
+          }
+        }
 
+        if (project) {
           if (project.name) setTitle(project.name);
           if (project.heroImage) {
             setHeroImage(project.heroImage);
@@ -150,11 +194,20 @@ export default function ProjectDetailTemplate({
           // Resolve relational or embedded advisor/agent (Prioritizing advisorId)
           if (project.advisorId) {
             console.log("[CMS Debug] Fetching advisor from collection with advisorId:", project.advisorId);
-            const advisorDoc = await getDoc(doc(db, 'advisors', project.advisorId));
-            console.log("[CMS Debug] advisorDoc exists:", advisorDoc.exists());
-            if (advisorDoc.exists()) {
-              const advisor = advisorDoc.data();
-              console.log("[CMS Debug] Setting sidebar advisor from advisors collection:", advisor);
+            let advisor;
+            if (advisorsCache[project.advisorId]) {
+              advisor = advisorsCache[project.advisorId];
+              console.log("[CMS Cache Hit] Setting sidebar advisor from cache:", advisor);
+            } else {
+              const advisorDoc = await getDoc(doc(db, 'advisors', project.advisorId));
+              console.log("[CMS Debug] advisorDoc exists:", advisorDoc.exists());
+              if (advisorDoc.exists()) {
+                advisor = advisorDoc.data();
+                advisorsCache[project.advisorId] = advisor;
+              }
+            }
+
+            if (advisor) {
               setSidebarAdviser({
                 name: advisor.name || '',
                 role: advisor.role || '',
@@ -194,10 +247,11 @@ export default function ProjectDetailTemplate({
           // Resolve house specifications
           if (project.houseTypeIds && project.houseTypeIds.length > 0) {
             const houseTypesList = [];
-            for (const htId of project.houseTypeIds) {
-              const htDoc = await getDoc(doc(db, 'houseTypes', htId));
-              if (htDoc.exists()) {
-                const ht = htDoc.data();
+            const idsToFetch = [];
+
+            project.houseTypeIds.forEach(htId => {
+              if (houseTypesCache[htId]) {
+                const ht = houseTypesCache[htId];
                 houseTypesList.push({
                   id: htId,
                   name: ht.classType || htId,
@@ -208,10 +262,43 @@ export default function ProjectDetailTemplate({
                   image: ht.images && ht.images.length > 0 ? ht.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec',
                   estate: '',
                 });
+              } else {
+                idsToFetch.push(htId);
               }
+            });
+
+            if (idsToFetch.length > 0) {
+              const promises = idsToFetch.map(htId => getDoc(doc(db, 'houseTypes', htId)));
+              const docsResolved = await Promise.all(promises);
+              docsResolved.forEach((htDoc, index) => {
+                if (htDoc.exists()) {
+                  const ht = htDoc.data();
+                  const htId = idsToFetch[index];
+                  houseTypesCache[htId] = ht;
+                  houseTypesList.push({
+                    id: htId,
+                    name: ht.classType || htId,
+                    tagline: ht.tagline || `${ht.beds || 0} Bedroom Smart Villa`,
+                    beds: ht.beds || 0,
+                    baths: ht.baths || 0,
+                    size: ht.size || 'N/A',
+                    image: ht.images && ht.images.length > 0 ? ht.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec',
+                    estate: '',
+                  });
+                }
+              });
             }
+
             if (houseTypesList.length > 0) {
               setHouseTypes(houseTypesList);
+              // Share parent project and related properties globally to ensure instant detail page loading
+              project.houseTypeIds.forEach(htId => {
+                cache.parentProjects[htId] = { id: path, name: project.name || 'Premium District', ...project };
+                cache.relatedHouseTypes[htId] = houseTypesList.filter(h => h.id !== htId).slice(0, 2).map(h => ({
+                  id: h.id,
+                  ...houseTypesCache[h.id]
+                }));
+              });
             }
           }
         }
@@ -224,22 +311,38 @@ export default function ProjectDetailTemplate({
 
   // Fetch other neighborhoods dynamically from Firestore
   useEffect(() => {
+    // Skip client-side Firestore query if preloaded on the server
+    if (initialOtherNeighborhoods && initialOtherNeighborhoods.length > 0) {
+      console.log("[CMS Server Render Hit] Skipping other neighborhoods client-side query.");
+      return;
+    }
+
     async function fetchOtherNeighborhoods() {
       try {
         const path = window.location.pathname.replace(/^\/|\/$/g, '').split('/').pop();
-        const snap = await getDocs(collection(db, 'projects'));
-        const list = [];
-        snap.forEach((doc) => {
-          const d = doc.data();
-          if (!d.name || doc.id === path) return;
-          list.push({
-            id: doc.id,
-            name: d.name,
-            district: d.location || d.tagline || 'Nigeria',
-            image: d.detailsImage || d.heroImage || 'https://placehold.co/1200x800/111/fff?text=Estate',
-            link: `/projects/${doc.id}`
+        
+        let allProjects = [];
+        if (otherNeighborhoodsCache) {
+          allProjects = otherNeighborhoodsCache;
+          console.log("[CMS Cache Hit] other neighborhoods list");
+        } else {
+          const queryRef = query(collection(db, 'projects'), limit(15));
+          const snap = await getDocs(queryRef);
+          snap.forEach((doc) => {
+            const d = doc.data();
+            if (!d.name) return;
+            allProjects.push({
+              id: doc.id,
+              name: d.name,
+              district: d.location || d.tagline || 'Nigeria',
+              image: d.detailsImage || d.heroImage || 'https://placehold.co/1200x800/111/fff?text=Estate',
+              link: `/projects/${doc.id}`
+            });
           });
-        });
+          otherNeighborhoodsCache = allProjects;
+        }
+
+        const list = allProjects.filter(p => p.id !== path);
         setOtherNeighborhoods(list.slice(0, 4));
       } catch (err) {
         console.error('Error fetching other neighborhoods:', err);
@@ -362,7 +465,7 @@ export default function ProjectDetailTemplate({
               }}></div>
             </div>
           ) : (
-            <img fetchPriority="high" src={heroImage} alt={title} referrerPolicy="no-referrer" />
+            <Image width={1920} height={1080} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={heroImage} alt={title} referrerPolicy="no-referrer" />
           )}
         </div>
         <div className="pd-hero-overlay"></div>
@@ -447,6 +550,7 @@ export default function ProjectDetailTemplate({
                 <div style={{ width: '100%', height: '400px', borderRadius: '8px', overflow: 'hidden', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--border)' }}>
                   <iframe 
                     src={mapEmbedUrl} 
+                    title="Estate location map"
                     width="100%" 
                     height="100%" 
                     style={{ borderWidth: 0 }} 
@@ -457,6 +561,8 @@ export default function ProjectDetailTemplate({
                 </div>
               </section>
             )}
+
+            <SocialShare title={title} />
           </div>
 
           {/* Right Column (Sidebar) */}
@@ -469,10 +575,21 @@ export default function ProjectDetailTemplate({
               <div className="pd-compact-list reveal-on-scroll">
                 {otherNeighborhoods?.map((item, idx) => (
                   <Link key={idx} href={item.link} className="pd-compact-item">
-                    <img loading="lazy" src={item.image} alt={item.name} className="pd-compact-thumb" referrerPolicy="no-referrer" />
-                    <div className="pd-compact-info">
-                      <h4>{item.name}</h4>
-                      {item.district && <p>, {item.district}</p>}
+                    <div className="pd-compact-flipper">
+                      <div className="pd-compact-front">
+                        <Image width={70} height={70} className="pd-compact-thumb" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
+                        <div className="pd-compact-info">
+                          <h4>{item.name}</h4>
+                          <p>{item.district}</p>
+                        </div>
+                      </div>
+                      <div className="pd-compact-back">
+                        <Image width={70} height={70} className="pd-compact-thumb" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
+                        <div className="pd-compact-info">
+                          <h4>{item.name}</h4>
+                          <p>{item.district}</p>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}
@@ -483,7 +600,7 @@ export default function ProjectDetailTemplate({
               <div className="pd-sidebar-card" suppressHydrationWarning={true}>
                 <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                  <img loading="lazy" src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
+                  <Image width={56} height={56} src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
                   <div>
                     <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>{sidebarAdviser.name}</h3>
                     <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>{sidebarAdviser.role}</p>
@@ -498,12 +615,18 @@ export default function ProjectDetailTemplate({
                     <i className="fa-solid fa-envelope" style={{ width: "14px", color: "var(--accent-green)" }}></i> {sidebarAdviser.email}
                   </a>
                 </div>
-                <Link href="/contact" className="btn-pill" style={{ width: "100%", justifyContent: "center", background: "var(--text-primary)", color: "#fff", border: "none" }}>
+                <button 
+                  type="button"
+                  className="btn-pill btn-book-consultation" 
+                  data-advisor-email={sidebarAdviser.email}
+                  data-advisor-name={sidebarAdviser.name}
+                  style={{ width: "100%", justifyContent: "center", background: "var(--text-primary)", color: "#fff", border: "none", cursor: "pointer" }}
+                >
                   <div className="flip-text">
                     <span>BOOK A CONSULTATION</span>
                     <span aria-hidden="true">BOOK A CONSULTATION</span>
                   </div>
-                </Link>
+                </button>
               </div>
             )}
           </aside>

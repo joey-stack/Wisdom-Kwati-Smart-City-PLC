@@ -5,13 +5,16 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectCard from '@/components/cards/ProjectCard';
 
-export default function Page() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+// Global in-memory cache for Kaduna projects
+let globalKadunaProjectsCache = null;
 
+export default function Page() {
+  const [projects, setProjects] = useState(() => globalKadunaProjectsCache || []);
+  const [loading, setLoading] = useState(() => !globalKadunaProjectsCache);
+  const [mounted, setMounted] = useState(false);
+ 
   useEffect(() => {
-    setMounted(true);
+    Promise.resolve().then(() => setMounted(true));
     async function loadProjects() {
       try {
         const snap = await getDocs(collection(db, 'projects'));
@@ -30,6 +33,7 @@ export default function Page() {
           });
         });
         list.sort((a, b) => a.name.localeCompare(b.name));
+        globalKadunaProjectsCache = list;
         setProjects(list);
       } catch (err) {
         console.error('Error fetching Kaduna projects:', err);

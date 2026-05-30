@@ -11,7 +11,7 @@ export default function Footer() {
 
     return (
         <>
-                <footer className="footer-section">
+                <footer className="footer-section" role="contentinfo" aria-label="Site footer">
         <div className="footer-container">
             {/*  Top Grid: Interactive Links  */}
             <div className="footer-top-grid">
@@ -162,12 +162,12 @@ export default function Footer() {
                 </div>
                 
                 <div className="social-grid">
-                    <a href="#" className="social-item"><i className="fa-brands fa-linkedin"></i></a>
-                    <a href="#" className="social-item"><i className="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" className="social-item"><i className="fa-brands fa-tiktok"></i></a>
-                    <a href="#" className="social-item"><i className="fa-brands fa-instagram"></i></a>
-                    <a href="#" className="social-item"><i className="fa-brands fa-youtube"></i></a>
-                    <a href="#" className="social-item"><i className="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" className="social-item" aria-label="Follow us on LinkedIn"><i className="fa-brands fa-linkedin"></i></a>
+                    <a href="#" className="social-item" aria-label="Follow us on Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" className="social-item" aria-label="Follow us on TikTok"><i className="fa-brands fa-tiktok"></i></a>
+                    <a href="#" className="social-item" aria-label="Follow us on Instagram"><i className="fa-brands fa-instagram"></i></a>
+                    <a href="#" className="social-item" aria-label="Subscribe on YouTube"><i className="fa-brands fa-youtube"></i></a>
+                    <a href="#" className="social-item" aria-label="Follow us on X"><i className="fa-brands fa-x-twitter"></i></a>
                 </div>
             </div>
 
@@ -178,7 +178,8 @@ export default function Footer() {
                     GET FRESH UPDATES
                 </div>
                 <div className="newsletter-group">
-                    <input type="email" placeholder="jane@framer.com" className="newsletter-input" required />
+                    <label htmlFor="newsletter-email" className="sr-only">Email address for newsletter</label>
+                    <input type="email" id="newsletter-email" placeholder="jane@framer.com" className="newsletter-input" required />
                     <button type="submit" className="newsletter-submit-btn">
                         <div className="flip-text">
                             <span>SUBSCRIBE</span>

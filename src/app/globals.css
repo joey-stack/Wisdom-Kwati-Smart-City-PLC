@@ -6,3 +6,22 @@
 @import "../styles/house-details.css";
 @import "../styles/cards.css";
 @import "../styles/site-updates.css";
+
+/* Screen-reader-only utility — visually hidden but accessible to assistive technology */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Defer rendering of off-screen components to drastically improve LCP/INP */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px; /* Approximate height to prevent huge scrollbar jumps */
+}

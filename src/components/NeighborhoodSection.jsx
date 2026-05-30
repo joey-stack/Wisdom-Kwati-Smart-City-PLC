@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectCard from './cards/ProjectCard';
 
@@ -20,13 +20,24 @@ export default function NeighborhoodSection() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    getDocs(collection(db, 'projects'))
+
+    const getGlobalCache = () => {
+      if (typeof window !== 'undefined' && window.wkscCache) return window.wkscCache;
+      return null;
+    };
+
+    getDocs(query(collection(db, 'projects'), limit(10)))
       .then(snap => {
         const list = [];
+        const cache = getGlobalCache();
         snap.forEach(doc => {
           const d = doc.data();
           if (!d.name) return; // skip shell documents
           if (!d.heroImage && !d.detailsImage) return; // skip docs without images
+
+          if (cache) {
+            cache.projects[doc.id] = d;
+          }
 
           // Parse createdAt supporting both Timestamp objects and ISO strings
           let createdAtDate = new Date(0);

@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 export default function HeroVideo() {
     return (
@@ -6,11 +7,14 @@ export default function HeroVideo() {
             className="hero-video-wrapper"
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0 }}
         >
-            <img
-                src="https://images.weserv.nl/?url=drive.google.com/uc?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi"
+            <Image
+                src="/images/hero-bg-new.jpg"
                 alt="Wisdom Kwati Smart City"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
-                fetchPriority="high"
+                fill
+                sizes="100vw"
+                style={{ objectFit: 'cover' }}
+                priority={true}
+                quality={75}
             />
             {/* Interaction Shield */}
             <div

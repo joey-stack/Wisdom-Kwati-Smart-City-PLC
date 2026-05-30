@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import '../../../styles/blog-single.css';
@@ -119,7 +120,7 @@ export default function BlogDetailPage({ params }) {
           <div className="blog-single-meta">
             <div className="blog-single-meta-item">
               <div className="blog-single-avatar">
-                <img src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`} alt={blog.author} />
+                <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={`https://ui-avatars.com/api/?name=${(blog.author || 'WK').replace(' ', '+')}&background=random`} alt={blog.author} />
               </div>
               <span className="blog-single-author-name">{blog.author || 'James Miller'}</span>
             </div>
@@ -136,7 +137,7 @@ export default function BlogDetailPage({ params }) {
 
         {/* Featured Image */}
         <div className="blog-single-featured-image">
-          <img src={blog.image || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" />
+          <Image width={1200} height={800} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={blog.image || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" priority={true} />
         </div>
 
         {/* Layout: Sidebar + Article Body */}
@@ -234,7 +235,7 @@ export default function BlogDetailPage({ params }) {
               {relatedBlogs.map((item) => (
                 <Link href={`/blogs/${item.slug}`} key={item.id} className="blog-card">
                   <div className="blog-card-image">
-                    <img loading="lazy" src={item.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={item.title} referrerPolicy="no-referrer" />
+                    <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={item.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={item.title} referrerPolicy="no-referrer" />
                   </div>
                   <div className="blog-card-content">
                     <div className="blog-card-meta">
@@ -245,7 +246,7 @@ export default function BlogDetailPage({ params }) {
                     <h3 className="blog-card-title">{item.title}</h3>
                     <div className="blog-card-author">
                       <div className="blog-author-avatar">
-                        <img src={`https://ui-avatars.com/api/?name=${(item.author || 'WK').replace(' ', '+')}&background=random`} alt={item.author} />
+                        <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={`https://ui-avatars.com/api/?name=${(item.author || 'WK').replace(' ', '+')}&background=random`} alt={item.author} />
                       </div>
                       <span className="blog-author-name">{item.author || 'James Miller'}</span>
                     </div>

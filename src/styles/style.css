@@ -6441,3 +6441,24 @@ body.menu-active .mobile-cta {
     filter: blur(0);
   }
 }
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS OVERRIDES & ANIMATION FALLBACKS
+   ========================================================================== */
+.hamburger-line {
+  pointer-events: none; /* Prevents touch/click interception on iOS Safari */
+}
+
+@media (max-width: 1024px) {
+  /* Immediately display all reveal-on-scroll elements to prevent empty page states on mobile JS failures */
+  .reveal-on-scroll,
+  .reveal-type-lines,
+  .hero-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+}

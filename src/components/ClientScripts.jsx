@@ -5,6 +5,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
+// Register ScrollTrigger once at module level to prevent registration race conditions
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ClientScripts() {
     const pathname = usePathname();
 
@@ -35,9 +38,10 @@ export default function ClientScripts() {
         const yieldToMain = () => new Promise(r => setTimeout(r, 0));
         const initTimeout = setTimeout(async function initAnimations() {
 
-        // --- 2. MOBILE TOUCH BEYPASS FOR LENIS (BEST PRACTICE) ---
+        // --- 2. MOBILE TOUCH BYPASS FOR LENIS (BEST PRACTICE) ---
         // Disable Lenis on mobile/tablet viewports to utilize native hardware-accelerated inertia scrolling
         const isMobile = window.matchMedia('(max-width: 1024px)').matches || ('ontouchstart' in window);
+        const body = document.body;
 
         if (!isMobile) {
             lenis = new Lenis({
@@ -69,101 +73,10 @@ export default function ClientScripts() {
             gsap.ticker.lagSmoothing(0);
         }
 
-        // --- 3. RESPONSIVE MOBILE NAVIGATION TOGGLE (CLICK + TOUCHSTART) ---
-        const menuToggle = document.querySelector('.menu-toggle');
-        const menuClose = document.querySelector('.menu-close');
-        const mobileMenu = document.querySelector('.mobile-menu-overlay');
-        const body = document.body;
-
-        const handleMenuOpen = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            body.classList.add('menu-active');
-            body.classList.add('no-scroll');
-            if (lenis) lenis.stop();
-        };
-
-        const handleMenuClose = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            body.classList.remove('menu-active');
-            body.classList.remove('no-scroll');
-            if (lenis) lenis.start();
-        };
-
-        if (menuToggle && mobileMenu) {
-            addTrackedListener(menuToggle, 'click', handleMenuOpen);
-            addTrackedListener(menuToggle, 'touchstart', handleMenuOpen, { passive: false });
-        }
-
-        if (menuClose) {
-            addTrackedListener(menuClose, 'click', handleMenuClose);
-            addTrackedListener(menuClose, 'touchstart', handleMenuClose, { passive: false });
-        }
-
-        // Close menu when clicking standard links
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links > li > a');
-        const handleMobileLinkClick = (e) => {
-            const link = e.currentTarget;
-            const parent = link.closest('.mobile-nav-item');
-            if (!parent) {
-                body.classList.remove('menu-active');
-                body.classList.remove('no-scroll');
-                if (lenis) lenis.start();
-            }
-        };
-
-        mobileLinks.forEach(link => {
-            addTrackedListener(link, 'click', handleMobileLinkClick);
-            addTrackedListener(link, 'touchstart', handleMobileLinkClick, { passive: true });
-        });
-
-        // --- 4. MOBILE ACCORDION TRIGGER FOR PROJECTS & HOUSE TYPES (HIGH FIDELITY UX) ---
-        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-        mobileNavItems.forEach(item => {
-            const triggerLink = item.querySelector('a');
-            
-            const handleAccordionToggle = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const isExpanded = item.classList.contains('expanded');
-                
-                // Accordion behavior: close other sections
-                mobileNavItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('expanded');
-                    }
-                });
-                
-                if (isExpanded) {
-                    item.classList.remove('expanded');
-                } else {
-                    item.classList.add('expanded');
-                }
-            };
-
-            if (triggerLink) {
-                addTrackedListener(triggerLink, 'click', handleAccordionToggle);
-                addTrackedListener(triggerLink, 'touchstart', handleAccordionToggle, { passive: false });
-            }
-        });
-
-        const compactCards = document.querySelectorAll('.mobile-compact-card');
-        const handleCompactCardClick = () => {
-            body.classList.remove('menu-active');
-            body.classList.remove('no-scroll');
-            if (lenis) lenis.start();
-        };
-
-        compactCards.forEach(card => {
-            addTrackedListener(card, 'click', handleCompactCardClick);
-            addTrackedListener(card, 'touchstart', handleCompactCardClick, { passive: true });
-        });
-
         await yieldToMain();
         if (initAborted) return;
 
-        // --- 5. CURSOR TRACKING (DISABLED ON MOBILE TO AVOID CPU SPIKES) ---
+        // --- 3. CURSOR TRACKING (DISABLED ON MOBILE TO AVOID CPU SPIKES) ---
         const cardCursor = document.getElementById('card-cursor');
 
         if (cardCursor && !isMobile) {
@@ -219,55 +132,333 @@ export default function ClientScripts() {
             addTrackedListener(document, 'mouseout', handleMouseOut);
         }
 
-        // --- 6. INITIALIZE GSAP ANIMATION MODULES ---
-        gsap.registerPlugin(ScrollTrigger);
+        // --- 4. INITIALIZE GSAP ANIMATIONS (DESKTOP ONLY) ---
+        if (!isMobile) {
+            // Timeline Spine Fill Animation
+            const timelineSpine = document.querySelector('.timeline-spine');
+            const processItems = document.querySelectorAll('.process-item');
+            
+            if (document.querySelector('.timeline-fill') && document.querySelector('.timeline-container')) {
+                if (timelineSpine && processItems.length > 0) {
+                    const updateHomeSpineHeight = () => {
+                        const firstItem = processItems[0];
+                        const lastItem = processItems[processItems.length - 1];
+                        const firstMarker = firstItem.querySelector('.process-marker');
+                        const lastMarker = lastItem.querySelector('.process-marker');
+                        
+                        if (firstMarker && lastMarker) {
+                            const startY = firstItem.offsetTop + firstMarker.offsetTop;
+                            const endY = lastItem.offsetTop + lastMarker.offsetTop;
+                            const calculatedHeight = endY - startY;
 
-        // Timeline Spine Fill Animation
-        const timelineSpine = document.querySelector('.timeline-spine');
-        const processItems = document.querySelectorAll('.process-item');
-        
-        if (document.querySelector('.timeline-fill') && document.querySelector('.timeline-container')) {
-            if (timelineSpine && processItems.length > 0) {
-                const updateHomeSpineHeight = () => {
-                    const firstItem = processItems[0];
-                    const lastItem = processItems[processItems.length - 1];
-                    const firstMarker = firstItem.querySelector('.process-marker');
-                    const lastMarker = lastItem.querySelector('.process-marker');
+                            timelineSpine.style.top = `${startY}px`;
+                            timelineSpine.style.height = `${calculatedHeight}px`;
+                        }
+                    };
                     
-                    if (firstMarker && lastMarker) {
-                        const startY = firstItem.offsetTop + firstMarker.offsetTop;
-                        const endY = lastItem.offsetTop + lastMarker.offsetTop;
-                        const calculatedHeight = endY - startY;
-
-                        timelineSpine.style.top = `${startY}px`;
-                        timelineSpine.style.height = `${calculatedHeight}px`;
-                    }
-                };
-                
-                updateHomeSpineHeight();
-                
-                const spineResizeObserver = new ResizeObserver(() => {
                     updateHomeSpineHeight();
+                    
+                    const spineResizeObserver = new ResizeObserver(() => {
+                        updateHomeSpineHeight();
+                    });
+                    spineResizeObserver.observe(document.querySelector('.timeline-container'));
+                    resizeObservers.push(spineResizeObserver);
+                    
+                    addTrackedListener(window, 'resize', updateHomeSpineHeight);
+                }
+
+                gsap.to('.timeline-fill', {
+                    height: '100%',
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.timeline-container',
+                        start: 'top 80%',
+                        end: 'bottom 80%',
+                        scrub: true
+                    }
                 });
-                spineResizeObserver.observe(document.querySelector('.timeline-container'));
-                resizeObservers.push(spineResizeObserver);
-                
-                addTrackedListener(window, 'resize', updateHomeSpineHeight);
             }
 
-            gsap.to('.timeline-fill', {
-                height: '100%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.timeline-container',
-                    start: 'top 80%',
-                    end: 'bottom 80%',
-                    scrub: true
+            // Parallax & Blur clears
+            const heroSections = document.querySelectorAll('.hero, .pd-hero');
+            heroSections.forEach(section => {
+                const overlay = section.querySelector('.grid-overlay, .pd-hero-overlay');
+                const wrapper = section.querySelector('.hero-video-wrapper, .bg-video-wrapper');
+                
+                if (overlay) {
+                    gsap.fromTo(overlay, 
+                        { backdropFilter: 'blur(0px)', backgroundColor: 'rgba(0,0,0,0)', opacity: 0 },
+                        {
+                            backdropFilter: 'blur(30px)',
+                            backgroundColor: 'rgba(0,0,0,0.3)',
+                            opacity: 1,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top top',
+                                end: 'bottom top',
+                                scrub: 1,
+                                invalidateOnRefresh: true
+                            }
+                        }
+                    );
+                }
+                
+                if (wrapper) {
+                    gsap.fromTo(wrapper,
+                        { scale: 1, y: '0%' },
+                        {
+                            scale: 1.2,
+                            y: '20%',
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top top',
+                                end: 'bottom top',
+                                scrub: 1,
+                                invalidateOnRefresh: true
+                            }
+                        }
+                    );
                 }
             });
+
+            await yieldToMain();
+            if (initAborted) return;
+
+            // Architectural Staggered Reveal
+            const gridSelectors = [
+                '.action-grid', '.ht-grid', '.locations-grid', '.neighborhood-grid', 
+                '.team-grid', '.career-grid', '.values-grid', '.recognition-list',
+                '.portfolio-grid', '.services-grid-body', '.uniqueness-grid', '.reviews-grid',
+                '.projects-grid', '.who-container', '.mission-grid', '.background-grid', '.stats-subgrid'
+            ];
+
+            gridSelectors.forEach(selector => {
+                const grid = document.querySelector(selector);
+                if (grid) {
+                    const items = grid.querySelectorAll('.reveal-on-scroll');
+                    if (items.length > 0) {
+                        ScrollTrigger.batch(items, {
+                            onEnter: batch => gsap.fromTo(batch, 
+                                { y: 35, opacity: 0, autoAlpha: 0 },
+                                {
+                                    y: 0, opacity: 1, autoAlpha: 1,
+                                    duration: 0.85, stagger: 0.08, ease: 'power3.out', overwrite: true
+                                }
+                            ),
+                            start: 'top 90%',
+                            once: true
+                        });
+                    }
+                }
+            });
+
+            const standaloneRevels = document.querySelectorAll('.reveal-on-scroll');
+            standaloneRevels.forEach(el => {
+                const isInsideGrid = gridSelectors.some(sel => el.closest(sel));
+                if (!isInsideGrid) {
+                    gsap.fromTo(el, 
+                        { y: 35, opacity: 0, autoAlpha: 0 },
+                        {
+                            y: 0, opacity: 1, autoAlpha: 1,
+                            duration: 0.85, ease: 'power3.out',
+                            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+                            force3D: true
+                        }
+                    );
+                }
+            });
+
+            // History Timeline Logic
+            const historySpine = document.querySelector('.history-spine');
+            const historySpineFill = document.querySelector('.history-spine-fill');
+            const historyItems = document.querySelectorAll('.history-item');
+            
+            if (historySpine && historySpineFill && historyItems.length > 0) {
+                const updateSpineHeight = () => {
+                    const firstItem = historyItems[0];
+                    const lastItem = historyItems[historyItems.length - 1];
+                    const firstIndicator = firstItem.querySelector('.history-indicator');
+                    const lastIndicator = lastItem.querySelector('.history-indicator');
+                    
+                    if (firstIndicator && lastIndicator) {
+                        const startY = firstItem.offsetTop + firstIndicator.offsetTop; 
+                        const endY = lastItem.offsetTop + lastIndicator.offsetTop;
+                        const calculatedHeight = endY - startY;
+
+                        historySpine.style.top = `${startY}px`;
+                        historySpine.style.height = `${calculatedHeight}px`;
+                    }
+                };
+
+                updateSpineHeight();
+                
+                const historyResizeObserver = new ResizeObserver(() => {
+                    updateSpineHeight();
+                });
+                historyResizeObserver.observe(historySpine.parentElement);
+                resizeObservers.push(historyResizeObserver);
+                
+                addTrackedListener(window, 'resize', updateSpineHeight);
+
+                gsap.to(historySpineFill, {
+                    height: '100%',
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: historySpine, start: 'top 45%', end: 'bottom 45%', scrub: true
+                    }
+                });
+
+                historyItems.forEach(item => {
+                    const indicator = item.querySelector('.history-indicator');
+                    if (indicator) {
+                        ScrollTrigger.create({
+                            trigger: indicator, start: "center 45%",
+                            onEnter: () => indicator.classList.add('active'),
+                            onLeaveBack: () => indicator.classList.remove('active'),
+                        });
+                    }
+                });
+            }
+
+            // Text Split Reveals (Premium effects)
+            const splitReveal = (selector, type = 'chars', timeline = null, position = 0.05) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    if (el.hasAttribute('data-split-reveal')) return;
+                    el.setAttribute('data-split-reveal', 'true');
+
+                    const content = el.innerHTML;
+                    gsap.set(el, { autoAlpha: 0 });
+                    
+                    if (type === 'chars') {
+                        const text = el.innerText;
+                        el.innerHTML = '';
+                        const chars = text.split('').map(char => {
+                            if (char === ' ') return '&nbsp;';
+                            return `<span class="reveal-char" style="display:inline-block; transform:translateY(105%); opacity:0;">${char}</span>`;
+                        }).join('');
+                        el.innerHTML = chars;
+                        
+                        const anim = {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.012,
+                            ease: 'power4.out',
+                            force3D: true,
+                            onStart: () => gsap.set(el, { autoAlpha: 1 })
+                        };
+
+                        if (timeline) timeline.to(el.querySelectorAll('.reveal-char'), anim, 0);
+                        else gsap.to(el.querySelectorAll('.reveal-char'), { ...anim, delay: 0.1 });
+
+                    } else if (type === 'lines') {
+                        const lines = content.split(/<br\s*\/?>/i);
+                        el.innerHTML = '';
+                        lines.forEach((line, index) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'reveal-line-wrapper';
+                            wrapper.style.overflow = 'hidden';
+                            wrapper.style.verticalAlign = 'top';
+                            wrapper.style.zIndex = lines.length - index;
+                            wrapper.style.position = 'relative';
+                            
+                            const inner = document.createElement('div');
+                            inner.className = 'reveal-line';
+                            inner.style.transform = 'translateY(100%)';
+                            inner.style.opacity = '0';
+                            inner.style.filter = 'blur(10px)';
+                            inner.innerHTML = line.trim();
+                            
+                            wrapper.appendChild(inner);
+                            el.appendChild(wrapper);
+                        });
+                        
+                        const anim = {
+                            y: 0,
+                            opacity: 1,
+                            filter: 'blur(0px)',
+                            duration: 1.0,
+                            stagger: 0.08,
+                            ease: 'power4.out',
+                            force3D: true,
+                            onStart: () => gsap.set(el, { autoAlpha: 1 })
+                        };
+
+                        if (timeline) timeline.to(el.querySelectorAll('.reveal-line'), anim, position);
+                        else gsap.to(el.querySelectorAll('.reveal-line'), { ...anim, delay: 0.15 });
+                    }
+                });
+            };
+
+            const heroTl = gsap.timeline({ delay: 0.05 });
+            const isHomePage = !document.querySelector('.about-page') &&
+                               !document.querySelector('.house-types-page') &&
+                               !document.querySelector('.projects-page');
+
+            if (!isHomePage) {
+                splitReveal('.pd-hero-title', 'lines', heroTl, 0.05);
+                splitReveal('.pd-hero-description', 'lines', heroTl, 0.5);
+                splitReveal('.reveal-type-lines', 'lines', heroTl, 0.05);
+            }
+
+            const heroSelectors = [
+                { el: document.querySelector('.about-page .hero-title') },
+                { el: document.querySelector('.house-types-page .ht-headline') },
+                { el: document.querySelector('.projects-page .pj-hero-title') }
+            ];
+
+            heroSelectors.forEach(({ el }) => {
+                if (el) {
+                    heroTl.fromTo(el, 
+                        { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)', autoAlpha: 0 },
+                        { 
+                            y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)', autoAlpha: 1, 
+                            duration: 1.2, ease: 'power4.out', force3D: true 
+                        }, 
+                        0.2
+                    );
+                }
+            });
+        } else {
+            // --- MOBILE IMMEDIATE RENDER STATE INITIALIZATION ---
+            // Set vertical timeline fill and process spine heights to final state
+            const timelineFill = document.querySelector('.timeline-fill');
+            if (timelineFill) timelineFill.style.height = '100%';
+            
+            const historySpineFill = document.querySelector('.history-spine-fill');
+            if (historySpineFill) historySpineFill.style.height = '100%';
+
+            const indicators = document.querySelectorAll('.history-indicator');
+            indicators.forEach(ind => ind.classList.add('active'));
         }
 
-        // Lock/Unlock Scroll when navbar menus open/close, pausing reviews marquee if active
+        // Stats Count-up (Handles immediate setting on mobile so numbers don't stick to 0)
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach(card => {
+            const inner = card.querySelector('.stat-reveal-inner');
+            const counter = card.querySelector('.count-up');
+            if (!inner || !counter) return;
+
+            const target = parseInt(counter.getAttribute('data-target'));
+            if (!isMobile) {
+                const tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' } });
+                tl.to(inner, { y: 0, duration: 1.2, ease: 'power4.out' });
+                tl.to(counter, {
+                    innerText: target, duration: 2.2, snap: { innerText: 1 }, ease: 'power2.out',
+                    onUpdate: function() { counter.innerHTML = Math.ceil(this.targets()[0].innerText); }
+                }, "-=0.8");
+            } else {
+                counter.innerText = target;
+                if (inner) {
+                    inner.style.transform = 'translateY(0)';
+                }
+            }
+        });
+
+        // --- 5. DESKTOP HOVER SCROLL LOCKING ---
         const lockScroll = () => {
             if (window.reviewsMarquee) {
                 gsap.to(window.reviewsMarquee, { timeScale: 0, duration: 0.4, ease: "power1.out" });
@@ -287,17 +478,19 @@ export default function ClientScripts() {
         const navItems = document.querySelectorAll('.nav-item.has-dropdown');
         const megaWrappers = document.querySelectorAll('.mega-menu-wrapper');
 
-        navItems.forEach(item => {
-            addTrackedListener(item, 'mouseenter', lockScroll);
-            addTrackedListener(item, 'mouseleave', unlockScroll);
-        });
+        if (!isMobile) {
+            navItems.forEach(item => {
+                addTrackedListener(item, 'mouseenter', lockScroll);
+                addTrackedListener(item, 'mouseleave', unlockScroll);
+            });
 
-        megaWrappers.forEach(menu => {
-            addTrackedListener(menu, 'mouseenter', lockScroll);
-            addTrackedListener(menu, 'mouseleave', unlockScroll);
-        });
+            megaWrappers.forEach(menu => {
+                addTrackedListener(menu, 'mouseenter', lockScroll);
+                addTrackedListener(menu, 'mouseleave', unlockScroll);
+            });
+        }
 
-        // FAQ Accordion
+        // FAQ Accordions (Works on all viewports)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const trigger = item.querySelector('.faq-trigger');
@@ -316,277 +509,7 @@ export default function ClientScripts() {
         await yieldToMain();
         if (initAborted) return;
 
-        // --- 7. PREMIUM TEXT REVEAL SCENARIO ---
-        const splitReveal = (selector, type = 'chars', timeline = null, position = 0.05) => {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(el => {
-                if (el.hasAttribute('data-split-reveal')) return;
-                el.setAttribute('data-split-reveal', 'true');
-
-                const content = el.innerHTML;
-                gsap.set(el, { autoAlpha: 0 });
-                
-                if (type === 'chars') {
-                    const text = el.innerText;
-                    el.innerHTML = '';
-                    const chars = text.split('').map(char => {
-                        if (char === ' ') return '&nbsp;';
-                        return `<span class="reveal-char" style="display:inline-block; transform:translateY(105%); opacity:0;">${char}</span>`;
-                    }).join('');
-                    el.innerHTML = chars;
-                    
-                    const anim = {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.012,
-                        ease: 'power4.out',
-                        force3D: true,
-                        onStart: () => gsap.set(el, { autoAlpha: 1 })
-                    };
-
-                    if (timeline) timeline.to(el.querySelectorAll('.reveal-char'), anim, 0);
-                    else gsap.to(el.querySelectorAll('.reveal-char'), { ...anim, delay: 0.1 });
-
-                } else if (type === 'lines') {
-                    const lines = content.split(/<br\s*\/?>/i);
-                    el.innerHTML = '';
-                    lines.forEach((line, index) => {
-                        const wrapper = document.createElement('div');
-                        wrapper.className = 'reveal-line-wrapper';
-                        wrapper.style.overflow = 'hidden';
-                        wrapper.style.verticalAlign = 'top';
-                        wrapper.style.zIndex = lines.length - index;
-                        wrapper.style.position = 'relative';
-                        
-                        const inner = document.createElement('div');
-                        inner.className = 'reveal-line';
-                        inner.style.transform = 'translateY(100%)';
-                        inner.style.opacity = '0';
-                        inner.style.filter = 'blur(10px)';
-                        inner.innerHTML = line.trim();
-                        
-                        wrapper.appendChild(inner);
-                        el.appendChild(wrapper);
-                    });
-                    
-                    const anim = {
-                        y: 0,
-                        opacity: 1,
-                        filter: 'blur(0px)',
-                        duration: 1.0,
-                        stagger: 0.08,
-                        ease: 'power4.out',
-                        force3D: true,
-                        onStart: () => gsap.set(el, { autoAlpha: 1 })
-                    };
-
-                    if (timeline) timeline.to(el.querySelectorAll('.reveal-line'), anim, position);
-                    else gsap.to(el.querySelectorAll('.reveal-line'), { ...anim, delay: 0.15 });
-                }
-            });
-        };
-
-        const heroTl = gsap.timeline({ delay: 0.05 });
-
-        // For the homepage hero, the CSS already handles visibility (LCP fix).
-        // Only run GSAP split-reveal on non-homepage hero selectors.
-        const isHomePage = !document.querySelector('.about-page') &&
-                           !document.querySelector('.house-types-page') &&
-                           !document.querySelector('.projects-page');
-
-        if (!isHomePage) {
-            // Non-homepage heroes: full GSAP animation
-            splitReveal('.pd-hero-title', 'lines', heroTl, 0.05);
-            splitReveal('.pd-hero-description', 'lines', heroTl, 0.5);
-            splitReveal('.reveal-type-lines', 'lines', heroTl, 0.05);
-        }
-        // Homepage hero headline & subheadline are animated by CSS keyframes
-
-        const heroSelectors = [
-            // Skip homepage hero-card — CSS keyframe handles it now
-            { el: document.querySelector('.about-page .hero-title') },
-            { el: document.querySelector('.house-types-page .ht-headline') },
-            { el: document.querySelector('.projects-page .pj-hero-title') }
-        ];
-
-        heroSelectors.forEach(({ el }) => {
-            if (el) {
-                heroTl.fromTo(el, 
-                    { y: 30, opacity: 0, filter: 'blur(12px)', clipPath: 'inset(0% 0% 100% 0%)', autoAlpha: 0 },
-                    { 
-                        y: 0, opacity: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)', autoAlpha: 1, 
-                        duration: 1.2, ease: 'power4.out', force3D: true 
-                    }, 
-                    0.2
-                );
-            }
-        });
-
-        // Parallax & Blur clears
-        const heroSections = document.querySelectorAll('.hero, .pd-hero');
-        heroSections.forEach(section => {
-            const overlay = section.querySelector('.grid-overlay, .pd-hero-overlay');
-            const wrapper = section.querySelector('.hero-video-wrapper, .bg-video-wrapper');
-            
-            if (overlay) {
-                gsap.fromTo(overlay, 
-                    { backdropFilter: 'blur(0px)', backgroundColor: 'rgba(0,0,0,0)', opacity: 0 },
-                    {
-                        backdropFilter: 'blur(30px)',
-                        backgroundColor: 'rgba(0,0,0,0.3)',
-                        opacity: 1,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: section,
-                            start: 'top top',
-                            end: 'bottom top',
-                            scrub: 1,
-                            invalidateOnRefresh: true
-                        }
-                    }
-                );
-            }
-            
-            if (wrapper) {
-                gsap.fromTo(wrapper,
-                    { scale: 1, y: '0%' },
-                    {
-                        scale: 1.2,
-                        y: '20%',
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: section,
-                            start: 'top top',
-                            end: 'bottom top',
-                            scrub: 1,
-                            invalidateOnRefresh: true
-                        }
-                    }
-                );
-            }
-        });
-
-        await yieldToMain();
-        if (initAborted) return;
-
-        // Architectural Staggered Reveal
-        const gridSelectors = [
-            '.action-grid', '.ht-grid', '.locations-grid', '.neighborhood-grid', 
-            '.team-grid', '.career-grid', '.values-grid', '.recognition-list',
-            '.portfolio-grid', '.services-grid-body', '.uniqueness-grid', '.reviews-grid',
-            '.projects-grid', '.who-container', '.mission-grid', '.background-grid', '.stats-subgrid'
-        ];
-
-        gridSelectors.forEach(selector => {
-            const grid = document.querySelector(selector);
-            if (grid) {
-                const items = grid.querySelectorAll('.reveal-on-scroll');
-                if (items.length > 0) {
-                    ScrollTrigger.batch(items, {
-                        onEnter: batch => gsap.fromTo(batch, 
-                            { y: 35, opacity: 0, autoAlpha: 0 },
-                            {
-                                y: 0, opacity: 1, autoAlpha: 1,
-                                duration: 0.85, stagger: 0.08, ease: 'power3.out', overwrite: true
-                            }
-                        ),
-                        start: 'top 90%',
-                        once: true
-                    });
-                }
-            }
-        });
-
-        const standaloneRevels = document.querySelectorAll('.reveal-on-scroll');
-        standaloneRevels.forEach(el => {
-            const isInsideGrid = gridSelectors.some(sel => el.closest(sel));
-            if (!isInsideGrid) {
-                gsap.fromTo(el, 
-                    { y: 35, opacity: 0, autoAlpha: 0 },
-                    {
-                        y: 0, opacity: 1, autoAlpha: 1,
-                        duration: 0.85, ease: 'power3.out',
-                        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-                        force3D: true
-                    }
-                );
-            }
-        });
-
-        // Stats Count-up
-        const statCards = document.querySelectorAll('.stat-card');
-        statCards.forEach(card => {
-            const inner = card.querySelector('.stat-reveal-inner');
-            const counter = card.querySelector('.count-up');
-            if (!inner || !counter) return;
-
-            const target = parseInt(counter.getAttribute('data-target'));
-            const tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' } });
-            
-            tl.to(inner, { y: 0, duration: 1.2, ease: 'power4.out' });
-            tl.to(counter, {
-                innerText: target, duration: 2.2, snap: { innerText: 1 }, ease: 'power2.out',
-                onUpdate: function() { counter.innerHTML = Math.ceil(this.targets()[0].innerText); }
-            }, "-=0.8");
-        });
-
-        // History Timeline Logic
-        const historySpine = document.querySelector('.history-spine');
-        const historySpineFill = document.querySelector('.history-spine-fill');
-        const historyItems = document.querySelectorAll('.history-item');
-        
-        if (historySpine && historySpineFill && historyItems.length > 0) {
-            const updateSpineHeight = () => {
-                const firstItem = historyItems[0];
-                const lastItem = historyItems[historyItems.length - 1];
-                const firstIndicator = firstItem.querySelector('.history-indicator');
-                const lastIndicator = lastItem.querySelector('.history-indicator');
-                
-                if (firstIndicator && lastIndicator) {
-                    const startY = firstItem.offsetTop + firstIndicator.offsetTop; 
-                    const endY = lastItem.offsetTop + lastIndicator.offsetTop;
-                    const calculatedHeight = endY - startY;
-
-                    historySpine.style.top = `${startY}px`;
-                    historySpine.style.height = `${calculatedHeight}px`;
-                }
-            };
-
-            updateSpineHeight();
-            
-            const historyResizeObserver = new ResizeObserver(() => {
-                updateSpineHeight();
-            });
-            historyResizeObserver.observe(historySpine.parentElement);
-            resizeObservers.push(historyResizeObserver);
-            
-            addTrackedListener(window, 'resize', updateSpineHeight);
-
-            gsap.to(historySpineFill, {
-                height: '100%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: historySpine, start: 'top 45%', end: 'bottom 45%', scrub: true
-                }
-            });
-
-            historyItems.forEach(item => {
-                const indicator = item.querySelector('.history-indicator');
-                if (indicator) {
-                    ScrollTrigger.create({
-                        trigger: indicator, start: "center 45%",
-                        onEnter: () => indicator.classList.add('active'),
-                        onLeaveBack: () => indicator.classList.remove('active'),
-                    });
-                }
-            });
-        }
-
-        await yieldToMain();
-        if (initAborted) return;
-
-        // Modal Logic
+        // Modal Logic (Works on all viewports)
         const siteVisitModal = document.getElementById('siteVisitModal');
         
         const closeSiteVisitModal = () => {
@@ -639,7 +562,7 @@ export default function ClientScripts() {
             }
         });
 
-        // Gallery Lightbox Logic
+        // Gallery Lightbox Logic (Works on all viewports)
         const lightbox = document.getElementById('gallery-lightbox');
         const viewAllBtn = document.getElementById('view-all-images-btn');
         const galleryItems = document.querySelectorAll('.hd-gallery-item img');
@@ -762,12 +685,14 @@ export default function ClientScripts() {
             addTrackedListener(document, 'keydown', keydownLightbox);
         }
 
-        // --- 8. REFRESH SCROLLTRIGGER STATE FOR ACCURATE CALCULATIONS ---
-        ScrollTrigger.refresh();
+        // --- 6. REFRESH SCROLLTRIGGER STATE FOR ACCURATE CALCULATIONS ---
+        if (!isMobile) {
+            ScrollTrigger.refresh();
+        }
 
-        }, 1); // End deferred initialization — eliminates TBT
+        }, 1); // End deferred initialization
 
-        // --- 9. RIGOROUS COMPREHENSIVE TEARDOWN DESTRUCTOR ON ROUTE / UNMOUNT ---
+        // --- 7. TEARDOWN DESTRUCTOR ON ROUTE / UNMOUNT ---
         return () => {
             initAborted = true;
             clearTimeout(initTimeout);

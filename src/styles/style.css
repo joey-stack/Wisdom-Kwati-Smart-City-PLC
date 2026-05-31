@@ -612,7 +612,7 @@ body.no-scroll {
   transform: translateX(100%);
   transition: transform 0.8s var(--ease-soft);
   flex-direction: column;
-  padding: 60px 40px;
+  padding: calc(60px + env(safe-area-inset-top)) 40px calc(40px + env(safe-area-inset-bottom)) 40px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   visibility: hidden;
@@ -648,7 +648,7 @@ body.menu-active .mobile-menu-overlay,
 
 .menu-close {
   position: absolute;
-  top: 30px;
+  top: calc(30px + env(safe-area-inset-top));
   right: 30px;
   background: transparent;
   border: none;
@@ -1595,6 +1595,11 @@ body.menu-active .mobile-cta {
     transform: translateY(-50%);
   }
 
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px !important;
+  }
+
   .nav-container {
     padding: 0 24px;
   }
@@ -1659,8 +1664,8 @@ body.menu-active .mobile-cta {
 /* Mobile Devices */
 @media (max-width: 768px) {
   .navbar {
-    height: 72px;
-    padding: 10px;
+    height: calc(72px + env(safe-area-inset-top));
+    padding: calc(10px + env(safe-area-inset-top)) 10px 10px 10px;
     background: transparent !important; /* Strictly transparent housing */
     border: none !important;
     box-shadow: none !important;

@@ -7,6 +7,7 @@ import Lenis from 'lenis';
 
 // Register ScrollTrigger once at module level to prevent registration race conditions
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export default function ClientScripts() {
     const pathname = usePathname();

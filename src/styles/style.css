@@ -578,6 +578,8 @@ body.no-scroll {
   background: transparent;
   border: none;
   cursor: pointer;
+  width: 48px;
+  height: 48px;
   padding: 0;
   z-index: 1001;
 }
@@ -637,7 +639,8 @@ body.no-scroll {
   z-index: -1;
 }
 
-body.menu-active .mobile-menu-overlay {
+body.menu-active .mobile-menu-overlay,
+.mobile-menu-overlay.menu-active {
   transform: translateX(0);
   visibility: visible;
   pointer-events: auto;
@@ -1588,6 +1591,8 @@ body.menu-active .mobile-cta {
     display: flex !important;
     position: absolute;
     right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .nav-container {
@@ -6446,7 +6451,7 @@ body.menu-active .mobile-cta {
    MOBILE RESPONSIVENESS OVERRIDES & ANIMATION FALLBACKS
    ========================================================================== */
 .hamburger-line {
-  pointer-events: none; /* Prevents touch/click interception on iOS Safari */
+  pointer-events: auto; /* Ensure touch events bubble up to the button */
 }
 
 @media (max-width: 1024px) {

@@ -132,8 +132,8 @@ export default function ClientScripts() {
             addTrackedListener(document, 'mouseout', handleMouseOut);
         }
 
-        // --- 4. INITIALIZE GSAP ANIMATIONS (DESKTOP ONLY) ---
-        if (!isMobile) {
+        // --- 4. INITIALIZE GSAP ANIMATIONS ---
+        {
             // Timeline Spine Fill Animation
             const timelineSpine = document.querySelector('.timeline-spine');
             const processItems = document.querySelectorAll('.process-item');
@@ -422,17 +422,6 @@ export default function ClientScripts() {
                     );
                 }
             });
-        } else {
-            // --- MOBILE IMMEDIATE RENDER STATE INITIALIZATION ---
-            // Set vertical timeline fill and process spine heights to final state
-            const timelineFill = document.querySelector('.timeline-fill');
-            if (timelineFill) timelineFill.style.height = '100%';
-            
-            const historySpineFill = document.querySelector('.history-spine-fill');
-            if (historySpineFill) historySpineFill.style.height = '100%';
-
-            const indicators = document.querySelectorAll('.history-indicator');
-            indicators.forEach(ind => ind.classList.add('active'));
         }
 
         // Stats Count-up (Handles immediate setting on mobile so numbers don't stick to 0)

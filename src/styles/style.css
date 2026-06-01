@@ -4205,6 +4205,10 @@ body.menu-active .mobile-menu-footer {
     padding: 0 16px !important;
   }
 
+  .about-hero {
+    padding-bottom: 50px !important;
+  }
+
   .about-mission {
     padding: 70px 10px 0 !important;
   }

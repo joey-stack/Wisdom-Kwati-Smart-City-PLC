@@ -1778,23 +1778,26 @@ body.menu-active .mobile-menu-footer {
   }
 
   .hero-card {
-    max-width: 100%;
+    width: 90%;
+    max-width: 290px; /* Reduced width per user request */
+    margin: 0 auto;
     text-align: center;
     align-items: center;
-    padding: 10px; /* Tighter padding for mobile panels */
+    padding: 10px;
     gap: 12px;
   }
 
   .hero-card .subheadline {
     text-align: center;
     font-size: 14px;
-    max-width: 280px; /* Constraint to force 2-line behavior if possible, or just let it wrap */
+    max-width: 260px; /* Constraint to force 2-line behavior if possible, or just let it wrap */
   }
 
   .cta-button {
-    width: 100%;
+    width: 85%;
+    max-width: 240px; /* Reduced width per user request */
     justify-content: center;
-    padding: 12px 24px;
+    padding: 12px 20px;
   }
 
   .who-we-are {

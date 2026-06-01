@@ -1720,7 +1720,6 @@ body.menu-active .mobile-menu-footer {
   .faq-header,
   .mission-header,
   .recognition-header,
-  .location-header,
   .background-header,
   .pd-sidebar-header {
     display: flex !important;
@@ -6209,6 +6208,26 @@ body.menu-active .mobile-menu-footer {
   .social-link {
     height: 56px;
     font-size: 20px;
+  }
+
+  /* Locations section mobile alignment & separation */
+  .locations-grid {
+    gap: 0 !important;
+    text-align: left !important;
+  }
+
+  .location-item {
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding-bottom: 32px !important;
+    margin-bottom: 32px !important;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .location-item:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 

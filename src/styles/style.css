@@ -724,7 +724,7 @@ body.menu-active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
 
 .mobile-nav-links a {
   font-family: var(--font-header);
-  font-size: clamp(38px, 9vh, 52px);
+  font-size: clamp(30px, 7.5vw, 44px);
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;

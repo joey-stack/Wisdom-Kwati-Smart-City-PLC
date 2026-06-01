@@ -4194,6 +4194,17 @@ body.menu-active .mobile-menu-footer {
     letter-spacing: -0.01em !important;
   }
 
+  .about-hero .hero-title {
+    font-size: clamp(14px, 4.1vw, 20px) !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.02em !important;
+    max-width: 100% !important;
+  }
+
+  .about-hero .hero-content {
+    padding: 0 16px !important;
+  }
+
   .about-mission {
     padding: 70px 10px 0 !important;
   }

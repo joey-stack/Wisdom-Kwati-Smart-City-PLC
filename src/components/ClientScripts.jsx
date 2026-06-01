@@ -180,11 +180,25 @@ export default function ClientScripts() {
                     
                     const spineResizeObserver = new ResizeObserver(() => {
                         updateHomeSpineHeight();
+                        ScrollTrigger.refresh();
                     });
                     spineResizeObserver.observe(document.querySelector('.timeline-container'));
                     resizeObservers.push(spineResizeObserver);
                     
-                    addTrackedListener(window, 'resize', updateHomeSpineHeight);
+                    addTrackedListener(window, 'resize', () => {
+                        updateHomeSpineHeight();
+                        ScrollTrigger.refresh();
+                    });
+
+                    if (document.readyState === 'complete') {
+                        updateHomeSpineHeight();
+                        ScrollTrigger.refresh();
+                    } else {
+                        addTrackedListener(window, 'load', () => {
+                            updateHomeSpineHeight();
+                            ScrollTrigger.refresh();
+                        });
+                    }
                 }
 
                 gsap.to('.timeline-fill', {
@@ -316,17 +330,31 @@ export default function ClientScripts() {
                 
                 const historyResizeObserver = new ResizeObserver(() => {
                     updateSpineHeight();
+                    ScrollTrigger.refresh();
                 });
                 historyResizeObserver.observe(historySpine.parentElement);
                 resizeObservers.push(historyResizeObserver);
                 
-                addTrackedListener(window, 'resize', updateSpineHeight);
+                addTrackedListener(window, 'resize', () => {
+                    updateSpineHeight();
+                    ScrollTrigger.refresh();
+                });
+
+                if (document.readyState === 'complete') {
+                    updateSpineHeight();
+                    ScrollTrigger.refresh();
+                } else {
+                    addTrackedListener(window, 'load', () => {
+                        updateSpineHeight();
+                        ScrollTrigger.refresh();
+                    });
+                }
 
                 gsap.to(historySpineFill, {
                     height: '100%',
                     ease: 'none',
                     scrollTrigger: {
-                        trigger: historySpine, start: 'top 45%', end: 'bottom 45%', scrub: true
+                        trigger: historySpine, start: 'top 80%', end: 'bottom 80%', scrub: true
                     }
                 });
 
@@ -334,7 +362,7 @@ export default function ClientScripts() {
                     const indicator = item.querySelector('.history-indicator');
                     if (indicator) {
                         ScrollTrigger.create({
-                            trigger: indicator, start: "center 45%",
+                            trigger: indicator, start: "center 80%",
                             onEnter: () => indicator.classList.add('active'),
                             onLeaveBack: () => indicator.classList.remove('active'),
                         });

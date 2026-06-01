@@ -2850,7 +2850,7 @@ body.menu-active .mobile-menu-footer {
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  background-color: transparent; /* Seamless timeline integration */
+  background-color: var(--border); /* Visible background track line */
   z-index: 1;
 }
 
@@ -4700,7 +4700,7 @@ body.menu-active .mobile-menu-footer {
   top: 0;
   height: 100%;
   width: 2px;
-  background: transparent;
+  background: var(--border); /* Visible background track line */
   z-index: 1;
 }
 

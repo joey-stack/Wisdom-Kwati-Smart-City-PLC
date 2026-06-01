@@ -448,8 +448,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Initialize Height Calculation
             updateSpineHeight();
-            window.addEventListener('load', updateSpineHeight);
-            window.addEventListener('resize', updateSpineHeight);
+            
+            const historyResizeObserver = new ResizeObserver(() => {
+                updateSpineHeight();
+                ScrollTrigger.refresh();
+            });
+            if (historySpine.parentElement) {
+                historyResizeObserver.observe(historySpine.parentElement);
+            }
+            
+            window.addEventListener('load', () => {
+                updateSpineHeight();
+                ScrollTrigger.refresh();
+            });
+            window.addEventListener('resize', () => {
+                updateSpineHeight();
+                ScrollTrigger.refresh();
+            });
 
             // Synchronized Timeline Fill Animation
             gsap.to(historySpineFill, {
@@ -457,8 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'none',
                 scrollTrigger: {
                     trigger: historySpine,
-                    start: 'top 45%', // Line starts exactly when first box top hits 45%
-                    end: 'bottom 45%', // Line finishes at center of last box at 45%
+                    start: 'top 80%', // Line starts exactly when first box top hits 80%
+                    end: 'bottom 80%', // Line finishes at center of last box at 80%
                     scrub: true
                 }
             });
@@ -468,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const indicator = item.querySelector('.history-indicator');
             if (indicator) {
                 ScrollTrigger.create({
-                    trigger: indicator, start: "center 45%",
+                    trigger: indicator, start: "center 80%",
                     onEnter: () => indicator.classList.add('active'),
                     onLeaveBack: () => indicator.classList.remove('active'),
                 });

@@ -205,9 +205,9 @@ export default function ClientScripts() {
                     height: '100%',
                     ease: 'none',
                     scrollTrigger: {
-                        trigger: '.timeline-container',
-                        start: 'top 80%',
-                        end: 'bottom 80%',
+                        trigger: timelineSpine,
+                        start: 'top 50%',
+                        end: 'bottom 50%',
                         scrub: true
                     }
                 });
@@ -354,7 +354,7 @@ export default function ClientScripts() {
                     height: '100%',
                     ease: 'none',
                     scrollTrigger: {
-                        trigger: historySpine, start: 'top 80%', end: 'bottom 80%', scrub: true
+                        trigger: historySpine, start: 'top 50%', end: 'bottom 50%', scrub: true
                     }
                 });
 
@@ -362,7 +362,7 @@ export default function ClientScripts() {
                     const indicator = item.querySelector('.history-indicator');
                     if (indicator) {
                         ScrollTrigger.create({
-                            trigger: indicator, start: "center 80%",
+                            trigger: indicator, start: "center 50%",
                             onEnter: () => indicator.classList.add('active'),
                             onLeaveBack: () => indicator.classList.remove('active'),
                         });

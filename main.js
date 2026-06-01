@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
             height: '100%',
             ease: 'none',
             scrollTrigger: {
-                trigger: '.timeline-container',
-                start: 'top 80%',
-                end: 'bottom 80%',
+                trigger: '.timeline-spine',
+                start: 'top 50%',
+                end: 'bottom 50%',
                 scrub: true
             }
         });
@@ -472,8 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'none',
                 scrollTrigger: {
                     trigger: historySpine,
-                    start: 'top 80%', // Line starts exactly when first box top hits 80%
-                    end: 'bottom 80%', // Line finishes at center of last box at 80%
+                    start: 'top 50%', // Line starts exactly when first box top hits 50%
+                    end: 'bottom 50%', // Line finishes at center of last box at 50%
                     scrub: true
                 }
             });
@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const indicator = item.querySelector('.history-indicator');
             if (indicator) {
                 ScrollTrigger.create({
-                    trigger: indicator, start: "center 80%",
+                    trigger: indicator, start: "center 50%",
                     onEnter: () => indicator.classList.add('active'),
                     onLeaveBack: () => indicator.classList.remove('active'),
                 });

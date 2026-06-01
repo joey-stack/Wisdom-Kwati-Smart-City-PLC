@@ -1652,7 +1652,8 @@ body.menu-active .mobile-menu-footer {
 
   .hero {
     padding: 0;
-    height: 85vh; /* Reduced for better mobile accessibility */
+    height: 100vh;
+    height: 100dvh;
   }
 
   /* Standardized Mobile Vertical Rhythm (70/10/0) */
@@ -1770,7 +1771,7 @@ body.menu-active .mobile-menu-footer {
   }
 
   .headline {
-    font-size: clamp(2.6rem, 7.5vw, 3.2rem); /* Increased mobile headline scale for impact */
+    font-size: clamp(3.2rem, 9vw, 3.8rem); /* Increased mobile size further */
     text-align: center;
     line-height: 1.1;
     max-width: 100%;

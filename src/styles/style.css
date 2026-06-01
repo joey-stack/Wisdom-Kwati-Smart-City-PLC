@@ -1770,7 +1770,7 @@ body.menu-active .mobile-menu-footer {
   }
 
   .headline {
-    font-size: 2.2rem; /* Standardized mobile headline scale */
+    font-size: clamp(2.6rem, 7.5vw, 3.2rem); /* Increased mobile headline scale for impact */
     text-align: center;
     line-height: 1.1;
     max-width: 100%;

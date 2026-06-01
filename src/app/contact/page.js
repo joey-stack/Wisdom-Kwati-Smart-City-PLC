@@ -19,7 +19,7 @@ export default function Page() {
                             CONTACTS
                             <div style={{ width: "8px", height: "8px", borderRadius: "2px", background: "var(--text-primary)", flexShrink: "0" }}></div>
                         </div>
-                        <h1 className="pj-hero-title reveal-on-scroll" style={{ fontFamily: "'Inter Display', 'Inter Display Placeholder', sans-serif", fontSize: "clamp(20px, 5.5vw, 40px)", fontStyle: "normal", fontWeight: "500", lineHeight: "1.2", color: "var(--text-primary)", marginBottom: "clamp(32px, 8vw, 64px)" }}>
+                        <h1 className="pj-hero-title reveal-on-scroll" style={{ fontFamily: "'Inter Display', 'Inter Display Placeholder', sans-serif", fontSize: "clamp(22px, 6vw, 46px)", fontStyle: "normal", fontWeight: "500", lineHeight: "1.2", color: "var(--text-primary)", marginBottom: "clamp(32px, 8vw, 64px)" }}>
                             We'd love to hear from you<br />
                             (seriously, we actually reply)
                         </h1>

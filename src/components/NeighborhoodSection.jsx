@@ -26,7 +26,7 @@ export default function NeighborhoodSection() {
       return null;
     };
 
-    getDocs(query(collection(db, 'projects'), limit(10)))
+    getDocs(query(collection(db, 'projects'), limit(50)))
       .then(snap => {
         const list = [];
         const cache = getGlobalCache();
@@ -54,12 +54,18 @@ export default function NeighborhoodSection() {
             name: d.name,
             location: d.location || d.tagline || 'Nigeria',
             image: d.detailsImage || d.heroImage || 'https://placehold.co/800x600/eaeaea/999?text=Estate',
+            sortOrder: d.sortOrder !== undefined && d.sortOrder !== null ? d.sortOrder : 999,
             createdAtDate,
           });
         });
 
-        // Sort descending (newest first)
-        list.sort((a, b) => b.createdAtDate - a.createdAtDate);
+        // Sort by sortOrder ascending first, fallback to newest first
+        list.sort((a, b) => {
+          if (a.sortOrder !== b.sortOrder) {
+            return a.sortOrder - b.sortOrder;
+          }
+          return b.createdAtDate - a.createdAtDate;
+        });
 
         setProjects(list.slice(0, 3));
       })

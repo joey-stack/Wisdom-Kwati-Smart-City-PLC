@@ -262,17 +262,6 @@ export default function Header() {
 
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu-overlay ${isMenuOpen ? 'menu-active' : ''}`} role="dialog" aria-label="Mobile navigation menu">
-                <button 
-                    className="menu-close" 
-                    aria-label="Close Menu"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setIsMenuOpen(false);
-                    }}
-                >
-                    &times;
-                </button>
                 <div className="mobile-menu-content">
                     <ul className="mobile-nav-links">
                         <li>
@@ -321,6 +310,12 @@ export default function Header() {
                                     <div className="compact-info">
                                         <h4>Kaduna Smart District</h4>
                                         <p>Strategic Northern hub</p>
+                                    </div>
+                                </a>
+                                <a href="/projects" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)} style={{ borderBottom: 'none', background: 'rgba(187, 227, 57, 0.08)' }}>
+                                    <div className="compact-info">
+                                        <h4 style={{ color: 'var(--accent-green)' }}>View All Projects</h4>
+                                        <p>Browse our entire 20-estate portfolio</p>
                                     </div>
                                 </a>
                             </div>
@@ -379,6 +374,12 @@ export default function Header() {
                                     <div className="compact-info">
                                         <h4>The Star Sapphire</h4>
                                         <p>4-bedroom smart penthouse</p>
+                                    </div>
+                                </a>
+                                <a href="/house-types" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)} style={{ borderBottom: 'none', background: 'rgba(187, 227, 57, 0.08)' }}>
+                                    <div className="compact-info">
+                                        <h4 style={{ color: 'var(--accent-green)' }}>View All House Types</h4>
+                                        <p>Explore all smart bungalows and villas</p>
                                     </div>
                                 </a>
                             </div>

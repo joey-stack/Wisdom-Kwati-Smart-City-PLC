@@ -1,4 +1,3 @@
-import { Outfit, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -9,27 +8,6 @@ const ConsultationModal = dynamic(() => import("../components/ConsultationModal"
 const ClientScripts = dynamic(() => import("../components/ClientScripts"));
 import FontAwesomeLoader from "../components/FontAwesomeLoader";
 import BraveShieldFix from "../components/BraveShieldFix";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const viewport = {
   width: "device-width",
@@ -93,8 +71,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Load Google Fonts directly */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
         {/* DNS-prefetch for image CDNs used on inner pages (non-critical) */}
         <link rel="dns-prefetch" href="https://images.weserv.nl" />
         <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />

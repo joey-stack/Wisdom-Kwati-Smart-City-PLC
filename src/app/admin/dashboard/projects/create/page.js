@@ -65,6 +65,9 @@ export default function AdminCreateProjectPage() {
   const [updatesLink, setUpdatesLink] = useState('');
   const [advisorId, setAdvisorId] = useState('');
   const [selectedHouseTypeIds, setSelectedHouseTypeIds] = useState([]);
+  const [sortOrder, setSortOrder] = useState('');
+  const [draggedHTIndex, setDraggedHTIndex] = useState(null);
+  const [dragOverHTIndex, setDragOverHTIndex] = useState(null);
 
   // Auto-detect State and Neighborhood on location change
   useEffect(() => {
@@ -246,6 +249,40 @@ export default function AdminCreateProjectPage() {
     );
   };
 
+  // Selected House Types Drag & Drop handlers
+  const handleHTDragStart = (e, idx) => {
+    e.dataTransfer.setData('text/plain', idx.toString());
+    setDraggedHTIndex(idx);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+  const handleHTDragOver = (e, idx) => {
+    e.preventDefault();
+    if (draggedHTIndex === null) return;
+    if (dragOverHTIndex !== idx) {
+      setDragOverHTIndex(idx);
+    }
+  };
+  const handleHTDrop = (e, idx) => {
+    e.preventDefault();
+    const sourceIdx = parseInt(e.dataTransfer.getData('text/plain'), 10);
+    if (isNaN(sourceIdx) || sourceIdx === idx) {
+      setDraggedHTIndex(null);
+      setDragOverHTIndex(null);
+      return;
+    }
+    const list = [...selectedHouseTypeIds];
+    const dragged = list[sourceIdx];
+    list.splice(sourceIdx, 1);
+    list.splice(idx, 0, dragged);
+    setSelectedHouseTypeIds(list);
+    setDraggedHTIndex(null);
+    setDragOverHTIndex(null);
+  };
+  const handleHTDragEnd = () => {
+    setDraggedHTIndex(null);
+    setDragOverHTIndex(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!slug || !name || !location || !state || !neighborhood) {
@@ -283,6 +320,7 @@ export default function AdminCreateProjectPage() {
         nearbyFacilities,
         plotSizes,
         marketSnapshot,
+        sortOrder: sortOrder !== '' ? parseInt(sortOrder, 10) : 999,
         createdAt: new Date().toISOString()
       };
 
@@ -506,6 +544,24 @@ export default function AdminCreateProjectPage() {
                 placeholder="e.g. https://www.google.com/maps/embed?pb=..."
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Display Order / Priority (Sort Order)
+              </label>
+              <input
+                type="number"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                placeholder="e.g. 1 (smaller numbers appear first, defining which show on homepage)"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+              <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', marginTop: '4px', display: 'block' }}>
+                Defines sorting priority on the frontend. Lower values come first. The top 3 (first row) will automatically show on the homepage.
+              </span>
             </div>
           </div>
         </div>
@@ -788,6 +844,61 @@ export default function AdminCreateProjectPage() {
                       <span>{ht.classType || ht.id} ({ht.beds || 0} Beds)</span>
                     </label>
                   ))}
+                </div>
+              )}
+
+              {selectedHouseTypeIds.length > 0 && (
+                <div style={{ marginTop: '16px' }}>
+                  <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                    Arrange Featured Spec Order (Drag to Reorder)
+                  </label>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '12px', border: '1px solid var(--admin-border)', borderRadius: '4px', backgroundColor: 'var(--admin-bg)' }}>
+                    {selectedHouseTypeIds.map((htId, idx) => {
+                      const ht = houseTypes.find(h => h.id === htId);
+                      const nameLabel = ht ? (ht.classType || ht.id) : htId;
+                      const isDragging = idx === draggedHTIndex;
+                      const isDragOver = idx === dragOverHTIndex;
+                      
+                      let borderStyle = '1px solid var(--admin-border)';
+                      let transformStyle = 'none';
+                      
+                      if (isDragging) {
+                        borderStyle = '1px dashed var(--admin-accent)';
+                      } else if (isDragOver && draggedHTIndex !== null) {
+                        borderStyle = '2px solid var(--admin-accent)';
+                        transformStyle = 'scale(1.05)';
+                      }
+
+                      return (
+                        <div
+                          key={htId}
+                          draggable
+                          onDragStart={(e) => handleHTDragStart(e, idx)}
+                          onDragOver={(e) => handleHTDragOver(e, idx)}
+                          onDragEnd={handleHTDragEnd}
+                          onDrop={(e) => handleHTDrop(e, idx)}
+                          style={{
+                            padding: '8px 14px',
+                            backgroundColor: 'var(--admin-surface-light)',
+                            border: borderStyle,
+                            borderRadius: '20px',
+                            fontSize: '12px',
+                            color: 'var(--admin-text-primary)',
+                            cursor: 'grab',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            opacity: isDragging ? 0.4 : 1,
+                            transform: transformStyle,
+                            transition: 'all 0.15s ease',
+                            userSelect: 'none'
+                          }}
+                        >
+                          <span>☰ {nameLabel}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

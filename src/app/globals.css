@@ -7,6 +7,12 @@
 @import "../styles/cards.css";
 @import "../styles/site-updates.css";
 
+:root {
+  --font-outfit: 'Outfit', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
 /* Screen-reader-only utility — visually hidden but accessible to assistive technology */
 .sr-only {
   position: absolute;

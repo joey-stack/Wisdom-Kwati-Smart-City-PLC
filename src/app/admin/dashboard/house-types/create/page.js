@@ -29,6 +29,7 @@ export default function AdminCreateHouseTypePage() {
   const [interiorNote, setInteriorNote] = useState('');
   const [advisorId, setAdvisorId] = useState('');
   const [advisorsList, setAdvisorsList] = useState([]);
+  const [sortOrder, setSortOrder] = useState('');
 
   // Load advisors list on mount
   useEffect(() => {
@@ -164,6 +165,7 @@ export default function AdminCreateHouseTypePage() {
         amenities: selectedAmenities,
         interiorSpecs,
         exteriorSpecs,
+        sortOrder: sortOrder !== '' ? parseInt(sortOrder, 10) : 999,
         createdAt: new Date().toISOString()
       };
 
@@ -437,6 +439,22 @@ export default function AdminCreateHouseTypePage() {
               placeholder="e.g. Q4 2026 / Completed"
               style={{ width: '100%', maxWidth: '300px', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
             />
+          </div>
+
+          <div className="form-group" style={{ marginTop: '20px' }}>
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+              Display Order / Priority (Sort Order)
+            </label>
+            <input
+              type="number"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              placeholder="e.g. 1 (smaller numbers appear first)"
+              style={{ width: '100%', maxWidth: '300px', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+            />
+            <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', marginTop: '4px', display: 'block' }}>
+              Defines sorting priority in the public catalog list page. Lower values come first.
+            </span>
           </div>
         </div>
 

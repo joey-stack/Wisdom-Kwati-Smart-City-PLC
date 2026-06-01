@@ -336,8 +336,17 @@ export default function ProjectDetailTemplate({
               name: d.name,
               district: d.location || d.tagline || 'Nigeria',
               image: d.detailsImage || d.heroImage || 'https://placehold.co/1200x800/111/fff?text=Estate',
-              link: `/projects/${doc.id}`
+              link: `/projects/${doc.id}`,
+              sortOrder: d.sortOrder,
             });
+          });
+          allProjects.sort((a, b) => {
+            const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? a.sortOrder : 999;
+            const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? b.sortOrder : 999;
+            if (orderA !== orderB) {
+              return orderA - orderB;
+            }
+            return a.name.localeCompare(b.name);
           });
           otherNeighborhoodsCache = allProjects;
         }

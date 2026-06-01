@@ -114,10 +114,18 @@ export default function Page() {
             state: resolvedState,
             neighborhood: resolvedNeighborhood,
             image: d.detailsImage || d.heroImage || 'https://placehold.co/1200x800/111/fff?text=Estate',
+            sortOrder: d.sortOrder,
           });
         });
-        // Alphabetical sort
-        list.sort((a, b) => a.name.localeCompare(b.name));
+        // Sort by sortOrder ascending, fallback to alphabetical
+        list.sort((a, b) => {
+          const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? a.sortOrder : 999;
+          const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? b.sortOrder : 999;
+          if (orderA !== orderB) {
+            return orderA - orderB;
+          }
+          return a.name.localeCompare(b.name);
+        });
         globalProjectsCache = list;
         setProjects(list);
       } catch (err) {

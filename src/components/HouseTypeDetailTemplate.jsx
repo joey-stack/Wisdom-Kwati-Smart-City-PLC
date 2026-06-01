@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SocialShare from './SocialShare';
+import HouseTypeCard from './cards/HouseTypeCard';
 
 // Re-initialize GSAP ScrollTrigger so reveal animations pick up the newly rendered DOM elements.
 function useRefreshScrollTrigger(ready) {
@@ -527,35 +528,19 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
               </h2>
             </div>
 
-            <div className="portfolio-grid" id="related-properties-grid">
+            <div className="wksc-ht-grid wksc-ht-grid--home" id="related-properties-grid">
               {relatedProperties.map((row, idx) => (
-                <Link key={idx} href={`/house-types/${row.id}`} className="ht-card">
-                  <div className="ht-card-image">
-                    <Image width={600} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={row.images && row.images.length > 0 ? row.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec'} alt={row.classType} referrerPolicy="no-referrer" />
-                  </div>
-                  <div className="ht-card-info">
-                    <div className="ht-card-left">
-                      <h3 className="ht-card-name">{row.classType}</h3>
-                      <p className="ht-card-location">{row.tagline || 'Premium Smart Class'}</p>
-                    </div>
-                    <div className="ht-card-right">
-                      <p className="ht-card-type">{row.classType}</p>
-                      <div className="ht-card-specs">
-                        <span>
-                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7v10M21 7v10M3 14h18M5 14v-2.5a2.5 2.5 0 012.5-2.5h9A2.5 2.5 0 0119 11.5V14"></path></svg>
-                          {row.beds || 0}
-                        </span>
-                        <span className="ht-dot"></span>
-                        <span>
-                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 14v2a2 2 0 002 2h8a2 2 0 002-2v-2"></path><path d="M4 14h16M8 8V5a1 1 0 011-1h2"></path></svg>
-                          {row.baths || 0}
-                        </span>
-                        <span className="ht-dot"></span>
-                        <span>{row.size || 'N/A'}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                <HouseTypeCard
+                  key={row.id || idx}
+                  id={row.id}
+                  name={row.classType}
+                  tagline={row.tagline || 'Premium Smart Class'}
+                  beds={row.beds || 0}
+                  baths={row.baths || 0}
+                  size={row.size || 'N/A'}
+                  image={row.images && row.images.length > 0 ? row.images[0] : 'https://placehold.co/600x400/111/fff?text=Villa+Spec'}
+                  estate={row.estate || ''}
+                />
               ))}
             </div>
 

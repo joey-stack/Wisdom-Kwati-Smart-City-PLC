@@ -1790,7 +1790,7 @@ body.menu-active .mobile-menu-footer {
   .hero-card .subheadline {
     text-align: center;
     font-size: 14px;
-    max-width: 260px; /* Constraint to force 2-line behavior if possible, or just let it wrap */
+    max-width: 100%;
   }
 
   .cta-button {

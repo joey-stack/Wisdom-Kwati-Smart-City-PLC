@@ -263,13 +263,7 @@ export default function Header() {
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu-overlay ${isMenuOpen ? 'menu-active' : ''}`} role="dialog" aria-label="Mobile navigation menu">
                 {/* Header Row */}
-                <div className="mobile-menu-header">
-                    <a href="/" className="mobile-menu-logo" aria-label="Wisdom Kwati Smart City Home" onClick={() => setIsMenuOpen(false)}>
-                        <img 
-                            src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g" 
-                            alt="Wisdom Kwati Smart City Logo"
-                        />
-                    </a>
+                <div className="mobile-menu-header" style={{ justifyContent: 'flex-end' }}>
                     <button 
                         className="mobile-menu-close-btn"
                         onClick={() => setIsMenuOpen(false)}

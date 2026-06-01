@@ -730,7 +730,7 @@ body.menu-active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  line-height: 1.05;
+  line-height: 1.25;
   display: inline-block;
   transition: opacity 0.3s ease, color 0.3s ease;
 }

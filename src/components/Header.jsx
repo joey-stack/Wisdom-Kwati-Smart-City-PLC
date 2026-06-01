@@ -262,144 +262,52 @@ export default function Header() {
 
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu-overlay ${isMenuOpen ? 'menu-active' : ''}`} role="dialog" aria-label="Mobile navigation menu">
-                <div className="mobile-menu-content">
-                    <ul className="mobile-nav-links">
-                        <li>
-                            <a href="/about" onClick={() => setIsMenuOpen(false)}>
-                                About
-                            </a>
-                        </li>
-                        <li className={`mobile-nav-item ${activeAccordion === 'projects' ? 'expanded' : ''}`}>
-                            <a 
-                                href="/projects" 
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setActiveAccordion(activeAccordion === 'projects' ? null : 'projects');
-                                }}
-                            >
-                                Projects
-                                <svg className="dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </a>
-                            <div className="mobile-accordion-content">
-                                <a href="/projects-abuja" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>Abuja Central</h4>
-                                        <p>Flagship smart districts</p>
-                                    </div>
-                                </a>
-                                <a href="/projects-lagos" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>Lagos Urban</h4>
-                                        <p>Emerging communities</p>
-                                    </div>
-                                </a>
-                                <a href="/projects-ph" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>Port Harcourt</h4>
-                                        <p>Coastal developments</p>
-                                    </div>
-                                </a>
-                                <a href="/projects-yola" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>Yola Heritage</h4>
-                                        <p>Northern expansion</p>
-                                    </div>
-                                </a>
-                                <a href="/projects-kaduna" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>Kaduna Smart District</h4>
-                                        <p>Strategic Northern hub</p>
-                                    </div>
-                                </a>
-                                <a href="/projects" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)} style={{ borderBottom: 'none', background: 'rgba(187, 227, 57, 0.08)' }}>
-                                    <div className="compact-info">
-                                        <h4 style={{ color: 'var(--accent-green)' }}>View All Projects</h4>
-                                        <p>Browse our entire 20-estate portfolio</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li className={`mobile-nav-item ${activeAccordion === 'house-types' ? 'expanded' : ''}`}>
-                            <a 
-                                href="/house-types" 
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setActiveAccordion(activeAccordion === 'house-types' ? null : 'house-types');
-                                }}
-                            >
-                                House Types
-                                <svg className="dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </a>
-                            <div className="mobile-accordion-content">
-                                <a href="/house-types/black-onyx" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Black Onyx</h4>
-                                        <p>3-bedroom smart bungalow</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/blue-sapphire" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Blue Sapphire</h4>
-                                        <p>4-bedroom family duplex</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/imperial-emerald" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Imperial Emerald</h4>
-                                        <p>7-bedroom ultra-luxury villa</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/red-onyx" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Red Onyx</h4>
-                                        <p>2-bedroom smart bungalow</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/royal-emerald" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Royal Emerald</h4>
-                                        <p>5-bedroom grand villa</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/silver-pearl" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Silver Pearl</h4>
-                                        <p>3-bedroom luxury apartment</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types/star-sapphire" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)}>
-                                    <div className="compact-info">
-                                        <h4>The Star Sapphire</h4>
-                                        <p>4-bedroom smart penthouse</p>
-                                    </div>
-                                </a>
-                                <a href="/house-types" className="mobile-compact-card" onClick={() => setIsMenuOpen(false)} style={{ borderBottom: 'none', background: 'rgba(187, 227, 57, 0.08)' }}>
-                                    <div className="compact-info">
-                                        <h4 style={{ color: 'var(--accent-green)' }}>View All House Types</h4>
-                                        <p>Explore all smart bungalows and villas</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/contact" onClick={() => setIsMenuOpen(false)}>
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
+                {/* Header Row */}
+                <div className="mobile-menu-header">
+                    <a href="/" className="mobile-menu-logo" aria-label="Wisdom Kwati Smart City Home" onClick={() => setIsMenuOpen(false)}>
+                        <img 
+                            src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g" 
+                            alt="Wisdom Kwati Smart City Logo"
+                        />
+                    </a>
                     <button 
-                        className="mobile-cta"
+                        className="mobile-menu-close-btn"
                         onClick={() => setIsMenuOpen(false)}
                     >
-                        <div className="flip-text">
-                            <span>REQUEST A SITE VISIT</span>
-                            <span aria-hidden="true">REQUEST A SITE VISIT</span>
-                        </div>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        Close
                     </button>
+                </div>
+
+                {/* Main Links (Typography-focused vertical stack) */}
+                <div className="mobile-menu-body">
+                    <ul className="mobile-nav-links">
+                        <li><a href="/" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+                        <li><a href="/about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+                        <li><a href="/projects" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
+                        <li><a href="/house-types" onClick={() => setIsMenuOpen(false)}>House Types</a></li>
+                        <li><a href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+                    </ul>
+                </div>
+
+                {/* Footer Section */}
+                <div className="mobile-menu-footer">
+                    <div className="footer-top-row">
+                        <div className="footer-col-left">
+                            <span className="footer-label">Socials</span>
+                            <a href="#" className="footer-value">@wksc_plc</a>
+                            <span className="footer-value-secondary">Abuja / Lagos / Yola</span>
+                        </div>
+                        <div className="footer-col-right">
+                            <span className="footer-label">Get in Touch</span>
+                            <a href="mailto:info@wisdomkwati.com" className="footer-value">info@wisdomkwati.com</a>
+                            <a href="tel:+2349087654321" className="footer-value-secondary">+234 908 765 4321</a>
+                        </div>
+                    </div>
+                    <div className="footer-divider-line"></div>
+                    <div className="footer-bottom-row">
+                        <span className="footer-bottom-left">Wisdom Kwati</span>
+                        <span className="footer-bottom-right">Smart City PLC</span>
+                    </div>
                 </div>
             </div>
         </>

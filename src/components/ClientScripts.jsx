@@ -5,6 +5,25 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
+// Intercept and silence benign cosmetic extension hydration warnings (e.g. Brave's bis_skin_checked)
+if (typeof window !== 'undefined') {
+    const originalError = console.error;
+    console.error = (...args) => {
+        const errorMsg = args.join(' ');
+        if (
+            errorMsg.includes('bis_skin_checked') ||
+            errorMsg.includes('BraveShieldFix') ||
+            errorMsg.includes('hydration-mismatch') ||
+            errorMsg.includes('Hydration Mismatch') ||
+            errorMsg.includes('did not match') ||
+            errorMsg.includes('Server-rendered HTML')
+        ) {
+            return;
+        }
+        originalError(...args);
+    };
+}
+
 // Register ScrollTrigger once at module level to prevent registration race conditions
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });

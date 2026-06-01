@@ -1778,8 +1778,8 @@ body.menu-active .mobile-menu-footer {
   }
 
   .hero-card {
-    width: 90%;
-    max-width: 290px; /* Reduced width per user request */
+    width: 92%;
+    max-width: 310px; /* Adjusted to fit content on exactly two lines */
     margin: 0 auto;
     text-align: center;
     align-items: center;

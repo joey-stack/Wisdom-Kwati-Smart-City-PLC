@@ -832,6 +832,10 @@
     padding: 40px 0 0 !important;
   }
 
+  .hd-hero-title {
+    padding-bottom: 150px !important;
+  }
+
   .hd-container {
     padding: 0 10px 20px !important;
   }

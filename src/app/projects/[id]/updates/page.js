@@ -97,7 +97,7 @@ export default function ProjectUpdatesPage({ params }) {
   const latestSubHeadline = updates.length > 0 && updates[0].subHeadline ? updates[0].subHeadline : 'Latest infrastructural development progress logs and recorded archives.';
 
   return (
-    <main style={{ backgroundColor: '#F8FAF5', minHeight: '100vh', padding: '60px 0', fontFamily: "'Outfit', sans-serif" }}>
+    <main style={{ backgroundColor: '#F8FAF5', minHeight: '100vh', padding: '140px 0 60px', fontFamily: "'Outfit', sans-serif" }}>
       <div className="container-1380" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
         
         {/* Dynamic Top Header */}

@@ -18,7 +18,7 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL('https://wisdomkwati.com'),
   title: {
-    default: "Wisdom Kwati Smart City PLC | buy. sell. rent.",
+    default: "Wisdom Kwati Smart City PLC",
     template: "%s | Wisdom Kwati Smart City"
   },
   description: "Dream large. Live smart. We are building the functional ecosystem Africa deserves with ultra-modern smart cities across Nigeria.",
@@ -32,7 +32,7 @@ export const metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Wisdom Kwati Smart City PLC | buy. sell. rent.",
+    title: "Wisdom Kwati Smart City PLC",
     description: "Building the functional ecosystem Africa deserves. Explore our ultra-modern smart cities.",
     url: 'https://wisdomkwati.com',
     siteName: 'Wisdom Kwati Smart City',
@@ -49,7 +49,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Wisdom Kwati Smart City PLC | buy. sell. rent.",
+    title: "Wisdom Kwati Smart City PLC",
     description: "Building the functional ecosystem Africa deserves.",
     images: ['https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200'],
   },

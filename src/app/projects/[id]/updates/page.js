@@ -98,7 +98,7 @@ export default function ProjectUpdatesPage({ params }) {
 
   return (
     <main style={{ backgroundColor: '#F8FAF5', minHeight: '100vh', padding: '140px 0 60px', fontFamily: "'Outfit', sans-serif" }}>
-      <div className="container-1380" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
+      <div className="container-1380" style={{ maxWidth: '1200px', margin: '0 auto 60px', padding: '0 24px', textAlign: 'center' }}>
         
         {/* Dynamic Top Header */}
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EBEEDB', borderRadius: '100px', padding: '8px 24px', marginBottom: '24px', fontSize: '11px', fontWeight: '700', letterSpacing: '0.1em', color: '#000', textTransform: 'uppercase' }}>
@@ -130,8 +130,6 @@ export default function ProjectUpdatesPage({ params }) {
           VIEW ESTATE DETAILS
         </Link>
       </div>
-
-      <div style={{ width: '100%', height: '1px', backgroundColor: '#E5E7E0', margin: '60px 0' }}></div>
 
       <div className="container-1380" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
         {updates.length === 0 ? (

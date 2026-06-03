@@ -453,6 +453,13 @@ const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
   'hof-community': ['silver-pearl', 'white-pearl']
 };
 
+const countWords = (str) => {
+  if (!str) return 0;
+  const clean = str.trim();
+  if (clean === '') return 0;
+  return clean.split(/\s+/).length;
+};
+
 export default function AdminEditProjectPage({ params }) {
   const router = useRouter();
   const { id } = use(params);
@@ -890,15 +897,16 @@ export default function AdminEditProjectPage({ params }) {
             <div className="form-group">
               <label style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
                 <span>Tagline / Sub-headline</span>
-                <span style={{ color: tagline.length > 60 ? '#EF4444' : 'inherit' }}>{tagline.length}/60</span>
+                <span style={{ color: (tagline.trim() !== '' && (countWords(tagline) < 8 || countWords(tagline) > 12)) ? '#EF4444' : 'inherit' }}>
+                  {countWords(tagline)} words (Target: 8-12)
+                </span>
               </label>
               <input
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                maxLength={60}
                 placeholder="e.g. Architectural masterpiece nestled in premium high hills"
-                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: tagline.length >= 60 ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: (tagline.trim() !== '' && (countWords(tagline) < 8 || countWords(tagline) > 12)) ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>
 
@@ -955,15 +963,16 @@ export default function AdminEditProjectPage({ params }) {
           <div className="form-group" style={{ marginBottom: '20px' }}>
             <label style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
               <span>Estate Overview / Description</span>
-              <span style={{ color: description.length > 200 ? '#EF4444' : 'inherit' }}>{description.length}/200</span>
+              <span style={{ color: countWords(description) > 100 ? '#EF4444' : 'inherit' }}>
+                {countWords(description)}/100 words
+              </span>
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              maxLength={200}
               placeholder="e.g. Ellington Villa is the ultimate urban connector. Located at the heart of Abuja's inner ring road system..."
               rows={4}
-              style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: description.length >= 200 ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
+              style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: countWords(description) > 100 ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
             />
           </div>
 

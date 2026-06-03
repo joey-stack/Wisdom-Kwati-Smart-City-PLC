@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SocialShare from './SocialShare';
 import HouseTypeCard from './cards/HouseTypeCard';
+import { resolveMediaUrl } from '@/lib/media';
 
 // Re-initialize GSAP ScrollTrigger so reveal animations pick up the newly rendered DOM elements.
 function useRefreshScrollTrigger(ready) {
@@ -54,12 +55,12 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
 
   // Gallery fallbacks
   const images = data.images || [];
-  const heroImage   = images[0] || 'https://placehold.co/1200x800/111/fff?text=Smart+Villa';
-  const galImage1   = images[0] || heroImage;
-  const galImage2   = images[1] || heroImage;
-  const galImage3   = images[2] || heroImage;
-  const galImage4   = images[3] || heroImage;
-  const galImage5   = images[4] || heroImage;
+  const heroImage   = resolveMediaUrl(images[0] || 'https://placehold.co/1200x800/111/fff?text=Smart+Villa');
+  const galImage1   = resolveMediaUrl(images[0] || heroImage);
+  const galImage2   = resolveMediaUrl(images[1] || heroImage);
+  const galImage3   = resolveMediaUrl(images[2] || heroImage);
+  const galImage4   = resolveMediaUrl(images[3] || heroImage);
+  const galImage5   = resolveMediaUrl(images[4] || heroImage);
 
   // Interior and exterior specs - support both {metric, details} (from CMS) and {title, description} (legacy)
   const interiorRows = (data.interiorSpecs || []).map(row => ({
@@ -388,7 +389,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                     <div className="hd-agent-header">
                       <span className="hd-agent-listed-by">YOUR PROJECT ADVISOR</span>
                       <div className="hd-agent-top">
-                        <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={advisor.image || 'https://placehold.co/100x100/111/fff?text=Advisor'} alt={advisor.name} className="hd-agent-img" />
+                        <Image width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(advisor.image || 'https://placehold.co/100x100/111/fff?text=Advisor')} alt={advisor.name} className="hd-agent-img" />
                         <div className="hd-agent-identity">
                           <h4 className="hd-agent-name">{advisor.name}</h4>
                           <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500 }}>{advisor.role}</span>

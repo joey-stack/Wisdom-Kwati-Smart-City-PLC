@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { resolveMediaUrl } from '@/lib/media';
 
 const ChevronIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
@@ -72,7 +73,7 @@ export default function ProjectCard({ id, name, location, image }) {
         <div className="wksc-proj-card__image">
           <img
             loading="lazy"
-            src={image}
+            src={resolveMediaUrl(image)}
             alt={name}
             width="800"
             height="500"

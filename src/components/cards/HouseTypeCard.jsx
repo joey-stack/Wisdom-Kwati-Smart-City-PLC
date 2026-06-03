@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { resolveMediaUrl } from '@/lib/media';
 
 // Inline SVGs so no icon-library dependency is needed here
 const BedIcon = () => (
@@ -117,7 +118,7 @@ export default function HouseTypeCard({ id, name, tagline, beds, baths, size, im
         <div className="wksc-ht-card__image">
           <img
             loading="lazy"
-            src={image}
+            src={resolveMediaUrl(image)}
             alt={name}
             width="800"
             height="500"

@@ -7,6 +7,7 @@ import { doc, getDoc, collection, getDocs, query, limit } from 'firebase/firesto
 import { db } from '@/lib/firebase';
 import HouseTypeCard from './cards/HouseTypeCard';
 import SocialShare from './SocialShare';
+import { resolveMediaUrl } from '@/lib/media';
 
 const DEFAULT_ADVISER = {
   name: "Sarah Kwati",
@@ -388,7 +389,7 @@ export default function ProjectDetailTemplate({
     "@type": "RealEstateListing",
     "name": title,
     "description": heroDescription || description,
-    "image": heroImage,
+    "image": resolveMediaUrl(heroImage),
     "address": {
       "@type": "PostalAddress",
       "addressLocality": title.split(' ')[0],
@@ -474,7 +475,7 @@ export default function ProjectDetailTemplate({
               }}></div>
             </div>
           ) : (
-            <Image width={1920} height={1080} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={heroImage} alt={title} referrerPolicy="no-referrer" />
+            <Image width={1920} height={1080} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(heroImage)} alt={title} referrerPolicy="no-referrer" />
           )}
         </div>
         <div className="pd-hero-overlay"></div>
@@ -586,14 +587,14 @@ export default function ProjectDetailTemplate({
                   <Link key={idx} href={item.link} className="pd-compact-item">
                     <div className="pd-compact-flipper">
                       <div className="pd-compact-front">
-                        <Image width={70} height={70} className="pd-compact-thumb" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
+                        <Image width={70} height={70} className="pd-compact-thumb" src={resolveMediaUrl(item.image)} alt={item.name} referrerPolicy="no-referrer" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
                         </div>
                       </div>
                       <div className="pd-compact-back">
-                        <Image width={70} height={70} className="pd-compact-thumb" src={item.image} alt={item.name} referrerPolicy="no-referrer" />
+                        <Image width={70} height={70} className="pd-compact-thumb" src={resolveMediaUrl(item.image)} alt={item.name} referrerPolicy="no-referrer" />
                         <div className="pd-compact-info">
                           <h4>{item.name}</h4>
                           <p>{item.district}</p>
@@ -609,7 +610,7 @@ export default function ProjectDetailTemplate({
               <div className="pd-sidebar-card" suppressHydrationWarning={true}>
                 <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Project Advisor</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-                  <Image width={56} height={56} src={sidebarAdviser.image} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
+                  <Image width={56} height={56} src={resolveMediaUrl(sidebarAdviser.image)} alt={sidebarAdviser.name} style={{ width: "56px", height: "56px", borderRadius: "4px", objectFit: "cover", flexShrink: "0" }} referrerPolicy="no-referrer" />
                   <div>
                     <h3 style={{ fontSize: "16px", fontWeight: "700", margin: "0 0 4px" }}>{sidebarAdviser.name}</h3>
                     <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "0" }}>{sidebarAdviser.role}</p>

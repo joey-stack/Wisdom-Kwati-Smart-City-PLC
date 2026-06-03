@@ -44,6 +44,8 @@ const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
   'lakeside-view': ['blue-sapphire', 'white-sapphire'],
   'sunbrook-estate': ['black-onyx', 'red-onyx'],
   'fintiri-extension': ['black-onyx', 'red-onyx'],
+  'fintiri-home-estate': ['black-onyx', 'red-onyx'],
+  'palm-nicole': ['black-onyx', 'red-onyx'],
   'hof-community': ['silver-pearl', 'white-pearl']
 };
 
@@ -187,7 +189,7 @@ export default function AdminCreateProjectPage() {
     const cleanSlug = slug.toLowerCase().trim();
     
     // Auto-prefill advisorId
-    const yolaRegionSlugs = ['sunbrook-estate', 'fintiri-extension', 'karsana-district', 'kaduna-smart-district', 'gousa-idu-district', 'ph-rumu-olumeni'];
+    const yolaRegionSlugs = ['sunbrook-estate', 'fintiri-extension', 'fintiri-home-estate', 'palm-nicole', 'karsana-district', 'kaduna-smart-district', 'gousa-idu-district', 'ph-rumu-olumeni'];
     const defaultId = yolaRegionSlugs.includes(cleanSlug) ? 'fatima-usman' : 'samuel-kwati';
     if (!advisorId || advisorId === 'samuel-kwati' || advisorId === 'fatima-usman') {
       setAdvisorId(defaultId);

@@ -450,6 +450,8 @@ const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
   'lakeside-view': ['blue-sapphire', 'white-sapphire'],
   'sunbrook-estate': ['black-onyx', 'red-onyx'],
   'fintiri-extension': ['black-onyx', 'red-onyx'],
+  'fintiri-home-estate': ['black-onyx', 'red-onyx'],
+  'palm-nicole': ['black-onyx', 'red-onyx'],
   'hof-community': ['silver-pearl', 'white-pearl']
 };
 
@@ -625,7 +627,7 @@ export default function AdminEditProjectPage({ params }) {
           
           // Determine default advisor based on project slug if not set in Firestore
           let defaultAdvisorId = '';
-          const yolaRegionSlugs = ['sunbrook-estate', 'fintiri-extension', 'karsana-district', 'kaduna-smart-district', 'gousa-idu-district', 'ph-rumu-olumeni'];
+          const yolaRegionSlugs = ['sunbrook-estate', 'fintiri-extension', 'fintiri-home-estate', 'palm-nicole', 'karsana-district', 'kaduna-smart-district', 'gousa-idu-district', 'ph-rumu-olumeni'];
           if (yolaRegionSlugs.includes(id)) {
             defaultAdvisorId = 'fatima-usman';
           } else {

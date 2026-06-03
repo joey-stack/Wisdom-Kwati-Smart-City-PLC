@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function ReorderProjectsPage() {
   const router = useRouter();
@@ -201,7 +202,7 @@ export default function ReorderProjectsPage() {
 
                 {/* Cover Preview */}
                 <img
-                  src={proj.heroImage || 'https://placehold.co/100x100/111/fff?text=Estate'}
+                  src={resolveMediaUrl(proj.heroImage) || 'https://placehold.co/100x100/111/fff?text=Estate'}
                   alt={proj.name}
                   style={{ width: '60px', height: '40px', objectFit: 'cover', borderRadius: '4px', marginRight: '20px', border: '1px solid var(--admin-border)' }}
                   onError={(e) => {

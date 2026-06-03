@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { collection, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminBlogsPage() {
   const [blogs, setBlogs] = useState([]);
@@ -122,7 +123,7 @@ export default function AdminBlogsPage() {
                 {/* Blog Image */}
                 <div style={{ width: '80px', height: '80px', borderRadius: '4px', overflow: 'hidden', backgroundColor: 'var(--admin-bg)', border: '1px solid var(--admin-border)', flexShrink: 0 }}>
                   <img
-                    src={blog.image || 'https://placehold.co/150x150/111/fff?text=Blog'}
+                    src={resolveMediaUrl(blog.image) || 'https://placehold.co/150x150/111/fff?text=Blog'}
                     alt={blog.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {

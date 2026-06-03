@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { collection, deleteDoc, doc, onSnapshot, writeBatch } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -202,7 +203,7 @@ export default function AdminProjectsPage() {
               {/* Cover/Hero Preview */}
               <div style={{ width: '100%', height: '160px', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', marginBottom: '16px', position: 'relative' }}>
                 <img
-                  src={project.heroImage || 'https://placehold.co/600x400/111/fff?text=Estate'}
+                  src={resolveMediaUrl(project.heroImage) || 'https://placehold.co/600x400/111/fff?text=Estate'}
                   alt={project.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => {

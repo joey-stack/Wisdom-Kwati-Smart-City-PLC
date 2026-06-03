@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminReviewsPage() {
   const [reviews, setReviews] = useState([]);
@@ -169,7 +170,7 @@ export default function AdminReviewsPage() {
                   {review.avatar && (
                     <div style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
                       <img 
-                        src={review.avatar} 
+                        src={resolveMediaUrl(review.avatar)} 
                         alt={review.name} 
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                         onError={(e) => { e.target.src = 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=1200'; }}

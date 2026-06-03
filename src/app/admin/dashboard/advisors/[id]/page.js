@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminEditAdvisorPage({ params }) {
   const router = useRouter();
@@ -188,7 +189,7 @@ export default function AdminEditAdvisorPage({ params }) {
               <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', marginBottom: '4px', fontWeight: 600 }}>LIVE PREVIEW</span>
               <div style={{ width: '70px', height: '70px', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)' }}>
                 <img
-                  src={formData.image || 'https://placehold.co/150x150/111/fff?text=Photo'}
+                  src={resolveMediaUrl(formData.image) || 'https://placehold.co/150x150/111/fff?text=Photo'}
                   alt="Live Preview"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => {

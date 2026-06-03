@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function ReorderHouseTypesPage() {
   const router = useRouter();
@@ -153,7 +154,7 @@ export default function ReorderHouseTypesPage() {
             const isDragging = idx === draggedIndex;
             const isDragOver = idx === dragOverIndex;
             const thumbnail = ht.images && ht.images.length > 0
-              ? ht.images[0]
+              ? resolveMediaUrl(ht.images[0])
               : 'https://placehold.co/100x100/111/fff?text=Villa';
 
             let borderTop = '1px solid var(--admin-border)';

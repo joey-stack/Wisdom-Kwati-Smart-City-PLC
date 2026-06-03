@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { collection, deleteDoc, doc, onSnapshot, writeBatch } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminHouseTypesPage() {
   const [houseTypes, setHouseTypes] = useState([]);
@@ -146,7 +147,7 @@ export default function AdminHouseTypesPage() {
         ) : (
           houseTypes.map((ht, idx) => {
             const thumbnail = ht.images && ht.images.length > 0
-              ? ht.images[0]
+              ? resolveMediaUrl(ht.images[0])
               : 'https://placehold.co/600x400/111/fff?text=Villa+Spec';
 
             const isDragging = idx === draggedIndex;

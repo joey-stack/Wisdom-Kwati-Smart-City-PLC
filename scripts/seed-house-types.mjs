@@ -297,6 +297,45 @@ const HOUSE_TYPES = [
     createdAt: new Date().toISOString(),
   },
 
+  // ─── 6. THE WHITE PEARL ────────────────────────────────────────────────────
+  {
+    id: 'white-pearl',
+    classType:   'The White Pearl',
+    tagline:     '2 Bedroom Block of Flats',
+    price:       '₦120,000,000',
+    description: 'This contemporary 2-bedroom apartment offers a sophisticated urban living solution, designed to maximize both comfort and functionality. Ideal for young professionals and modern families, this unit features a well-laid-out floor plan that optimizes every square meter to create a seamless living experience. As part of our signature residential developments, this property combines modern architectural aesthetics with smart community living, ensuring an ideal environment for those seeking a premium lifestyle in a secure, well-planned estate.',
+    beds: 2, baths: 2,
+    size: '2,400 SQ FT', lotSize: '450 SQM',
+    floors: 1, parking: '2 Cars',
+    builtIn: 'Q1 2026 — Ready',
+    propertyId: 'WK-WP-PRL-006',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo4Bo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+    ],
+    amenities: [
+      { name: 'Private Terrace spaces', iconClass: 'icon-balcony' },
+      { name: 'Sit-Out / Patio areas', iconClass: 'icon-patio' },
+      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
+      { name: 'Spacious Lobby & circulation', iconClass: 'icon-lobby' },
+      { name: 'Designated Kitchen & Dining', iconClass: 'icon-kitchen' }
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms', details: '2 bedrooms' },
+      { metric: 'Bathrooms', details: '2 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Spacious living room area (20m²)' },
+      { metric: 'Kitchen', details: 'Dedicated kitchen space (7.2m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, lobby, and sit-out/patio' }
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Contemporary block of flats design with front and side views' },
+      { metric: 'Garden / Outdoor', details: 'Includes terrace, sit-out, and patio spaces' }
+    ],
+    createdAt: new Date().toISOString()
+  }
+
 ];
 
 // ---------- Write to Firestore ----------

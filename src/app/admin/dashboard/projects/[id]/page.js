@@ -963,8 +963,8 @@ export default function AdminEditProjectPage({ params }) {
           <div className="form-group" style={{ marginBottom: '20px' }}>
             <label style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
               <span>Estate Overview / Description</span>
-              <span style={{ color: countWords(description) > 100 ? '#EF4444' : 'inherit' }}>
-                {countWords(description)}/100 words
+              <span style={{ color: countWords(description) > 45 ? '#EF4444' : 'inherit' }}>
+                {countWords(description)}/45 words
               </span>
             </label>
             <textarea
@@ -972,7 +972,7 @@ export default function AdminEditProjectPage({ params }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Ellington Villa is the ultimate urban connector. Located at the heart of Abuja's inner ring road system..."
               rows={4}
-              style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: countWords(description) > 100 ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
+              style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: countWords(description) > 45 ? '1px solid #EF4444' : '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
             />
           </div>
 

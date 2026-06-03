@@ -1001,7 +1001,7 @@ export default function AdminEditProjectPage({ params }) {
                 Site Updates Link
               </label>
               <input
-                type="url"
+                type="text"
                 value={updatesLink}
                 onChange={(e) => setUpdatesLink(e.target.value)}
                 placeholder="https://... (URL to site updates or gallery)"

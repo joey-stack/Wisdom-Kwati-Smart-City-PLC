@@ -139,7 +139,7 @@ export default function Page() {
 
             {/*  Download Plan Button  */}
             <div className="hd-download-wrapper">
-                <a href="#" className="hd-download-btn">
+                <a href="https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link" className="hd-download-btn" target="_blank" rel="noreferrer">
                     <div className="flip-text">
                         <span>DOWNLOAD BROCHURE</span>
                         <span aria-hidden="true">DOWNLOAD BROCHURE</span>

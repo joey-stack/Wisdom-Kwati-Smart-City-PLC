@@ -195,7 +195,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
           </div>
 
           <div className="hd-download-wrapper">
-            <a href={data.brochureUrl || '#'} className="hd-download-btn" target={data.brochureUrl ? '_blank' : '_self'} rel="noreferrer">
+            <a href={data.brochureUrl || 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link'} className="hd-download-btn" target="_blank" rel="noreferrer">
               <div className="flip-text">
                 <span>DOWNLOAD BROCHURE</span>
                 <span aria-hidden="true">DOWNLOAD BROCHURE</span>

@@ -53,7 +53,7 @@ const HOUSE_TYPES = [
     floors: 3, parking: '6 Cars + EV Charging',
     builtIn: 'Q2 2026 — Completion Stage',
     propertyId: 'WK-IE-EMR-001',
-    brochureUrl: '',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
     images: [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200',
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200',
@@ -111,7 +111,7 @@ const HOUSE_TYPES = [
     floors: 3, parking: '4 Cars + EV Charging',
     builtIn: 'Q3 2026 — Pre-Delivery',
     propertyId: 'WK-RE-EMR-002',
-    brochureUrl: '',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
     images: [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200',
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200',
@@ -164,7 +164,7 @@ const HOUSE_TYPES = [
     floors: 2, parking: '3 Cars',
     builtIn: 'Q4 2026 — Off-Plan',
     propertyId: 'WK-SS-SAP-003',
-    brochureUrl: '',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
     images: [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200',
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
@@ -214,7 +214,7 @@ const HOUSE_TYPES = [
     floors: 1, parking: '2 Cars',
     builtIn: 'Q1 2026 — Ready',
     propertyId: 'WK-BO-ONX-006',
-    brochureUrl: '',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
     images: [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
@@ -261,7 +261,7 @@ const HOUSE_TYPES = [
     floors: 2, parking: '3 Cars',
     builtIn: 'Q2 2026 — Pre-Delivery',
     propertyId: 'WK-WS-SAP-005',
-    brochureUrl: '',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
     images: [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',

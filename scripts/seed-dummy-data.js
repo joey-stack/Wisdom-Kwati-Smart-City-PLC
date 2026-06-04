@@ -38,7 +38,6 @@ const STATIC_PROJECTS = [
   { id: "usulo-city", name: "Usulo City", location: "Kuje, Abuja", image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1W78PkCZEKS_smIJHqajeKCdtYev7yGpZ%26sz=w1200", state: "abuja", neighborhood: "kuje", estate: "usulo city" },
   { id: "lagos-ekpe", name: "Lagos Ekpe", location: "Epe, Lagos", image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=11vBQAjvTsw6D_nR3Llikz7MLeCMUWJ34%26sz=w1200", state: "lagos", neighborhood: "epe", estate: "lagos ekpe" },
   { id: "sunbrook-estate", name: "Sunbrook Estate", location: "Yola, Adamawa", image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1U1e8GB0DuhRemMH1LBYizaFHB9Gx-uLb%26sz=w1200", state: "adamawa", neighborhood: "yola", estate: "sunbrook estate" },
-  { id: "garden-eden", name: "Garden Eden Estate", location: "Port Harcourt, Rivers", image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UlrWanL0sHutgi7BJQqadeXWXY9G3jLm%26sz=w1200", state: "rivers", neighborhood: "port harcourt", estate: "garden eden estate" },
   { id: "ph-rumu-olumeni", name: "PH Rumu-olumeni", location: "Port Harcourt, Rivers", image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1U5Q-8bVvFGhPl8TJXrMk-s1EhexRPW7c%26sz=w1200", state: "rivers", neighborhood: "port harcourt", estate: "ph rumu-olumeni" }
 ];
 

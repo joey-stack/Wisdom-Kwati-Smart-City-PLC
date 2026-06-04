@@ -486,6 +486,96 @@ const HOUSE_TYPES = [
       { floor: 'Second Floor', room: 'Study', area: '11.6' }
     ],
     createdAt: new Date().toISOString()
+  },
+
+  // ─── 10. THE BLACK ONYX ────────────────────────────────────────────────────
+  {
+    id: 'black-onyx',
+    classType:   'The Black Onyx',
+    tagline:     '3 Bedroom Smart Class Detached Bungalow',
+    price:       '₦145,000,000',
+    description: 'The Black Onyx is the smart entry point into Wisdom Kwati Smart City living — a beautifully designed three-bedroom detached bungalow that packs incredible value, technology and style into 2,400 sq ft. Perfect for young families and professionals, it features a fully fitted kitchen, integrated smart home system, solar power and a private garden — all within a secure, serviced smart estate.',
+    beds: 3, baths: 3,
+    size: '2,400 SQ FT', lotSize: '450 SQM',
+    floors: 1, parking: '2 Cars',
+    builtIn: 'Q1 2026 — Ready',
+    propertyId: 'WK-BO-ONX-006',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+    ],
+    amenities: [
+      { name: 'Smart Home Automation',  iconClass: 'icon-smart' },
+      { name: 'Solar Power System',     iconClass: 'icon-solar' },
+      { name: '24/7 Security Patrol',   iconClass: 'icon-security' },
+      { name: 'Fibre Optic Internet',   iconClass: 'icon-internet' },
+      { name: 'Fully Fitted Kitchen',   iconClass: 'icon-kitchen' },
+      { name: 'Underground Drainage',   iconClass: 'icon-drainage' },
+      { name: 'Full Power Backup',      iconClass: 'icon-power' },
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms',      details: '3 (all ensuite)' },
+      { metric: 'Bathrooms',     details: '3 full — modern tiled finishes' },
+      { metric: 'Living Room',   details: 'Open-plan with large sliding doors to garden' },
+      { metric: 'Kitchen',       details: 'Fully fitted kitchen — imported cabinetry, cooker & dishwasher' },
+      { metric: 'Flooring',      details: 'Premium imported tiles throughout' },
+      { metric: 'Smart Home',    details: 'Smart lighting, smart locks and security cameras via app' },
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Modern bungalow with flat roof and angular facade' },
+      { metric: 'Garden',       details: 'Private garden with landscaped lawn and patio' },
+      { metric: 'Parking',      details: '2-car covered carport' },
+      { metric: 'Security',     details: 'Estate perimeter wall, CCTV & 24/7 security' },
+      { metric: 'Energy',       details: '5kW solar system + inverter backup' },
+    ],
+    createdAt: new Date().toISOString(),
+  },
+
+  // ─── 11. THE RED ONYX ──────────────────────────────────────────────────────
+  {
+    id: 'red-onyx',
+    classType:   'The Red Onyx',
+    tagline:     '2 Bedroom Smart Class Detached Bungalow',
+    price:       '₦115,000,000',
+    description: 'The Red Onyx is a beautifully designed two-bedroom detached bungalow offering modern smart living at an exceptional value. Featuring a compact and highly efficient 1,800 sq ft layout, it comes equipped with a fully fitted kitchen, smart home readiness, solar integration, and private outdoor spaces — perfect for compact modern families, downsizers, or savvy investors.',
+    beds: 2, baths: 2,
+    size: '1,800 SQ FT', lotSize: '300 SQM',
+    floors: 1, parking: '2 Cars',
+    builtIn: 'Q1 2026 — Ready',
+    propertyId: 'WK-RO-ONX-005',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EvTJIVwYq5NcbH33A3opCXBuNFyWNS92%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+    ],
+    amenities: [
+      { name: 'Smart Home Automation',  iconClass: 'icon-smart' },
+      { name: 'Solar Power System',     iconClass: 'icon-solar' },
+      { name: '24/7 Security Patrol',   iconClass: 'icon-security' },
+      { name: 'Fibre Optic Internet',   iconClass: 'icon-internet' },
+      { name: 'Fully Fitted Kitchen',   iconClass: 'icon-kitchen' },
+      { name: 'Underground Drainage',   iconClass: 'icon-drainage' },
+      { name: 'Full Power Backup',      iconClass: 'icon-power' },
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms',      details: '2 (both en-suite)' },
+      { metric: 'Bathrooms',     details: '2 full — modern tiled finishes' },
+      { metric: 'Living Room',   details: 'Open-plan with large sliding doors to garden' },
+      { metric: 'Kitchen',       details: 'Fully fitted kitchen — imported cabinetry, cooker & dishwasher' },
+      { metric: 'Flooring',      details: 'Premium imported tiles throughout' },
+      { metric: 'Smart Home',    details: 'Smart lighting, smart locks and security cameras via app' },
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Modern bungalow with flat roof and angular facade' },
+      { metric: 'Garden',       details: 'Private garden with landscaped lawn and patio' },
+      { metric: 'Parking',      details: '2-car covered carport' },
+      { metric: 'Security',     details: 'Estate perimeter wall, CCTV & 24/7 security' },
+      { metric: 'Energy',       details: '3kW solar system + inverter backup' },
+    ],
+    createdAt: new Date().toISOString(),
   }
 
 ];

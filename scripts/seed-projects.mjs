@@ -63,47 +63,7 @@ const projects = [
     neighborhood: 'Kuje',
     updatesLink: '/projects/beverly-hills',
     createdAt: new Date().toISOString()
-  },
-  {
-    id: 'garden-eden',
-    name: 'Garden Eden Estate',
-    tagline: 'A lush, tranquil smart residential community where nature and technology coexist in perfect harmony.',
-    description: 'Garden Eden Estate draws inspiration from nature\'s finest design principles — lush greenery, open spaces, and clean air — combined with Wisdom Kwati\'s world-class smart infrastructure. This is a community for families seeking quality of life, safety, and the comfort of modern intelligent living.',
-    heroImage: 'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU%26sz=w1200',
-    highlights: [
-      'Expansive Green Parks & Gardens',
-      'Smart Irrigation & Landscaping System',
-      'Child-Safe Gated Community Design',
-      'Solar-Powered Street Lights',
-      'Smart Security with Perimeter CCTV',
-      'Community Clubhouse & Playground'
-    ],
-    realEstateVibe: [
-      { title: 'Environment', description: 'Nature-Integrated Smart Estate' },
-      { title: 'Target', description: 'Family-Oriented Community' },
-      { title: 'Green Space', description: '40% Landscaped Common Areas' },
-      { title: 'Security', description: 'Child-Safe Smart Perimeter' }
-    ],
-    nearbyFacilities: [
-      { category: 'Education', name: 'Primary & Secondary Schools', distance: '5 mins' },
-      { category: 'Healthcare', name: 'Community Health Centre', distance: '8 mins' },
-      { category: 'Markets', name: 'Local Food Market', distance: '10 mins' },
-      { category: 'Recreation', name: 'Public Recreation Park', distance: '3 mins' }
-    ],
-    marketSnapshot: [
-      { metric: '400 SQM Plot', value: '₦20,000,000 – ₦30,000,000', outlook: 'Family Market Growth' }
-    ],
-    plotSizes: [
-      { size: '400 SQM', dimensions: '20m × 20m', availability: 'Available' },
-      { size: '600 SQM', dimensions: '30m × 20m', availability: 'Available' }
-    ],
-    houseTypeIds: [],
-    status: 'active',
-    location: 'Nigeria',
-    state: 'Abuja',
-    neighborhood: 'Asokoro',
-    updatesLink: '/projects/garden-eden',
-    createdAt: new Date().toISOString()
+
   },
   {
     id: 'lagos-ekpe',

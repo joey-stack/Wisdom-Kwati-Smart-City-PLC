@@ -66,11 +66,11 @@ const kwatiCityMaitamaData = {
   neighborhood: "Maitama",
   tagline: "A landmark smart development strategically positioned in Abuja's most prestigious corridor.",
   description: "A landmark, FCDA-approved smart city development in Abuja's prestigious Maitama II. Engineered for refined urban living, it offers high-end residential layouts, seamless business connectivity, and exceptional capital appreciation potential in a high-growth corridor.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1vdMFJGPHIiAOCtp5zqxqNvHRqR4Mr1da&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1vdMFJGPHIiAOCtp5zqxqNvHRqR4Mr1da&sz=w1200",
   updatesLink: "/projects/kwati-city-maitama-ii",
   advisorId: "samuel-kwati",
-  houseTypeIds: [],
+  houseTypeIds: ["white-pearl", "silver-pearl", "blue-sapphire", "star-sapphire", "jade-terrace", "royal-emerald", "imperial-emerald"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the prestigious Maitama II district of Abuja.",
@@ -92,21 +92,21 @@ const kwatiCityMaitamaData = {
     { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "40 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "180 SQM - 350 SQM Plots", priceRange: "N7,000,000 - N12,740,000", outlook: "High-Growth Potential" },
-    { plotCategory: "500 SQM - 800 SQM Plots", priceRange: "N19,500,000 - N28,600,000", outlook: "Premium Investment" },
-    { plotCategory: "1,000 SQM Plot", priceRange: "N36,400,000", outlook: "Strong Appreciation Potential" },
-    { plotCategory: "1 Hectare", priceRange: "N260,000,000", outlook: "Long-Term Wealth Preservation" }
+    { plotCategory: "180 SQM - 350 SQM Plots", priceRange: "₦7,000,000 - ₦12,740,000", outlook: "High-Growth Potential" },
+    { plotCategory: "500 SQM - 800 SQM Plots", priceRange: "₦19,500,000 - ₦28,600,000", outlook: "Premium Investment" },
+    { plotCategory: "1,000 SQM Plot", priceRange: "₦36,400,000", outlook: "Strong Appreciation Potential" },
+    { plotCategory: "1 Hectare", priceRange: "₦260,000,000", outlook: "Long-Term Wealth Preservation" }
   ],
   plotSizes: [
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "180 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "250 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "350 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "500 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "650 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "750 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "800 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "1,000 SQM", availability: "Available" },
-    { plotType: "Large Scale", dimensions: "Standard Layout", area: "1 Hectare", availability: "Available" }
+    { plotType: "Standard Plot", dimensions: "18m x 10m", area: "180 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 10m", area: "250 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 14m", area: "350 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 20m", area: "500 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "32.5m x 20m", area: "650 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "37.5m x 20m", area: "750 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "40m x 20m", area: "800 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "40m x 25m", area: "1,000 SQM", availability: "Available" },
+    { plotType: "Large Scale", dimensions: "100m x 100m", area: "1 Hectare", availability: "Available" }
   ],
   sortOrder: 2,
   createdAt: new Date().toISOString()
@@ -123,7 +123,7 @@ const deLuminariaData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/maitama-ii-estate",
   advisorId: "samuel-kwati",
-  houseTypeIds: [],
+  houseTypeIds: ["white-pearl", "silver-pearl", "blue-sapphire", "star-sapphire", "jade-terrace", "royal-emerald", "imperial-emerald"],
   highlights: [
     "FCDA Approved with Certificate of Occupancy (C of O)",
     "Located in the prestigious Maitama II district",
@@ -145,18 +145,18 @@ const deLuminariaData = {
     { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "40 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "180 SQM - 350 SQM Plots", priceRange: "N16.2M - N22.5M", outlook: "High-Growth Potential" },
-    { plotCategory: "500 SQM - 750 SQM Plots", priceRange: "N45M - N67.5M", outlook: "Premium Investment" },
-    { plotCategory: "1,000 SQM Plot", priceRange: "N90M", outlook: "Strong Appreciation Potential" }
+    { plotCategory: "180 SQM - 350 SQM Plots", priceRange: "₦16.2M - ₦22.5M", outlook: "High-Growth Potential" },
+    { plotCategory: "500 SQM - 750 SQM Plots", priceRange: "₦45M - ₦67.5M", outlook: "Premium Investment" },
+    { plotCategory: "1,000 SQM Plot", priceRange: "₦90M", outlook: "Strong Appreciation Potential" }
   ],
   plotSizes: [
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "180 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "250 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "350 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "500 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "650 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "750 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "Standard Layout", area: "1,000 SQM", availability: "Available" }
+    { plotType: "Standard Plot", dimensions: "18m x 10m", area: "180 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 10m", area: "250 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 14m", area: "350 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 20m", area: "500 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "32.5m x 20m", area: "650 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "37.5m x 20m", area: "750 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "40m x 25m", area: "1,000 SQM", availability: "Available" }
   ],
   sortOrder: 2,
   createdAt: new Date().toISOString()
@@ -241,14 +241,12 @@ const palmHavenData = {
     { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "35 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "Land Plots (250sqm - 450sqm)", priceRange: "N33,000,000 - N60,000,000", outlook: "High-Growth Potential" },
-    { plotCategory: "Apartments (2BR - 3BR)", priceRange: "N50,000,000 - N65,000,000", outlook: "High Rental Demand" },
-    { plotCategory: "Duplexes (Terrace - Detached)", priceRange: "N90,000,000 - N180,000,000", outlook: "Premium Investment" }
+    { plotCategory: "250 SQM Plot", priceRange: "₦33,000,000", outlook: "High-Growth Potential" },
+    { plotCategory: "450 SQM Plot", priceRange: "₦60,000,000", outlook: "Premium Investment" }
   ],
   plotSizes: [
-    { plotType: "Residential Plot", dimensions: "Standard Layout", area: "250 SQM", availability: "Available" },
-    { plotType: "Residential Plot", dimensions: "Standard Layout", area: "450 SQM", availability: "Available" },
-    { plotType: "Apartment/Duplex Units", dimensions: "Various Layouts", area: "Varies", availability: "Available" }
+    { plotType: "Standard Plot", dimensions: "25m x 10m", area: "250 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "22.5m x 20m", area: "450 SQM", availability: "Available" }
   ],
   sortOrder: 999,
   createdAt: new Date().toISOString()
@@ -262,8 +260,8 @@ const murgCityData = {
   neighborhood: "Katampe Extension",
   tagline: "Africa's first AI-integrated smart community in Katampe Extension, Abuja.",
   description: "Africa’s first AI-integrated community located in prestigious Katampe Extension, Abuja. This FCDA-approved estate blends luxury residential design with cutting-edge smart infrastructure, offering advanced security, premium modern amenities, and excellent connectivity for strong property appreciation and long-term investment value.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1hxVqzWX7fTw6I2a2KMNgz53N9JAmgzO4&sz=w1200",
   updatesLink: "/projects/murg-city",
   advisorId: "samuel-kwati",
   houseTypeIds: [],
@@ -309,8 +307,8 @@ const murgCityExclusiveData = {
   neighborhood: "Katampe Extension",
   tagline: "Ultra-luxury residential community featuring golf courses and lakes in Katampe Extension.",
   description: "An FCDA-approved master-planned estate in Katampe Extension, Abuja, offering golf courses, artificial lakes, and a private clubhouse. It combines underground wiring and advanced security with premium recreational amenities, ensuring prestigious luxury living and high capital appreciation potential for investors.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SgY9v0_USlmGyfIO1J9bE8TA4fbwYETM&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SgY9v0_USlmGyfIO1J9bE8TA4fbwYETM&sz=w1200",
   updatesLink: "/projects/murg-city-exclusive",
   advisorId: "samuel-kwati",
   houseTypeIds: [],
@@ -365,7 +363,7 @@ const ellingtonVillaData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/ellington-villa",
   advisorId: "samuel-kwati",
-  houseTypeIds: [],
+  houseTypeIds: ["white-pearl", "silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the central and highly prestigious Mabushi district.",
@@ -387,12 +385,15 @@ const ellingtonVillaData = {
     { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "30 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "2 Bedroom Apartment", priceRange: "N130,000,000", outlook: "High Rental Demand" },
-    { plotCategory: "3 Bedroom Apartment", priceRange: "N180,000,000", outlook: "Premium Investment" }
+    { plotCategory: "225 SQM Plot", priceRange: "₦32,000,000 – ₦40,000,000", outlook: "Steady Value Rise" },
+    { plotCategory: "350 SQM Plot", priceRange: "₦50,000,000 – ₦65,000,000", outlook: "High Demand" },
+    { plotCategory: "650 SQM - 750 SQM Plots", priceRange: "₦90,000,000 – ₦110,000,000", outlook: "Premium Investment" }
   ],
   plotSizes: [
-    { plotType: "2 Bedroom Apt", dimensions: "Standard Design", area: "N/A", availability: "Available" },
-    { plotType: "3 Bedroom Apt", dimensions: "Standard Design", area: "N/A", availability: "Available" }
+    { plotType: "Standard Plot", dimensions: "22.5m x 10m", area: "225 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 14m", area: "350 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "32.5m x 20m", area: "650 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "37.5m x 20m", area: "750 SQM", availability: "Limited" }
   ],
   sortOrder: 999,
   createdAt: new Date().toISOString()
@@ -406,11 +407,11 @@ const nimiHillsGuzapeData = {
   neighborhood: "Guzape",
   tagline: "Ultra-luxury residential landmark offering an elite elevated living experience in Guzape.",
   description: "An FCDA-approved master-planned community in Guzape, Abuja, combining high-end architectural grandeur with premium recreational amenities, including private pools. It offers breathtaking elevated views, top-tier security, and seamless connectivity, promising elite residential luxury and unmatched long-term wealth preservation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1AfA4qAiAd3NQPFRkujrl_Or6dAgG-QqP&sz=w1200",
   updatesLink: "/projects/nimi-hills-guzape",
   advisorId: "samuel-kwati",
-  houseTypeIds: [],
+  houseTypeIds: ["white-pearl", "silver-pearl", "blue-sapphire", "star-sapphire", "jade-terrace", "royal-emerald", "imperial-emerald"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the prestigious and highly elevated Guzape district.",
@@ -432,15 +433,18 @@ const nimiHillsGuzapeData = {
     { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "35 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "2 Bedroom - 3 Bedroom Apartments", priceRange: "N149,000,000 - N199,000,000", outlook: "High Rental Demand" },
-    { plotCategory: "5 Bedroom Fully Detached Duplex", priceRange: "N573,000,000", outlook: "Premium Investment" },
-    { plotCategory: "7 Bedroom Fully Detached Duplex", priceRange: "N879,000,000", outlook: "Long-Term Wealth Preservation" }
+    { plotCategory: "200 SQM - 450 SQM Plots", priceRange: "₦24,000,000 - ₦54,000,000", outlook: "High-Growth Potential" },
+    { plotCategory: "650 SQM - 800 SQM Plots", priceRange: "₦78,000,000 - ₦96,000,000", outlook: "Premium Investment" },
+    { plotCategory: "1,000 SQM Plot", priceRange: "₦120,000,000", outlook: "Strong Appreciation Potential" }
   ],
   plotSizes: [
-    { plotType: "2 Bedroom Apt", dimensions: "Standard Luxury", area: "N/A", availability: "Available" },
-    { plotType: "3 Bedroom Apt", dimensions: "Standard Luxury", area: "N/A", availability: "Available" },
-    { plotType: "5 Bedroom Duplex", dimensions: "Standard Luxury", area: "N/A", availability: "Available" },
-    { plotType: "7 Bedroom Duplex", dimensions: "Standard Luxury", area: "N/A", availability: "Available" }
+    { plotType: "Standard Plot", dimensions: "20m x 10m", area: "200 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "25m x 10m", area: "250 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "22.5m x 20m", area: "450 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "32.5m x 20m", area: "650 SQM", availability: "Available" },
+    { plotType: "Standard Plot", dimensions: "37.5m x 20m", area: "750 SQM", availability: "Limited" },
+    { plotType: "Standard Plot", dimensions: "40m x 20m", area: "800 SQM", availability: "Limited" },
+    { plotType: "Standard Plot", dimensions: "40m x 25m", area: "1,000 SQM", availability: "Limited" }
   ],
   sortOrder: 999,
   createdAt: new Date().toISOString()
@@ -454,8 +458,8 @@ const usuloCityKujeData = {
   neighborhood: "Kuje",
   tagline: "Africa's first AI-integrated wellness community in the tranquil Kuje district.",
   description: "A groundbreaking FCDA-approved development in Kuje, Abuja. Proudly standing as Africa's first AI-integrated wellness community, it blends cutting-edge technology with serene surroundings, offering a refreshing lifestyle escape, advanced security, and high potential for sustained property value appreciation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1W78PkCZEKS_smIJHqajeKCdtYev7yGpZ&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1W78PkCZEKS_smIJHqajeKCdtYev7yGpZ&sz=w1200",
   updatesLink: "/projects/usulo-city-kuje",
   advisorId: "samuel-kwati",
   houseTypeIds: [],
@@ -503,8 +507,8 @@ const lakesideViewData = {
   neighborhood: "Kuje",
   tagline: "Premium residential opportunity offering tranquility and strategic accessibility in Kuje, Abuja.",
   description: "An FCDA-approved residential community in Kuje, Abuja. Designed to combine immediate comfort with long-term capital appreciation, Lakeside View features well-planned road networks, street lighting, and dedicated play areas, offering a perfect balance of affordability and prestige in an expanding market corridor.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612&sz=w1200",
   updatesLink: "/projects/lakeside-view",
   advisorId: "samuel-kwati",
   houseTypeIds: [],
@@ -541,102 +545,6 @@ const lakesideViewData = {
 };
 
 
-const royalCityKujePhase2Data = {
-  name: "Royal City Kuje, Phase 2",
-  location: "Kuje, Abuja",
-  state: "Abuja",
-  neighborhood: "Kuje",
-  tagline: "Premier residential development offering modern architectural elegance in Kuje district, Abuja.",
-  description: "An FCDA-approved master-planned community in Kuje, Abuja. Designed to combine architectural elegance with functional living spaces, Royal City Kuje, Phase 2, provides comfort, security, and strategic convenience, offering significant capital appreciation potential and pre-sale value for homeowners and investors.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  updatesLink: "/projects/royal-city-kuje-phase-2",
-  advisorId: "samuel-kwati",
-  houseTypeIds: [],
-  highlights: [
-    "FCDA Approved development status.",
-    "Strategically positioned in the high-growth Kuje district of Abuja.",
-    "Ideal environment for modern residential and family-oriented living.",
-    "Strong investment appeal with a diverse range of residential options for optimal rental yields.",
-    "Excellent accessibility to major road networks within the Abuja metropolis."
-  ],
-  realEstateVibe: [
-    { category: "Land Title", details: "FCDA Approved" },
-    { category: "Security", details: "Secure and gated community environment" },
-    { category: "Infrastructure", details: "Planned residential layout with modern utilities" },
-    { category: "Environment", details: "Serene, residential-focused, and family-oriented" }
-  ],
-  nearbyFacilities: [
-    { category: "Governance", establishment: "Kuje Area Council Secretariat", travelTime: "10 mins" },
-    { category: "Healthcare", establishment: "Kuje General Hospital", travelTime: "12 mins" },
-    { category: "Education", establishment: "Government Science & Technical College", travelTime: "15 mins" },
-    { category: "Shopping", establishment: "Kuje Main Market", travelTime: "10 mins" },
-    { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "20 mins" }
-  ],
-  marketSnapshot: [
-    { plotCategory: "300 SQM Plot", priceRange: "N4,500,000", outlook: "High-Growth Potential" },
-    { plotCategory: "400 SQM Plot (Bungalow)", priceRange: "N6,700,000", outlook: "Emerging Residential Hub" },
-    { plotCategory: "400 SQM Plot (Penthouse)", priceRange: "N7,500,000", outlook: "Premium Investment" }
-  ],
-  plotSizes: [
-    { plotType: "Residential Plot", dimensions: "Standard Layout", area: "300 SQM", availability: "Pre-Sale" },
-    { plotType: "Residential Plot", dimensions: "Standard Layout", area: "400 SQM", availability: "Pre-Sale" }
-  ],
-  sortOrder: 999,
-  createdAt: new Date().toISOString()
-};
-
-
-const wisdomKwatiSmartCityKarshiData = {
-  name: "Wisdom Kwati Smart City, Karshi",
-  location: "Karshi, Abuja",
-  state: "Abuja",
-  neighborhood: "Karshi",
-  tagline: "Master-planned community offering strategic connectivity and modern living in Karshi district.",
-  description: "An FCDA-approved master-planned community in Karshi, Abuja. Poised for significant future appreciation, the estate provides consistent infrastructural growth, excellent arterial road accessibility, and secure residential living, offering a prime investment opportunity for forward-thinking property owners.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  updatesLink: "/projects/wisdom-kwati-smart-city-karshi",
-  advisorId: "samuel-kwati",
-  houseTypeIds: [],
-  highlights: [
-    "FCDA Approved development status.",
-    "Strategically located in the high-growth Karshi district.",
-    "Excellent accessibility to major arterial roads connecting to the Abuja metropolis.",
-    "Ideal environment for modern residential and family-oriented living.",
-    "Strong investment potential due to ongoing infrastructural development in Karshi."
-  ],
-  realEstateVibe: [
-    { category: "Land Title", details: "FCDA Approved" },
-    { category: "Security", details: "Secure and accessible community" },
-    { category: "Infrastructure", details: "Well-planned residential layout" },
-    { category: "Environment", details: "Serene, residential-focused, and well-connected" }
-  ],
-  nearbyFacilities: [
-    { category: "Education", establishment: "Bingham University", travelTime: "10 mins" },
-    { category: "Healthcare", establishment: "Karshi General Hospital", travelTime: "10 mins" },
-    { category: "Governance", establishment: "Abuja Municipal Area Council", travelTime: "20 mins" },
-    { category: "Shopping", establishment: "Karshi Main Market", travelTime: "10 mins" },
-    { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "50 mins" }
-  ],
-  marketSnapshot: [
-    { plotCategory: "300 SQM Plot", priceRange: "N2,700,000", outlook: "High-Growth Potential" },
-    { plotCategory: "500 SQM Plot", priceRange: "N4,500,000", outlook: "Strong Appreciation Potential" },
-    { plotCategory: "750 SQM Plot", priceRange: "N6,700,000", outlook: "Emerging Residential Hub" },
-    { plotCategory: "1,000 SQM Plot", priceRange: "N9,000,000", outlook: "Premium Investment" },
-    { plotCategory: "1 Hectare", priceRange: "N25,000,000", outlook: "Long-Term Wealth Preservation" }
-  ],
-  plotSizes: [
-    { plotType: "Standard Plot", dimensions: "~15m x 20m", area: "300 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "~20m x 25m", area: "500 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "~25m x 30m", area: "750 SQM", availability: "Available" },
-    { plotType: "Standard Plot", dimensions: "~25m x 40m", area: "1,000 SQM", availability: "Available" },
-    { plotType: "Large Scale Plot", dimensions: "~100m x 100m", area: "1 Hectare", availability: "Available" }
-  ],
-  sortOrder: 999,
-  createdAt: new Date().toISOString()
-};
-
 
 const beverlyHillsKujeData = {
   name: "Beverly Hills",
@@ -645,8 +553,8 @@ const beverlyHillsKujeData = {
   neighborhood: "Kuje",
   tagline: "Master-planned community offering modern architectural elegance in Kuje district, Abuja.",
   description: "An FCDA-approved master-planned community in Kuje, Abuja. Designed to combine modern architectural elegance with secure family-oriented living, it features well-planned road networks, street lighting, and dedicated play areas, offering immediate comfort and long-term value preservation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SMA1L09Z3xg6nV7hIpSs8BAOM70IHb8s&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1SMA1L09Z3xg6nV7hIpSs8BAOM70IHb8s&sz=w1200",
   updatesLink: "/projects/beverly-hills",
   advisorId: "samuel-kwati",
   houseTypeIds: [],
@@ -685,93 +593,6 @@ const beverlyHillsKujeData = {
 };
 
 
-const kwatiResidenceAsokoroData = {
-  name: "Kwati Residence",
-  location: "Asokoro Main, Abuja",
-  state: "Abuja",
-  neighborhood: "Asokoro",
-  tagline: "Paragon of luxury living in Abuja's most elite Asokoro Main district.",
-  description: "An FCDA-approved development in elite Asokoro Main, Abuja. Designed for ultra-luxury living, it offers maximum security, premium infrastructure, and unmatched proximity to government and diplomatic hubs, presenting an exceptional investment for long-term wealth preservation and capital appreciation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  updatesLink: "/projects/kwati-residence-asokoro",
-  advisorId: "samuel-kwati",
-  houseTypeIds: [],
-  highlights: [
-    "FCDA Approved development status.",
-    "Located in the elite Asokoro Main district, Abuja's seat of power.",
-    "Unmatched proximity to major government secretariats and diplomatic enclaves.",
-    "Designed for ultra-luxury residential living with premium architectural standards.",
-    "Strong investment potential with sustained demand for high-end properties in Asokoro."
-  ],
-  realEstateVibe: [
-    { category: "Land Title", details: "FCDA Approved" },
-    { category: "Security", details: "Elite gated community with top-tier security protocols" },
-    { category: "Infrastructure", details: "Premium, modern residential infrastructure" },
-    { category: "Environment", details: "Prestigious, serene, and highly exclusive" }
-  ],
-  nearbyFacilities: [
-    { category: "Governance", establishment: "Aso Villa / Federal Secretariat", travelTime: "5 mins" },
-    { category: "Healthcare", establishment: "Asokoro District Hospital", travelTime: "5 mins" },
-    { category: "Education", establishment: "Lead British International School", travelTime: "10 mins" },
-    { category: "Shopping", establishment: "Shoprite, Apo Mall", travelTime: "15 mins" },
-    { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "35 mins" }
-  ],
-  marketSnapshot: [
-    { plotCategory: "225 SQM (4BR Semi Detached)", priceRange: "N100,000,000", outlook: "Premium Investment" },
-    { plotCategory: "350 SQM (5BR Fully Detached)", priceRange: "N100,000,000", outlook: "Long-Term Wealth Preservation" }
-  ],
-  plotSizes: [
-    { plotType: "4BR Semi Detached", dimensions: "Standard Luxury", area: "225 SQM", availability: "Available" },
-    { plotType: "5BR Fully Detached", dimensions: "Standard Luxury", area: "350 SQM", availability: "Available" }
-  ],
-  sortOrder: 999,
-  createdAt: new Date().toISOString()
-};
-
-
-const kwatiFarmsResortData = {
-  name: "Kwati Farms & Resort",
-  location: "Gwagwalada, Abuja",
-  state: "Abuja",
-  neighborhood: "Gwagwalada",
-  tagline: "Premier agricultural and leisure destination located within Abuja's expanding Gwagwalada corridor.",
-  description: "An FCDA-approved agricultural and leisure development in Gwagwalada, Abuja. Combining high-yield sustainable farming potential with resort-style serenity, the estate offers 1-hectare land parcels positioned for long-term appreciation, secure utility, and wellness-focused wealth preservation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
-  updatesLink: "/projects/kwati-farms-resort",
-  advisorId: "samuel-kwati",
-  houseTypeIds: [],
-  highlights: [
-    "FCDA Approved development status.",
-    "Strategically positioned in the high-growth Gwagwalada district of Abuja.",
-    "Combines large-scale agricultural potential with resort-style recreational benefits.",
-    "Ideal environment for sustainable investment and leisure-focused development.",
-    "Excellent long-term growth potential due to the strategic expansion of the Gwagwalada corridor."
-  ],
-  realEstateVibe: [
-    { category: "Land Title", details: "FCDA Approved" },
-    { category: "Security", details: "Secure, managed agricultural and resort environment" },
-    { category: "Infrastructure", details: "Well-planned layout for agricultural and recreational use" },
-    { category: "Environment", details: "Serene, natural, and wellness-oriented" }
-  ],
-  nearbyFacilities: [
-    { category: "Governance", establishment: "Gwagwalada Area Council Secretariat", travelTime: "10 mins" },
-    { category: "Healthcare", establishment: "University of Abuja Teaching Hospital", travelTime: "15 mins" },
-    { category: "Education", establishment: "University of Abuja", travelTime: "15 mins" },
-    { category: "Shopping", establishment: "Gwagwalada Main Market", travelTime: "10 mins" },
-    { category: "Aviation", establishment: "Nnamdi Azikiwe International Airport", travelTime: "25 mins" }
-  ],
-  marketSnapshot: [
-    { plotCategory: "1 Hectare", priceRange: "N10,000,000", outlook: "Long-Term Wealth Preservation" }
-  ],
-  plotSizes: [
-    { plotType: "Large Scale Plot", dimensions: "~100m x 100m", area: "1 Hectare", availability: "Available" }
-  ],
-  sortOrder: 999,
-  createdAt: new Date().toISOString()
-};
-
 
 const fintiriHomeEstateData = {
   name: "Fintiri Home Estate",
@@ -780,11 +601,11 @@ const fintiriHomeEstateData = {
   neighborhood: "Sangere",
   tagline: "Comfortable modern living spaces in the serene Sangere area of Yola.",
   description: "A comfortable modern residential development in Sangere, Yola. Engineered to make home ownership accessible, it offers fully finished and carcass options, flexible payment plans with a 20% down payment, secure community living, and excellent potential for long-term property appreciation.",
-  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ&sz=w1200",
-  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ&sz=w1200",
+  heroImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1KGLdqvAPmRLFCi_vYeKe8nJ0yms7idqb&sz=w1200",
+  detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1KGLdqvAPmRLFCi_vYeKe8nJ0yms7idqb&sz=w1200",
   updatesLink: "/projects/fintiri-home-estate",
   advisorId: "fatima-usman",
-  houseTypeIds: [],
+  houseTypeIds: ["black-onyx", "red-onyx"],
   highlights: [
     "Strategically positioned in the Sangere district of Yola.",
     "Offered in both \"Fully Finished\" and \"Carcas\" options to suit various budgets and preferences.",
@@ -806,14 +627,12 @@ const fintiriHomeEstateData = {
     { category: "Aviation", establishment: "Yola International Airport", travelTime: "30 mins" }
   ],
   marketSnapshot: [
-    { plotCategory: "2 Bedroom (Carcas)", priceRange: "N13,000,000", outlook: "High-Growth Potential" },
-    { plotCategory: "2 Bedroom (Fully Finished)", priceRange: "N17,000,000", outlook: "Strong Appreciation Potential" },
-    { plotCategory: "3 Bedroom (Carcas)", priceRange: "N17,000,000", outlook: "Emerging Residential Hub" },
-    { plotCategory: "3 Bedroom (Fully Finished)", priceRange: "N21,000,000", outlook: "Premium Investment" }
+    { plotCategory: "300 SQM Plot", priceRange: "₦13,000,000 - ₦17,000,000", outlook: "High-Growth Potential" },
+    { plotCategory: "450 SQM Plot", priceRange: "₦17,000,000 - ₦21,000,000", outlook: "Premium Investment" }
   ],
   plotSizes: [
-    { plotType: "2 Bedroom Unit", dimensions: "Standard Residential", area: "Varies", availability: "Available" },
-    { plotType: "3 Bedroom Unit", dimensions: "Standard Residential", area: "Varies", availability: "Available" }
+    { plotType: "2 Bedroom Bungalow Plot", dimensions: "15m x 20m", area: "300 SQM", availability: "Available" },
+    { plotType: "3 Bedroom Bungalow Plot", dimensions: "18m x 25m", area: "450 SQM", availability: "Available" }
   ],
   sortOrder: 999,
   createdAt: new Date().toISOString()
@@ -831,7 +650,7 @@ const palmNicoleData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ&sz=w1200",
   updatesLink: "/projects/palm-nicole",
   advisorId: "fatima-usman",
-  houseTypeIds: [],
+  houseTypeIds: ["black-onyx", "red-onyx"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned on Sao Tome Road, Millennium City, Kaduna.",
@@ -909,25 +728,9 @@ async function run() {
     await setDoc(doc(db, 'projects', 'lakeside-view'), lakesideViewData);
     console.log('✅ Lakeside View successfully written.');
 
-    console.log('Writing Royal City Kuje, Phase 2 document...');
-    await setDoc(doc(db, 'projects', 'royal-city-kuje-phase-2'), royalCityKujePhase2Data);
-    console.log('✅ Royal City Kuje, Phase 2 successfully written.');
-
-    console.log('Writing Wisdom Kwati Smart City, Karshi document...');
-    await setDoc(doc(db, 'projects', 'wisdom-kwati-smart-city-karshi'), wisdomKwatiSmartCityKarshiData);
-    console.log('✅ Wisdom Kwati Smart City, Karshi successfully written.');
-
     console.log('Writing Beverly Hills document...');
     await setDoc(doc(db, 'projects', 'beverly-hills'), beverlyHillsKujeData);
     console.log('✅ Beverly Hills successfully written.');
-
-    console.log('Writing Kwati Residence document...');
-    await setDoc(doc(db, 'projects', 'kwati-residence-asokoro'), kwatiResidenceAsokoroData);
-    console.log('✅ Kwati Residence successfully written.');
-
-    console.log('Writing Kwati Farms & Resort document...');
-    await setDoc(doc(db, 'projects', 'kwati-farms-resort'), kwatiFarmsResortData);
-    console.log('✅ Kwati Farms & Resort successfully written.');
 
     console.log('Writing Fintiri Home Estate document...');
     await setDoc(doc(db, 'projects', 'fintiri-home-estate'), fintiriHomeEstateData);

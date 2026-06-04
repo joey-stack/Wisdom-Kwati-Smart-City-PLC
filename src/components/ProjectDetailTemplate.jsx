@@ -185,9 +185,9 @@ export default function ProjectDetailTemplate({
 
           if (project.plotSizes && project.plotSizes.length > 0) {
             setPlotSizes(project.plotSizes.map(p => ({
-              plotType: p.size || p.plotType || '',
+              plotType: p.plotType || 'Standard Plot',
               dimensions: p.dimensions || '',
-              area: p.size || p.area || '',
+              area: p.area || p.size || '',
               availability: p.availability || 'Available'
             })));
           }

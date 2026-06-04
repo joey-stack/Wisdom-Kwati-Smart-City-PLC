@@ -428,6 +428,91 @@ const HOUSE_TYPES = [
       { metric: 'Circulation', details: 'Dedicated stairways serving all levels' }
     ],
     createdAt: new Date().toISOString()
+  },
+
+  // ─── 9. THE JADE TERRACE ───────────────────────────────────────────────────
+  {
+    id: 'jade-terrace',
+    classType:   'The Jade Terrace',
+    tagline:     '4 Bedroom Smart Terrace Duplex',
+    price:       '₦185,000,000',
+    description: 'The Jade Terrace is a contemporary 4-bedroom smart terrace duplex designed for premium urban living. It balances space, utility, and modern home automation, providing an excellent lifestyle in a secure community.',
+    beds: 4, baths: 4,
+    size: '3,200 SQ FT', lotSize: '250 SQM',
+    floors: 2, parking: '2 Cars',
+    builtIn: 'Q2 2026 — Under Construction',
+    propertyId: 'WK-JT-JAD-007',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
+    ],
+    amenities: [
+      { name: 'Private Terrace and Balcony spaces', iconClass: 'icon-balcony' },
+      { name: 'Smart Home Automation', iconClass: 'icon-smart' },
+      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
+      { name: 'Designated Kitchen and Dining zones', iconClass: 'icon-kitchen' },
+      { name: '24/7 Security Patrol', iconClass: 'icon-security' }
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms', details: '4 bedrooms (all ensuite)' },
+      { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Spacious living room area (22.5m²)' },
+      { metric: 'Kitchen', details: 'Modern kitchen space (8.4m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, lobby, private balcony, and terrace' }
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Modern terraced duplex architecture with private entry' },
+      { metric: 'Garden / Outdoor', details: 'Private terrace and patio spaces' },
+      { metric: 'Parking', details: '2 designated car parking spaces' },
+      { metric: 'Circulation', details: 'Internal stairway connecting levels' }
+    ],
+    createdAt: new Date().toISOString()
+  },
+
+  // ─── 10. THE QUARTZ TERRACE ────────────────────────────────────────────────
+  {
+    id: 'quartz-terrace',
+    classType:   'The Quartz Terrace',
+    tagline:     '4 Bedroom Classic Terrace Duplex',
+    price:       '₦165,000,000',
+    description: 'The Quartz Terrace is an elegant 4-bedroom terrace duplex that offers the perfect blend of structural aesthetics, spacious rooms, and comfort. Designed for modern families, it includes premium interior fittings, dedicated parking, and private terrace access.',
+    beds: 4, baths: 4,
+    size: '3,000 SQ FT', lotSize: '200 SQM',
+    floors: 2, parking: '2 Cars',
+    builtIn: 'Q2 2026 — Under Construction',
+    propertyId: 'WK-QT-QTZ-008',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cBO3as-XL4ecKLz_xur4TxlVn1eqbi4D%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
+    ],
+    amenities: [
+      { name: 'Private Balcony and Terrace spaces', iconClass: 'icon-balcony' },
+      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
+      { name: 'Designated Kitchen and Dining zones', iconClass: 'icon-kitchen' },
+      { name: '24/7 Security Patrol', iconClass: 'icon-security' }
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
+      { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Generous living room area (20m²)' },
+      { metric: 'Kitchen', details: 'Dedicated kitchen space (7.2m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, lobby, balcony, and terrace' }
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Classic terraced duplex design' },
+      { metric: 'Garden / Outdoor', details: 'Private balcony and terrace zones' },
+      { metric: 'Parking', details: '2-car parking bay' },
+      { metric: 'Circulation', details: 'Stair Hall connecting ground and upper floor' }
+    ],
+    createdAt: new Date().toISOString()
   }
 
 ];

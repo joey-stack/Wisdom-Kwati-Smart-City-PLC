@@ -26,27 +26,36 @@ const BathIcon = () => (
  */
 function getGemstoneClass(name) {
   if (!name) return '';
-  // Known gemstone words that appear as the last word in classType
+  // Known gemstone words
   const gemstones = [
     'Emerald', 'Sapphire', 'Onyx', 'Pearl', 'Opal',
     'Quartz', 'Jade', 'Diamond', 'Ruby', 'Topaz',
     'Amethyst', 'Garnet', 'Aquamarine',
   ];
   const words = name.replace(/^The\s+/i, '').split(/\s+/);
-  // Last word is usually the gemstone family
-  const last = words[words.length - 1];
-  if (gemstones.some(g => g.toLowerCase() === last.toLowerCase())) {
-    return `${last} Class Villa`;
+  
+  // Find if any gemstone is present in the name
+  const gem = gemstones.find(g => name.toLowerCase().includes(g.toLowerCase()));
+  if (!gem) {
+    return words.join(' ') + ' Class';
   }
-  // If suffix is a house type keyword, use the word before it
-  const typeWords = ['Terrace', 'SMART', 'Duplex', 'Bungalow', 'Apartment', 'Penthouse'];
-  if (typeWords.some(t => t.toLowerCase() === last.toLowerCase()) && words.length >= 2) {
-    const gem = words[words.length - 2];
-    if (gemstones.some(g => g.toLowerCase() === gem.toLowerCase())) {
-      return `${gem} Class Villa`;
-    }
+
+  // Determine the type suffix dynamically based on the name keywords
+  const nameLower = name.toLowerCase();
+  let typeSuffix = 'Villa'; // default fallback
+  if (nameLower.includes('terrace')) {
+    typeSuffix = 'Terrace';
+  } else if (nameLower.includes('bungalow')) {
+    typeSuffix = 'Bungalow';
+  } else if (nameLower.includes('flat') || nameLower.includes('apartment')) {
+    typeSuffix = 'Apartment';
+  } else if (nameLower.includes('penthouse') || nameLower.includes('pent-house')) {
+    typeSuffix = 'Penthouse';
+  } else if (nameLower.includes('duplex')) {
+    typeSuffix = 'Duplex';
   }
-  return words.join(' ') + ' Class';
+
+  return `${gem} Class ${typeSuffix}`;
 }
 
 /**

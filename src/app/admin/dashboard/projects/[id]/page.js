@@ -439,8 +439,8 @@ const STATIC_PROJECT_DEFAULTS = {
 
 const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
   'wisdom-kwati-smart-city': ['blue-sapphire', 'imperial-emerald'],
-  'katampe-extension': ['star-sapphire', 'blue-sapphire', 'imperial-emerald'],
-  'karsana-district': ['blue-sapphire', 'imperial-emerald'],
+  'katampe-extension': ['star-sapphire', 'blue-sapphire', 'imperial-emerald', 'jade-terrace', 'quartz-terrace'],
+  'karsana-district': ['blue-sapphire', 'imperial-emerald', 'jade-terrace', 'quartz-terrace'],
   'mabushi-district': ['white-sapphire', 'imperial-emerald'],
   'guzape-estate': ['royal-emerald', 'blue-sapphire', 'imperial-emerald'],
   'palm-haven': ['silver-pearl', 'white-pearl'],

@@ -173,7 +173,7 @@ const whisperingPinesData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN&sz=w1200",
   updatesLink: "/projects/whispering-pines",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["blue-sapphire", "star-sapphire", "white-pearl", "silver-pearl"],
+  houseTypeIds: ["blue-sapphire", "star-sapphire", "white-pearl", "silver-pearl", "jade-terrace", "quartz-terrace"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically located in the high-growth Karsana district of Abuja.",

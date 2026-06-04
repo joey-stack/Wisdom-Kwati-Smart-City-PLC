@@ -182,7 +182,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['royal-emerald'],
+    houseTypeIds: ['royal-emerald', 'jade-terrace', 'quartz-terrace'],
     status: 'active',
     location: 'Katampe Extension, Abuja',
     state: 'Abuja',
@@ -401,7 +401,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['blue-sapphire', 'star-sapphire', 'white-pearl', 'silver-pearl'],
+    houseTypeIds: ['blue-sapphire', 'star-sapphire', 'white-pearl', 'silver-pearl', 'jade-terrace', 'quartz-terrace'],
     status: 'active',
     location: 'Karsana, Abuja',
     state: 'Abuja',
@@ -444,7 +444,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['royal-emerald'],
+    houseTypeIds: ['royal-emerald', 'jade-terrace', 'quartz-terrace'],
     status: 'active',
     location: 'Katampe Extension, Abuja',
     state: 'Abuja',

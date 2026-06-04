@@ -46,15 +46,15 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.75) 100%
   );
   z-index: 2;
   pointer-events: none;
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  opacity: 0; /* Clean start for reversed blur animation */
+  opacity: 1; /* Dark overlay enabled from the start */
 }
 
 .pd-hero-content {

@@ -221,10 +221,10 @@ export default function ClientScripts() {
                 
                 if (overlay) {
                     gsap.fromTo(overlay, 
-                        { backdropFilter: 'blur(0px)', backgroundColor: 'rgba(0,0,0,0)', opacity: 0 },
+                        { backdropFilter: 'blur(0px)', backgroundColor: 'rgba(0,0,0,0.4)', opacity: 1 },
                         {
                             backdropFilter: 'blur(30px)',
-                            backgroundColor: 'rgba(0,0,0,0.3)',
+                            backgroundColor: 'rgba(0,0,0,0.7)',
                             opacity: 1,
                             ease: 'none',
                             scrollTrigger: {

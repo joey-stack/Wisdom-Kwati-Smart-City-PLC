@@ -136,76 +136,6 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
         </div>
       </section>
 
-      {/* Specs Bar */}
-      <div className="hd-container">
-        <div className="hd-specs-bar-wrapper">
-          <div className="hd-specs-bar">
-            {/* ROW 1 */}
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-tag hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Type</span>
-              <span className="hd-spec-value">{data.classType || 'Villa'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-money-bill-wave hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Price</span>
-              <span className="hd-spec-value">{data.price || 'Contact for Price'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-bed hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Beds</span>
-              <span className="hd-spec-value">{data.beds || '0'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-bath hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Baths</span>
-              <span className="hd-spec-value">{data.baths || '0'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-maximize hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Size</span>
-              <span className="hd-spec-value">{data.size || 'N/A'}</span>
-            </div>
-
-            {/* ROW 2 */}
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-vector-square hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Lot Size</span>
-              <span className="hd-spec-value">{data.lotSize || 'N/A'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-calendar-days hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Built in</span>
-              <span className="hd-spec-value">{data.builtIn || '2026'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-stairs hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Floors</span>
-              <span className="hd-spec-value">{data.floors || '2'} stories</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-car-side hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Parking</span>
-              <span className="hd-spec-value">{data.parking || '2+'}</span>
-            </div>
-            <div className="hd-spec-item">
-              <i className="fa-solid fa-id-badge hd-spec-icon" aria-hidden="true"></i>
-              <span className="hd-spec-label">Property ID</span>
-              <span className="hd-spec-value">{data.propertyId || `WKSC-${id.toUpperCase().slice(0, 6)}`}</span>
-            </div>
-          </div>
-
-          <div className="hd-download-wrapper">
-            <a href={data.brochureUrl || 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link'} className="hd-download-btn" target="_blank" rel="noreferrer">
-              <div className="flip-text">
-                <span>DOWNLOAD BROCHURE</span>
-                <span aria-hidden="true">DOWNLOAD BROCHURE</span>
-              </div>
-              <i className="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
 
       {/* Main Content */}
       <main className="hd-container">
@@ -324,34 +254,6 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
               </section>
             )}
 
-            {/* Floor Plan Section */}
-            {data.floorPlan && data.floorPlan.length > 0 && (
-              <section className="hd-interior-section">
-                <div className="hd-section-line"></div>
-                <div className="hd-section-header">
-                  <div className="hd-section-label">
-                    <div className="label-square"></div>
-                    <span className="label-text">FLOOR PLAN</span>
-                  </div>
-                  <h2 className="hd-section-headline">Floor Plan Breakdown</h2>
-                </div>
-                <p className="hd-section-subtitle">Detailed breakdown of space allocation:</p>
-                <div className="hd-interior-table">
-                  <div className="hd-int-table-header" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr 1fr', gap: '16px' }}>
-                    <span>Floor</span>
-                    <span>Room</span>
-                    <span style={{ textAlign: 'right' }}>Area (m²)</span>
-                  </div>
-                  {data.floorPlan.map((row, idx) => (
-                    <div key={idx} className="hd-int-table-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr 1fr', gap: '16px' }}>
-                      <span className="hd-int-label">{row.floor}</span>
-                      <span className="hd-int-value">{row.room}</span>
-                      <span className="hd-int-value" style={{ textAlign: 'right', fontWeight: '600' }}>{row.area}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
 
 
             {/* Featured Estate */}

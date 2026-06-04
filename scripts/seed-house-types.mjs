@@ -434,12 +434,12 @@ const HOUSE_TYPES = [
   {
     id: 'jade-terrace',
     classType:   'The Jade Terrace',
-    tagline:     '4 Bedroom Smart Terrace Duplex',
+    tagline:     '4 Bedroom Terrace',
     price:       '₦185,000,000',
-    description: 'The Jade Terrace is a contemporary 4-bedroom smart terrace duplex designed for premium urban living. It balances space, utility, and modern home automation, providing an excellent lifestyle in a secure community.',
+    description: 'The Jade Terrace is a masterfully designed 4-bedroom residence that redefines modern community living. Offering a seamless blend of style and practicality, this terrace unit is arranged over three distinct floors, featuring specialized spaces such as a private lounge, a dedicated study, and a luxurious "Madam\'s Bedroom." As part of our signature residential developments, the Jade Terrace provides an sophisticated urban oasis, perfectly suited for families who desire a premium lifestyle integrated within a secure, high-tech, and intelligently managed community environment.',
     beds: 4, baths: 4,
     size: '3,200 SQ FT', lotSize: '250 SQM',
-    floors: 2, parking: '2 Cars',
+    floors: 3, parking: '2 Cars',
     builtIn: 'Q2 2026 — Under Construction',
     propertyId: 'WK-JT-JAD-007',
     brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
@@ -451,24 +451,37 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
     ],
     amenities: [
-      { name: 'Private Terrace and Balcony spaces', iconClass: 'icon-balcony' },
-      { name: 'Smart Home Automation', iconClass: 'icon-smart' },
-      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
-      { name: 'Designated Kitchen and Dining zones', iconClass: 'icon-kitchen' },
-      { name: '24/7 Security Patrol', iconClass: 'icon-security' }
+      { name: 'Dedicated Service Quarters', iconClass: 'icon-service' },
+      { name: 'Multiple Balcony and Terrace spaces', iconClass: 'icon-balcony' },
+      { name: 'Private Study for remote work or focus', iconClass: 'icon-study' },
+      { name: 'Spacious Private Lounge', iconClass: 'icon-lounge' },
+      { name: 'Dedicated Kitchen, Pantry, and Store zones', iconClass: 'icon-kitchen' }
     ],
     interiorSpecs: [
-      { metric: 'Bedrooms', details: '4 bedrooms (all ensuite)' },
+      { metric: 'Bedrooms', details: "4 bedrooms (including Madam's Bedroom and Primary Bedroom)" },
       { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
-      { metric: 'Living Room', details: 'Spacious living room area (22.5m²)' },
-      { metric: 'Kitchen', details: 'Modern kitchen space (8.4m²)' },
-      { metric: 'Additional Spaces', details: 'Dining area, lobby, private balcony, and terrace' }
+      { metric: 'Living Room', details: 'Grand open-plan living and dining area (31.3m²)' },
+      { metric: 'Kitchen', details: 'Modern kitchen with adjoining pantry (15m²)' },
+      { metric: 'Additional Spaces', details: 'Private Lounge, Study, Anteroom, and Service Quarters' }
     ],
     exteriorSpecs: [
-      { metric: 'Architecture', details: 'Modern terraced duplex architecture with private entry' },
-      { metric: 'Garden / Outdoor', details: 'Private terrace and patio spaces' },
-      { metric: 'Parking', details: '2 designated car parking spaces' },
-      { metric: 'Circulation', details: 'Internal stairway connecting levels' }
+      { metric: 'Architecture', details: 'Elegant multi-level terrace design with defined front and side elevations' },
+      { metric: 'Garden / Outdoor', details: 'Features a variety of private balconies and terraces across all floors' },
+      { metric: 'Visual Orientation', details: 'Sophisticated row-terrace design with consistent front/side aesthetic' },
+      { metric: 'Circulation', details: 'Central internal stairways connecting all floors' }
+    ],
+    floorPlan: [
+      { floor: 'Ground Floor', room: 'Living Room & Dining', area: '31.3' },
+      { floor: 'Ground Floor', room: 'Kitchen', area: '15' },
+      { floor: 'Ground Floor', room: 'Service Quarters', area: '10.9' },
+      { floor: 'Ground Floor', room: 'Anteroom', area: '6.4' },
+      { floor: 'Ground Floor', room: 'Pantry/Store', area: '2.1 / 2.3' },
+      { floor: 'First Floor', room: "Madam's Bedroom", area: '19.5' },
+      { floor: 'First Floor', room: 'Bedroom', area: '16.8' },
+      { floor: 'First Floor', room: 'Bedroom', area: '16.3' },
+      { floor: 'Second Floor', room: 'Primary Bedroom', area: '23.3' },
+      { floor: 'Second Floor', room: 'Private Lounge', area: '21.3' },
+      { floor: 'Second Floor', room: 'Study', area: '11.6' }
     ],
     createdAt: new Date().toISOString()
   },

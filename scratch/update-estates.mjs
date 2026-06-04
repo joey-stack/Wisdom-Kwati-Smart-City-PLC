@@ -219,7 +219,7 @@ const palmHavenData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
   updatesLink: "/projects/palm-haven",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl", "blue-sapphire", "star-sapphire"],
+  houseTypeIds: ["silver-pearl", "white-pearl", "blue-sapphire", "star-sapphire", "jade-terrace"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned in the high-growth Apo-Tafyi district of Abuja.",

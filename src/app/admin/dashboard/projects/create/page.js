@@ -37,7 +37,7 @@ const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
   'karsana-district': ['blue-sapphire', 'imperial-emerald', 'jade-terrace', 'quartz-terrace'],
   'mabushi-district': ['white-sapphire', 'imperial-emerald'],
   'guzape-estate': ['royal-emerald', 'blue-sapphire', 'imperial-emerald'],
-  'palm-haven': ['silver-pearl', 'white-pearl'],
+  'palm-haven': ['silver-pearl', 'white-pearl', 'jade-terrace'],
   'maitama-district': ['imperial-emerald'],
   'royal-city': ['blue-sapphire', 'white-sapphire'],
   'beverly-hills': ['blue-sapphire', 'white-sapphire'],

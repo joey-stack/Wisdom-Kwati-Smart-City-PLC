@@ -85,7 +85,6 @@ export default function Page() {
             <div className="hero-bg-container hero-video-wrapper">
                 <Image width={1200} height={800} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
                 <div className="hero-gradient-blur"></div>
-                <div className="hero-grid-overlay grid-overlay"></div>
             </div>
             
             <div className="hero-content">

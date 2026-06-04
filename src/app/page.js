@@ -22,8 +22,6 @@ export default function Page() {
     <div className="hero" role="banner">
         {/* Background Video – client island (needs useRef + play()) */}
         <HeroVideo />
-        {/*  Background Grid Overlay  */}
-        <div className="grid-overlay"></div>
         
         <div className="hero-container">
             <div className="hero-content">

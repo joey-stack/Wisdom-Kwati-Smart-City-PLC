@@ -41,7 +41,7 @@ export default function Page() {
                     </div>
                     <div className="map-column">
                         <div className="map-wrapper">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.4913346513365!2d7.408233300000001!3d9.1009167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7516d2524d77%3A0x6b4f7a22eb2877a!2s10%20Dutse%20St%2C%20War%20College%2C%20Gwarinpa%2C%20Abuja%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1713710729729!5m2!1sen!2sng" title="Google Maps showing Wisdom Kwati Smart City Abuja office location" width="100%" height="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=2141%20Katampe%20Rd,%20Kado,%20Abuja%20900108,%20Federal%20Capital%20Territory&t=&z=15&ie=UTF8&iwloc=&output=embed" title="Google Maps showing Wisdom Kwati Smart City Abuja office location" width="100%" height="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ export default function Page() {
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             ABUJA OFFICE HEADQUARTERS
                         </div>
-                        <p className="location-address">10 Dutse Street, War College, 3rd Avenue,<br />Gwarinpa Estate, Abuja, FCT – Nigeria.</p>
+                        <p className="location-address">2141 Katampe Rd, Kado,<br />Abuja 900108, Federal Capital Territory.</p>
                         <p className="location-contact">+234 810 001 5555</p>
                         <p className="location-contact">hello@wisdomkwatismartcity.com</p>
                         <p className="location-hours">Monday—Friday: 9:00 AM—5:00 PM<br />Saturday: 10:00 AM—3:00 PM | Sunday: Closed</p>

@@ -70,7 +70,7 @@ const kwatiCityMaitamaData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/kwati-city-maitama-ii",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["imperial-emerald"],
+  houseTypeIds: [],
   highlights: [
     "FCDA Approved development status.",
     "Located in the prestigious Maitama II district of Abuja.",
@@ -123,7 +123,7 @@ const deLuminariaData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/maitama-ii-estate",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["imperial-emerald"],
+  houseTypeIds: [],
   highlights: [
     "FCDA Approved with Certificate of Occupancy (C of O)",
     "Located in the prestigious Maitama II district",
@@ -173,7 +173,7 @@ const whisperingPinesData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN&sz=w1200",
   updatesLink: "/projects/whispering-pines",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["blue-sapphire", "star-sapphire", "white-pearl", "silver-pearl", "jade-terrace", "quartz-terrace"],
+  houseTypeIds: ["blue-sapphire", "star-sapphire", "white-pearl", "silver-pearl", "jade-terrace", "royal-emerald", "imperial-emerald"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically located in the high-growth Karsana district of Abuja.",
@@ -219,7 +219,7 @@ const palmHavenData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
   updatesLink: "/projects/palm-haven",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl", "blue-sapphire", "star-sapphire", "jade-terrace"],
+  houseTypeIds: ["silver-pearl", "white-pearl", "blue-sapphire", "star-sapphire", "jade-terrace", "royal-emerald", "imperial-emerald"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned in the high-growth Apo-Tafyi district of Abuja.",
@@ -784,7 +784,7 @@ const fintiriHomeEstateData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ&sz=w1200",
   updatesLink: "/projects/fintiri-home-estate",
   advisorId: "fatima-usman",
-  houseTypeIds: ["black-onyx", "red-onyx"],
+  houseTypeIds: [],
   highlights: [
     "Strategically positioned in the Sangere district of Yola.",
     "Offered in both \"Fully Finished\" and \"Carcas\" options to suit various budgets and preferences.",
@@ -831,7 +831,7 @@ const palmNicoleData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ&sz=w1200",
   updatesLink: "/projects/palm-nicole",
   advisorId: "fatima-usman",
-  houseTypeIds: ["black-onyx", "red-onyx"],
+  houseTypeIds: [],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned on Sao Tome Road, Millennium City, Kaduna.",

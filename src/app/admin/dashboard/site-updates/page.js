@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { collection, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminSiteUpdatesPage() {
   const [updates, setUpdates] = useState([]);
@@ -59,25 +60,6 @@ export default function AdminSiteUpdatesPage() {
     return proj ? proj.name : 'Unknown Estate';
   };
 
-  const resolveMediaUrl = (url) => {
-    if (!url) return '';
-    if (url.includes('drive.google.com/file/d/') || url.includes('drive.google.com/open?id=')) {
-      let fileId = '';
-      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-      if (match && match[1]) {
-        fileId = match[1];
-      } else {
-        try {
-          const urlObj = new URL(url);
-          fileId = urlObj.searchParams.get('id');
-        } catch (e) {}
-      }
-      if (fileId) {
-        return `https://images.weserv.nl/?url=${encodeURIComponent(`https://drive.google.com/uc?export=view&id=${fileId}`)}&w=1600&output=webp&q=85`;
-      }
-    }
-    return url;
-  };
 
   const filteredUpdates = updates.filter(update => {
     return projectFilter === 'ALL' || update.projectId === projectFilter;

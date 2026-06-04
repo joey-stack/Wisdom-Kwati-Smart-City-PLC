@@ -6,7 +6,7 @@
  */
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc } from 'firebase/firestore';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -45,11 +45,11 @@ const HOUSE_TYPES = [
   {
     id: 'imperial-emerald',
     classType:   'The Imperial Emerald',
-    tagline:     '7 Bedroom Premium Fully Detached Smart Villa',
+    tagline:     '7 Bedroom Mansion',
     price:       '₦2,850,000,000',
-    description: 'The Imperial Emerald is the crown jewel of Wisdom Kwati Smart City — a seven-bedroom fully detached ultra-luxury villa that redefines premium living. Commanding an expansive 12,500 sq ft of architectural brilliance, every detail has been crafted for those who demand nothing short of the extraordinary. From the grand double-height entrance foyer to the infinity-edge pool overlooking the estate, this is a home that speaks before you even step inside.',
-    beds: 7, baths: 8,
-    size: '12,500 SQ FT', lotSize: '2,500 SQM',
+    description: 'The Imperial Emerald is the crown jewel of luxury living by Wisdom Kwati Smart City Plc. This magnificent seven-bedroom mansion, set on an expansive 1,000 sqm plot, is designed for homeowners who demand prestige, space, and unparalleled comfort. Showcasing grand architecture, exquisite finishes, and cutting-edge smart technology, The Imperial Emerald offers an elevated lifestyle where elegance meets innovation. From its impressive entrance and expansive living spaces to its premium recreational and entertainment features, every detail has been carefully crafted to deliver a world-class living experience. Whether featured within any of our smart city sites, The Imperial Emerald stands as a symbol of success, sophistication, and timeless luxury.',
+    beds: 7, baths: 7,
+    size: '12,500 SQ FT', lotSize: '1,000 SQM',
     floors: 3, parking: '6 Cars + EV Charging',
     builtIn: 'Q2 2026 — Completion Stage',
     propertyId: 'WK-IE-EMR-001',
@@ -62,39 +62,58 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
     ],
     amenities: [
-      { name: 'Smart Home Automation',     iconClass: 'icon-smart' },
-      { name: 'Private Swimming Pool',     iconClass: 'icon-pool' },
-      { name: '24/7 Security Patrol',      iconClass: 'icon-security' },
-      { name: 'Solar Power System',        iconClass: 'icon-solar' },
-      { name: 'Fibre Optic Internet',      iconClass: 'icon-internet' },
-      { name: 'Electric Vehicle Charging', iconClass: 'icon-ev' },
-      { name: 'Private Gym & Fitness',     iconClass: 'icon-gym' },
-      { name: 'Wine Cellar',               iconClass: 'icon-wine' },
-      { name: 'Home Theater / Cinema',     iconClass: 'icon-cinema' },
-      { name: 'BBQ & Outdoor Kitchen',     iconClass: 'icon-bbq' },
-      { name: '24/7 Concierge Service',    iconClass: 'icon-concierge' },
-      { name: 'Full Power Backup',         iconClass: 'icon-power' },
+      { name: 'Seven spacious en-suite bedrooms', iconClass: 'icon-bed' },
+      { name: 'Fully fitted luxury kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Secondary service kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Multiple living and lounge areas', iconClass: 'icon-lounge' },
+      { name: 'Private family lounge', iconClass: 'icon-lounge' },
+      { name: 'Home office/study', iconClass: 'icon-study' },
+      { name: 'Smart home automation system', iconClass: 'icon-smart' },
+      { name: 'Solar power system', iconClass: 'icon-solar' },
+      { name: 'Private cinema room', iconClass: 'icon-cinema' },
+      { name: 'Gym/fitness room', iconClass: 'icon-gym' },
+      { name: 'Walk-in closets', iconClass: 'icon-closet' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Guest suite', iconClass: 'icon-bed' },
+      { name: 'Guest toilet', iconClass: 'icon-bath' },
+      { name: 'Swimming pool', iconClass: 'icon-pool' },
+      { name: 'Landscaped private garden', iconClass: 'icon-garden' },
+      { name: "Boys' Quarters (BQ)", iconClass: 'icon-service' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' }
     ],
     interiorSpecs: [
-      { metric: 'Bedrooms',    details: '7 (all ensuite with walk-in wardrobes)' },
-      { metric: 'Bathrooms',   details: '8 full bathrooms — Italian marble finishes throughout' },
-      { metric: 'Living Room', details: 'Grand double-height ceiling — floor-to-ceiling glass walls open to panoramic views' },
-      { metric: 'Kitchen',     details: 'Gourmet Italian kitchen — custom cabinetry, marble island, Miele & Sub-Zero appliances' },
-      { metric: 'Flooring',    details: 'Imported Calacatta marble & engineered hardwood' },
-      { metric: 'Master Suite',details: 'Private terrace + spa bathroom — deep soaking tub with estate views' },
-      { metric: 'Home Theater',details: 'Soundproof Dolby Atmos cinema room' },
-      { metric: 'Wine Cellar', details: 'Temperature-controlled — capacity 400+ bottles' },
-      { metric: 'Smart Home',  details: 'Fully automated lighting, climate, sound, curtains & security via single app' },
+      { metric: 'Bedrooms',    details: '7 bedrooms (including Guest Bedroom and Primary Bedroom)' },
+      { metric: 'Bathrooms',   details: '7 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Grand living room area (45.2m²)' },
+      { metric: 'Kitchen',     details: 'Expansive kitchen space (20m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, Home Cinema, Gym, Private Study, Anteroom, and Lobby' }
     ],
     exteriorSpecs: [
-      { metric: 'Architecture',     details: 'Contemporary Mediterranean fusion with Nigerian modernist accents' },
-      { metric: 'Pool',             details: 'Infinity-edge heated swimming pool — overlooking the smart city gardens' },
-      { metric: 'Outdoor Kitchen',  details: 'Fully equipped BBQ terrace & bar lounge' },
-      { metric: 'Rooftop',          details: 'Sky lounge with fire pit — 360° panoramic sunset views' },
-      { metric: 'Landscaping',      details: 'Lush private gardens, water features & stone pathways' },
-      { metric: 'Garage',           details: '6-car underground garage with dedicated EV charging stations' },
-      { metric: 'Security',         details: 'Gated entry, biometric access + 24/7 CCTV surveillance' },
-      { metric: 'Facade',           details: 'Hand-laid Italian stone cladding, full-height glass curtain walls' },
+      { metric: 'Architecture',    details: 'Monumental villa design with defined front and side elevations' },
+      { metric: 'Garden / Outdoor', details: 'Features expansive terrace spaces on the pent floor' },
+      { metric: 'Visual Orientation', details: 'Grand facade with modern glass and structured architectural detailing' },
+      { metric: 'Circulation',     details: 'Grand central stair hall connecting all floors' }
+    ],
+    floorPlan: [
+      { floor: 'Ground Floor', room: 'Living Room', area: '45.2' },
+      { floor: 'Ground Floor', room: 'Kitchen', area: '20' },
+      { floor: 'Ground Floor', room: 'Dining', area: '17.8' },
+      { floor: 'Ground Floor', room: 'Guest Bedroom', area: '12' },
+      { floor: 'Ground Floor', room: 'Gym', area: '22.1' },
+      { floor: 'First Floor', room: 'Bedroom', area: '20' },
+      { floor: 'First Floor', room: 'Bedroom', area: '15' },
+      { floor: 'First Floor', room: 'Bedroom', area: '14' },
+      { floor: 'First Floor', room: 'Family Sitting Room', area: '18' },
+      { floor: 'First Floor', room: 'Private Study', area: '22' },
+      { floor: 'Pent Floor', room: 'Primary Bedroom', area: '42' },
+      { floor: 'Pent Floor', room: 'Primary Lounge', area: '22' },
+      { floor: 'Pent Floor', room: 'Cinema', area: '17' }
     ],
     createdAt: new Date().toISOString(),
   },
@@ -103,11 +122,11 @@ const HOUSE_TYPES = [
   {
     id: 'royal-emerald',
     classType:   'The Royal Emerald',
-    tagline:     '5 Bedroom Premium Fully Detached Smart Villa',
+    tagline:     '5 Bedroom Fully Detached Duplex',
     price:       '₦1,650,000,000',
-    description: 'The Royal Emerald offers the pinnacle of five-bedroom detached luxury within the Wisdom Kwati Smart City. With a commanding façade of glass and natural stone, this villa blends smart technology with timeless elegance. Spread across 8,200 sq ft on a generous plot, it features an infinity-edge pool, home cinema, and a gourmet kitchen fitted with premium European appliances — designed for families who refuse to compromise.',
-    beds: 5, baths: 6,
-    size: '8,200 SQ FT', lotSize: '1,800 SQM',
+    description: 'The Royal Emerald is a distinguished five-bedroom fully detached duplex that embodies elegance, comfort, and smart living. Situated on a generous 500 sqm plot, this beautifully designed residence offers the perfect balance of luxury and functionality for modern families. Featuring spacious interiors, contemporary architecture, premium finishes, and intelligent home technology, The Royal Emerald delivers an exceptional living experience. Whether located within any of our smart city sites, this remarkable home reflects the quality, innovation, and excellence that define every Wisdom Kwati Smart City development.',
+    beds: 5, baths: 5,
+    size: '8,200 SQ FT', lotSize: '500 SQM',
     floors: 3, parking: '4 Cars + EV Charging',
     builtIn: 'Q3 2026 — Pre-Delivery',
     propertyId: 'WK-RE-EMR-002',
@@ -120,34 +139,52 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
     ],
     amenities: [
-      { name: 'Smart Home Automation',     iconClass: 'icon-smart' },
-      { name: 'Private Swimming Pool',     iconClass: 'icon-pool' },
-      { name: '24/7 Security Patrol',      iconClass: 'icon-security' },
-      { name: 'Solar Power System',        iconClass: 'icon-solar' },
-      { name: 'Fibre Optic Internet',      iconClass: 'icon-internet' },
-      { name: 'Electric Vehicle Charging', iconClass: 'icon-ev' },
-      { name: 'Home Theater / Cinema',     iconClass: 'icon-cinema' },
-      { name: 'BBQ & Outdoor Kitchen',     iconClass: 'icon-bbq' },
-      { name: 'Full Power Backup',         iconClass: 'icon-power' },
-      { name: 'Balcony / Terrace',         iconClass: 'icon-balcony' },
+      { name: 'Five spacious en-suite bedrooms', iconClass: 'icon-bed' },
+      { name: 'Fully fitted modern kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Spacious living and dining areas', iconClass: 'icon-lounge' },
+      { name: 'Family lounge', iconClass: 'icon-lounge' },
+      { name: 'Smart home automation system', iconClass: 'icon-smart' },
+      { name: 'Solar power system', iconClass: 'icon-solar' },
+      { name: 'Guest toilet', iconClass: 'icon-bath' },
+      { name: 'Walk-in closet in the master bedroom', iconClass: 'icon-closet' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Home office/study', iconClass: 'icon-study' },
+      { name: 'Landscaped private garden', iconClass: 'icon-garden' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: "Boys' Quarters (BQ)", iconClass: 'icon-service' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' },
+      { name: 'Estate management services', iconClass: 'icon-service' }
     ],
     interiorSpecs: [
-      { metric: 'Bedrooms',    details: '5 (all ensuite with walk-in wardrobes)' },
-      { metric: 'Bathrooms',   details: '6 full bathrooms — Italian marble throughout' },
-      { metric: 'Living Room', details: 'Open-plan double-volume living with floor-to-ceiling glazing' },
-      { metric: 'Kitchen',     details: 'Custom Italian kitchen — Gaggenau appliances, waterfall island' },
-      { metric: 'Flooring',    details: 'Imported travertine stone & wide-plank hardwood' },
-      { metric: 'Master Suite',details: 'His & hers walk-in wardrobes, private spa bathroom with soaking tub' },
-      { metric: 'Home Theater',details: 'Dedicated cinema room with surround sound' },
-      { metric: 'Smart Home',  details: 'Full home automation — lighting, security, climate & AV' },
+      { metric: 'Bedrooms',    details: '5 bedrooms (including Primary Bedroom and BQ)' },
+      { metric: 'Bathrooms',   details: '5 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Grand living room area (34.3m²)' },
+      { metric: 'Kitchen',     details: 'Expansive kitchen space (28.7m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, Family Lounge, Anteroom, Lobby, and Service Quarters' }
     ],
     exteriorSpecs: [
-      { metric: 'Architecture',    details: 'Modernist tropical design — wide overhanging eaves, natural stone' },
-      { metric: 'Pool',            details: 'Infinity-edge swimming pool with sun deck' },
-      { metric: 'Outdoor Kitchen', details: 'Covered alfresco dining terrace with full BBQ setup' },
-      { metric: 'Landscaping',     details: 'Manicured tropical gardens with water feature' },
-      { metric: 'Garage',          details: '4-car garage with EV charging points' },
-      { metric: 'Security',        details: 'Perimeter wall, gated entrance, 24/7 CCTV' },
+      { metric: 'Architecture',    details: 'Modern fully detached duplex design with defined front and side elevations' },
+      { metric: 'Garden / Outdoor', details: 'Includes extensive balcony and terrace spaces across floors' },
+      { metric: 'Visual Orientation', details: 'Striking multi-level facade with contemporary architectural detailing' },
+      { metric: 'Circulation',     details: 'Dedicated internal stairwell connecting ground, first, and pent floors' }
+    ],
+    floorPlan: [
+      { floor: 'Ground Floor', room: 'Living Room', area: '34.3' },
+      { floor: 'Ground Floor', room: 'Kitchen', area: '28.7' },
+      { floor: 'Ground Floor', room: 'Dining', area: '8.9' },
+      { floor: 'Ground Floor', room: 'Anteroom', area: '8.8' },
+      { floor: 'Ground Floor', room: 'BQ', area: '12' },
+      { floor: 'First Floor', room: 'Family Lounge', area: '18.5' },
+      { floor: 'First Floor', room: 'Bedroom', area: '20.2' },
+      { floor: 'First Floor', room: 'Bedroom', area: '20.8' },
+      { floor: 'First Floor', room: 'Bedroom', area: '17.4' },
+      { floor: 'Pent Floor', room: 'Primary Bedroom', area: '35.1' },
+      { floor: 'Pent Floor', room: 'Bedroom', area: '27.4' }
     ],
     createdAt: new Date().toISOString(),
   },
@@ -156,11 +193,11 @@ const HOUSE_TYPES = [
   {
     id: 'star-sapphire',
     classType:   'The Star Sapphire',
-    tagline:     '4 Bedroom Fully Detached Duplex',
+    tagline:     '4 Bedroom Fully Detached Classic Villa',
     price:       '₦780,000,000',
-    description: 'The Star Sapphire is an architectural marvel, designed to offer an elite and spacious living experience in a fully detached duplex format. Perfect for families seeking privacy and high-end comfort, this property showcases a thoughtful design that integrates expansive living areas with sophisticated private retreats. As a flagship offering within our smart estates, The Star Sapphire combines striking contemporary aesthetics with premium structural integrity, providing a grand residence that stands as a testament to luxury living in the capital city.',
+    description: 'The Star Sapphire is a beautifully designed four-bedroom fully detached classic villa that blends timeless elegance with modern smart living. Set on a well-planned 350 sqm plot, this residence offers a refined lifestyle experience tailored for families who appreciate comfort, space efficiency, and architectural sophistication. With its classic villa styling, well-structured layout, and premium finishes, The Star Sapphire delivers a warm and luxurious home environment while maintaining functionality and modern convenience. It stands as a distinguished option within any Wisdom Kwati Smart City development, offering residents both prestige and practicality.',
     beds: 4, baths: 4,
-    size: '5,500 SQ FT', lotSize: '800 SQM',
+    size: '5,500 SQ FT', lotSize: '350 SQM',
     floors: 2, parking: '3 Cars',
     builtIn: 'Q4 2026 — Off-Plan',
     propertyId: 'WK-SS-SAP-003',
@@ -173,11 +210,23 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
     ],
     amenities: [
-      { name: 'Private Terrace and Balcony spaces', iconClass: 'icon-balcony' },
-      { name: 'Dedicated Patio area', iconClass: 'icon-patio' },
-      { name: 'Spacious Anteroom and Lobby', iconClass: 'icon-lobby' },
-      { name: 'Functional Service Store', iconClass: 'icon-storage' },
-      { name: 'Designated Kitchen, Dining, and Living zones', iconClass: 'icon-kitchen' }
+      { name: 'Four spacious en-suite bedrooms', iconClass: 'icon-bed' },
+      { name: 'Fully fitted modern kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Family lounge', iconClass: 'icon-lounge' },
+      { name: 'Spacious living and dining areas', iconClass: 'icon-lounge' },
+      { name: 'Smart home automation system', iconClass: 'icon-smart' },
+      { name: 'Solar power system', iconClass: 'icon-solar' },
+      { name: 'Private garden', iconClass: 'icon-garden' },
+      { name: 'Guest toilet', iconClass: 'icon-bath' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Walk-in closets', iconClass: 'icon-closet' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' }
     ],
     interiorSpecs: [
       { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
@@ -208,110 +257,15 @@ const HOUSE_TYPES = [
     createdAt: new Date().toISOString(),
   },
 
-  // ─── 4. THE BLACK ONYX ────────────────────────────────────────────────────
-  {
-    id: 'black-onyx',
-    classType:   'The Black Onyx',
-    tagline:     '3 Bedroom Smart Class Detached Bungalow',
-    price:       '₦145,000,000',
-    description: 'The Black Onyx is the smart entry point into Wisdom Kwati Smart City living — a beautifully designed three-bedroom detached bungalow that packs incredible value, technology and style into 2,400 sq ft. Perfect for young families and professionals, it features a fully fitted kitchen, integrated smart home system, solar power and a private garden — all within a secure, serviced smart estate.',
-    beds: 3, baths: 3,
-    size: '2,400 SQ FT', lotSize: '450 SQM',
-    floors: 1, parking: '2 Cars',
-    builtIn: 'Q1 2026 — Ready',
-    propertyId: 'WK-BO-ONX-006',
-    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
-    images: [
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200',
-    ],
-    amenities: [
-      { name: 'Smart Home Automation',  iconClass: 'icon-smart' },
-      { name: 'Solar Power System',     iconClass: 'icon-solar' },
-      { name: '24/7 Security Patrol',   iconClass: 'icon-security' },
-      { name: 'Fibre Optic Internet',   iconClass: 'icon-internet' },
-      { name: 'Fully Fitted Kitchen',   iconClass: 'icon-kitchen' },
-      { name: 'Underground Drainage',   iconClass: 'icon-drainage' },
-      { name: 'Full Power Backup',      iconClass: 'icon-power' },
-    ],
-    interiorSpecs: [
-      { metric: 'Bedrooms',      details: '3 (all ensuite)' },
-      { metric: 'Bathrooms',     details: '3 full — modern tiled finishes' },
-      { metric: 'Living Room',   details: 'Open-plan with large sliding doors to garden' },
-      { metric: 'Kitchen',       details: 'Fully fitted kitchen — imported cabinetry, cooker & dishwasher' },
-      { metric: 'Flooring',      details: 'Premium imported tiles throughout' },
-      { metric: 'Smart Home',    details: 'Smart lighting, smart locks and security cameras via app' },
-    ],
-    exteriorSpecs: [
-      { metric: 'Architecture', details: 'Modern bungalow with flat roof and angular facade' },
-      { metric: 'Garden',       details: 'Private garden with landscaped lawn and patio' },
-      { metric: 'Parking',      details: '2-car covered carport' },
-      { metric: 'Security',     details: 'Estate perimeter wall, CCTV & 24/7 security' },
-      { metric: 'Energy',       details: '5kW solar system + inverter backup' },
-    ],
-    createdAt: new Date().toISOString(),
-  },
-
-  // ─── 5. THE WHITE SAPPHIRE ────────────────────────────────────────────────
-  {
-    id: 'white-sapphire',
-    classType:   'The White Sapphire',
-    tagline:     '4 Bedroom Smart Class Semi-Detached Duplex',
-    price:       '₦280,000,000',
-    description: 'The White Sapphire is a meticulously crafted four-bedroom semi-detached duplex that delivers premium smart living at an accessible price point. With its crisp white minimalist façade, open-plan living spaces and fully automated smart home system, this is the ideal home for families seeking intelligent design without excess. Located within Wisdom Kwati Smart City, it offers proximity to all community amenities.',
-    beds: 4, baths: 4,
-    size: '3,800 SQ FT', lotSize: '650 SQM',
-    floors: 2, parking: '3 Cars',
-    builtIn: 'Q2 2026 — Pre-Delivery',
-    propertyId: 'WK-WS-SAP-005',
-    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
-    images: [
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1xDix9g0as7V5dV9U_uggWnkr_kdl5SpX%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200',
-    ],
-    amenities: [
-      { name: 'Smart Home Automation',  iconClass: 'icon-smart' },
-      { name: 'Solar Power System',     iconClass: 'icon-solar' },
-      { name: '24/7 Security Patrol',   iconClass: 'icon-security' },
-      { name: 'Fibre Optic Internet',   iconClass: 'icon-internet' },
-      { name: 'Fully Fitted Kitchen',   iconClass: 'icon-kitchen' },
-      { name: 'Balcony / Terrace',      iconClass: 'icon-balcony' },
-      { name: 'Full Power Backup',      iconClass: 'icon-power' },
-      { name: 'Underground Drainage',   iconClass: 'icon-drainage' },
-    ],
-    interiorSpecs: [
-      { metric: 'Bedrooms',    details: '4 (all ensuite, master on top floor)' },
-      { metric: 'Bathrooms',   details: '4 full — contemporary tiled finishes' },
-      { metric: 'Living Room', details: 'Double-volume open-plan with balcony access' },
-      { metric: 'Kitchen',     details: 'Fitted kitchen with built-in oven, hob and extractor' },
-      { metric: 'Flooring',    details: 'Engineered wood upstairs, premium tiles downstairs' },
-      { metric: 'Smart Home',  details: 'App-controlled lighting, AC, locks & CCTV' },
-    ],
-    exteriorSpecs: [
-      { metric: 'Architecture', details: 'Minimalist white duplex with clean geometric lines' },
-      { metric: 'Balcony',      details: 'First-floor wraparound balcony with glass railings' },
-      { metric: 'Garden',       details: 'Front and rear landscaped garden' },
-      { metric: 'Parking',      details: '3-car covered parking bay' },
-      { metric: 'Security',     details: 'Gated compound with intercom and CCTV' },
-    ],
-    createdAt: new Date().toISOString(),
-  },
-
   // ─── 6. THE WHITE PEARL ────────────────────────────────────────────────────
   {
     id: 'white-pearl',
     classType:   'The White Pearl',
-    tagline:     '2 Bedroom Block of Flat',
+    tagline:     '2 Bedroom Block of Flats',
     price:       '₦120,000,000',
-    description: 'The White Pearl offers a sophisticated urban living solution, designed to maximize both comfort and functionality. Ideal for young professionals and modern families, this 2-bedroom apartment features a well-laid-out floor plan that optimizes every square meter to create a seamless living experience. As part of our signature residential developments, this property combines modern architectural aesthetics with smart community living, ensuring an ideal environment for those seeking a premium lifestyle in a secure, well-planned estate.',
+    description: 'The White Pearl is a thoughtfully designed two-bedroom block of flats that delivers comfort, simplicity, and modern smart living by Wisdom Kwati Smart City Plc. Sitting on a shared 650 sqm plot, this residential prototype is tailored for young professionals, small families, and investors seeking affordable quality within a secure and well-planned environment. With efficient layouts, contemporary finishes, and smart infrastructure integration, The White Pearl maximizes space while maintaining a clean, elegant, and functional living experience.',
     beds: 2, baths: 2,
-    size: '2,400 SQ FT', lotSize: '450 SQM',
+    size: '2,400 SQ FT', lotSize: 'Shared 650 SQM',
     floors: 1, parking: '2 Cars',
     builtIn: 'Q1 2026 — Ready',
     propertyId: 'WK-WP-PRL-006',
@@ -322,11 +276,21 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
     ],
     amenities: [
-      { name: 'Private Terrace spaces', iconClass: 'icon-balcony' },
-      { name: 'Sit-Out / Patio areas for relaxation', iconClass: 'icon-patio' },
-      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
-      { name: 'Spacious Lobby and circulation areas', iconClass: 'icon-lobby' },
-      { name: 'Designated Kitchen and Dining zones', iconClass: 'icon-kitchen' }
+      { name: 'Two-bedroom apartment units (multiple flats)', iconClass: 'icon-bed' },
+      { name: 'Spacious living and dining areas', iconClass: 'icon-lounge' },
+      { name: 'Fully fitted modern kitchens', iconClass: 'icon-kitchen' },
+      { name: 'En-suite master bedrooms', iconClass: 'icon-bed' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Smart home readiness', iconClass: 'icon-smart' },
+      { name: 'Solar power support system', iconClass: 'icon-solar' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' },
+      { name: 'Estate management services', iconClass: 'icon-service' }
     ],
     interiorSpecs: [
       { metric: 'Bedrooms', details: '2 bedrooms' },
@@ -348,11 +312,11 @@ const HOUSE_TYPES = [
   {
     id: 'silver-pearl',
     classType:   'The Silver Pearl',
-    tagline:     '3 Bedroom Block of Flat',
+    tagline:     '3 Bedroom Block of Flats',
     price:       '$4,500,000',
-    description: 'The Silver Pearl represents an exquisite 3-bedroom apartment designed to provide a perfect blend of space, luxury, and modern convenience. Ideal for growing families or discerning professionals, this unit is masterfully planned to offer a seamless transition between relaxation and entertainment. As part of our signature residential developments, The Silver Pearl integrates contemporary architectural style with highly functional interior spaces, ensuring a premium living experience within a secure and well-orchestrated smart community.',
+    description: 'The Silver Pearl is a modern three-bedroom block of flats designed for comfortable and affordable urban living by Wisdom Kwati Smart City. Set on a shared 750 sqm plot, this well-planned residential building combines efficiency, functionality, and contemporary design to meet the needs of small families, young professionals, and investors. Each apartment is thoughtfully designed with spacious interiors, quality finishes, and smart living features that enhance convenience and security. The Silver Pearl offers a serene community lifestyle while maintaining easy access to modern estate infrastructure and services.',
     beds: 3, baths: 3,
-    size: '2,200 sq ft', lotSize: 'N/A (Apartment)',
+    size: '2,200 sq ft', lotSize: 'Shared 750 SQM',
     floors: 1, parking: '2',
     builtIn: '2024',
     propertyId: 'WKSC-PL-001',
@@ -365,11 +329,22 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
     ],
     amenities: [
-      { name: 'Dedicated Veranda spaces', iconClass: 'icon-balcony' },
-      { name: 'Patio areas for outdoor relaxation', iconClass: 'icon-patio' },
-      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
-      { name: 'Spacious Lobby and circulation areas', iconClass: 'icon-lobby' },
-      { name: 'Dedicated Kitchen, Dining, and Storage zones', iconClass: 'icon-kitchen' }
+      { name: 'Three-bedroom apartments (multiple units)', iconClass: 'icon-bed' },
+      { name: 'Spacious living and dining areas', iconClass: 'icon-lounge' },
+      { name: 'Fully fitted modern kitchens', iconClass: 'icon-kitchen' },
+      { name: 'En-suite master bedrooms', iconClass: 'icon-bed' },
+      { name: 'Family lounge', iconClass: 'icon-lounge' },
+      { name: 'Smart home readiness', iconClass: 'icon-smart' },
+      { name: 'Solar power support', iconClass: 'icon-solar' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' },
+      { name: 'Estate management services', iconClass: 'icon-service' }
     ],
     interiorSpecs: [
       { metric: 'Bedrooms', details: '3 bedrooms (including 1 Primary Bedroom)' },
@@ -391,11 +366,11 @@ const HOUSE_TYPES = [
   {
     id: 'blue-sapphire',
     classType:   'The Blue Sapphire',
-    tagline:     '4 Bedroom Semi-Detached Duplex',
+    tagline:     '4 Bedroom Fully Detached Duplex',
     price:       '$8,500,000',
-    description: 'The Blue Sapphire is a masterpiece of contemporary residential design, offering a spacious and sophisticated living environment tailored for the modern family. This 4-bedroom semi-detached duplex elegantly balances aesthetic appeal with high-performance functionality, featuring generous living spaces, private lounges, and thoughtful architectural touches. As part of our signature residential developments, this property stands as an iconic choice for those who value privacy, prestige, and a premium lifestyle within a secure and smart community.',
+    description: 'The Blue Sapphire is a premium four-bedroom fully detached duplex thoughtfully designed to deliver luxury, comfort, and smart living within a Wisdom Kwati Smart City development. Sitting on a generous 350 sqm plot, this elegant home combines contemporary architecture with spacious interiors, making it ideal for families, professionals, and investors seeking a modern lifestyle. From its expansive living areas to its smart home features and energy-efficient design, every detail has been carefully crafted to provide convenience, security, and long-term value. The Blue Sapphire offers residents the opportunity to enjoy a serene, well-planned environment while benefiting from the innovation and quality that define every Wisdom Kwati Smart City community.',
     beds: 4, baths: 4,
-    size: '4,200 sq ft', lotSize: '500 SQM',
+    size: '4,200 sq ft', lotSize: '350 SQM',
     floors: 2, parking: '2',
     builtIn: '2024',
     propertyId: 'WKSC-SA-001',
@@ -408,11 +383,25 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
     ],
     amenities: [
-      { name: 'Private Balcony and Patio spaces', iconClass: 'icon-balcony' },
-      { name: 'Dedicated Anteroom and Lobby areas', iconClass: 'icon-lobby' },
-      { name: 'Family Lounge for private relaxation', iconClass: 'icon-patio' },
-      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
-      { name: 'Designated Kitchen, Dining, and Storage zones', iconClass: 'icon-kitchen' }
+      { name: 'Four spacious en-suite bedrooms', iconClass: 'icon-bed' },
+      { name: 'Fully fitted modern kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Elegant living and dining areas', iconClass: 'icon-lounge' },
+      { name: 'Family lounge', iconClass: 'icon-lounge' },
+      { name: 'Smart home automation system', iconClass: 'icon-smart' },
+      { name: 'Solar power system', iconClass: 'icon-solar' },
+      { name: 'Guest toilet', iconClass: 'icon-bath' },
+      { name: 'Walk-in closet in master bedroom', iconClass: 'icon-closet' },
+      { name: 'Private balconies', iconClass: 'icon-balcony' },
+      { name: 'Study/home office', iconClass: 'icon-study' },
+      { name: 'Landscaped mini garden', iconClass: 'icon-garden' },
+      { name: 'Ample parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' },
+      { name: 'Estate management services', iconClass: 'icon-service' }
     ],
     interiorSpecs: [
       { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
@@ -434,11 +423,11 @@ const HOUSE_TYPES = [
   {
     id: 'jade-terrace',
     classType:   'The Jade Terrace',
-    tagline:     '4 Bedroom Terrace',
+    tagline:     '4 Bedroom Terrace Duplex',
     price:       '₦185,000,000',
-    description: 'The Jade Terrace is a masterfully designed 4-bedroom residence that redefines modern community living. Offering a seamless blend of style and practicality, this terrace unit is arranged over three distinct floors, featuring specialized spaces such as a private lounge, a dedicated study, and a luxurious "Madam\'s Bedroom." As part of our signature residential developments, the Jade Terrace provides an sophisticated urban oasis, perfectly suited for families who desire a premium lifestyle integrated within a secure, high-tech, and intelligently managed community environment.',
+    description: 'The Jade Terrace is a stylish four-bedroom terrace duplex designed for modern families and professionals seeking comfort, affordability, and smart living. Situated on a 200 sqm plot, this contemporary home maximizes space and functionality without compromising on elegance. Featuring modern architecture, well-planned interiors, and smart technology integration, The Jade Terrace offers a perfect blend of convenience, security, and sophistication. Whether for first-time homeowners, growing families, or investors, this beautifully designed residence delivers exceptional value and a vibrant lifestyle across any Wisdom Kwati Smart City site.',
     beds: 4, baths: 4,
-    size: '3,200 SQ FT', lotSize: '250 SQM',
+    size: '3,200 SQ FT', lotSize: '200 SQM',
     floors: 3, parking: '2 Cars',
     builtIn: 'Q2 2026 — Under Construction',
     propertyId: 'WK-JT-JAD-007',
@@ -451,11 +440,24 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
     ],
     amenities: [
-      { name: 'Dedicated Service Quarters', iconClass: 'icon-service' },
-      { name: 'Multiple Balcony and Terrace spaces', iconClass: 'icon-balcony' },
-      { name: 'Private Study for remote work or focus', iconClass: 'icon-study' },
-      { name: 'Spacious Private Lounge', iconClass: 'icon-lounge' },
-      { name: 'Dedicated Kitchen, Pantry, and Store zones', iconClass: 'icon-kitchen' }
+      { name: 'Four spacious en-suite bedrooms', iconClass: 'icon-bed' },
+      { name: 'Fully fitted modern kitchen', iconClass: 'icon-kitchen' },
+      { name: 'Spacious living and dining area', iconClass: 'icon-lounge' },
+      { name: 'Family lounge', iconClass: 'icon-lounge' },
+      { name: 'Smart home automation system', iconClass: 'icon-smart' },
+      { name: 'Solar power system', iconClass: 'icon-solar' },
+      { name: 'Guest toilet', iconClass: 'icon-bath' },
+      { name: 'Private balcony', iconClass: 'icon-balcony' },
+      { name: 'Walk-in closet in the master bedroom', iconClass: 'icon-closet' },
+      { name: 'Dedicated parking space', iconClass: 'icon-parking' },
+      { name: '24/7 security and access control', iconClass: 'icon-security' },
+      { name: 'Reliable water supply', iconClass: 'icon-water' },
+      { name: 'Well-paved roads and drainage', iconClass: 'icon-road' },
+      { name: 'Street lighting', iconClass: 'icon-lighting' },
+      { name: 'High-speed internet infrastructure', iconClass: 'icon-internet' },
+      { name: 'Recreational and green spaces', iconClass: 'icon-garden' },
+      { name: "Children's play area", iconClass: 'icon-service' },
+      { name: 'Estate management services', iconClass: 'icon-service' }
     ],
     interiorSpecs: [
       { metric: 'Bedrooms', details: "4 bedrooms (including Madam's Bedroom and Primary Bedroom)" },
@@ -484,54 +486,28 @@ const HOUSE_TYPES = [
       { floor: 'Second Floor', room: 'Study', area: '11.6' }
     ],
     createdAt: new Date().toISOString()
-  },
-
-  // ─── 10. THE QUARTZ TERRACE ────────────────────────────────────────────────
-  {
-    id: 'quartz-terrace',
-    classType:   'The Quartz Terrace',
-    tagline:     '4 Bedroom Classic Terrace Duplex',
-    price:       '₦165,000,000',
-    description: 'The Quartz Terrace is an elegant 4-bedroom terrace duplex that offers the perfect blend of structural aesthetics, spacious rooms, and comfort. Designed for modern families, it includes premium interior fittings, dedicated parking, and private terrace access.',
-    beds: 4, baths: 4,
-    size: '3,000 SQ FT', lotSize: '200 SQM',
-    floors: 2, parking: '2 Cars',
-    builtIn: 'Q2 2026 — Under Construction',
-    propertyId: 'WK-QT-QTZ-008',
-    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
-    images: [
-      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cBO3as-XL4ecKLz_xur4TxlVn1eqbi4D%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
-      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
-    ],
-    amenities: [
-      { name: 'Private Balcony and Terrace spaces', iconClass: 'icon-balcony' },
-      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
-      { name: 'Designated Kitchen and Dining zones', iconClass: 'icon-kitchen' },
-      { name: '24/7 Security Patrol', iconClass: 'icon-security' }
-    ],
-    interiorSpecs: [
-      { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
-      { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
-      { metric: 'Living Room', details: 'Generous living room area (20m²)' },
-      { metric: 'Kitchen', details: 'Dedicated kitchen space (7.2m²)' },
-      { metric: 'Additional Spaces', details: 'Dining area, lobby, balcony, and terrace' }
-    ],
-    exteriorSpecs: [
-      { metric: 'Architecture', details: 'Classic terraced duplex design' },
-      { metric: 'Garden / Outdoor', details: 'Private balcony and terrace zones' },
-      { metric: 'Parking', details: '2-car parking bay' },
-      { metric: 'Circulation', details: 'Stair Hall connecting ground and upper floor' }
-    ],
-    createdAt: new Date().toISOString()
   }
 
 ];
 
 // ---------- Write to Firestore ----------
 async function seed() {
+  // 1. Delete inactive house types from Firestore
+  console.log('🧹 Cleaning up inactive house types in Firestore...');
+  const activeIds = new Set(HOUSE_TYPES.map(ht => ht.id));
+  try {
+    const querySnapshot = await getDocs(collection(db, 'houseTypes'));
+    for (const d of querySnapshot.docs) {
+      if (!activeIds.has(d.id)) {
+        await deleteDoc(doc(db, 'houseTypes', d.id));
+        console.log(`  🗑️  Deleted inactive from Firestore: ${d.id}`);
+      }
+    }
+  } catch (err) {
+    console.error('  ⚠️  Firestore cleanup failed:', err.message);
+  }
+
+  // 2. Write active house types
   let success = 0;
   for (const ht of HOUSE_TYPES) {
     const { id, ...data } = ht;

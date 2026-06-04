@@ -438,20 +438,18 @@ const STATIC_PROJECT_DEFAULTS = {
 };
 
 const DEFAULT_HOUSE_TYPES_BY_PROJECT = {
-  'wisdom-kwati-smart-city': ['blue-sapphire', 'imperial-emerald'],
-  'katampe-extension': ['star-sapphire', 'blue-sapphire', 'imperial-emerald', 'jade-terrace', 'quartz-terrace'],
-  'karsana-district': ['blue-sapphire', 'imperial-emerald', 'jade-terrace', 'quartz-terrace'],
-  'mabushi-district': ['white-sapphire', 'imperial-emerald'],
-  'guzape-estate': ['royal-emerald', 'blue-sapphire', 'imperial-emerald'],
-  'palm-haven': ['silver-pearl', 'white-pearl', 'jade-terrace'],
-  'maitama-district': ['imperial-emerald'],
-  'royal-city': ['blue-sapphire', 'white-sapphire'],
-  'beverly-hills': ['blue-sapphire', 'white-sapphire'],
-  'lakeside-view': ['blue-sapphire', 'white-sapphire'],
-  'sunbrook-estate': ['black-onyx', 'red-onyx'],
-  'fintiri-extension': ['black-onyx', 'red-onyx'],
-  'fintiri-home-estate': ['black-onyx', 'red-onyx'],
-  'palm-nicole': ['black-onyx', 'red-onyx'],
+  'katampe-extension': ['star-sapphire', 'blue-sapphire', 'jade-terrace'],
+  'karsana-district': ['blue-sapphire', 'imperial-emerald', 'jade-terrace', 'royal-emerald'],
+  'mabushi-district': [],
+  'guzape-estate': ['blue-sapphire'],
+  'palm-haven': ['silver-pearl', 'white-pearl', 'jade-terrace', 'royal-emerald', 'imperial-emerald'],
+  'maitama-district': [],
+  'beverly-hills': ['blue-sapphire'],
+  'lakeside-view': ['blue-sapphire'],
+  'sunbrook-estate': [],
+  'fintiri-extension': [],
+  'fintiri-home-estate': [],
+  'palm-nicole': [],
   'hof-community': ['silver-pearl', 'white-pearl']
 };
 

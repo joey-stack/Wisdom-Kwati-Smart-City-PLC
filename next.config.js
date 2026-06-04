@@ -55,7 +55,7 @@ const nextConfig = {
 
       // House type clean URLs mapped to dynamic specification pages
       {
-        source: '/:slug(black-onyx|blue-sapphire|imperial-emerald|jade-terrace|opal-smart|quartz-terrace|red-onyx|royal-emerald|silver-pearl|star-sapphire|white-pearl|white-sapphire)',
+        source: '/:slug(blue-sapphire|imperial-emerald|jade-terrace|royal-emerald|silver-pearl|star-sapphire|white-pearl)',
         destination: '/house-types/:slug',
         permanent: true
       },

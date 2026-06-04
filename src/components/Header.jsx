@@ -108,11 +108,11 @@ export default function Header() {
                 <div className="mega-menu-wrapper house-types-menu">
                     <div className="mega-menu">
                         <div className="mega-menu-grid-4">
-                            <a href="/house-types/black-onyx" className="mega-menu-card">
+                            <a href="/house-types/white-pearl" className="mega-menu-card">
                                 <div className="mega-menu-card-inner">
                                     <div className="card-content">
-                                        <h3>The Black Onyx</h3>
-                                        <p>Elegant 3-bedroom smart bungalow featuring integrated automation and premium finishes.</p>
+                                        <h3>The White Pearl</h3>
+                                        <p>Sophisticated 2-bedroom apartment offering clean, luxury modern living in highly secure smart communities.</p>
                                         <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                                     </div>
                                 </div>
@@ -135,11 +135,11 @@ export default function Header() {
                                     </div>
                                 </div>
                             </a>
-                            <a href="/house-types/red-onyx" className="mega-menu-card">
+                            <a href="/house-types/jade-terrace" className="mega-menu-card">
                                 <div className="mega-menu-card-inner">
                                     <div className="card-content">
-                                        <h3>The Red Onyx</h3>
-                                        <p>Intelligent 2-bedroom bungalow offering clean energy integration and modern design.</p>
+                                        <h3>The Jade Terrace</h3>
+                                        <p>Premium 4-bedroom terrace residence arranged over three distinct floors with dedicated study and service quarters.</p>
                                         <span className="card-link">View Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                                     </div>
                                 </div>

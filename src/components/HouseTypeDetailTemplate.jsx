@@ -130,7 +130,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
             <div className="hd-location-dot"></div>
           </div>
           <h1 className="hd-hero-title">{data.classType}</h1>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: "18px", letterSpacing: "0.05em", opacity: "0.9", marginTop: "-10px" }}>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: "18px", letterSpacing: "0.05em", opacity: "0.9", marginTop: "-10px", maxWidth: "520px", marginLeft: "auto", marginRight: "auto" }}>
             {data.tagline || `${data.beds || 0} Bedroom Smart Villa`}
           </p>
         </div>

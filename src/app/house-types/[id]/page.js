@@ -49,6 +49,7 @@ export default async function Page({ params }) {
 
   let data = null;
   let parentProject = null;
+  let availableEstates = [];
   let advisor = null;
   let relatedProperties = [];
 
@@ -65,11 +66,15 @@ export default async function Page({ params }) {
         getDocs(collection(db, 'houseTypes'))
       ]);
 
-      // Resolve parent project
+      // Resolve parent project & all available estates
       projectsSnap.forEach((projDoc) => {
         const projData = projDoc.data();
         if (Array.isArray(projData.houseTypeIds) && projData.houseTypeIds.includes(id)) {
-          parentProject = { id: projDoc.id, name: projData.name || 'Premium District', ...projData };
+          const est = { id: projDoc.id, name: projData.name || 'Premium District', ...projData };
+          availableEstates.push(est);
+          if (!parentProject) {
+            parentProject = est;
+          }
         }
       });
 
@@ -103,6 +108,7 @@ export default async function Page({ params }) {
       id={id}
       data={data}
       parentProject={parentProject}
+      availableEstates={availableEstates}
       advisor={advisor}
       relatedProperties={relatedProperties}
     />

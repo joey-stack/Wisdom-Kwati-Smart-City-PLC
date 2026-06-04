@@ -29,7 +29,7 @@ function useRefreshScrollTrigger(ready) {
   }, [ready]);
 }
 
-export default function HouseTypeDetailTemplate({ id, data, parentProject, advisor, relatedProperties }) {
+export default function HouseTypeDetailTemplate({ id, data, parentProject, advisor, relatedProperties, availableEstates = [] }) {
   // Refresh GSAP ScrollTrigger once component mounts
   useRefreshScrollTrigger(!!data);
 
@@ -356,7 +356,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
             </section>
 
             {/* Featured Estate */}
-            {parentProject && (
+            {((availableEstates && availableEstates.length > 0) || parentProject) && (
               <section className="hd-estate-section">
                 <div className="hd-section-line"></div>
                 <div className="hd-section-header">
@@ -366,11 +366,20 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                   </div>
                   <h2 className="hd-section-headline">Available in these estates</h2>
                 </div>
-                <div className="hd-estate-grid">
-                  <Link href={`/projects/${parentProject.id}`} className="hd-estate-tag">
-                    <i className="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    {parentProject.name}
-                  </Link>
+                <div className="hd-estate-grid" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  {availableEstates && availableEstates.length > 0 ? (
+                    availableEstates.map((est) => (
+                      <Link key={est.id} href={`/projects/${est.id}`} className="hd-estate-tag">
+                        <i className="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        {est.name}
+                      </Link>
+                    ))
+                  ) : (
+                    <Link href={`/projects/${parentProject.id}`} className="hd-estate-tag">
+                      <i className="fa-solid fa-location-dot" aria-hidden="true"></i>
+                      {parentProject.name}
+                    </Link>
+                  )}
                 </div>
               </section>
             )}

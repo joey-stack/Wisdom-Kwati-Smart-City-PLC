@@ -24,7 +24,7 @@ const hofCommunityData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz&sz=w1200",
   updatesLink: "/projects/hof-community",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned for high accessibility within Abuja’s prime residential zone.",
@@ -173,7 +173,7 @@ const whisperingPinesData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1FKHV1OKlto7dJFQqUk-xjlu4-M7w4vFN&sz=w1200",
   updatesLink: "/projects/whispering-pines",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["blue-sapphire", "star-sapphire"],
+  houseTypeIds: ["blue-sapphire", "star-sapphire", "white-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically located in the high-growth Karsana district of Abuja.",
@@ -266,7 +266,7 @@ const murgCityData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
   updatesLink: "/projects/murg-city",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Integrated smart community features, including AI-driven security and infrastructure.",
@@ -313,7 +313,7 @@ const murgCityExclusiveData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1eMbw99C0kjQqbNZoyN4rieCduY_uNnuZ&sz=w1200",
   updatesLink: "/projects/murg-city-exclusive",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the prestigious Usuma, Katampe Extension district.",
@@ -365,7 +365,7 @@ const ellingtonVillaData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/ellington-villa",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the central and highly prestigious Mabushi district.",
@@ -410,7 +410,7 @@ const nimiHillsGuzapeData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1K9BgIgXG_xT9slAfRl32icd95C1bmoOz&sz=w1200",
   updatesLink: "/projects/nimi-hills-guzape",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the prestigious and highly elevated Guzape district.",
@@ -458,7 +458,7 @@ const usuloCityKujeData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/usulo-city-kuje",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Pioneering status as Africa’s first AI-integrated wellness community.",
@@ -507,7 +507,7 @@ const lakesideViewData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/lakeside-view",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically located in the tranquil and high-growth Kuje district.",
@@ -552,7 +552,7 @@ const royalCityKujePhase2Data = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/royal-city-kuje-phase-2",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned in the high-growth Kuje district of Abuja.",
@@ -598,7 +598,7 @@ const wisdomKwatiSmartCityKarshiData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/wisdom-kwati-smart-city-karshi",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically located in the high-growth Karshi district.",
@@ -649,7 +649,7 @@ const beverlyHillsKujeData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/beverly-hills",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned in the high-growth Kuje district of Abuja.",
@@ -696,7 +696,7 @@ const kwatiResidenceAsokoroData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/kwati-residence-asokoro",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Located in the elite Asokoro Main district, Abuja's seat of power.",
@@ -741,7 +741,7 @@ const kwatiFarmsResortData = {
   detailsImage: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1rqJ7nHkX-nN-BaI5oXkt55-l6BcvG-qU&sz=w1200",
   updatesLink: "/projects/kwati-farms-resort",
   advisorId: "samuel-kwati",
-  houseTypeIds: ["silver-pearl", "white-pearl"],
+  houseTypeIds: ["silver-pearl"],
   highlights: [
     "FCDA Approved development status.",
     "Strategically positioned in the high-growth Gwagwalada district of Abuja.",

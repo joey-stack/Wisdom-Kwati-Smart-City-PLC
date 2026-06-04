@@ -182,7 +182,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['royal-emerald', 'silver-pearl'],
+    houseTypeIds: ['royal-emerald'],
     status: 'active',
     location: 'Katampe Extension, Abuja',
     state: 'Abuja',
@@ -401,7 +401,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['silver-pearl', 'star-sapphire'],
+    houseTypeIds: ['blue-sapphire', 'star-sapphire', 'white-pearl', 'silver-pearl'],
     status: 'active',
     location: 'Karsana, Abuja',
     state: 'Abuja',
@@ -444,7 +444,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['royal-emerald', 'silver-pearl'],
+    houseTypeIds: ['royal-emerald'],
     status: 'active',
     location: 'Katampe Extension, Abuja',
     state: 'Abuja',
@@ -566,7 +566,7 @@ const projects = [
       { size: '350 SQM', dimensions: '25m × 14m', availability: 'Available' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['silver-pearl', 'star-sapphire'],
+    houseTypeIds: ['star-sapphire'],
     status: 'active',
     location: 'Jahi Phase 2, Abuja',
     state: 'Abuja',
@@ -606,7 +606,7 @@ const projects = [
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Available' },
       { size: '750 SQM', dimensions: '37.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['silver-pearl'],
+    houseTypeIds: [],
     status: 'active',
     location: 'Mabushi Phase 1, Abuja',
     state: 'Abuja',
@@ -646,7 +646,7 @@ const projects = [
       { size: '350 SQM', dimensions: '25m × 14m', availability: 'Available' },
       { size: '650 SQM', dimensions: '32.5m × 20m', availability: 'Limited' }
     ],
-    houseTypeIds: ['blue-sapphire', 'silver-pearl'],
+    houseTypeIds: ['blue-sapphire'],
     status: 'active',
     location: 'Mabushi Phase 2, Abuja',
     state: 'Abuja',

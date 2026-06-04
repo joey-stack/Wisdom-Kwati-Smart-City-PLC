@@ -332,6 +332,35 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
               </section>
             )}
 
+            {/* Floor Plan Section */}
+            {data.floorPlan && data.floorPlan.length > 0 && (
+              <section className="hd-interior-section">
+                <div className="hd-section-line"></div>
+                <div className="hd-section-header">
+                  <div className="hd-section-label">
+                    <div className="label-square"></div>
+                    <span className="label-text">FLOOR PLAN</span>
+                  </div>
+                  <h2 className="hd-section-headline">Floor Plan Breakdown</h2>
+                </div>
+                <p className="hd-section-subtitle">Detailed breakdown of space allocation:</p>
+                <div className="hd-interior-table">
+                  <div className="hd-int-table-header" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr 1fr', gap: '16px' }}>
+                    <span>Floor</span>
+                    <span>Room</span>
+                    <span style={{ textAlign: 'right' }}>Area (m²)</span>
+                  </div>
+                  {data.floorPlan.map((row, idx) => (
+                    <div key={idx} className="hd-int-table-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr 1fr', gap: '16px' }}>
+                      <span className="hd-int-label">{row.floor}</span>
+                      <span className="hd-int-value">{row.room}</span>
+                      <span className="hd-int-value" style={{ textAlign: 'right', fontWeight: '600' }}>{row.area}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {/* 360 Video / Virtual Tour */}
             <section className="hd-video-section">
               {data.videoUrl ? (

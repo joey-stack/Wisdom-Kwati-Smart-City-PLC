@@ -156,10 +156,10 @@ const HOUSE_TYPES = [
   {
     id: 'star-sapphire',
     classType:   'The Star Sapphire',
-    tagline:     '4 Bedroom Smart Class Penthouse',
+    tagline:     '4 Bedroom Fully Detached Duplex',
     price:       '₦780,000,000',
-    description: 'The Star Sapphire is a stunning four-bedroom penthouse that sits at the apex of contemporary smart living. Occupying the premium floors with uninterrupted 270° panoramic views, this penthouse combines industrial-chic aesthetics with cutting-edge home technology. The open-plan rooftop terrace, private plunge pool and state-of-the-art smart systems make this a true urban sanctuary for the modern professional.',
-    beds: 4, baths: 5,
+    description: 'The Star Sapphire is an architectural marvel, designed to offer an elite and spacious living experience in a fully detached duplex format. Perfect for families seeking privacy and high-end comfort, this property showcases a thoughtful design that integrates expansive living areas with sophisticated private retreats. As a flagship offering within our smart estates, The Star Sapphire combines striking contemporary aesthetics with premium structural integrity, providing a grand residence that stands as a testament to luxury living in the capital city.',
+    beds: 4, baths: 4,
     size: '5,500 SQ FT', lotSize: '800 SQM',
     floors: 2, parking: '3 Cars',
     builtIn: 'Q4 2026 — Off-Plan',
@@ -173,31 +173,37 @@ const HOUSE_TYPES = [
       'https://images.weserv.nl/?output=webp&q=85&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
     ],
     amenities: [
-      { name: 'Smart Home Automation',  iconClass: 'icon-smart' },
-      { name: 'Balcony / Terrace',      iconClass: 'icon-balcony' },
-      { name: '24/7 Security Patrol',   iconClass: 'icon-security' },
-      { name: 'Solar Power System',     iconClass: 'icon-solar' },
-      { name: 'Fibre Optic Internet',   iconClass: 'icon-internet' },
-      { name: 'Private Gym & Fitness',  iconClass: 'icon-gym' },
-      { name: 'Full Power Backup',      iconClass: 'icon-power' },
-      { name: '24/7 Concierge Service', iconClass: 'icon-concierge' },
+      { name: 'Private Terrace and Balcony spaces', iconClass: 'icon-balcony' },
+      { name: 'Dedicated Patio area', iconClass: 'icon-patio' },
+      { name: 'Spacious Anteroom and Lobby', iconClass: 'icon-lobby' },
+      { name: 'Functional Service Store', iconClass: 'icon-storage' },
+      { name: 'Designated Kitchen, Dining, and Living zones', iconClass: 'icon-kitchen' }
     ],
     interiorSpecs: [
-      { metric: 'Bedrooms',    details: '4 (all ensuite — master with private terrace)' },
-      { metric: 'Bathrooms',   details: '5 — floor-to-ceiling Italian stone tiles' },
-      { metric: 'Living Area', details: 'Open-plan with 4m floor-to-ceiling glass walls and city panorama' },
-      { metric: 'Kitchen',     details: 'Boffi Italian kitchen — integrated Siemens appliances, stone counters' },
-      { metric: 'Flooring',    details: 'Large-format porcelain & engineered European oak' },
-      { metric: 'Master Suite',details: 'Rooftop access, rain shower, freestanding soaking tub' },
-      { metric: 'Smart Home',  details: 'Crestron-level automation — mood lighting, voice control, smart locks' },
+      { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
+      { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Impressive grand living room area (36m²)' },
+      { metric: 'Kitchen', details: 'Expansive kitchen space (18m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, lobby, store, anteroom, and terrace' }
     ],
     exteriorSpecs: [
-      { metric: 'Architecture',  details: 'Minimalist glass and steel tower design' },
-      { metric: 'Rooftop Deck',  details: 'Private rooftop terrace with plunge pool and fire pit' },
-      { metric: 'Views',         details: '270° panoramic views of Abuja skyline and hills' },
-      { metric: 'Parking',       details: 'Dedicated 3-bay basement parking' },
-      { metric: 'Security',      details: 'Biometric lobby access, 24/7 concierge, CCTV' },
-      { metric: 'Energy',        details: '100kW rooftop solar array + battery storage' },
+      { metric: 'Architecture', details: 'Contemporary fully detached duplex design with front and side views' },
+      { metric: 'Garden / Outdoor', details: 'Includes terrace, veranda, and patio spaces' },
+      { metric: 'Visual Orientation', details: 'Modern facade with defined front and side elevations' },
+      { metric: 'Circulation', details: 'Dedicated internal stairway system' }
+    ],
+    floorPlan: [
+      { floor: 'Ground Floor', room: 'Living Room', area: '36' },
+      { floor: 'Ground Floor', room: 'Kitchen', area: '18' },
+      { floor: 'Ground Floor', room: 'Dining', area: '10' },
+      { floor: 'Ground Floor', room: 'Bedroom', area: '16' },
+      { floor: 'Ground Floor', room: 'Ante Room', area: '6.4' },
+      { floor: 'Ground Floor', room: 'Patio', area: '6.4' },
+      { floor: 'First Floor', room: 'Primary Bedroom', area: '25' },
+      { floor: 'First Floor', room: 'Bedroom', area: '12' },
+      { floor: 'First Floor', room: 'Bedroom', area: '18' },
+      { floor: 'First Floor', room: 'Living Room', area: '12.8' },
+      { floor: 'First Floor', room: 'Terrace', area: '6.7' }
     ],
     createdAt: new Date().toISOString(),
   },
@@ -334,6 +340,92 @@ const HOUSE_TYPES = [
       { metric: 'Garden / Outdoor', details: 'Includes terrace, sit-out, and patio spaces' },
       { metric: 'Visual Orientation', details: 'Multi-level facade with defined front and side views' },
       { metric: 'Circulation', details: 'Central Stair Hall serving all levels' }
+    ],
+    createdAt: new Date().toISOString()
+  },
+
+  // ─── 7. THE SILVER PEARL ───────────────────────────────────────────────────
+  {
+    id: 'silver-pearl',
+    classType:   'The Silver Pearl',
+    tagline:     '3 Bedroom Block of Flat',
+    price:       '$4,500,000',
+    description: 'The Silver Pearl represents an exquisite 3-bedroom apartment designed to provide a perfect blend of space, luxury, and modern convenience. Ideal for growing families or discerning professionals, this unit is masterfully planned to offer a seamless transition between relaxation and entertainment. As part of our signature residential developments, The Silver Pearl integrates contemporary architectural style with highly functional interior spaces, ensuring a premium living experience within a secure and well-orchestrated smart community.',
+    beds: 3, baths: 3,
+    size: '2,200 sq ft', lotSize: 'N/A (Apartment)',
+    floors: 1, parking: '2',
+    builtIn: '2024',
+    propertyId: 'WKSC-PL-001',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1cBO3as-XL4ecKLz_xur4TxlVn1eqbi4D%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1YpYFPwZQUCf0k9tWJp13Y1kYzKe7npmJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
+    ],
+    amenities: [
+      { name: 'Dedicated Veranda spaces', iconClass: 'icon-balcony' },
+      { name: 'Patio areas for outdoor relaxation', iconClass: 'icon-patio' },
+      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
+      { name: 'Spacious Lobby and circulation areas', iconClass: 'icon-lobby' },
+      { name: 'Dedicated Kitchen, Dining, and Storage zones', iconClass: 'icon-kitchen' }
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms', details: '3 bedrooms (including 1 Primary Bedroom)' },
+      { metric: 'Bathrooms', details: '3 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Generous living room area (21.2m²)' },
+      { metric: 'Kitchen', details: 'Dedicated kitchen space (12m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, lobby, store, and patio' }
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Modern block of flats design with front and side views' },
+      { metric: 'Garden / Outdoor', details: 'Includes veranda and patio spaces' },
+      { metric: 'Visual Orientation', details: 'Multi-level facade with defined front and side views' },
+      { metric: 'Circulation', details: 'Central Stair Hall serving all levels' }
+    ],
+    createdAt: new Date().toISOString()
+  },
+
+  // ─── 8. THE BLUE SAPPHIRE ──────────────────────────────────────────────────
+  {
+    id: 'blue-sapphire',
+    classType:   'The Blue Sapphire',
+    tagline:     '4 Bedroom Semi-Detached Duplex',
+    price:       '$8,500,000',
+    description: 'The Blue Sapphire is a masterpiece of contemporary residential design, offering a spacious and sophisticated living environment tailored for the modern family. This 4-bedroom semi-detached duplex elegantly balances aesthetic appeal with high-performance functionality, featuring generous living spaces, private lounges, and thoughtful architectural touches. As part of our signature residential developments, this property stands as an iconic choice for those who value privacy, prestige, and a premium lifestyle within a secure and smart community.',
+    beds: 4, baths: 4,
+    size: '4,200 sq ft', lotSize: '500 SQM',
+    floors: 2, parking: '2',
+    builtIn: '2024',
+    propertyId: 'WKSC-SA-001',
+    brochureUrl: 'https://drive.google.com/file/d/1O2RgTr-EYUK3OeId5-vmUfS56dxypP-U/view?usp=drive_link',
+    images: [
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1EM6PEbCKWutwdjTCdT-8wLCm3qtmkSJJ%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1A7k_VT1u7aBo45A3bDqgo86Cgl7xRRow%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=19sBRWuZx6VQ-enPz4-9UlWgyfrGLKVX-%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1pZw-Bbw-n7F6cLhweMXVkXN8EDU0mlIT%26sz=w1200',
+      'https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1low4QaMMGv78ejUu8fu4jGET-05Ou612%26sz=w1200'
+    ],
+    amenities: [
+      { name: 'Private Balcony and Patio spaces', iconClass: 'icon-balcony' },
+      { name: 'Dedicated Anteroom and Lobby areas', iconClass: 'icon-lobby' },
+      { name: 'Family Lounge for private relaxation', iconClass: 'icon-patio' },
+      { name: 'Efficient Stair Hall access', iconClass: 'icon-stairs' },
+      { name: 'Designated Kitchen, Dining, and Storage zones', iconClass: 'icon-kitchen' }
+    ],
+    interiorSpecs: [
+      { metric: 'Bedrooms', details: '4 bedrooms (including 1 Primary Bedroom)' },
+      { metric: 'Bathrooms', details: '4 En-suite bathrooms + W/C' },
+      { metric: 'Living Room', details: 'Grand living room area (22.5m²)' },
+      { metric: 'Kitchen', details: 'Spacious kitchen space (8.4m²)' },
+      { metric: 'Additional Spaces', details: 'Dining area, Family Lounge, Anteroom, and Lobby' }
+    ],
+    exteriorSpecs: [
+      { metric: 'Architecture', details: 'Contemporary semi-detached duplex design with front and side views' },
+      { metric: 'Garden / Outdoor', details: 'Includes veranda, patio, and balcony spaces' },
+      { metric: 'Visual Orientation', details: 'Modern facade with defined front and side elevations' },
+      { metric: 'Circulation', details: 'Dedicated stairways serving all levels' }
     ],
     createdAt: new Date().toISOString()
   }

@@ -25,8 +25,6 @@ export default function AdminCreateHouseTypePage() {
   const [propertyId, setPropertyId] = useState('');
   const [brochureUrl, setBrochureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
-  const [amenitiesNote, setAmenitiesNote] = useState('');
-  const [interiorNote, setInteriorNote] = useState('');
   const [advisorId, setAdvisorId] = useState('');
   const [advisorsList, setAdvisorsList] = useState([]);
   const [sortOrder, setSortOrder] = useState('');
@@ -158,8 +156,6 @@ export default function AdminCreateHouseTypePage() {
         propertyId: propertyId || '',
         brochureUrl: brochureUrl || '',
         videoUrl: videoUrl || '',
-        amenitiesNote: amenitiesNote || '',
-        interiorNote: interiorNote || '',
         advisorId: advisorId || '',
         images: imagesArray,
         amenities: selectedAmenities,
@@ -401,32 +397,6 @@ export default function AdminCreateHouseTypePage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
-            <div className="form-group">
-              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
-                Amenities Note (optional subtitle)
-              </label>
-              <textarea
-                value={amenitiesNote}
-                onChange={(e) => setAmenitiesNote(e.target.value)}
-                placeholder="e.g. All amenities are subject to estate phase and availability."
-                rows={3}
-                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
-              />
-            </div>
-            <div className="form-group">
-              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
-                Interior Specs Note (optional subtitle)
-              </label>
-              <textarea
-                value={interiorNote}
-                onChange={(e) => setInteriorNote(e.target.value)}
-                placeholder="e.g. All finishes are bespoke and subject to buyer selection."
-                rows={3}
-                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', resize: 'vertical' }}
-              />
-            </div>
-          </div>
 
           <div className="form-group">
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>

@@ -265,11 +265,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                     </div>
                   ))}
                 </div>
-                {data.amenitiesNote && (
-                  <div className="hd-amenities-description">
-                    <p>{data.amenitiesNote}</p>
-                  </div>
-                )}
+
               </section>
             )}
 
@@ -297,11 +293,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                     </div>
                   ))}
                 </div>
-                {data.interiorNote && (
-                  <div className="hd-interior-description">
-                    <p>{data.interiorNote}</p>
-                  </div>
-                )}
+
               </section>
             )}
 

@@ -328,16 +328,6 @@ export default function Page() {
                     </div>
                 </section>
 
-                {/*  360 Video placeholder  */}
-                <section className="hd-video-section reveal-on-scroll">
-                    <div className="hd-video-placeholder">
-                        <div className="hd-video-play">
-                            <i className="fa-solid fa-play" style={{ fontSize: "24px", marginLeft: "5px" }}></i>
-                        </div>
-                        <h3>360° Virtual Tour</h3>
-                        <p style={{ opacity: "0.7", maxWidth: "300px", fontSize: "14px" }}>Cinematic high-fidelity walkthrough coming soon. Experience the future of living.</p>
-                    </div>
-                </section>
 
                 {/*  Featured Estate  */}
                 <section className="hd-estate-section reveal-on-scroll">

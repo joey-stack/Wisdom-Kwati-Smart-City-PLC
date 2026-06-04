@@ -353,28 +353,6 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
               </section>
             )}
 
-            {/* 360 Video / Virtual Tour */}
-            <section className="hd-video-section">
-              {data.videoUrl ? (
-                <iframe
-                  src={data.videoUrl}
-                  title="360° Virtual Tour"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  style={{ width: '100%', height: '100%', border: 'none', borderRadius: '16px' }}
-                />
-              ) : (
-                <div className="hd-video-placeholder">
-                  <div className="hd-video-play">
-                    <i className="fa-solid fa-play" aria-hidden="true" style={{ fontSize: '24px', marginLeft: '5px' }}></i>
-                  </div>
-                  <h3>360° Virtual Tour</h3>
-                  <p style={{ opacity: '0.7', maxWidth: '300px', fontSize: '14px' }}>
-                    Cinematic high-fidelity walkthrough coming soon. Experience the future of living.
-                  </p>
-                </div>
-              )}
-            </section>
 
             {/* Featured Estate */}
             {((availableEstates && availableEstates.length > 0) || parentProject) && (

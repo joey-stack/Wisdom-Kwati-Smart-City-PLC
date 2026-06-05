@@ -43,6 +43,33 @@ const getGlobalCache = () => {
   };
 };
 
+const getYouTubeId = (url) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
+
+const getGoogleDriveUrl = (url) => {
+  if (!url) return '';
+  if (!url.includes('drive.google.com')) return url;
+  
+  let id = '';
+  const dMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (dMatch) {
+    id = dMatch[1];
+  } else {
+    const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (idMatch) {
+      id = idMatch[1];
+    }
+  }
+  if (id) {
+    return `https://drive.google.com/uc?export=download&id=${id}&confirm=t`;
+  }
+  return url;
+};
+
 export default function ProjectDetailTemplate({
   title: initialTitle,
   heroImage: initialHeroImage,
@@ -433,34 +460,54 @@ export default function ProjectDetailTemplate({
               overflow: "hidden",
               zIndex: "0"
             }}>
-              <video 
-                ref={videoRef}
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                crossOrigin="anonymous"
-                poster={heroPoster}
-                onLoadedData={(e) => {
-                    e.currentTarget.play().catch(() => {});
-                }}
-                style={{ 
-                  width: "100%", 
-                  height: "100%", 
-                  objectFit: "cover",
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  pointerEvents: "none"
-                }}
-              >
-                <source 
-                  src={heroVideo.includes('drive.google.com') 
-                    ? `https://drive.google.com/uc?export=view&id=${heroVideo.includes('/d/') ? heroVideo.split('/d/')[1].split('/')[0] : (heroVideo.includes('id=') ? heroVideo.split('id=')[1].split('&')[0] : heroVideo)}&confirm=t`
-                    : heroVideo} 
-                  type="video/mp4" 
+              {getYouTubeId(heroVideo) ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${getYouTubeId(heroVideo)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(heroVideo)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="Project Detail Hero Video"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100vw',
+                    height: '56.25vw', /* 16:9 Aspect Ratio */
+                    minHeight: '100vh',
+                    minWidth: '177.77vh', /* 16:9 Aspect Ratio */
+                    transform: 'translate(-50%, -50%) scale(1.25)', /* Zoomed to hide controls and channel header */
+                    pointerEvents: 'none',
+                    zIndex: 0
+                  }}
                 />
-              </video>
+              ) : (
+                <video 
+                  ref={videoRef}
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline 
+                  crossOrigin="anonymous"
+                  poster={heroPoster}
+                  onLoadedData={(e) => {
+                      e.currentTarget.play().catch(() => {});
+                  }}
+                  style={{ 
+                    width: "100%", 
+                    height: "100%", 
+                    objectFit: "cover",
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    pointerEvents: "none"
+                  }}
+                >
+                  <source 
+                    src={getGoogleDriveUrl(heroVideo)} 
+                    type="video/mp4" 
+                  />
+                </video>
+              )}
               
               {/* Professional Interaction Shield */}
               <div style={{ 

@@ -484,36 +484,50 @@ export default function ProjectDetailTemplate({
                     minWidth: '177.77vh', /* 16:9 Aspect Ratio */
                     transform: 'translate(-50%, -50%) scale(1.25)', /* Zoomed to hide controls and channel header */
                     pointerEvents: 'none',
-                    zIndex: 0
+                    zIndex: 1
                   }}
                 />
               ) : (
-                <video 
-                  ref={videoRef}
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline 
-                  crossOrigin="anonymous"
-                  poster={heroPoster}
-                  onLoadedData={(e) => {
-                      e.currentTarget.play().catch(() => {});
-                  }}
-                  style={{ 
-                    width: "100%", 
-                    height: "100%", 
-                    objectFit: "cover",
-                    position: "absolute",
-                    top: "0",
-                    left: "0",
-                    pointerEvents: "none"
-                  }}
-                >
-                  <source 
-                    src={getGoogleDriveUrl(heroVideo || heroImage)} 
-                    type="video/mp4" 
-                  />
-                </video>
+                <>
+                  <video 
+                    ref={videoRef}
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    poster={heroPoster}
+                    onLoadedData={(e) => {
+                        e.currentTarget.play().catch(() => {});
+                    }}
+                    style={{ 
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "cover",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      pointerEvents: "none",
+                      zIndex: 2
+                    }}
+                  >
+                    <source 
+                      src={getGoogleDriveUrl(heroVideo || heroImage)} 
+                      type="video/mp4" 
+                    />
+                  </video>
+                  {/* Fallback image behind the video while loading/buffering */}
+                  {(heroImage || detailsImage) && (
+                    <Image 
+                      width={1920} 
+                      height={1080} 
+                      priority={true} 
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: 1 }} 
+                      src={resolveMediaUrl(heroImage || detailsImage)} 
+                      alt={title} 
+                      referrerPolicy="no-referrer" 
+                    />
+                  )}
+                </>
               )}
               
               {/* Professional Interaction Shield */}
@@ -524,7 +538,7 @@ export default function ProjectDetailTemplate({
                 width: "100%", 
                 height: "100%", 
                 background: "transparent", 
-                zIndex: "1",
+                zIndex: "3",
                 pointerEvents: "all"
               }}></div>
             </div>

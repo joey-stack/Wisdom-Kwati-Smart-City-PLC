@@ -1,17 +1,28 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 export default function HeroVideo() {
-    const playerRef = useRef(null);
     const containerRef = useRef(null);
-    const [videoReady, setVideoReady] = useState(false);
 
     useEffect(() => {
         let player = null;
-        let intervalId = null;
+        let timePollId = null;
+        let scriptPollId = null;
 
-        // Function to initialize the YT player
+        // Ensure script is added
+        if (typeof window !== 'undefined' && !document.getElementById('youtube-iframe-api')) {
+            const tag = document.createElement('script');
+            tag.id = 'youtube-iframe-api';
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            if (firstScriptTag) {
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            } else {
+                document.head.appendChild(tag);
+            }
+        }
+
         const initPlayer = () => {
             if (!containerRef.current || player) return;
 
@@ -36,16 +47,12 @@ export default function HeroVideo() {
                         onReady: (event) => {
                             event.target.mute();
                             event.target.playVideo();
-                            setVideoReady(true);
 
-                            // Start interval to check video time and loop seamlessly
-                            intervalId = setInterval(() => {
+                            // Start time checker for seamless looping
+                            timePollId = setInterval(() => {
                                 if (event.target && typeof event.target.getCurrentTime === 'function') {
                                     const currentTime = event.target.getCurrentTime();
                                     const duration = event.target.getDuration();
-                                    
-                                    // Seek back to 0.1s when we are 0.5s away from the end
-                                    // This prevents the YouTube player from entering the buffering / ended state
                                     if (duration > 0 && currentTime >= duration - 0.5) {
                                         event.target.seekTo(0.1, true);
                                     }
@@ -53,8 +60,13 @@ export default function HeroVideo() {
                             }, 100);
                         },
                         onStateChange: (event) => {
-                            // Safe fallback: if video ended or paused, resume and seek
-                            if (event.data === window.YT.PlayerState.ENDED) {
+                            if (event.data === window.YT.PlayerState.PLAYING) {
+                                // Fade in the iframe once it actually starts playing
+                                const iframe = event.target.getIframe();
+                                if (iframe) {
+                                    iframe.style.opacity = '1';
+                                }
+                            } else if (event.data === window.YT.PlayerState.ENDED) {
                                 event.target.seekTo(0.1, true);
                                 event.target.playVideo();
                             } else if (event.data === window.YT.PlayerState.PAUSED) {
@@ -64,43 +76,21 @@ export default function HeroVideo() {
                     }
                 });
             } catch (err) {
-                console.error("Error initializing YouTube Player:", err);
+                console.error("Error inside YT.Player instantiation:", err);
             }
         };
 
-        // Load YouTube API if not already loaded
-        if (!window.YT) {
-            // Check if the script is already added to avoid duplicate scripts
-            if (!document.getElementById('youtube-iframe-api')) {
-                const tag = document.createElement('script');
-                tag.id = 'youtube-iframe-api';
-                tag.src = 'https://www.youtube.com/iframe_api';
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            }
-
-            // Bind global callback
-            const prevCallback = window.onYouTubeIframeAPIReady;
-            window.onYouTubeIframeAPIReady = () => {
-                if (prevCallback) prevCallback();
-                initPlayer();
-            };
-        } else {
-            // If API already exists, check if YT.Player is loaded, otherwise wait or run
+        // Poll until YT API is ready on window
+        scriptPollId = setInterval(() => {
             if (window.YT && window.YT.Player) {
+                clearInterval(scriptPollId);
                 initPlayer();
-            } else {
-                const prevCallback = window.onYouTubeIframeAPIReady;
-                window.onYouTubeIframeAPIReady = () => {
-                    if (prevCallback) prevCallback();
-                    initPlayer();
-                };
             }
-        }
+        }, 100);
 
-        // Cleanup on unmount
         return () => {
-            if (intervalId) clearInterval(intervalId);
+            if (scriptPollId) clearInterval(scriptPollId);
+            if (timePollId) clearInterval(timePollId);
             if (player && typeof player.destroy === 'function') {
                 try {
                     player.destroy();
@@ -130,7 +120,7 @@ export default function HeroVideo() {
                     transform: 'translate(-50%, -50%) scale(1.3)', /* Zoomed to hide controls and channel header */
                     pointerEvents: 'none',
                     zIndex: 1,
-                    opacity: videoReady ? 1 : 0,
+                    opacity: 0, // Starts hidden, faded in via direct DOM manipulation once playing
                     transition: 'opacity 0.8s ease-in-out'
                 }}
             />

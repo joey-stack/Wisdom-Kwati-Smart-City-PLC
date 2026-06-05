@@ -40,13 +40,13 @@ export default function HeroVideo() {
                     pointerEvents: 'none'
                 }}
             >
-                <source src="/hero.mp4" type="video/mp4" />
+                <source src="/assets/videos/hero.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
             {/* Fallback Poster Image */}
             <Image
-                src="/images/hero-bg-new.jpg"
+                src="/assets/images/hero-bg-new.jpg"
                 alt="Wisdom Kwati Smart City"
                 fill
                 sizes="100vw"

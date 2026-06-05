@@ -473,6 +473,7 @@ export default function AdminEditProjectPage({ params }) {
   const [neighborhood, setNeighborhood] = useState('');
   const [mapEmbedUrl, setMapEmbedUrl] = useState('');
   const [heroImage, setHeroImage] = useState('');
+  const [heroVideo, setHeroVideo] = useState('');
   const [detailsImage, setDetailsImage] = useState('');
   const [updatesLink, setUpdatesLink] = useState('');
   const [advisorId, setAdvisorId] = useState('');
@@ -545,6 +546,7 @@ export default function AdminEditProjectPage({ params }) {
           setLocation(data.location || '');
           setMapEmbedUrl(data.mapEmbedUrl || '');
           setHeroImage(data.heroImage || '');
+          setHeroVideo(data.heroVideo || '');
           setDetailsImage(data.detailsImage || '');
           setUpdatesLink(data.updatesLink || '');
           setSortOrder(data.sortOrder !== undefined && data.sortOrder !== null ? String(data.sortOrder) : '');
@@ -809,6 +811,7 @@ export default function AdminEditProjectPage({ params }) {
         neighborhood,
         mapEmbedUrl: mapEmbedUrl || '',
         heroImage: heroImage || '',
+        heroVideo: heroVideo || '',
         detailsImage: detailsImage || '',
         updatesLink: updatesLink || '',
         advisorId: advisorId || '',
@@ -976,7 +979,7 @@ export default function AdminEditProjectPage({ params }) {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginBottom: '20px' }}>
             <div className="form-group">
               <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
                 Hero Cover Image URL
@@ -986,6 +989,19 @@ export default function AdminEditProjectPage({ params }) {
                 value={heroImage}
                 onChange={(e) => setHeroImage(e.target.value)}
                 placeholder="https://images.unsplash.com/... or paste hosted link"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Hero Cover Video URL
+              </label>
+              <input
+                type="url"
+                value={heroVideo}
+                onChange={(e) => setHeroVideo(e.target.value)}
+                placeholder="https://... (Direct MP4 or GDrive link)"
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>

@@ -98,6 +98,14 @@ export default function ProjectDetailTemplate({
   const [title, setTitle] = useState(initialTitle);
   const [heroImage, setHeroImage] = useState(initialHeroImage);
   const [heroVideo, setHeroVideo] = useState(initialHeroVideo);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const isVideo = (url) => {
+    if (!url) return false;
+    return url.includes('youtube.com') || 
+           url.includes('youtu.be') || 
+           url.match(/\.(mp4|webm|ogg|mov|avi|m4v)(?:\?|$)/i);
+  };
   const [heroPoster, setHeroPoster] = useState(initialHeroPoster);
   const [heroDescription, setHeroDescription] = useState(initialHeroDescription);
   const [updatesLink, setUpdatesLink] = useState(initialUpdatesLink);
@@ -118,6 +126,7 @@ export default function ProjectDetailTemplate({
   // Sync state if props change
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
+    setImageFailed(false);
     if (initialTitle) setTitle(initialTitle);
     if (initialHeroImage) setHeroImage(initialHeroImage);
     if (initialHeroVideo) setHeroVideo(initialHeroVideo);
@@ -173,11 +182,9 @@ export default function ProjectDetailTemplate({
 
         if (project) {
           if (project.name) setTitle(project.name);
-          if (project.heroImage) {
-            setHeroImage(project.heroImage);
-            setHeroVideo(null);
-            setHeroPoster(null);
-          }
+          setHeroImage(project.heroImage || '');
+          setHeroVideo(project.heroVideo || '');
+          setHeroPoster(project.heroPoster || '');
           if (project.tagline) setHeroDescription(project.tagline);
           if (project.description) setDescription(project.description);
           if (project.mapEmbedUrl) setMapEmbedUrl(project.mapEmbedUrl);
@@ -450,7 +457,7 @@ export default function ProjectDetailTemplate({
       {/* Hero Section */}
       <section className="pd-hero">
         <div className="pd-hero-image">
-          {heroVideo ? (
+          {(heroVideo || isVideo(heroImage) || imageFailed) ? (
             <div className="bg-video-wrapper" style={{ 
               position: "absolute", 
               top: "0", 
@@ -460,9 +467,9 @@ export default function ProjectDetailTemplate({
               overflow: "hidden",
               zIndex: "0"
             }}>
-              {getYouTubeId(heroVideo) ? (
+              {getYouTubeId(heroVideo || heroImage) ? (
                 <iframe
-                  src={`https://www.youtube.com/embed/${getYouTubeId(heroVideo)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(heroVideo)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
+                  src={`https://www.youtube.com/embed/${getYouTubeId(heroVideo || heroImage)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(heroVideo || heroImage)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
@@ -503,7 +510,7 @@ export default function ProjectDetailTemplate({
                   }}
                 >
                   <source 
-                    src={getGoogleDriveUrl(heroVideo)} 
+                    src={getGoogleDriveUrl(heroVideo || heroImage)} 
                     type="video/mp4" 
                   />
                 </video>
@@ -522,7 +529,20 @@ export default function ProjectDetailTemplate({
               }}></div>
             </div>
           ) : (
-            <Image width={1920} height={1080} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(heroImage)} alt={title} referrerPolicy="no-referrer" />
+            <Image 
+              width={1920} 
+              height={1080} 
+              priority={true} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              src={resolveMediaUrl(heroImage)} 
+              alt={title} 
+              referrerPolicy="no-referrer" 
+              onError={() => {
+                if (heroImage && (heroImage.includes('drive.google.com') || isVideo(heroImage))) {
+                  setImageFailed(true);
+                }
+              }}
+            />
           )}
         </div>
         <div className="pd-hero-overlay"></div>

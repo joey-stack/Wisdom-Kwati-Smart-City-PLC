@@ -64,6 +64,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
           name,
           email,
           phone,
+          estate: data?.classType || '',
           message: finalMessage
         })
       });

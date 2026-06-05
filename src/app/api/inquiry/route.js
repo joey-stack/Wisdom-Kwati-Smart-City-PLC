@@ -132,31 +132,58 @@ export async function POST(request) {
       `;
 
     } else {
-      // General / FAQ inquiry type
+      // General / FAQ / Property inquiry type
       if (!message) {
         return NextResponse.json({ error: 'Message / inquiry text is required.' }, { status: 400 });
       }
 
-      emailTo = customerExperienceEmail;
-      emailSubject = `New FAQ / Client Inquiry: ${name}`;
-      emailHtml = `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
-          <h2 style="color: #0f172a; border-bottom: 2px solid #64748b; padding-bottom: 10px; margin-top: 0;">New FAQ / Inquiry Received</h2>
-          <p>A client has submitted a query via the website form:</p>
-          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 15px 0;" />
-          <p><strong>Sender Name:</strong> ${name}</p>
-          <p><strong>Email Address:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Phone Number:</strong> ${phone ? `<a href="tel:${phone}">${phone}</a>` : 'Not provided'}</p>
-          
-          <div style="margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 4px; border: 1px solid #e2e8f0;">
-            <h4 style="margin-top: 0; color: #334155;">Client Question / Message:</h4>
-            <p style="white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #0f172a; margin: 0;">${message}</p>
+      if (estate) {
+        leadData.estate = estate;
+        leadData.type = 'property-inquiry';
+
+        emailTo = customerExperienceEmail;
+        emailSubject = `New Property Inquiry: ${name} - ${estate}`;
+        emailHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
+            <h2 style="color: #0f172a; border-bottom: 2px solid #0284c7; padding-bottom: 10px; margin-top: 0;">New Property Inquiry</h2>
+            <p>A client has submitted an inquiry for the property <strong>${estate}</strong>:</p>
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 15px 0;" />
+            <p><strong>Client Name:</strong> ${name}</p>
+            <p><strong>Email Address:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Phone Number:</strong> ${phone ? `<a href="tel:${phone}">${phone}</a>` : 'Not provided'}</p>
+            <p><strong>Property of Interest:</strong> <span style="color: #0284c7; font-weight: bold;">${estate}</span></p>
+            
+            <div style="margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 4px; border: 1px solid #e2e8f0;">
+              <h4 style="margin-top: 0; color: #334155;">Client Message:</h4>
+              <p style="white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #0f172a; margin: 0;">${message}</p>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin-top: 30px;" />
+            <p style="font-size: 11px; color: #64748b; text-align: center;">This inquiry was submitted directly on the Wisdom Kwati Smart City portal and recorded in the administration dashboard.</p>
           </div>
-          
-          <hr style="border: none; border-top: 1px solid #e2e8f0; margin-top: 30px;" />
-          <p style="font-size: 11px; color: #64748b; text-align: center;">This inquiry was submitted directly on the Wisdom Kwati Smart City portal and recorded in the administration dashboard.</p>
-        </div>
-      `;
+        `;
+      } else {
+        emailTo = customerExperienceEmail;
+        emailSubject = `New FAQ / Client Inquiry: ${name}`;
+        emailHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
+            <h2 style="color: #0f172a; border-bottom: 2px solid #64748b; padding-bottom: 10px; margin-top: 0;">New FAQ / Inquiry Received</h2>
+            <p>A client has submitted a query via the website form:</p>
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 15px 0;" />
+            <p><strong>Sender Name:</strong> ${name}</p>
+            <p><strong>Email Address:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Phone Number:</strong> ${phone ? `<a href="tel:${phone}">${phone}</a>` : 'Not provided'}</p>
+            
+            <div style="margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 4px; border: 1px solid #e2e8f0;">
+              <h4 style="margin-top: 0; color: #334155;">Client Question / Message:</h4>
+              <p style="white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #0f172a; margin: 0;">${message}</p>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin-top: 30px;" />
+            <p style="font-size: 11px; color: #64748b; text-align: center;">This inquiry was submitted directly on the Wisdom Kwati Smart City portal and recorded in the administration dashboard.</p>
+          </div>
+        `;
+      }
     }
 
     // 2. Save to Firestore collection 'leads'

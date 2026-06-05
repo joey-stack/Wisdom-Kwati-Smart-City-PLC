@@ -456,7 +456,7 @@ export default function ProjectDetailTemplate({
               >
                 <source 
                   src={heroVideo.includes('drive.google.com') 
-                    ? `https://drive.google.com/uc?export=download&id=${heroVideo.includes('/d/') ? heroVideo.split('/d/')[1].split('/')[0] : (heroVideo.includes('id=') ? heroVideo.split('id=')[1].split('&')[0] : heroVideo)}`
+                    ? `https://drive.google.com/uc?export=view&id=${heroVideo.includes('/d/') ? heroVideo.split('/d/')[1].split('/')[0] : (heroVideo.includes('id=') ? heroVideo.split('id=')[1].split('&')[0] : heroVideo)}&confirm=t`
                     : heroVideo} 
                   type="video/mp4" 
                 />

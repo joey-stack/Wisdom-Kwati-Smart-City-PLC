@@ -1,46 +1,33 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 export default function HeroVideo() {
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch((err) => {
-                console.log('Video autoplay failed or was prevented:', err);
-            });
-        }
-    }, []);
-
     return (
         <div
             className="hero-video-wrapper"
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0 }}
         >
-            <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                crossOrigin="anonymous"
-                style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover', 
-                    position: 'absolute', 
-                    top: 0, 
-                    left: 0, 
-                    zIndex: 1 
+            {/* YouTube Embed configured for background loops */}
+            <iframe
+                src="https://www.youtube.com/embed/JYLmRiA-Wp4?autoplay=1&mute=1&loop=1&playlist=JYLmRiA-Wp4&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&enablejsapi=1"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title="Wisdom Kwati Smart City Video Background"
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100vw',
+                    height: '56.25vw', /* 16:9 Aspect Ratio */
+                    minHeight: '100vh',
+                    minWidth: '177.77vh', /* 16:9 Aspect Ratio */
+                    transform: 'translate(-50%, -50%)',
+                    pointerEvents: 'none',
+                    zIndex: 1
                 }}
-            >
-                <source 
-                    src="https://drive.google.com/uc?export=view&id=1RInQBUS0NH37uiFF-cOvtKfGKioKS-fz&confirm=t" 
-                    type="video/mp4" 
-                />
-            </video>
+            />
 
             {/* Fallback Poster Image */}
             <Image

@@ -538,7 +538,7 @@ export default function ProjectDetailTemplate({
               <section className="pd-section reveal-on-scroll">
                 <div className="pd-section-title">Market Snapshot</div>
                 <div className="pd-table-container">
-                  <table className="pd-table"><thead><tr><th>Plot Category</th><th>Price Range</th><th>Investment Outlook</th></tr></thead><tbody>{marketSnapshot.map((row, idx) => (<tr key={idx}><td className="pd-label-cell">{row.plotCategory}</td><td>{row.priceRange}</td><td>{row.outlook}</td></tr>))}</tbody></table>
+                  <table className="pd-table"><thead><tr><th>Plot Category</th><th>Investment Outlook</th></tr></thead><tbody>{marketSnapshot.map((row, idx) => (<tr key={idx}><td className="pd-label-cell">{row.plotCategory}</td><td>{row.outlook}</td></tr>))}</tbody></table>
                 </div>
               </section>
             )}

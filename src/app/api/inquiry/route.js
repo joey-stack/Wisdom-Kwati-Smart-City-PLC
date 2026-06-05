@@ -166,26 +166,33 @@ export async function POST(request) {
 
     // 3. Send Email Notification via Nodemailer
     if (smtpHost && smtpUser && smtpPass) {
-      const transporter = nodemailer.createTransport({
-        host: smtpHost,
-        port: parseInt(smtpPort),
-        secure: parseInt(smtpPort) === 465,
-        auth: {
-          user: smtpUser,
-          pass: smtpPass
-        }
-      });
+      try {
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: parseInt(smtpPort),
+          secure: parseInt(smtpPort) === 465,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass
+          },
+          connectionTimeout: 5000, // 5 seconds connection timeout
+          greetingTimeout: 5000,   // 5 seconds greeting timeout
+          socketTimeout: 8000      // 8 seconds socket timeout
+        });
 
-      const mailOptions = {
-        from: `"${name} (via Platform)" <${smtpFrom}>`,
-        replyTo: email,
-        to: emailTo,
-        subject: emailSubject,
-        html: emailHtml
-      };
+        const mailOptions = {
+          from: `"${name} (via Platform)" <${smtpFrom}>`,
+          replyTo: email,
+          to: emailTo,
+          subject: emailSubject,
+          html: emailHtml
+        };
 
-      await transporter.sendMail(mailOptions);
-      console.log(`[API Inquiry] Email notification successfully sent to ${emailTo}`);
+        await transporter.sendMail(mailOptions);
+        console.log(`[API Inquiry] Email notification successfully sent to ${emailTo}`);
+      } catch (emailErr) {
+        console.error('[API Inquiry] Failed to send email notification (non-fatal):', emailErr);
+      }
     } else {
       console.warn('[API Inquiry] SMTP configuration is missing. Skipping email notification. Inquiry saved in database.');
     }

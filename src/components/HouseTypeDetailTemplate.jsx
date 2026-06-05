@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SocialShare from './SocialShare';
@@ -30,8 +30,67 @@ function useRefreshScrollTrigger(ready) {
 }
 
 export default function HouseTypeDetailTemplate({ id, data, parentProject, advisor, relatedProperties, availableEstates = [] }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
   // Refresh GSAP ScrollTrigger once component mounts
   useRefreshScrollTrigger(!!data);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !phone) {
+      setError('Please fill out all required fields (Name, Email, and Phone).');
+      return;
+    }
+
+    setError('');
+    setSubmitting(true);
+    setSuccess(false);
+
+    // Default message if empty
+    const finalMessage = message.trim() || `I'm interested in ${data?.classType || 'this property'}. Please provide more details.`;
+
+    try {
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'general',
+          name,
+          email,
+          phone,
+          message: finalMessage
+        })
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(resData.error || 'Failed to submit inquiry.');
+      }
+
+      setSuccess(true);
+      setName('');
+      setEmail('');
+      setPhone('');
+      setMessage('');
+      
+      // Clear success banner after 5 seconds
+      setTimeout(() => {
+        setSuccess(false);
+      }, 5000);
+    } catch (err) {
+      console.error('Failed to submit inquiry:', err);
+      setError(err.message || 'Inquiry submission failed. Please check your network and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (!data) {
     return (
@@ -396,23 +455,78 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
               <div className="hd-inquiry-box">
                 <h3>Inquire about this property</h3>
                 <p>Our dedicated advisors will contact you shortly to arrange a private viewing or site tour.</p>
-                <form className="hd-inquiry-form">
+                
+                {error && (
+                  <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#EF4444', padding: '12px 16px', fontSize: '13px', borderRadius: '4px', marginBottom: '20px', fontFamily: 'var(--font-main)' }}>
+                    {error}
+                  </div>
+                )}
+                {success && (
+                  <div style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', color: '#10B981', padding: '12px 16px', fontSize: '13px', borderRadius: '4px', marginBottom: '20px', fontFamily: 'var(--font-main)' }}>
+                    ✓ Inquiry submitted successfully!
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="hd-inquiry-form">
                   <div className="hd-form-group">
-                    <input type="text" placeholder="Full Name" aria-label="Full name" required />
+                    <input 
+                      type="text" 
+                      placeholder="Full Name" 
+                      aria-label="Full name" 
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      disabled={submitting}
+                      required 
+                    />
                   </div>
                   <div className="hd-form-group">
-                    <input type="email" placeholder="Email Address" aria-label="Email address" required />
+                    <input 
+                      type="email" 
+                      placeholder="Email Address" 
+                      aria-label="Email address" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={submitting}
+                      required 
+                    />
                   </div>
                   <div className="hd-form-group">
-                    <input type="tel" placeholder="Phone Number" aria-label="Phone number" required />
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number" 
+                      aria-label="Phone number" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      disabled={submitting}
+                      required 
+                    />
                   </div>
                   <div className="hd-form-group">
-                    <textarea rows="4" placeholder={`I'm interested in ${data.classType}. Please provide more details.`} aria-label="Your message"></textarea>
+                    <textarea 
+                      rows="4" 
+                      placeholder={`I'm interested in ${data.classType}. Please provide more details.`} 
+                      aria-label="Your message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      disabled={submitting}
+                    ></textarea>
                   </div>
-                  <button type="submit" className="hd-submit-btn">
+                  <button 
+                    type="submit" 
+                    className="hd-submit-btn" 
+                    disabled={submitting}
+                    style={{
+                      backgroundColor: success ? '#10B981' : '',
+                      borderColor: success ? '#10B981' : '',
+                    }}
+                  >
                     <div className="flip-text">
-                      <span>SEND INQUIRY</span>
-                      <span aria-hidden="true">SEND INQUIRY</span>
+                      <span>
+                        {success ? '✓ REQUEST SECURED' : submitting ? 'SENDING...' : 'SEND INQUIRY'}
+                      </span>
+                      <span aria-hidden="true">
+                        {success ? '✓ REQUEST SECURED' : submitting ? 'SENDING...' : 'SEND INQUIRY'}
+                      </span>
                     </div>
                   </button>
                 </form>

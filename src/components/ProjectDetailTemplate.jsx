@@ -522,7 +522,7 @@ export default function ProjectDetailTemplate({
                       height={1080} 
                       priority={true} 
                       style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: 1 }} 
-                      src={resolveMediaUrl(heroImage || detailsImage)} 
+                      src={resolveMediaUrl(heroImage || detailsImage, 2000)} 
                       alt={title} 
                       referrerPolicy="no-referrer" 
                     />
@@ -548,7 +548,7 @@ export default function ProjectDetailTemplate({
               height={1080} 
               priority={true} 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              src={resolveMediaUrl(heroImage)} 
+              src={resolveMediaUrl(heroImage, 2000)} 
               alt={title} 
               referrerPolicy="no-referrer" 
               onError={() => {

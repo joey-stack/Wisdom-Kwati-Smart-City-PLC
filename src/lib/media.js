@@ -2,7 +2,7 @@
  * Resolves Google Drive image URLs to optimized weserv proxy URLs.
  * If the input URL is not a Google Drive link, it is returned unchanged.
  */
-export const resolveMediaUrl = (url) => {
+export const resolveMediaUrl = (url, width = 1600, quality = 90) => {
   if (!url) return '';
   if (typeof url !== 'string') return url;
 
@@ -37,7 +37,7 @@ export const resolveMediaUrl = (url) => {
 
     if (fileId) {
       // Fetch full original resolution and apply lanczos3 scaling + post-processing sharpen parameter
-      return `https://images.weserv.nl/?url=${encodeURIComponent(`https://drive.google.com/uc?export=view&id=${fileId}`)}&w=1600&output=webp&q=90&sharp=1`;
+      return `https://images.weserv.nl/?url=${encodeURIComponent(`https://drive.google.com/uc?export=view&id=${fileId}`)}&w=${width}&output=webp&q=${quality}&sharp=1`;
     }
   }
   return url;

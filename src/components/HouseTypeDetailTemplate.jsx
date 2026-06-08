@@ -115,7 +115,7 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
 
   // Gallery fallbacks
   const images = data.images || [];
-  const heroImage   = resolveMediaUrl(images[0] || 'https://placehold.co/1200x800/111/fff?text=Smart+Villa');
+  const heroImage   = resolveMediaUrl(images[0] || 'https://placehold.co/1200x800/111/fff?text=Smart+Villa', 2000);
   const galImage1   = resolveMediaUrl(images[0] || heroImage);
   const galImage2   = resolveMediaUrl(images[1] || heroImage);
   const galImage3   = resolveMediaUrl(images[2] || heroImage);

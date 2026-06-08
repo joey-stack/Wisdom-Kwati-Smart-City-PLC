@@ -137,7 +137,7 @@ export default function BlogDetailPage({ params }) {
 
         {/* Featured Image */}
         <div className="blog-single-featured-image">
-          <Image width={1200} height={800} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={blog.image || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" priority={true} />
+          <Image width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image, 2000) || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" priority={true} />
         </div>
 
         {/* Layout: Sidebar + Article Body */}
@@ -164,7 +164,7 @@ export default function BlogDetailPage({ params }) {
               <h4 className="widget-title">Insights Newsletter</h4>
               {subscribed ? (
                 <div style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '14px', fontStyle: 'italic' }}>
-                  ✓ Thank you! You're subscribed.
+                  ✓ Thank you! You&apos;re subscribed.
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="newsletter-form">
@@ -198,7 +198,7 @@ export default function BlogDetailPage({ params }) {
 
             {blog.quote && (
               <blockquote>
-                "{blog.quote}"
+                &ldquo;{blog.quote}&rdquo;
               </blockquote>
             )}
 

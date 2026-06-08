@@ -66,6 +66,8 @@ export default function AdminEditHouseTypePage({ params }) {
     { id: 'backup-power', name: 'Full Power Backup', iconClass: 'icon-power' }
   ];
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [availableAmenities, setAvailableAmenities] = useState(PREDEFINED_AMENITIES);
+  const [customAmenityInput, setCustomAmenityInput] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -94,7 +96,26 @@ export default function AdminEditHouseTypePage({ params }) {
           setParking(data.parking || '');
           setInteriorSpecs(data.interiorSpecs || []);
           setExteriorSpecs(data.exteriorSpecs || []);
-          setSelectedAmenities(data.amenities || []);
+          const dbAmenities = data.amenities || [];
+          setSelectedAmenities(dbAmenities);
+
+          // Merge dbAmenities into availableAmenities
+          setAvailableAmenities(prev => {
+            const merged = [...prev];
+            dbAmenities.forEach(dbA => {
+              const name = typeof dbA === 'string' ? dbA : dbA.name;
+              const icon = typeof dbA === 'string' ? 'icon-default' : (dbA.iconClass || 'icon-default');
+              
+              if (name && !merged.some(a => a.name.toLowerCase() === name.toLowerCase())) {
+                merged.push({
+                  id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                  name: name,
+                  iconClass: icon
+                });
+              }
+            });
+            return merged;
+          });
           setVideoUrl(data.videoUrl || '');
           setAdvisorId(data.advisorId || '');
           setSortOrder(data.sortOrder !== undefined && data.sortOrder !== null ? String(data.sortOrder) : '');
@@ -154,12 +175,47 @@ export default function AdminEditHouseTypePage({ params }) {
 
   // Amenities toggle
   const toggleAmenity = (amenity) => {
-    const exists = selectedAmenities.find(a => a.name === amenity.name);
+    const exists = selectedAmenities.find(a => a.name.toLowerCase() === amenity.name.toLowerCase());
     if (exists) {
-      setSelectedAmenities(prev => prev.filter(a => a.name !== amenity.name));
+      setSelectedAmenities(prev => prev.filter(a => a.name.toLowerCase() !== amenity.name.toLowerCase()));
     } else {
-      setSelectedAmenities(prev => [...prev, { name: amenity.name, iconClass: amenity.iconClass }]);
+      setSelectedAmenities(prev => [...prev, { name: amenity.name, iconClass: amenity.iconClass || 'icon-default' }]);
     }
+  };
+
+  const addCustomAmenity = () => {
+    if (!customAmenityInput.trim()) return;
+    const name = customAmenityInput.trim();
+    
+    // Check if already selected
+    if (selectedAmenities.some(a => a.name.toLowerCase() === name.toLowerCase())) {
+      alert('This amenity is already added.');
+      return;
+    }
+
+    const newAmenityObj = {
+      name,
+      iconClass: 'icon-default'
+    };
+
+    setSelectedAmenities(prev => [...prev, newAmenityObj]);
+
+    // Ensure it exists in availableAmenities so a checkbox is rendered for it
+    setAvailableAmenities(prev => {
+      if (prev.some(a => a.name.toLowerCase() === name.toLowerCase())) {
+        return prev;
+      }
+      return [
+        ...prev,
+        {
+          id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+          name: name,
+          iconClass: 'icon-default'
+        }
+      ];
+    });
+
+    setCustomAmenityInput('');
   };
 
   const handleSubmit = async (e) => {
@@ -624,9 +680,28 @@ export default function AdminEditHouseTypePage({ params }) {
             5. Core Structural Amenities
           </h3>
 
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', maxWidth: '480px' }}>
+            <input
+              type="text"
+              placeholder="Add custom amenity (e.g. Smart Lock, Helipad)"
+              value={customAmenityInput}
+              onChange={(e) => setCustomAmenityInput(e.target.value)}
+              style={{ flex: 1, padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  addCustomAmenity();
+                }
+              }}
+            />
+            <button type="button" onClick={addCustomAmenity} className="admin-btn active" style={{ padding: '8px 20px', fontSize: '12px', width: 'auto', cursor: 'pointer' }}>
+              + Add
+            </button>
+          </div>
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px' }}>
-            {PREDEFINED_AMENITIES.map((amenity) => {
-              const isChecked = selectedAmenities.some(a => a.name === amenity.name);
+            {availableAmenities.map((amenity) => {
+              const isChecked = selectedAmenities.some(a => a.name.toLowerCase() === amenity.name.toLowerCase());
               return (
                 <label key={amenity.id} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer', color: 'var(--admin-text-primary)', backgroundColor: isChecked ? 'rgba(30, 143, 196, 0.08)' : 'var(--admin-bg)', padding: '12px', borderRadius: '4px', border: '1px solid var(--admin-border)' }}>
                   <input

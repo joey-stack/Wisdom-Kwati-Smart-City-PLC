@@ -224,7 +224,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper reveal-on-scroll">
                         <div className="services-image-inner">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1_ytmM02VsSMbbvYBP3cw_R7SMhfaQKOB%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1ikiZhEycVPG3CB1_OCXuCcmwXwbqF-kA%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>

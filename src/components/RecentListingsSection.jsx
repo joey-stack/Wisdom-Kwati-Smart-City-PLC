@@ -26,7 +26,7 @@ export default function RecentListingsSection() {
       return null;
     };
 
-    getDocs(query(collection(db, 'houseTypes'), limit(15)))
+    getDocs(collection(db, 'houseTypes'))
       .then(snap => {
         const list = [];
         const cache = getGlobalCache();
@@ -36,16 +36,6 @@ export default function RecentListingsSection() {
 
           if (cache) {
             cache.houseTypes[doc.id] = d;
-          }
-
-          // Parse createdAt supporting both Timestamp objects and ISO strings
-          let createdAtDate = new Date(0);
-          if (d.createdAt) {
-            if (typeof d.createdAt.toDate === 'function') {
-              createdAtDate = d.createdAt.toDate();
-            } else {
-              createdAtDate = new Date(d.createdAt);
-            }
           }
 
           list.push({
@@ -60,12 +50,19 @@ export default function RecentListingsSection() {
               ? d.images[0]
               : 'https://placehold.co/800x600/eaeaea/999?text=Smart+Villa',
             estate: d.estate || '',
-            createdAtDate,
+            sortOrder: d.sortOrder,
           });
         });
 
-        // Sort descending (newest first)
-        list.sort((a, b) => b.createdAtDate - a.createdAtDate);
+        // Sort by sortOrder ascending, fallback to alphabetical
+        list.sort((a, b) => {
+          const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? a.sortOrder : 999;
+          const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? b.sortOrder : 999;
+          if (orderA !== orderB) {
+            return orderA - orderB;
+          }
+          return (a.name || '').localeCompare(b.name || '');
+        });
 
         setHouseTypes(list.slice(0, 2));
       })

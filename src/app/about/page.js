@@ -83,14 +83,14 @@ export default function Page() {
         {/*  About Hero Section  */}
         <section className="about-hero hero">
             <div className="hero-bg-container hero-video-wrapper">
-                <Image width={1200} height={800} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w1200" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
+                <Image width={1920} height={1080} priority={true} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=82&url=https://drive.google.com/thumbnail?id=1VBqCbd9wcYZK-027SKQoy1-t1eofVjdL%26sz=w2000" alt="WKSC Team Photo" className="hero-bg-blur" referrerPolicy="no-referrer" />
                 <div className="hero-gradient-blur"></div>
             </div>
             
             <div className="hero-content">
                 <h1 className="hero-title reveal-type-lines">
                     Nigeria has a 17-million-home deficit. <br />
-                    We're not waiting for someone else to fix&nbsp;it.
+                    We&apos;re not waiting for someone else to fix&nbsp;it.
                 </h1>
             </div>
         </section>
@@ -218,7 +218,7 @@ export default function Page() {
                             </div>
                             <h2 className="history-sticky-headline reveal-on-scroll">Our journey through the years</h2>
                             <p className="history-subheadline reveal-on-scroll">
-                                From private group into Africa's leading smart city developer across Nigeria
+                                From private group into Africa&apos;s leading smart city developer across Nigeria
                             </p>
                         </div>
                     </div>
@@ -357,7 +357,7 @@ export default function Page() {
                                 <span className="label-text">OUR DIFFERENCES</span>
                             </div>
                             <h2 className="differences-headline reveal-on-scroll">
-                                We don't just build walls. We are a vision of what cities can become when intelligent infrastructure meets innovation.
+                                We don&apos;t just build walls. We are a vision of what cities can become when intelligent infrastructure meets innovation.
                             </h2>
                         </div>
 
@@ -420,7 +420,7 @@ export default function Page() {
                                 <div className="value-item">
                                     <div className="value-icon"><i className="fa-solid fa-house-circle-check"></i></div>
                                     <h3>Closing the 17-million-home deficit.</h3>
-                                    <p>We are not waiting for someone else to fix Africa's housing crisis. Our massive transformative purpose is to deliver 1 million sustainable African homes by 2035.</p>
+                                    <p>We are not waiting for someone else to fix Africa&apos;s housing crisis. Our massive transformative purpose is to deliver 1 million sustainable African homes by 2035.</p>
                                 </div>
                                 <div className="value-item">
                                     <div className="value-icon"><i className="fa-solid fa-chart-line"></i></div>
@@ -444,7 +444,7 @@ export default function Page() {
                         <div className="label-square"></div>
                         <span className="label-text">OUR TEAM</span>
                     </div>
-                    <h2 className="team-headline">Get to know the team that's as passionate about your project as you are.</h2>
+                    <h2 className="team-headline">Get to know the team that&apos;s as passionate about your project as you are.</h2>
                 </div>                <div className="team-grid">
                     {/*  Y.G. Ballah (COO, CEO WKSC PLC)  */}
                     <div className="team-card reveal-on-scroll">

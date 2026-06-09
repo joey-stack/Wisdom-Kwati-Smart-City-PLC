@@ -22,11 +22,12 @@ export default function BlogDetailPage({ params }) {
   useEffect(() => {
     async function loadBlog() {
       try {
-        // Direct document lookup by ID (slug)
-        const docRef = doc(db, 'blogs', slug);
-        const docSnap = await getDoc(docRef);
+        // Query blogs collection where slug field equals the slug parameter
+        const q = query(collection(db, 'blogs'), where('slug', '==', slug), limit(1));
+        const querySnap = await getDocs(q);
 
-        if (docSnap.exists()) {
+        if (!querySnap.empty) {
+          const docSnap = querySnap.docs[0];
           const docData = docSnap.data();
           setBlog({ id: docSnap.id, ...docData });
 
@@ -35,6 +36,21 @@ export default function BlogDetailPage({ params }) {
           const relSnap = await getDocs(relQ);
           const relList = relSnap.docs.map(d => ({ id: d.id, ...d.data() }));
           setRelatedBlogs(relList);
+        } else {
+          // Fallback: Try direct document ID lookup (for legacy posts)
+          const docRef = doc(db, 'blogs', slug);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const docData = docSnap.data();
+            setBlog({ id: docSnap.id, ...docData });
+
+            const relQ = query(collection(db, 'blogs'), where('slug', '!=', slug), limit(4));
+            const relSnap = await getDocs(relQ);
+            const relList = relSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+            setRelatedBlogs(relList);
+          } else {
+            setBlog(null);
+          }
         }
       } catch (err) {
         console.error('Error fetching blog details:', err);

@@ -79,10 +79,17 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
   const [activeFormats, setActiveFormats] = useState({
     bold: false,
     italic: false,
+    underline: false,
     h2: false,
     h3: false,
     h4: false,
-    blockquote: false
+    blockquote: false,
+    listUnordered: false,
+    listOrdered: false,
+    alignLeft: false,
+    alignCenter: false,
+    alignRight: false,
+    alignJustify: false
   });
 
   // Set default paragraph separator to 'p' on mount
@@ -303,10 +310,17 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
     setActiveFormats({
       bold: document.queryCommandState('bold'),
       italic: document.queryCommandState('italic'),
+      underline: document.queryCommandState('underline'),
       h2: !!parent.closest('h2'),
       h3: !!parent.closest('h3'),
       h4: !!parent.closest('h4'),
-      blockquote: !!parent.closest('blockquote')
+      blockquote: !!parent.closest('blockquote'),
+      listUnordered: document.queryCommandState('insertUnorderedList'),
+      listOrdered: document.queryCommandState('insertOrderedList'),
+      alignLeft: document.queryCommandState('justifyLeft'),
+      alignCenter: document.queryCommandState('justifyCenter'),
+      alignRight: document.queryCommandState('justifyRight'),
+      alignJustify: document.queryCommandState('justifyFull')
     });
   };
 
@@ -455,7 +469,7 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
             cursor: 'pointer',
             fontSize: '13px'
           }}
-          title="Bold Selection"
+          title="Bold Selection (Ctrl+B)"
         >
           B
         </button>
@@ -473,9 +487,28 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
             cursor: 'pointer',
             fontSize: '13px'
           }}
-          title="Italicize Selection"
+          title="Italicize Selection (Ctrl+I)"
         >
           I
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('underline')}
+          style={{
+            background: activeFormats.underline ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.underline ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            textDecoration: 'underline',
+            fontWeight: 'bold',
+            padding: '6px 10px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            fontSize: '13px'
+          }}
+          title="Underline Selection (Ctrl+U)"
+        >
+          U
         </button>
         <button
           type="button"
@@ -493,6 +526,210 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
           title="Quote Block"
         >
           Quote
+        </button>
+
+        <span style={{ width: '1px', height: '18px', backgroundColor: 'var(--admin-border)', margin: '0 4px' }}></span>
+
+        {/* Bullet and Numbered Lists */}
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('insertUnorderedList')}
+          style={{
+            background: activeFormats.listUnordered ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.listUnordered ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Bullet List"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('insertOrderedList')}
+          style={{
+            background: activeFormats.listOrdered ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.listOrdered ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Numbered List"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="10" y1="6" x2="21" y2="6"></line>
+            <line x1="10" y1="12" x2="21" y2="12"></line>
+            <line x1="10" y1="18" x2="21" y2="18"></line>
+            <path d="M4 6h1v4"></path>
+            <path d="M4 10h2"></path>
+            <path d="M6 6H4"></path>
+          </svg>
+        </button>
+
+        <span style={{ width: '1px', height: '18px', backgroundColor: 'var(--admin-border)', margin: '0 4px' }}></span>
+
+        {/* Indentation Controls */}
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('outdent')}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Decrease Indent (Shift+Tab)"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="11 17 6 12 11 7"></polyline>
+            <line x1="18" y1="12" x2="6" y2="12"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('indent')}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Increase Indent (Tab)"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="13 17 18 12 13 7"></polyline>
+            <line x1="6" y1="12" x2="18" y2="12"></line>
+          </svg>
+        </button>
+
+        <span style={{ width: '1px', height: '18px', backgroundColor: 'var(--admin-border)', margin: '0 4px' }}></span>
+
+        {/* Text Alignments */}
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('justifyLeft')}
+          style={{
+            background: activeFormats.alignLeft ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.alignLeft ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Align Left"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="17" y1="10" x2="3" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="15" y1="18" x2="3" y2="18"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('justifyCenter')}
+          style={{
+            background: activeFormats.alignCenter ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.alignCenter ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Align Center"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="10" x2="6" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="16" y1="18" x2="8" y2="18"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('justifyRight')}
+          style={{
+            background: activeFormats.alignRight ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.alignRight ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Align Right"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="21" y1="10" x2="7" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="21" y1="18" x2="13" y2="18"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          onMouseDown={preventFocusLoss}
+          onClick={() => executeCommand('justifyFull')}
+          style={{
+            background: activeFormats.alignJustify ? 'rgba(187, 227, 57, 0.2)' : 'transparent',
+            border: 'none',
+            color: activeFormats.alignJustify ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+            padding: '6px 8px',
+            borderRadius: '3px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Justify Text"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="21" y1="10" x2="3" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="21" y1="18" x2="3" y2="18"></line>
+          </svg>
         </button>
         <span style={{ width: '1px', height: '18px', backgroundColor: 'var(--admin-border)', margin: '0 4px' }}></span>
         <button
@@ -613,7 +850,8 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
                 Formatting Instructions
               </div>
               <ul style={{ paddingLeft: '14px', margin: 0, fontSize: '11px', color: 'var(--admin-text-secondary)', lineHeight: '1.6', display: 'flex', flexDirection: 'column', gap: '6px', listStyleType: 'disc' }}>
-                <li><strong>Inline Menu:</strong> Highlight text inside the editor to open a floating formatting menu (Bold, Italic, H2, H3, Blockquote).</li>
+                <li><strong>Inline Menu:</strong> Highlight text inside the editor to open a floating formatting menu (Bold, Italic, Underline, H2, H3, Blockquote).</li>
+                <li><strong>Word-Style Tools:</strong> Create bullet or numbered lists, indent paragraphs, and align text (Left, Center, Right, Justify) in the toolbar.</li>
                 <li><strong>Toolbar:</strong> Click H2, H3, or H4 to toggle heading styles on the active paragraph.</li>
                 <li><strong>Smart Format (✨):</strong> Cleans up messy inline styles and automatically structures headers and blockquotes based on content context.</li>
                 <li><strong>Clear Format (Tx):</strong> Removes style overrides from your selection.</li>
@@ -634,7 +872,7 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
             position: 'absolute',
             top: `${menuPosition.top}px`,
             left: `${menuPosition.left}px`,
-            width: '240px',
+            width: '270px',
             height: '38px',
             background: 'rgba(18, 18, 21, 0.9)',
             backdropFilter: 'blur(12px)',
@@ -681,6 +919,23 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
             }}
           >
             I
+          </button>
+          <button
+            type="button"
+            onMouseDown={preventFocusLoss}
+            onClick={() => executeCommand('underline')}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: activeFormats.underline ? 'var(--admin-accent)' : '#FFF',
+              textDecoration: 'underline',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              fontSize: '13px',
+              padding: '6px'
+            }}
+          >
+            U
           </button>
           <button
             type="button"

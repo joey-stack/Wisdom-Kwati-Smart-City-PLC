@@ -1012,7 +1012,7 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
         data-placeholder={placeholder}
       />
 
-      {/* CSS injector for custom hover tooltips and placeholders */}
+      {/* CSS injector for custom hover tooltips, placeholders, and frontend typography sync */}
       <style>{`
         [contenteditable]:empty:before {
           content: attr(data-placeholder);
@@ -1024,6 +1024,67 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
           opacity: 1 !important;
           transform: translateY(0) scale(1) !important;
           pointer-events: auto !important;
+        }
+        
+        /* Frontend typography styles for editing workspace */
+        [contenteditable] {
+          font-family: 'Outfit', sans-serif !important;
+          font-size: 19px !important;
+          line-height: 1.65 !important;
+          color: var(--admin-text-primary) !important;
+          background-color: var(--admin-bg) !important;
+        }
+        [contenteditable] h2 {
+          font-size: 32px !important;
+          font-weight: 700 !important;
+          color: var(--admin-text-primary) !important;
+          margin: 40px 0 20px 0 !important;
+          letter-spacing: -0.01em !important;
+        }
+        [contenteditable] h3 {
+          font-size: 24px !important;
+          font-weight: 700 !important;
+          color: var(--admin-text-primary) !important;
+          margin: 32px 0 16px 0 !important;
+        }
+        [contenteditable] h4 {
+          font-size: 20px !important;
+          font-weight: 700 !important;
+          color: var(--admin-text-primary) !important;
+          margin: 28px 0 14px 0 !important;
+        }
+        [contenteditable] p {
+          margin-bottom: 24px !important;
+        }
+        [contenteditable] blockquote {
+          font-size: 22px !important;
+          font-style: italic !important;
+          font-weight: 500 !important;
+          color: var(--admin-accent) !important;
+          border-left: 4px solid var(--admin-accent) !important;
+          padding-left: 20px !important;
+          margin: 32px 0 !important;
+        }
+        [contenteditable] ul, [contenteditable] ol {
+          margin: 0 0 24px 24px !important;
+          padding-left: 10px !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+          list-style-position: outside !important;
+        }
+        [contenteditable] ul {
+          list-style-type: disc !important;
+        }
+        [contenteditable] ol {
+          list-style-type: decimal !important;
+        }
+        [contenteditable] li {
+          padding-left: 4px !important;
+        }
+        [contenteditable] strong {
+          color: #FFF !important;
+          font-weight: 700 !important;
         }
       `}</style>
     </div>

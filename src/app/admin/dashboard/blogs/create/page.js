@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { resolveMediaUrl } from '@/lib/media';
+import RichTextEditor from '@/components/RichTextEditor';
 
 export default function AdminCreateBlogPage() {
   const router = useRouter();
@@ -236,15 +237,10 @@ export default function AdminCreateBlogPage() {
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Article Body Content *
             </label>
-            <textarea
-              name="content"
+            <RichTextEditor
               value={formData.content}
-              onChange={handleChange}
-              rows="12"
-              required
-              placeholder="Write the full content of the article here. You can use standard formatting..."
-              style={{ width: '100%', padding: '16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none', fontFamily: 'inherit', resize: 'vertical', lineHeight: '1.6' }}
-            ></textarea>
+              onChange={(val) => setFormData(prev => ({ ...prev, content: val }))}
+            />
           </div>
 
           <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

@@ -227,15 +227,23 @@ export default function BlogDetailPage({ params }) {
           <article className="blog-single-body">
             {blog.excerpt && <p className="blog-single-lead" style={{ fontSize: '20px', fontWeight: '500', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '32px' }}>{blog.excerpt}</p>}
             
-            {/* Split paragraphs by newlines and render */}
-            {blog.content?.split('\n').map((paragraph, idx) => {
-              const text = paragraph.trim();
-              if (!text) return null;
-              if (text.endsWith(':')) {
-                return <h2 key={idx} style={{ marginTop: '32px' }}>{text.slice(0, -1)}</h2>;
-              }
-              return <p key={idx}>{text}</p>;
-            })}
+            {/* If content is rich text HTML, render directly. Otherwise, fall back to legacy split renderer */}
+            {blog.content && (blog.content.includes('<p>') || blog.content.includes('</h2>') || blog.content.includes('<h3>') || blog.content.includes('<h4>') || blog.content.includes('<blockquote>') || blog.content.includes('<strong>')) ? (
+              <div 
+                dangerouslySetInnerHTML={{ __html: blog.content }} 
+                className="blog-body-richtext"
+              />
+            ) : (
+              /* Split paragraphs by newlines and render */
+              blog.content?.split('\n').map((paragraph, idx) => {
+                const text = paragraph.trim();
+                if (!text) return null;
+                if (text.endsWith(':')) {
+                  return <h2 key={idx} style={{ marginTop: '32px' }}>{text.slice(0, -1)}</h2>;
+                }
+                return <p key={idx}>{text}</p>;
+              })
+            )}
 
             {blog.quote && (
               <blockquote>

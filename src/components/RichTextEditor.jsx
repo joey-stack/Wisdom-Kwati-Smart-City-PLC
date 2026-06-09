@@ -43,6 +43,17 @@ const cleanHTMLPaste = (htmlString) => {
     // Sanitize tree
     Array.from(body.childNodes).forEach(child => sanitizeNode(child));
 
+    // Convert divs to p tags for clean paragraph spacing
+    const divs = body.querySelectorAll('div');
+    divs.forEach(div => {
+      const hasBlockChildren = div.querySelector('p, div, h1, h2, h3, h4, blockquote, ul, ol');
+      if (!hasBlockChildren) {
+        const p = doc.createElement('p');
+        p.innerHTML = div.innerHTML;
+        div.parentNode?.replaceChild(p, div);
+      }
+    });
+
     // Remove empty paragraph tags
     const blocks = body.querySelectorAll('p, div, h1, h2, h3, h4, blockquote');
     blocks.forEach(block => {
@@ -73,6 +84,17 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
     h4: false,
     blockquote: false
   });
+
+  // Set default paragraph separator to 'p' on mount
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      try {
+        document.execCommand('defaultParagraphSeparator', false, 'p');
+      } catch (e) {
+        console.warn('Could not set defaultParagraphSeparator:', e);
+      }
+    }
+  }, []);
 
   // Sync external value updates (like initial Firestore load)
   useEffect(() => {
@@ -223,7 +245,13 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write t
           return;
         }
 
-        newBlocks.push(node);
+        if (tagName === 'div') {
+          const p = document.createElement('p');
+          p.innerHTML = node.innerHTML;
+          newBlocks.push(p);
+        } else {
+          newBlocks.push(node);
+        }
       }
     });
 

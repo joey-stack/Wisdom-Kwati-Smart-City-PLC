@@ -202,11 +202,13 @@
   color: var(--text-secondary);
 }
 
-.blog-single-body p {
+.blog-single-body p,
+.blog-body-richtext div {
   margin-bottom: 28px;
 }
 
-.blog-single-body p:first-of-type::first-letter {
+/* Drop cap on the excerpt (lead paragraph) if present */
+.blog-single-body > .blog-single-lead::first-letter {
   float: left;
   font-size: 64px;
   line-height: 0.8;
@@ -216,6 +218,42 @@
   font-weight: 700;
   color: var(--text-primary);
 }
+
+/* Drop cap on the first paragraph of rich text body ONLY if it is the absolute first element of the body (no headings above it) */
+.blog-single-body > .blog-body-richtext > p:first-child::first-letter {
+  float: left;
+  font-size: 64px;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Drop cap on the first paragraph of legacy parser */
+.blog-single-body > p:first-of-type::first-letter {
+  float: left;
+  font-size: 64px;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Disable body/fallback drop-cap if excerpt is present */
+.blog-single-lead ~ .blog-body-richtext > p:first-child::first-letter,
+.blog-single-lead ~ p::first-letter {
+  float: none !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  padding: 0 !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+}
+
 
 .blog-single-body h2 {
   font-size: 32px;

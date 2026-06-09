@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 const getSlug = (title) => {
   return title
@@ -61,7 +62,7 @@ function BlogCard({ blog }) {
       <div className="blog-card-image">
         <img
           loading="lazy"
-          src={blog.image || 'https://placehold.co/600x400/111/fff?text=Blog'}
+          src={resolveMediaUrl(blog.image) || 'https://placehold.co/600x400/111/fff?text=Blog'}
           alt={blog.title}
           width="800"
           height="500"
@@ -116,8 +117,15 @@ export default function RecentBlogsSection() {
           });
         });
 
-        // Sort descending (newest first) based on createdAt or date
-        list.sort((a, b) => new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date));
+        // Sort by sortOrder ascending, falling back to date descending
+        list.sort((a, b) => {
+          const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? Number(a.sortOrder) : 9999;
+          const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? Number(b.sortOrder) : 9999;
+          if (orderA !== orderB) {
+            return orderA - orderB;
+          }
+          return new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date);
+        });
 
         // Take the 4 most recent blogs
         setBlogs(list.slice(0, 4));

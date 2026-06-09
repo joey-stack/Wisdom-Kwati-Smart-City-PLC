@@ -20,11 +20,18 @@ export default function BlogDetailPage({ params }) {
   const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
+    if (!slug || slug === 'undefined') return;
+
+    let active = true;
+
     async function loadBlog() {
       try {
+        setLoading(true);
         // Query blogs collection where slug field equals the slug parameter
         const q = query(collection(db, 'blogs'), where('slug', '==', slug), limit(1));
         const querySnap = await getDocs(q);
+
+        if (!active) return;
 
         if (!querySnap.empty) {
           const docSnap = querySnap.docs[0];
@@ -32,22 +39,33 @@ export default function BlogDetailPage({ params }) {
           setBlog({ id: docSnap.id, ...docData });
 
           // Load other related blogs
-          const relQ = query(collection(db, 'blogs'), where('slug', '!=', slug), limit(4));
+          const relQ = query(collection(db, 'blogs'), limit(5));
           const relSnap = await getDocs(relQ);
-          const relList = relSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-          setRelatedBlogs(relList);
+          if (active) {
+            const relList = relSnap.docs
+              .map(d => ({ id: d.id, ...d.data() }))
+              .filter(item => item.slug !== slug)
+              .slice(0, 4);
+            setRelatedBlogs(relList);
+          }
         } else {
           // Fallback: Try direct document ID lookup (for legacy posts)
           const docRef = doc(db, 'blogs', slug);
           const docSnap = await getDoc(docRef);
+          if (!active) return;
           if (docSnap.exists()) {
             const docData = docSnap.data();
             setBlog({ id: docSnap.id, ...docData });
 
-            const relQ = query(collection(db, 'blogs'), where('slug', '!=', slug), limit(4));
+            const relQ = query(collection(db, 'blogs'), limit(5));
             const relSnap = await getDocs(relQ);
-            const relList = relSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-            setRelatedBlogs(relList);
+            if (active) {
+              const relList = relSnap.docs
+                .map(d => ({ id: d.id, ...d.data() }))
+                .filter(item => item.slug !== slug)
+                .slice(0, 4);
+              setRelatedBlogs(relList);
+            }
           } else {
             setBlog(null);
           }
@@ -55,10 +73,16 @@ export default function BlogDetailPage({ params }) {
       } catch (err) {
         console.error('Error fetching blog details:', err);
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     }
     loadBlog();
+
+    return () => {
+      active = false;
+    };
   }, [slug]);
 
   const handleSubscribe = (e) => {
@@ -154,7 +178,7 @@ export default function BlogDetailPage({ params }) {
 
         {/* Featured Image */}
         <div className="blog-single-featured-image">
-          <Image width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image, 2000) || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" priority={true} />
+          <Image width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image, 2000) || 'https://placehold.co/1200x800/111/fff?text=Blog+Header'} alt={blog.title} referrerPolicy="no-referrer" priority={true} unoptimized={true} />
         </div>
 
         {/* Layout: Sidebar + Article Body */}
@@ -252,7 +276,7 @@ export default function BlogDetailPage({ params }) {
               {relatedBlogs.map((item) => (
                 <Link href={`/blogs/${item.slug}`} key={item.id} className="blog-card">
                   <div className="blog-card-image">
-                    <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={item.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={item.title} referrerPolicy="no-referrer" />
+                    <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(item.image) || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={item.title} referrerPolicy="no-referrer" unoptimized={true} />
                   </div>
                   <div className="blog-card-content">
                     <div className="blog-card-meta">

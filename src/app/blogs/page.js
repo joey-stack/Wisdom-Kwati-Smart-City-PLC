@@ -52,7 +52,7 @@ function BlogCard({ blog }) {
       className={`blog-card wksc-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="blog-card-image">
-        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image) || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" />
+        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image) || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" unoptimized={true} />
       </div>
       <div className="blog-card-content">
         <div className="blog-card-meta">

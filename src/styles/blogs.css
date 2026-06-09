@@ -105,30 +105,28 @@
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.3s ease;
-}
-
-.blog-card:hover {
-  transform: translateY(-4px);
 }
 
 .blog-card-image {
+  position: relative;
   width: 100%;
   aspect-ratio: 16/10;
+  border: 1.5px solid transparent;
   border-radius: 5px; /* Matched the project-details request */
   overflow: hidden;
   margin-bottom: 20px;
+  transition: border-color 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.blog-card:hover .blog-card-image {
+  border-color: var(--accent-green);
 }
 
 .blog-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.blog-card:hover .blog-card-image img {
-  transform: scale(1.05);
+  display: block;
 }
 
 .blog-card-content {

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminCreateBlogPage() {
   const router = useRouter();
@@ -17,7 +18,8 @@ export default function AdminCreateBlogPage() {
     excerpt: '',
     content: '',
     date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase(),
-    published: true
+    published: true,
+    sortOrder: ''
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -55,10 +57,12 @@ export default function AdminCreateBlogPage() {
     setError('');
 
     try {
-      await addDoc(collection(db, 'blogs'), {
+      const payload = {
         ...formData,
+        sortOrder: formData.sortOrder !== '' ? parseInt(formData.sortOrder, 10) : 999,
         createdAt: new Date().toISOString()
-      });
+      };
+      await addDoc(collection(db, 'blogs'), payload);
       router.push('/admin/dashboard/blogs');
     } catch (err) {
       console.error('Failed to publish blog post:', err);
@@ -138,7 +142,7 @@ export default function AdminCreateBlogPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
             <div className="form-group">
               <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Author Name
@@ -166,6 +170,20 @@ export default function AdminCreateBlogPage() {
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Priority / Sort Order
+              </label>
+              <input
+                type="number"
+                name="sortOrder"
+                value={formData.sortOrder}
+                onChange={handleChange}
+                placeholder="e.g. 1"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
           </div>
 
           {/* Featured Image URL & Preview */}
@@ -188,7 +206,7 @@ export default function AdminCreateBlogPage() {
               <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', marginBottom: '4px', fontWeight: 600 }}>IMAGE PREVIEW</span>
               <div style={{ width: '100px', height: '60px', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)' }}>
                 <img
-                  src={formData.image || 'https://placehold.co/150x100/111/fff?text=No+Image'}
+                  src={resolveMediaUrl(formData.image) || 'https://placehold.co/150x100/111/fff?text=No+Image'}
                   alt="Featured Preview"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => {

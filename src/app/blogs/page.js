@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 import '../../styles/blogs.css';
 
 function BlogCard({ blog }) {
@@ -51,7 +52,7 @@ function BlogCard({ blog }) {
       className={`blog-card wksc-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="blog-card-image">
-        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={blog.image || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" />
+        <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={resolveMediaUrl(blog.image) || 'https://placehold.co/600x400/111/fff?text=Blog'} alt={blog.title} referrerPolicy="no-referrer" />
       </div>
       <div className="blog-card-content">
         <div className="blog-card-meta">
@@ -88,8 +89,15 @@ export default function BlogsPage() {
         const blogsSnap = await getDocs(collection(db, 'blogs'));
         let loadedBlogs = blogsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-        // Sort by createdAt or date
-        loadedBlogs.sort((a, b) => new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date));
+        // Sort by sortOrder first, then fall back to date
+        loadedBlogs.sort((a, b) => {
+          const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? a.sortOrder : 999;
+          const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? b.sortOrder : 999;
+          if (orderA !== orderB) {
+            return orderA - orderB;
+          }
+          return new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date);
+        });
         setBlogs(loadedBlogs);
       } catch (err) {
         console.error('Failed to load blogs from Firestore:', err);

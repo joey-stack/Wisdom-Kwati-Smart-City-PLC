@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 
 export default function AdminEditBlogPage({ params }) {
   const router = useRouter();
@@ -19,7 +20,8 @@ export default function AdminEditBlogPage({ params }) {
     excerpt: '',
     content: '',
     date: '',
-    published: true
+    published: true,
+    sortOrder: ''
   });
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -40,7 +42,8 @@ export default function AdminEditBlogPage({ params }) {
             excerpt: docSnap.data().excerpt || '',
             content: docSnap.data().content || '',
             date: docSnap.data().date || '',
-            published: docSnap.data().published !== false
+            published: docSnap.data().published !== false,
+            sortOrder: docSnap.data().sortOrder !== undefined && docSnap.data().sortOrder !== null ? docSnap.data().sortOrder : ''
           });
         } else {
           setError('Blog article not found.');
@@ -88,10 +91,12 @@ export default function AdminEditBlogPage({ params }) {
 
     try {
       const docRef = doc(db, 'blogs', id);
-      await updateDoc(docRef, {
+      const payload = {
         ...formData,
+        sortOrder: formData.sortOrder !== '' && formData.sortOrder !== undefined && formData.sortOrder !== null ? parseInt(formData.sortOrder, 10) : 999,
         updatedAt: new Date().toISOString()
-      });
+      };
+      await updateDoc(docRef, payload);
       router.push('/admin/dashboard/blogs');
     } catch (err) {
       console.error('Failed to update blog post:', err);
@@ -195,7 +200,7 @@ export default function AdminEditBlogPage({ params }) {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
             <div className="form-group">
               <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Author Name
@@ -223,6 +228,20 @@ export default function AdminEditBlogPage({ params }) {
                 style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
               />
             </div>
+
+            <div className="form-group">
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: 'var(--admin-text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Priority / Sort Order
+              </label>
+              <input
+                type="number"
+                name="sortOrder"
+                value={formData.sortOrder}
+                onChange={handleChange}
+                placeholder="e.g. 1"
+                style={{ width: '100%', padding: '12px 16px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '13px', outline: 'none' }}
+              />
+            </div>
           </div>
 
           {/* Featured Image URL & Preview */}
@@ -245,7 +264,7 @@ export default function AdminEditBlogPage({ params }) {
               <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', marginBottom: '4px', fontWeight: 600 }}>IMAGE PREVIEW</span>
               <div style={{ width: '100px', height: '60px', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)' }}>
                 <img
-                  src={formData.image || 'https://placehold.co/150x100/111/fff?text=No+Image'}
+                  src={resolveMediaUrl(formData.image) || 'https://placehold.co/150x100/111/fff?text=No+Image'}
                   alt="Featured Preview"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => {

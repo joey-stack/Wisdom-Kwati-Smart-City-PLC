@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { resolveMediaUrl } from '@/lib/media';
 import '../../../styles/blog-single.css';
 import '../../../styles/blogs.css';
 

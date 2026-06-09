@@ -36,8 +36,8 @@ export const resolveMediaUrl = (url, width = 1600, quality = 90) => {
     }
 
     if (fileId) {
-      // Fetch full original resolution and apply lanczos3 scaling + post-processing sharpen parameter
-      return `https://images.weserv.nl/?url=${encodeURIComponent(`https://drive.google.com/uc?export=view&id=${fileId}`)}&w=${width}&output=webp&q=${quality}&sharp=1`;
+      // Fetch thumbnail resolution and apply lanczos3 scaling + post-processing sharpen parameter
+      return `https://images.weserv.nl/?url=${encodeURIComponent(`https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`)}&w=${width}&output=webp&q=${quality}&sharp=1`;
     }
   }
   return url;

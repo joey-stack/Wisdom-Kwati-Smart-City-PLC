@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { collection, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, writeBatch } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { resolveMediaUrl } from '@/lib/media';
 
@@ -11,6 +11,78 @@ export default function AdminBlogsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('ALL');
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+  const [savingOrder, setSavingOrder] = useState(false);
+
+  // HTML5 Drag & Drop handlers for Kanban-like card sorting
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData('text/plain', index.toString());
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    if (draggedIndex === null) return;
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDrop = async (e, index) => {
+    e.preventDefault();
+    const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+    if (isNaN(sourceIndex) || sourceIndex === index) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const items = [...filteredBlogs];
+    const draggedItem = items[sourceIndex];
+    items.splice(sourceIndex, 1);
+    items.splice(index, 0, draggedItem);
+
+    // Map reorder to original main list
+    const sourceBlogId = filteredBlogs[sourceIndex].id;
+    const targetBlogId = filteredBlogs[index].id;
+
+    const sourceIdxInMain = blogs.findIndex(b => b.id === sourceBlogId);
+    const targetIdxInMain = blogs.findIndex(b => b.id === targetBlogId);
+
+    const mainItems = [...blogs];
+    const [movedItem] = mainItems.splice(sourceIdxInMain, 1);
+    mainItems.splice(targetIdxInMain, 0, movedItem);
+
+    setBlogs(mainItems);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+
+    setSavingOrder(true);
+    try {
+      const batch = writeBatch(db);
+      mainItems.forEach((b, idx) => {
+        const docRef = doc(db, 'blogs', b.id);
+        batch.update(docRef, { sortOrder: idx + 1 });
+      });
+      await batch.commit();
+    } catch (err) {
+      console.error('Failed to commit batch reorder:', err);
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const savingOrderRef = useRef(savingOrder);
+  useEffect(() => {
+    savingOrderRef.current = savingOrder;
+  }, [savingOrder]);
 
   useEffect(() => {
     // Live subscription to blogs
@@ -19,7 +91,18 @@ export default function AdminBlogsPage() {
         id: doc.id,
         ...doc.data()
       }));
-      setBlogs(list);
+      list.sort((a, b) => {
+        const orderA = a.sortOrder !== undefined && a.sortOrder !== null ? a.sortOrder : 999;
+        const orderB = b.sortOrder !== undefined && b.sortOrder !== null ? b.sortOrder : 999;
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+        return new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date);
+      });
+      
+      if (!savingOrderRef.current) {
+        setBlogs(list);
+      }
       setLoading(false);
     }, (err) => {
       console.error('Error listening to blogs:', err);
@@ -62,7 +145,7 @@ export default function AdminBlogsPage() {
       <header className="admin-header">
         <div className="admin-title-group">
           <h1>Blog Posts Manager</h1>
-          <p>Create, edit, and publish articles and news updates for the website.</p>
+          <p>Create, edit, and publish articles. Drag and drop cards to rearrange display order.</p>
         </div>
         <Link href="/admin/dashboard/blogs/create" className="admin-btn active" style={{ textDecoration: 'none' }}>
           + Write New Post
@@ -117,8 +200,42 @@ export default function AdminBlogsPage() {
             No blog posts found. Click "+ Write New Post" to start.
           </div>
         ) : (
-          filteredBlogs.map((blog) => (
-            <div key={blog.id} className="admin-section-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '24px' }}>
+          filteredBlogs.map((blog, index) => {
+            const isDragging = index === draggedIndex;
+            const isDragOver = index === dragOverIndex;
+
+            let borderStyle = '1px solid var(--admin-border)';
+            let transformStyle = 'none';
+
+            if (isDragging) {
+              borderStyle = '1px dashed var(--admin-accent)';
+            } else if (isDragOver && draggedIndex !== null) {
+              borderStyle = '2px solid var(--admin-accent)';
+              transformStyle = 'scale(1.02)';
+            }
+
+            return (
+              <div
+                key={blog.id}
+                draggable
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDragEnd={handleDragEnd}
+                onDrop={(e) => handleDrop(e, index)}
+                className="admin-section-card"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                  padding: '24px',
+                  cursor: 'grab',
+                  opacity: isDragging ? 0.4 : 1,
+                  border: borderStyle,
+                  transform: transformStyle,
+                  transition: 'all 0.2s ease',
+                  userSelect: 'none'
+                }}
+              >
               <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
                 {/* Blog Image */}
                 <div style={{ width: '80px', height: '80px', borderRadius: '4px', overflow: 'hidden', backgroundColor: 'var(--admin-bg)', border: '1px solid var(--admin-border)', flexShrink: 0 }}>
@@ -159,6 +276,7 @@ export default function AdminBlogsPage() {
               <div style={{ fontSize: '12px', color: 'var(--admin-text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px', marginBottom: '20px', marginTop: 'auto' }}>
                 <div><strong>Author:</strong> {blog.author || 'Anonymous'}</div>
                 <div><strong>Slug:</strong> <code style={{ color: 'var(--admin-accent)' }}>{blog.slug}</code></div>
+                <div><strong>Sort Order:</strong> <span style={{ color: 'var(--admin-accent)' }}>{blog.sortOrder !== undefined && blog.sortOrder !== null ? blog.sortOrder : '999 (Default)'}</span></div>
               </div>
 
               {/* Action Buttons */}
@@ -179,7 +297,8 @@ export default function AdminBlogsPage() {
                 </button>
               </div>
             </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

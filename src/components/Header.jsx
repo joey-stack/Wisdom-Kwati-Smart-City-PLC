@@ -75,6 +75,7 @@ export default function Header() {
                                 <svg className="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </a>
                         </li>
+                        <li><a href="/careers"><div className="flip-text"><span>Careers</span><span aria-hidden="true">Careers</span></div></a></li>
                         <li><a href="/contact"><div className="flip-text"><span>Contact</span><span aria-hidden="true">Contact</span></div></a></li>
                     </ul>
 
@@ -279,6 +280,7 @@ export default function Header() {
                         <li><a href="/about" onClick={() => setIsMenuOpen(false)}>About</a></li>
                         <li><a href="/projects" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
                         <li><a href="/house-types" onClick={() => setIsMenuOpen(false)}>House Types</a></li>
+                        <li><a href="/careers" onClick={() => setIsMenuOpen(false)}>Careers</a></li>
                         <li><a href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
                     </ul>
                 </div>

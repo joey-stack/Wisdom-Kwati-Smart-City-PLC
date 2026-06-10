@@ -74,6 +74,30 @@ export default function CareerDetailPage({ params }) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
+  // Social Share States
+  const [shareUrl, setShareUrl] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.href;
+      const timer = setTimeout(() => {
+        setShareUrl(currentUrl);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [slug]);
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
+  };
+
   const handleApplySubmit = async (e) => {
     e.preventDefault();
     if (!formFile) {
@@ -312,7 +336,7 @@ export default function CareerDetailPage({ params }) {
           {/* What We're Looking For Section */}
           {job.requirements && job.requirements.length > 0 && (
             <div className="careers-section">
-              <h2 className="careers-section-title">What we're looking for</h2>
+              <h2 className="careers-section-title">What we&apos;re looking for</h2>
               <div className="pd-table-container">
                 <table className="pd-table">
                   <tbody>
@@ -364,7 +388,7 @@ export default function CareerDetailPage({ params }) {
                   Option A: Apply Directly Online (Recommended)
                 </h4>
                 <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-                  Click the <strong>"Apply For This Job"</strong> button on the sidebar to fill in your application form and upload your CV/Resume directly from this page.
+                  Click the <strong>&quot;Apply For This Job&quot;</strong> button on the sidebar to fill in your application form and upload your CV/Resume directly from this page.
                 </p>
               </div>
 
@@ -429,6 +453,59 @@ export default function CareerDetailPage({ params }) {
             >
               Apply For This Job
             </button>
+
+            <div className="share-section">
+              <span className="share-title">Share this opportunity</span>
+              <div className="share-buttons">
+                <a 
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="share-btn linkedin"
+                  title="Share on LinkedIn"
+                >
+                  <i className="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a 
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(`Check out this job opportunity at Wisdom Kwati Smart City: ${job.title}`)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="share-btn twitter"
+                  title="Share on X"
+                >
+                  <i className="fa-brands fa-x-twitter"></i>
+                </a>
+                <a 
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="share-btn facebook"
+                  title="Share on Facebook"
+                >
+                  <i className="fa-brands fa-facebook-f"></i>
+                </a>
+                <a 
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this job opening at Wisdom Kwati Smart City: ${job.title} - ${shareUrl}`)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="share-btn whatsapp"
+                  title="Share on WhatsApp"
+                >
+                  <i className="fa-brands fa-whatsapp"></i>
+                </a>
+                <button 
+                  onClick={handleCopyLink} 
+                  className="share-btn copy"
+                  title="Copy Link"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                  <i className={copied ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                </button>
+              </div>
+              <div className={`copied-toast ${copied ? 'show' : ''}`}>
+                Link copied to clipboard!
+              </div>
+            </div>
           </div>
         </aside>
       </div>
@@ -438,7 +515,7 @@ export default function CareerDetailPage({ params }) {
       {otherJobs.length > 0 && (
         <section className="other-positions-section">
           <h2 className="other-positions-headline">
-            If you're passionate, curious, and love making real impact, you'll fit right in.
+            If you&apos;re passionate, curious, and love making real impact, you&apos;ll fit right in.
           </h2>
           <div className="career-grid">
             {otherJobs.map((item) => (

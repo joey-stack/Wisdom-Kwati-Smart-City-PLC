@@ -18,7 +18,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL('https://wisdomkwati.com'),
+  metadataBase: new URL('https://wisdomkwatismartcity.com'),
   title: {
     default: "Wisdom Kwati Smart City PLC",
     template: "%s | Wisdom Kwati Smart City"
@@ -36,7 +36,7 @@ export const metadata = {
   openGraph: {
     title: "Wisdom Kwati Smart City PLC",
     description: "Building the functional ecosystem Africa deserves. Explore our ultra-modern smart cities.",
-    url: 'https://wisdomkwati.com',
+    url: 'https://wisdomkwatismartcity.com',
     siteName: 'Wisdom Kwati Smart City',
     images: [
       {
@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               "name": "Wisdom Kwati Smart City PLC",
               "alternateName": "WKSC PLC",
-              "url": "https://wisdomkwati.com",
+              "url": "https://wisdomkwatismartcity.com",
               "logo": "https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g",
               "contactPoint": {
                 "@type": "ContactPoint",

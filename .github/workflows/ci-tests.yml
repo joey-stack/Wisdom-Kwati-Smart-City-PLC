@@ -1,0 +1,45 @@
+name: UI Tests (Playwright + BrowserStack)
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Setup Mock Environment Variables
+        run: cp .env.example .env.local
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      # 🧪 Run local tests first
+      - name: Run Playwright tests (local)
+        run: npx playwright test
+
+      # 🌐 BrowserStack execution (optional but powerful)
+      - name: Run BrowserStack tests
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: |
+          if [ -n "$BROWSERSTACK_USERNAME" ] && [ -n "$BROWSERSTACK_ACCESS_KEY" ]; then
+            echo "Running BrowserStack tests..."
+            npx browserstack-node-sdk playwright test
+          else
+            echo "BrowserStack credentials not provided, skipping BrowserStack execution."
+          fi

@@ -16,19 +16,8 @@ const DEFAULT_ADVISER = {
   image: "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1f60lY6QnI4T6pUfN0V-V6y6W6h6h6h6h%26sz=w1200"
 };
 
-// Generate static params for all projects at build time for instant, zero-loading page loads
-export async function generateStaticParams() {
-  if (!db) return []; // Firebase not initialized (build env vars not set)
-  try {
-    const querySnapshot = await getDocs(collection(db, 'projects'));
-    return querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-    }));
-  } catch (err) {
-    console.error('Failed to generate static params for projects:', err);
-    return [];
-  }
-}
+// This page is force-dynamic (always SSR) — generateStaticParams is not used.
+// Pages are served live from Firebase on every request.
 
 // Generate dynamic SEO metadata on the server
 export async function generateMetadata({ params }) {

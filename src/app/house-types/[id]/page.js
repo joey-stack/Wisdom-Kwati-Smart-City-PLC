@@ -5,19 +5,8 @@ import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import HouseTypeDetailTemplate from '@/components/HouseTypeDetailTemplate';
 
-// Generate static params for all house types at build time for instant, zero-loading page loads
-export async function generateStaticParams() {
-  if (!db) return []; // Firebase not initialized (build env vars not set)
-  try {
-    const querySnapshot = await getDocs(collection(db, 'houseTypes'));
-    return querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-    }));
-  } catch (err) {
-    console.error('Failed to generate static params for house types:', err);
-    return [];
-  }
-}
+// This page is force-dynamic (always SSR) — generateStaticParams is not used.
+// Pages are served live from Firebase on every request.
 
 // Generate dynamic SEO metadata on the server
 export async function generateMetadata({ params }) {

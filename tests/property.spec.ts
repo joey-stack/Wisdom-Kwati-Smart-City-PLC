@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('property detail page loads correctly or handles fallback', async ({ page }) => {
-  await page.goto('/house-types/white-pearl');
+  await page.goto('/house-types/white-pearl', { waitUntil: 'domcontentloaded' });
 
   // Inject CSS to bypass GSAP scroll reveal hiding
   await page.addStyleTag({

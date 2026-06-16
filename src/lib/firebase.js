@@ -12,15 +12,31 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase (safeguarding for Next.js SSR & HMR)
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+let app;
+let auth;
+let db;
+let storage;
 
-const auth = getAuth(app);
-
-// Initialize Firestore safely using standard getFirestore
-const db = getFirestore(app);
-
-const storage = getStorage(app);
+try {
+  if (!firebaseConfig.apiKey) {
+    throw new Error("Missing NEXT_PUBLIC_FIREBASE_API_KEY. Please verify that your environment variables are configured in your Vercel or deployment settings.");
+  }
+  // Initialize Firebase (safeguarding for Next.js SSR & HMR)
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+} catch (err) {
+  if (typeof window !== 'undefined') {
+    console.error("🔴 [Firebase Initialization Failed]:", err.message);
+  }
+  // Export dummy mocks so client-side hydration and other components do not crash
+  app = {};
+  auth = {};
+  db = {};
+  storage = {};
+}
 
 export { app, auth, db, storage };
+
 

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('property listings render and filters are interactive', async ({ page }) => {
-  await page.goto('/house-types');
+  await page.goto('/house-types', { waitUntil: 'domcontentloaded' });
 
   // Inject CSS to bypass GSAP scroll reveal hiding
   await page.addStyleTag({

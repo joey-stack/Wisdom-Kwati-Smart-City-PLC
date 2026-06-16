@@ -4,18 +4,19 @@
 projectName: Wisdom Kwati Smart City
 buildName: Local Playwright Build
 
-# Enable BrowserStack Local tunnel to allow remote cloud browsers to access localhost:3005
-local: true
+# Enable BrowserStack Local tunnel to allow remote cloud browsers to access local servers
+browserstackLocal: true
+idleTimeout: 300
 
 platforms:
   - browserName: chrome
     browserVersion: latest
     os: Windows
     osVersion: 11
-  - browserName: safari
+  - browserName: playwright-webkit
     browserVersion: latest
     os: OS X
     osVersion: Sonoma
   - deviceName: iPhone 15 Pro
     osVersion: 17
-    browserName: playright-webkit
+    browserName: playwright-webkit

@@ -51,21 +51,25 @@ const PORT = process.env.PLAYWRIGHT_TEST_PORT || '3005';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 60000,
+  timeout: process.env.BROWSERSTACK_USERNAME ? 180000 : 90000,
 
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || `http://localhost:${PORT}`,
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || `http://bs-local.com:${PORT}`,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    navigationTimeout: 90000,
+    actionTimeout: 30000,
   },
 
   projects,
 
-  // Automatically spin up the Next.js dev server on the specified port
+  // Automatically spin up the Next.js production server on the specified port
   webServer: {
-    command: `npm run dev -- -p ${PORT}`,
-    url: `http://localhost:${PORT}`,
+    command: `npm run start -- -p ${PORT} -H 0.0.0.0`,
+    url: `http://bs-local.com:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
 });
+
+

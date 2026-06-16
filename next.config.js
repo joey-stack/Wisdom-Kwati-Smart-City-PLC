@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Allow cross-origin requests from BrowserStack Local loopback domain
+  allowedDevOrigins: ['bs-local.com'],
+
   // Enable gzip/brotli compression for all responses
   compress: true,
 

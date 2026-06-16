@@ -26,6 +26,8 @@ export default function HeroVideo() {
                 muted
                 playsInline
                 preload="auto"
+                poster="/assets/images/hero-bg-new.jpg"
+
                 style={{
                     position: 'absolute',
                     top: '50%',

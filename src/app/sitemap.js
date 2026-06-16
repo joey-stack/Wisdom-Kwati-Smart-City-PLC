@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://wisdomkwatismartcity.com';
+  const baseUrl = 'https://wisdomkwatismartcityplc.com';
 
   // Core Pages
   const routes = [

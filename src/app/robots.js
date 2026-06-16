@@ -5,6 +5,6 @@ export default function robots() {
       allow: '/',
       disallow: '/_next/',
     },
-    sitemap: 'https://wisdomkwatismartcity.com/sitemap.xml',
+    sitemap: 'https://wisdomkwatismartcityplc.com/sitemap.xml',
   }
 }

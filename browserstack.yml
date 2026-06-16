@@ -1,0 +1,18 @@
+# BrowserStack Playwright SDK Configuration
+# Authentication keys are read automatically from BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY environment variables
+
+projectName: Wisdom Kwati Smart City
+buildName: Local Playwright Build
+
+platforms:
+  - browserName: chrome
+    browserVersion: latest
+    os: Windows
+    osVersion: 11
+  - browserName: safari
+    browserVersion: latest
+    os: OS X
+    osVersion: Sonoma
+  - deviceName: iPhone 15 Pro
+    osVersion: 17
+    browserName: playright-webkit

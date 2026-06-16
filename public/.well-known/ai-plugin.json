@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Wisdom Kwati Smart City",
+  "name_for_model": "wisdom_kwati_smart_city",
+  "description_for_human": "Explore smart city residential estates, house types, and property investment opportunities across Nigeria by Wisdom Kwati Smart City PLC.",
+  "description_for_model": "Use this plugin to get information about Wisdom Kwati Smart City PLC properties, estates, house types (White Pearl, Blue Sapphire, Imperial Emerald, etc.), locations across Abuja, Lagos, Port Harcourt, Yola, and Kaduna, investment opportunities, and contact details.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://wisdomkwatismartcityplc.com/sitemap.xml"
+  },
+  "logo_url": "https://wisdomkwatismartcityplc.com/icon.png",
+  "contact_email": "hello@wisdomkwatismartcity.com",
+  "legal_info_url": "https://wisdomkwatismartcityplc.com/about"
+}

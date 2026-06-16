@@ -49,12 +49,21 @@ if (hasWebkit()) {
 
 const PORT = process.env.PLAYWRIGHT_TEST_PORT || '3005';
 
+// Use bs-local.com only when running via BrowserStack, otherwise use localhost
+const isBrowserStack = !!process.env.BROWSERSTACK_USERNAME;
+const HOST = process.env.PLAYWRIGHT_TEST_BASE_URL
+  ? new URL(process.env.PLAYWRIGHT_TEST_BASE_URL).hostname
+  : isBrowserStack
+  ? 'bs-local.com'
+  : 'localhost';
+const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || `http://${HOST}:${PORT}`;
+
 export default defineConfig({
   testDir: './tests',
-  timeout: process.env.BROWSERSTACK_USERNAME ? 180000 : 90000,
+  timeout: isBrowserStack ? 180000 : 90000,
 
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || `http://bs-local.com:${PORT}`,
+    baseURL: BASE_URL,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     navigationTimeout: 90000,
@@ -66,7 +75,7 @@ export default defineConfig({
   // Automatically spin up the Next.js production server on the specified port
   webServer: {
     command: `npm run start -- -p ${PORT} -H 0.0.0.0`,
-    url: `http://bs-local.com:${PORT}`,
+    url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },

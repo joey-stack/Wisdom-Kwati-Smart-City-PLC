@@ -17,6 +17,8 @@ let auth;
 let db;
 let storage;
 
+let isFirestoreReady = false;
+
 try {
   if (!firebaseConfig.apiKey) {
     throw new Error("Missing NEXT_PUBLIC_FIREBASE_API_KEY. Please verify that your environment variables are configured in your Vercel or deployment settings.");
@@ -26,17 +28,22 @@ try {
   auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
+  isFirestoreReady = true;
 } catch (err) {
   if (typeof window !== 'undefined') {
     console.error("🔴 [Firebase Initialization Failed]:", err.message);
+  } else {
+    // In server/build context, log a concise warning instead of a full stack trace
+    console.warn("⚠️  [Firebase] Not initialized (build-time or missing env vars):", err.message);
   }
-  // Export dummy mocks so client-side hydration and other components do not crash
-  app = {};
-  auth = {};
-  db = {};
-  storage = {};
+  // Export null so callers can guard: if (!db) return [];
+  app = null;
+  auth = null;
+  db = null;
+  storage = null;
 }
 
-export { app, auth, db, storage };
+export { app, auth, db, storage, isFirestoreReady };
+
 
 

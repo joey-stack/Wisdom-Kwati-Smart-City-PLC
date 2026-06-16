@@ -18,6 +18,7 @@ const DEFAULT_ADVISER = {
 
 // Generate static params for all projects at build time for instant, zero-loading page loads
 export async function generateStaticParams() {
+  if (!db) return []; // Firebase not initialized (build env vars not set)
   try {
     const querySnapshot = await getDocs(collection(db, 'projects'));
     return querySnapshot.docs.map((doc) => ({

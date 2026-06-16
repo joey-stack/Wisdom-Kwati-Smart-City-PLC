@@ -215,25 +215,79 @@ export default async function Page({ params }) {
   }
 
   return (
-    <ProjectDetailTemplate
-      title={title}
-      heroImage={heroImage}
-      heroVideo={heroVideo}
-      heroPoster={heroPoster}
-      heroDescription={heroDescription}
-      description={description}
-      highlights={highlights}
-      realEstateVibe={realEstateVibe}
-      nearbyFacilities={nearbyFacilities}
-      marketSnapshot={marketSnapshot}
-      plotSizes={plotSizes}
-      sidebarAdviser={sidebarAdviser}
-      otherNeighborhoods={otherNeighborhoods}
-      houseTypesTitle={houseTypesTitle}
-      houseTypes={houseTypes}
-      mapEmbedUrl={mapEmbedUrl}
-      updatesLink={updatesLink}
-      projectId={id}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://wisdomkwatismartcityplc.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Projects",
+                "item": "https://wisdomkwatismartcityplc.com/projects"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": title,
+                "item": `https://wisdomkwatismartcityplc.com/projects/${id}`
+              }
+            ]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Place",
+            "name": title,
+            "description": description || heroDescription || `Premium smart district at Wisdom Kwati Smart City.`,
+            "image": heroImage || undefined,
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Abuja",
+              "addressRegion": "FCT",
+              "addressCountry": "NG"
+            },
+            "amenityFeature": highlights.map(h => ({
+              "@type": "LocationFeatureSpecification",
+              "name": h,
+              "value": true
+            }))
+          })
+        }}
+      />
+      <ProjectDetailTemplate
+        title={title}
+        heroImage={heroImage}
+        heroVideo={heroVideo}
+        heroPoster={heroPoster}
+        heroDescription={heroDescription}
+        description={description}
+        highlights={highlights}
+        realEstateVibe={realEstateVibe}
+        nearbyFacilities={nearbyFacilities}
+        marketSnapshot={marketSnapshot}
+        plotSizes={plotSizes}
+        sidebarAdviser={sidebarAdviser}
+        otherNeighborhoods={otherNeighborhoods}
+        houseTypesTitle={houseTypesTitle}
+        houseTypes={houseTypes}
+        mapEmbedUrl={mapEmbedUrl}
+        updatesLink={updatesLink}
+        projectId={id}
+      />
+    </>
   );
 }

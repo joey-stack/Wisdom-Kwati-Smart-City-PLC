@@ -109,6 +109,48 @@ export default function RootLayout({ children }) {
             })
           }}
         />
+        <script
+          suppressHydrationWarning
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["RealEstateAgent", "LocalBusiness"],
+              "@id": "https://wisdomkwatismartcityplc.com/#localbusiness",
+              "name": "Wisdom Kwati Smart City PLC",
+              "url": "https://wisdomkwatismartcityplc.com",
+              "logo": "https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g",
+              "image": "https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WkaEVNo0ii8zkmYXHDOd5MOFwDcz7VKi%26sz=w1200",
+              "description": "Building the functional ecosystem Africa deserves with ultra-modern smart cities across Nigeria.",
+              "telephone": "+234-706-661-8999",
+              "email": "hello@wisdomkwatismartcity.com",
+              "priceRange": "₦₦₦",
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Abuja",
+                "addressRegion": "FCT",
+                "addressCountry": "NG"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/company/wisdom-kwati-smart-city",
+                "https://www.facebook.com/wisdomkwatismartcity",
+                "https://www.instagram.com/wisdomkwatismartcity"
+              ]
+            })
+          }}
+        />
       </head>
       <body suppressHydrationWarning>
         {/* Strip bis_skin_checked attributes injected by Brave browser/extensions before React hydrates to prevent console hydration errors */}

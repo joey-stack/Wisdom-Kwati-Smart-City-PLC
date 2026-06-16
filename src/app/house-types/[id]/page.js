@@ -96,13 +96,70 @@ export default async function Page({ params }) {
   }
 
   return (
-    <HouseTypeDetailTemplate
-      id={id}
-      data={data}
-      parentProject={parentProject}
-      availableEstates={availableEstates}
-      advisor={advisor}
-      relatedProperties={relatedProperties}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://wisdomkwatismartcityplc.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "House Types",
+                "item": "https://wisdomkwatismartcityplc.com/house-types"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": data?.classType || "Specification",
+                "item": `https://wisdomkwatismartcityplc.com/house-types/${id}`
+              }
+            ]
+          })
+        }}
+      />
+      {data && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "House",
+              "name": data.classType,
+              "description": data.description || `${data.classType} is a premium smart villa spec in Wisdom Kwati Smart City.`,
+              "numberOfBedrooms": data.beds || undefined,
+              "image": data.images?.[0] || undefined,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": parentProject?.name || "Abuja",
+                "addressRegion": "FCT",
+                "addressCountry": "NG"
+              },
+              "amenityFeature": (data.amenities || []).map(a => ({
+                "@type": "LocationFeatureSpecification",
+                "name": typeof a === 'string' ? a : a.name || a.label || '',
+                "value": true
+              }))
+            })
+          }}
+        />
+      )}
+      <HouseTypeDetailTemplate
+        id={id}
+        data={data}
+        parentProject={parentProject}
+        availableEstates={availableEstates}
+        advisor={advisor}
+        relatedProperties={relatedProperties}
+      />
+    </>
   );
 }

@@ -44,10 +44,218 @@ export default function FAQPage() {
                         },
                         {
                           "@type": "Question",
+                          "name": "Where are your offices located?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Our offices are located in Abuja, Lagos, Yola, and Port Harcourt."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What types of properties do you specialise in?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We specialise in houses and lands for residential and commercial use, ranging from smart flats to luxury villas."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How can I get in touch with your company for more information?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can contact us via our website, phone, email (hello@wisdomkwatismartcity.com), or our various social media platforms."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What is your company’s approach to customer service?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We focus on transparency, professionalism, and ensuring a smooth, stress-free experience for all our clients."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How can I stay updated on your company’s latest news and listings?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Follow us on our social media platforms or subscribe to our newsletter in the footer below for real-time updates."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How can I become an agent?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can become an agent by signing up on our dedicated agent portal: wkscagents.com"
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How can I learn more about your team of agents?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can learn more or join the team by visiting wkscagents.com. Our agents are local experts trained to provide real guidance."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What is expected of the agent throughout the purchase?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Agents are expected to guide clients, provide accurate information, ensure proper documentation, and facilitate a smooth transaction process from start to finish."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What percentage of the sale price goes to the agent as commission?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Our agents earn a 10% commission on land sales and a 5% commission on house sales."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Are agent commissions negotiable?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No, commissions are fixed at 10% for land and 5% for houses and are not negotiable."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Who is responsible for paying the agent’s commission?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The company pays the agent’s commission directly after full payment has been received from the client."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How is the commission affected if the property price changes during negotiations?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The commission is always calculated based on the final agreed sale price."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "When is the agent’s commission paid?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Commission is paid upon completion of full payment by the client and once the transaction is officially confirmed."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What happens to the commission if the sale falls through?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No commission is paid if the sale is not successfully completed."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Can I request a breakdown of the commission fees?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, agents can request a detailed breakdown of their earned commissions at any time."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What happens to my commission if my client requests a refund?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "If a refund occurs, the commission previously paid may be reversed or adjusted accordingly against future earnings."
+                          }
+                        },
+                        {
+                          "@type": "Question",
                           "name": "What is the refund policy for deposits or down payments?",
                           "acceptedAnswer": {
                             "@type": "Answer",
                             "text": "A 20% deduction applies for administrative charges. Refunds are processed 90 days after the receipt of a formal refund application."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Under what circumstances am I eligible for a refund?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You are eligible for a refund whenever you are unwilling to proceed with the purchase after making a part or full payment."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How do I request a refund?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Requests must be made by writing a letter addressed to the MD. The letter must be signed, have an ID card attached, and upon approval, you must return all documents previously issued to you."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Are there any fees associated with processing a refund?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "There are no additional 'fees', however, a 20% deduction is made from the total amount paid to cover administrative charges."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How long does it take to receive a refund after approval?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "It takes 90 days from the day the company receives the formal letter requesting the refund."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Can I get a refund if I change my mind about a purchase?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, you can request a refund if you change your mind, subject to the 20% administrative deduction."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What happens if I believe my refund amount is incorrect?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "You can reach out to us through our customer care line, social media handles, or by emailing hello@wisdomkwatismartcity.com."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Is there a deadline for requesting a refund?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, the deadline is before physical allocation has been given. Any request before physical allocation is subject to our terms and conditions."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "How will my refund be issued?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Refunds are issued via bank transfer to the account provided, which must match the name used for the initial purchase."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "Can I transfer a refund to a different property purchase?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, you can transfer your funds to another property. Write a letter to the MD, return all original documents, and we will handle the process from there."
+                          }
+                        },
+                        {
+                          "@type": "Question",
+                          "name": "What happens if the company backs out of a deal?",
+                          "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "An alternative location of equal or close value will be offered. If the client declines the alternative, a full refund (100%) will be issued within 90 days."
                           }
                         }
                       ]

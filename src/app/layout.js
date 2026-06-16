@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
+import { Analytics } from '@vercel/analytics/next';
 
 const SiteVisitModal = dynamic(() => import("../components/SiteVisitModal"));
 const ConsultationModal = dynamic(() => import("../components/ConsultationModal"));
@@ -123,7 +124,7 @@ export default function RootLayout({ children }) {
         <ClientScripts />
         {/* Font Awesome loads asynchronously — not on the critical path */}
         <FontAwesomeLoader />
-
+        <Analytics />
       </body>
     </html>
   );

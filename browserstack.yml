@@ -4,6 +4,9 @@
 projectName: Wisdom Kwati Smart City
 buildName: Local Playwright Build
 
+# Enable BrowserStack Local tunnel to allow remote cloud browsers to access localhost:3005
+local: true
+
 platforms:
   - browserName: chrome
     browserVersion: latest

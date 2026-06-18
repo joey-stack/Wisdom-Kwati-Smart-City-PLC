@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "../components/Header";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
@@ -168,6 +169,7 @@ export default function RootLayout({ children }) {
         {/* Font Awesome loads asynchronously — not on the critical path */}
         <FontAwesomeLoader />
         <Analytics />
+        <SpeedInsights />
 
       </body>
     </html>

@@ -94,7 +94,12 @@ export default function SiteVisitModal() {
                     <button className="site-visit-modal-close" aria-label="Close Modal">&times;</button>
                     <div className="form-card" style={{ boxShadow: 'none', border: 'none', padding: '40px', margin: '0', width: '100%' }}>
                         <h2 className="form-title" style={{ marginBottom: '12px', fontSize: '24px' }}>Request a Site Visit</h2>
-                        <p style={{ fontFamily: 'var(--font-main)', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '32px' }}>Fill out the details below and our team will get in touch to schedule your visit.</p>
+                        <p style={{ fontFamily: 'var(--font-main)', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '20px' }}>Fill out the details below and our team will get in touch to schedule your visit.</p>
+                        
+                        <div className="modal-trust-badge">
+                            <span className="trust-badge-icon">✓</span>
+                            <span className="trust-badge-text">Join 200+ families who have secured their future with us.</span>
+                        </div>
                         
                         {error && (
                           <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#EF4444', padding: '12px 16px', fontSize: '13px', borderRadius: '4px', marginBottom: '20px', fontFamily: 'var(--font-main)' }}>

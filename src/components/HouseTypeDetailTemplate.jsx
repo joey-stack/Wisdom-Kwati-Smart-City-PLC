@@ -420,6 +420,17 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                         Message on WhatsApp
                       </a>
                     )}
+                    <button 
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
+                      className="btn-pill btn-download-brochure" 
+                      style={{ width: "100%", justifyContent: "center", background: "var(--text-primary)", color: "#fff", border: "none", cursor: "pointer", marginTop: "20px", fontWeight: "600" }}
+                    >
+                      <div className="flip-text">
+                        <span>DOWNLOAD BROCHURE</span>
+                        <span aria-hidden="true">DOWNLOAD BROCHURE</span>
+                      </div>
+                    </button>
                   </>
                 ) : (
                   <>
@@ -449,6 +460,17 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
                       </div>
                     </div>
+                    <button 
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
+                      className="btn-pill btn-download-brochure" 
+                      style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "#000", border: "none", cursor: "pointer", marginTop: "20px", fontWeight: "600" }}
+                    >
+                      <div className="flip-text">
+                        <span>DOWNLOAD BROCHURE</span>
+                        <span aria-hidden="true">DOWNLOAD BROCHURE</span>
+                      </div>
+                    </button>
                   </>
                 )}
               </div>
@@ -583,6 +605,28 @@ export default function HouseTypeDetailTemplate({ id, data, parentProject, advis
           </div>
         </section>
       )}
+      
+      {/* Sticky Mobile CTA Bar */}
+      <div className="sticky-mobile-cta">
+        <button 
+          onClick={() => {
+            const modal = document.getElementById('siteVisitModal');
+            if (modal) {
+              modal.classList.add('active');
+              document.body.classList.add('no-scroll');
+            }
+          }}
+          className="cta-btn-primary"
+        >
+          Book a Site Visit
+        </button>
+        <button 
+          onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
+          className="cta-btn-secondary"
+        >
+          Download Brochure
+        </button>
+      </div>
     </main>
   );
 }

@@ -155,14 +155,19 @@ export default function ConsultationModal() {
                     <div className="form-card" style={{ boxShadow: 'none', border: 'none', padding: '40px', margin: '0', width: '100%' }}>
                         <h2 className="form-title" style={{ marginBottom: '6px', fontSize: '24px' }}>Book a Consultation</h2>
                         {advisorName ? (
-                            <p style={{ fontFamily: 'var(--font-main)', fontSize: '13px', color: 'var(--accent-green)', fontWeight: '600', marginBottom: '24px' }}>
+                            <p style={{ fontFamily: 'var(--font-main)', fontSize: '13px', color: 'var(--accent-green)', fontWeight: '600', marginBottom: '20px' }}>
                                 Assigned Advisor: {advisorName}
                             </p>
                         ) : (
-                            <p style={{ fontFamily: 'var(--font-main)', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '28px' }}>
+                            <p style={{ fontFamily: 'var(--font-main)', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '20px' }}>
                                 Schedule a meeting with our smart city real estate advisors.
                             </p>
                         )}
+                        
+                        <div className="modal-trust-badge">
+                            <span className="trust-badge-icon">✓</span>
+                            <span className="trust-badge-text">1-on-1 private consultation with Nigeria's top real estate advisors.</span>
+                        </div>
                         
                         {error && (
                           <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#EF4444', padding: '12px 16px', fontSize: '13px', borderRadius: '4px', marginBottom: '20px', fontFamily: 'var(--font-main)' }}>

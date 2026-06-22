@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 
 const SiteVisitModal = dynamic(() => import("../components/SiteVisitModal"));
 const ConsultationModal = dynamic(() => import("../components/ConsultationModal"));
+const BrochureModal = dynamic(() => import("../components/BrochureModal"));
+const WhatsAppWidget = dynamic(() => import("../components/WhatsAppWidget"));
 import ClientScripts from "../components/ClientScripts";
 import FontAwesomeLoader from "../components/FontAwesomeLoader";
 import BraveShieldFix from "../components/BraveShieldFix";
@@ -164,6 +166,8 @@ export default function RootLayout({ children }) {
         </div>
         <SiteVisitModal />
         <ConsultationModal />
+        <BrochureModal />
+        <WhatsAppWidget />
         <ClientScripts />
         {/* Font Awesome loads asynchronously — not on the critical path */}
         <FontAwesomeLoader />

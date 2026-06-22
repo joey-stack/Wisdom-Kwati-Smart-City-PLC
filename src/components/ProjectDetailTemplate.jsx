@@ -718,6 +718,17 @@ export default function ProjectDetailTemplate({
                     <span aria-hidden="true">BOOK A CONSULTATION</span>
                   </div>
                 </button>
+                <button 
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
+                  className="btn-pill btn-download-brochure" 
+                  style={{ width: "100%", justifyContent: "center", background: "transparent", color: "var(--text-primary)", border: "1px solid var(--border)", cursor: "pointer", marginTop: "10px" }}
+                >
+                  <div className="flip-text">
+                    <span>DOWNLOAD BROCHURE</span>
+                    <span aria-hidden="true">DOWNLOAD BROCHURE</span>
+                  </div>
+                </button>
               </div>
             )}
           </aside>
@@ -754,6 +765,28 @@ export default function ProjectDetailTemplate({
           </div>
         </div>
       </section>
+      
+      {/* Sticky Mobile CTA Bar */}
+      <div className="sticky-mobile-cta">
+        <button 
+          onClick={() => {
+            const modal = document.getElementById('siteVisitModal');
+            if (modal) {
+              modal.classList.add('active');
+              document.body.classList.add('no-scroll');
+            }
+          }}
+          className="cta-btn-primary"
+        >
+          Book a Site Visit
+        </button>
+        <button 
+          onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
+          className="cta-btn-secondary"
+        >
+          Download Brochure
+        </button>
+      </div>
     </div>
   );
 }

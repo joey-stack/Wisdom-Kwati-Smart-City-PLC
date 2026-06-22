@@ -198,10 +198,20 @@
     padding-bottom: 80px;
   }
   
-  /* Make sure floating whatsapp doesn't overlap the sticky cta bar */
+  /* Make sure floating whatsapp doesn't overlap the sticky cta bar and stays on the bottom left */
   .whatsapp-widget {
     bottom: 90px;
-    right: 20px;
+    left: 20px;
+    right: auto;
+    flex-direction: row;
+  }
+  
+  .whatsapp-widget:hover .whatsapp-tooltip {
+    transform: translateX(0);
+  }
+  
+  .whatsapp-tooltip {
+    transform: translateX(10px);
   }
   
   .whatsapp-icon-wrapper {

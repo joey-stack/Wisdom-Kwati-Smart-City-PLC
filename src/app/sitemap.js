@@ -9,6 +9,7 @@ export default function sitemap() {
     '/house-types',
     '/contact',
     '/faqs',
+    '/blogs',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -18,18 +19,20 @@ export default function sitemap() {
 
   // District & Project Pages
   const projects = [
-    '/wisdom-kwati-smart-city',
-    '/guzape-estate',
-    '/katampe-extension',
-    '/mabushi-district',
-    '/karsana-district',
-    '/palm-haven',
-    '/lakeside-view',
-    '/royal-city',
-    '/epe-smart-city',
-    '/kaduna-smart-district',
-    '/gousa-idu-district',
-    '/port-harcourt-estate',
+    '/projects/wisdom-kwati-smart-city',
+    '/projects/guzape-estate',
+    '/projects/katampe-extension',
+    '/projects/mabushi-district',
+    '/projects/karsana-district',
+    '/projects/palm-haven',
+    '/projects/lakeside-view',
+    '/projects/royal-city',
+    '/projects/epe-smart-city',
+    '/projects/kaduna-smart-district',
+    '/projects/gousa-idu-district',
+    '/projects/port-harcourt-estate',
+    '/projects/sunset-haven',
+    '/projects/murg-city-exclusive',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -39,11 +42,13 @@ export default function sitemap() {
 
   // House Types
   const houses = [
-    '/emerald-villa',
-    '/sapphire-terrace',
-    '/diamond-duplex',
-    '/topaz-semi',
-    '/onyx-flats',
+    '/house-types/blue-sapphire',
+    '/house-types/imperial-emerald',
+    '/house-types/jade-terrace',
+    '/house-types/royal-emerald',
+    '/house-types/silver-pearl',
+    '/house-types/star-sapphire',
+    '/house-types/white-pearl',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

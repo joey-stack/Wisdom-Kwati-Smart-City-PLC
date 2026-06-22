@@ -25,7 +25,8 @@ export default function Page() {
         
         <div className="hero-container">
             <div className="hero-content">
-                <h1 className="headline reveal-type-lines">Dream Large. <br /> Live Smart.</h1>
+                <h1 className="sr-only">Wisdom Kwati Smart City - Ultra-Modern Smart Cities & Real Estate in Nigeria</h1>
+                <p className="headline reveal-type-lines" aria-hidden="true" role="heading" aria-level="2">Dream Large. <br /> Live Smart.</p>
             </div>
 
             <div className="hero-card glass-panel bloom-element delay-1">
@@ -59,13 +60,13 @@ export default function Page() {
                 <p className="who-text reveal-on-scroll">
                     Founded in 2019, WKSC is more than a real estate developer. We are ecosystem builders on a mission to deliver 1 million smart homes by 2035. By integrating IoT-ready infrastructure, solar grids, and water treatment plants from the ground up, we ensure every community is ready for the future.
                 </p>
-                <a href="/about" className="btn-pill reveal-on-scroll">
+                <Link href="/about" className="btn-pill reveal-on-scroll">
                     <div className="flip-text">
                         <span>LEARN MORE</span>
                         <span aria-hidden="true">LEARN MORE</span>
                     </div>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </a>
+                </Link>
             </div>
         </div>
     </section>
@@ -90,13 +91,13 @@ export default function Page() {
             <NeighborhoodSection />
 
             <div className="neighborhood-footer">
-                <a href="/projects" className="btn-pill btn-black reveal-on-scroll">
+                <Link href="/projects" className="btn-pill btn-black reveal-on-scroll">
                     <span className="flip-text">
                         <span className="original">VIEW ALL NEIGHBORHOODS</span>
                         <span className="remix">VIEW ALL NEIGHBORHOODS</span>
                     </span>
                     <svg className="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </a>
+                </Link>
             </div>
         </div>
     </section>
@@ -119,13 +120,13 @@ export default function Page() {
             <RecentListingsSection />
 
             <div className="portfolio-footer">
-                <a href="/house-types" className="btn-pill reveal-on-scroll">
+                <Link href="/house-types" className="btn-pill reveal-on-scroll">
                     <div className="flip-text">
                         <span>VIEW PROPERTIES</span>
                         <span aria-hidden="true">VIEW PROPERTIES</span>
                     </div>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </a>
+                </Link>
             </div>
         </div>
     </section>
@@ -224,7 +225,7 @@ export default function Page() {
                 <div className="services-image-column">
                     <div className="services-image-wrapper reveal-on-scroll">
                         <div className="services-image-inner">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1ikiZhEycVPG3CB1_OCXuCcmwXwbqF-kA%26sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://drive.google.com/thumbnail?id=1ikiZhEycVPG3CB1_OCXuCcmwXwbqF-kA&sz=w1200" alt="High-Fidelity Architectural Project" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                 </div>
@@ -335,7 +336,7 @@ export default function Page() {
                 <div className="process-item" data-step="1">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam%26sz=w1200" alt="Search & Explore" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://drive.google.com/thumbnail?id=1UD9Y32e13MOoV8CRibkuC5bBgHbTzoam&sz=w1200" alt="Search & Explore" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -362,7 +363,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="2">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK%26sz=w1200" alt="Book a Tour" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://drive.google.com/thumbnail?id=1B3cgNstWKQojqadbYfvYhldFT961GRPK&sz=w1200" alt="Book a Tour" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -389,7 +390,7 @@ export default function Page() {
                 <div className="process-item" data-step="3">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk%26sz=w1200" alt="Make Your Move" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://drive.google.com/thumbnail?id=1LYF8aZZPnWhg3my_LJH_GOPzy4AEKppk&sz=w1200" alt="Make Your Move" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">
@@ -416,7 +417,7 @@ export default function Page() {
                 <div className="process-item reverse" data-step="4">
                     <div className="process-image-side">
                         <div className="process-image-wrapper">
-                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://images.weserv.nl/?output=webp&q=80&url=https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r%26sz=w1200" alt="Close & Celebrate" referrerPolicy="no-referrer" />
+                            <Image width={800} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover' }} src="https://drive.google.com/thumbnail?id=1WyUxduCtGKp5W4B5xZ1liHas9U1oz-3r&sz=w1200" alt="Close & Celebrate" referrerPolicy="no-referrer" />
                         </div>
                     </div>
                     <div className="process-marker-side">

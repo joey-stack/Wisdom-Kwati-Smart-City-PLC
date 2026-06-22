@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-17T00:51:30Z",
+  "title": "Design System: Wisdom Kwati Smart City PLC",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "WKSC Deep Blue",
+        "canonical": "oklch(38.5% 0.16 256)",
+        "tonalRamp": ["#030f1d", "#061e3b", "#092c57", "#0c3a75", "#0f4b94", "#326eb5", "#6797cf", "#a4c2e7", "#e3eef9"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Horizon Cyan",
+        "canonical": "oklch(60.2% 0.17 236)",
+        "tonalRamp": ["#041e2b", "#083c56", "#0c5a81", "#1277a9", "#1e8fc4", "#4bb7eb", "#8ad2f3", "#c6ebfa", "#e8f6fd"]
+      },
+      "accent": {
+        "role": "accent",
+        "displayName": "Smart City Green",
+        "canonical": "oklch(84.1% 0.22 109)",
+        "tonalRamp": ["#202703", "#415007", "#62780a", "#8dae0e", "#bbe339", "#cbee61", "#daf382", "#e9f8b0", "#f6fbe0"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Warm Chalk",
+        "canonical": "oklch(99.1% 0.01 105)",
+        "tonalRamp": ["#1c1d1a", "#383b34", "#55584f", "#74776c", "#95988e", "#b8bab1", "#dcddd7", "#f1f2ec", "#fcfff2"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Hero",
+        "purpose": "Page-level hero headings only."
+      },
+      "body": {
+        "displayName": "Body Text",
+        "purpose": "Standard paragraphs and property descriptions."
+      },
+      "label": {
+        "displayName": "Label / Monospace",
+        "purpose": "Interactive elements, tags, and uppercase headers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-soft",
+        "value": "0 4px 12px rgba(0, 0, 0, 0.07)",
+        "purpose": "Subtle visual depth on card/button hovers."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(0.7, 0, 0.3, 1)",
+        "purpose": "Custom smooth transition easing."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "480px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Standard action and navigation call-to-action button.",
+      "html": "<button class=\"ds-btn-pill\">REQUEST A SITE VISIT</button>",
+      "css": ".ds-btn-pill { display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px; background: #bbe339; color: #1a1a1a; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; font-family: 'Inter Display', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1); } .ds-btn-pill:hover { background: #bbe339; opacity: 0.9; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07); }"
+    },
+    {
+      "name": "House Type Card",
+      "kind": "card",
+      "refersTo": "card-house",
+      "description": "Premium property card displaying type, size, class, and features.",
+      "html": "<div class=\"ds-ht-card\"><div class=\"ds-ht-card-image-wrapper\"><div class=\"ds-ht-card-image\"><img src=\"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80\" alt=\"Sample Property\" /></div></div><div class=\"ds-ht-card-body\"><div class=\"ds-ht-card-row\"><h4 class=\"ds-ht-card-name\">The White Pearl</h4><span class=\"ds-ht-card-class\">Luxury Flat</span></div><div class=\"ds-ht-card-row\"><p class=\"ds-ht-card-tagline\">2-Bedroom Smart Apartment</p><div class=\"ds-ht-card-specs\"><span class=\"ds-ht-card-spec\">2 Beds</span></div></div></div></div>",
+      "css": ".ds-ht-card { display: flex; flex-direction: column; color: #1a1a1a; gap: 12px; width: 300px; } .ds-ht-card-image-wrapper { border: 1.5px solid transparent; border-radius: 5px; overflow: hidden; transition: border-color 0.45s cubic-bezier(0.7, 0, 0.3, 1); } .ds-ht-card:hover .ds-ht-card-image-wrapper { border-color: #bbe339; } .ds-ht-card-image { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #faffe8; } .ds-ht-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1); } .ds-ht-card:hover .ds-ht-card-image img { transform: scale(1.05); } .ds-ht-card-body { display: flex; flex-direction: column; gap: 4px; } .ds-ht-card-row { display: flex; justify-content: space-between; align-items: baseline; } .ds-ht-card-name { font-family: 'Inter Display', sans-serif; font-size: 19px; font-weight: 600; margin: 0; } .ds-ht-card-class { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; } .ds-ht-card-tagline { font-family: 'Outfit', sans-serif; font-size: 13px; color: #4e5a69; margin: 0; } .ds-ht-card-specs { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; color: #4e5a69; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Modern Monolith",
+    "overview": "Wisdom Kwati Smart City PLC's visual system represents bold, sharp structure like concrete and steel, balanced with the refined restfulness of luxury residential spaces. It is designed to convey absolute architectural confidence, smart-grid technology integration, and premium comfort. It deliberately avoids generic SaaS design patterns (such as overused glassmorphic panels and tiny uppercase kickers above every single section) in favor of spacious layout structures, bold typography pairings, and a highly focused, meaningful color palette.",
+    "keyCharacteristics": [
+      "Bold Structural Geometry: Clean, sharp layouts, precise hairline borders, and generous architectural spacing.",
+      "Sophisticated Restraint: Avoid decorative visual clutter; depth is generated via clean layout rhythm and high-quality photography rather than shadows.",
+      "High Information Clarity: Clear presentation of real estate specs, dimensions, locations, and pricing."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "The high-visibility Smart City Green accent (#bbe339) must only be used for interactive elements, primary CTAs, and active hover borders. It should represent <=10% of any screen layout to preserve its visual impact.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Layout panels and card backgrounds rest flat. Soft shadows and highlighted borders are reserved as active responses to state changes (hover, focus).",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do maintain a strict 65–75ch line length limit for long-form text.",
+      "Do restrict the use of the bright accent green (#bbe339) to active links, buttons, and hover boundaries.",
+      "Do use large, clean photography as the primary driver of layout storytelling."
+    ],
+    "donts": [
+      "Don't use SaaS template clichés like colored side-stripes, heavy card shadows, or glassmorphic blurred panels.",
+      "Don't apply tiny uppercase kickers/eyebrows or arbitrary numbered markers above every layout section.",
+      "Don't allow headline text to wrap awkwardly or overflow layout boundaries on mobile devices."
+    ]
+  }
+}

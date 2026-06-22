@@ -1,13 +1,13 @@
 import "./globals.css";
 import Header from "../components/Header";
-import { Analytics } from "@vercel/analytics/next";
+import AnalyticsTracker from "../components/AnalyticsTracker";
 
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
 
 const SiteVisitModal = dynamic(() => import("../components/SiteVisitModal"));
 const ConsultationModal = dynamic(() => import("../components/ConsultationModal"));
-const ClientScripts = dynamic(() => import("../components/ClientScripts"));
+import ClientScripts from "../components/ClientScripts";
 import FontAwesomeLoader from "../components/FontAwesomeLoader";
 import BraveShieldFix from "../components/BraveShieldFix";
 
@@ -167,7 +167,7 @@ export default function RootLayout({ children }) {
         <ClientScripts />
         {/* Font Awesome loads asynchronously — not on the critical path */}
         <FontAwesomeLoader />
-        <Analytics />
+        <AnalyticsTracker />
 
       </body>
     </html>

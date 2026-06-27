@@ -4,6 +4,29 @@ import React from 'react';
 import { doc, getDoc, collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectDetailTemplate from '@/components/ProjectDetailTemplate';
+import { projectAssets, getWeservUrl } from '@/data/project-assets';
+
+function getFallbackSliderImages(projectId) {
+  const assetKey = {
+    'whispering-pines': 'karsana',
+    'nimi-hills-guzape': 'guzape',
+    'ellington-villa': 'mabushi',
+    'palm-haven': 'palm_haven',
+    'murg-city': 'katampe',
+    'murg-city-exclusive': 'katampe',
+    'kwati-city-maitama-ii': 'maitama',
+    'maitama-ii-estate': 'maitama',
+    'lakeside-view': 'lakeside',
+    'usulo-city-kuje': 'lakeside',
+    'beverly-hills': 'lakeside'
+  }[projectId];
+
+  if (assetKey && projectAssets[assetKey]) {
+    const updates = projectAssets[assetKey].updates || [];
+    return updates.map(id => getWeservUrl(id));
+  }
+  return [];
+}
 
 const EMPTY_ARRAY = [];
 
@@ -67,6 +90,8 @@ export default async function Page({ params }) {
   let houseTypes = EMPTY_ARRAY;
   let mapEmbedUrl = null;
   let updatesLink = null;
+  let sliderImages = EMPTY_ARRAY;
+  let neighborhood = "";
 
   try {
     // 1. Fetch project document
@@ -75,6 +100,13 @@ export default async function Page({ params }) {
       const project = projectDoc.data();
       
       title = project.name || 'Premium District';
+      neighborhood = project.neighborhood || "";
+      if (!neighborhood && project.location) {
+        const parts = project.location.split(',');
+        if (parts.length > 0) {
+          neighborhood = parts[0].trim();
+        }
+      }
       if (project.heroImage) {
         heroImage = project.heroImage;
       }
@@ -82,6 +114,18 @@ export default async function Page({ params }) {
       description = project.description || "";
       mapEmbedUrl = project.mapEmbedUrl || null;
       updatesLink = project.updatesLink || null;
+
+      // Handle Slider Images
+      if (project.sliderImages && project.sliderImages.length > 0) {
+        sliderImages = project.sliderImages;
+      } else {
+        const fallbacks = getFallbackSliderImages(id);
+        if (fallbacks && fallbacks.length > 0) {
+          sliderImages = fallbacks;
+        } else if (heroImage) {
+          sliderImages = [heroImage];
+        }
+      }
 
       if (project.highlights && project.highlights.length > 0) {
         highlights = project.highlights;
@@ -287,6 +331,8 @@ export default async function Page({ params }) {
         mapEmbedUrl={mapEmbedUrl}
         updatesLink={updatesLink}
         projectId={id}
+        sliderImages={sliderImages}
+        neighborhood={neighborhood}
       />
     </>
   );

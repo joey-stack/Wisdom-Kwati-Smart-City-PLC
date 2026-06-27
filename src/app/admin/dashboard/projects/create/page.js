@@ -135,6 +135,7 @@ export default function AdminCreateProjectPage() {
   const [nearbyFacilities, setNearbyFacilities] = useState([]);
   const [plotSizes, setPlotSizes] = useState([]);
   const [marketSnapshot, setMarketSnapshot] = useState([]);
+  const [sliderImages, setSliderImages] = useState([]);
 
   // Tmp row inputs
   const [highlightInput, setHighlightInput] = useState('');
@@ -142,6 +143,7 @@ export default function AdminCreateProjectPage() {
   const [facilityInput, setFacilityInput] = useState({ category: '', establishment: '', travelTime: '' });
   const [plotInput, setPlotInput] = useState({ plotType: '', dimensions: '', area: '', availability: '' });
   const [snapshotInput, setSnapshotInput] = useState({ plotCategory: '', priceRange: '', outlook: '' });
+  const [sliderImageInput, setSliderImageInput] = useState('');
 
   // Database listings
   const [advisors, setAdvisors] = useState([]);
@@ -207,6 +209,16 @@ export default function AdminCreateProjectPage() {
   };
   const removeHighlight = (idx) => {
     setHighlights(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  // Slider image handlers
+  const addSliderImage = () => {
+    if (!sliderImageInput.trim()) return;
+    setSliderImages(prev => [...prev, sliderImageInput.trim()]);
+    setSliderImageInput('');
+  };
+  const removeSliderImage = (idx) => {
+    setSliderImages(prev => prev.filter((_, i) => i !== idx));
   };
 
   // Vibe handlers
@@ -327,6 +339,7 @@ export default function AdminCreateProjectPage() {
         nearbyFacilities,
         plotSizes,
         marketSnapshot,
+        sliderImages: sliderImages || [],
         sortOrder: sortOrder !== '' ? parseInt(sortOrder, 10) : 999,
         createdAt: new Date().toISOString()
       };
@@ -613,6 +626,51 @@ export default function AdminCreateProjectPage() {
                 ADD
               </button>
             </div>
+          </div>
+
+          {/* Slider Images / Carousel Slides */}
+          <div className="admin-section-card" style={{ padding: '24px', gridColumn: '1 / -1' }}>
+            <h3 className="admin-section-title" style={{ fontSize: '14px', marginBottom: '16px' }}>Hero Slider Images (Dynamic Carousel)</h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+              {sliderImages.map((url, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--admin-bg)', padding: '10px 14px', borderRadius: '4px', border: '1px solid var(--admin-border)', fontSize: '12px' }}>
+                  <div style={{ color: 'var(--admin-text-primary)', wordBreak: 'break-all' }}>{url}</div>
+                  <button type="button" onClick={() => removeSliderImage(i)} style={{ border: 'none', background: 'transparent', color: '#EF4444', cursor: 'pointer', fontSize: '14px' }}>&times;</button>
+                </div>
+              ))}
+              {sliderImages.length === 0 && (
+                <div style={{ fontSize: '11px', color: 'var(--admin-text-secondary)', fontStyle: 'italic' }}>
+                  No custom slider images added. System will use automatic fallback updates gallery or hero image.
+                </div>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+              <input
+                type="url"
+                placeholder="Paste slide image URL (e.g. Google Drive or Unsplash links)"
+                value={sliderImageInput}
+                onChange={(e) => setSliderImageInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addSliderImage();
+                  }
+                }}
+                style={{ flex: 1, padding: '8px 12px', borderRadius: '4px', border: '1px solid var(--admin-border)', backgroundColor: 'var(--admin-bg)', color: 'var(--admin-text-primary)', fontSize: '12px', outline: 'none' }}
+              />
+              <button 
+                type="button" 
+                onClick={addSliderImage}
+                style={{ padding: '8px 16px', borderRadius: '4px', backgroundColor: 'var(--admin-accent)', color: '#fff', border: 'none', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                ADD
+              </button>
+            </div>
+            <span style={{ fontSize: '10px', color: 'var(--admin-text-secondary)', display: 'block' }}>
+              These images populate the luxury slider on the right side of the project hero.
+            </span>
           </div>
 
           {/* Real estate vibes */}

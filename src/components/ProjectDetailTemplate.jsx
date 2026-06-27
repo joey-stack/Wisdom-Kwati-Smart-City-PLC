@@ -88,7 +88,9 @@ export default function ProjectDetailTemplate({
   houseTypesTitle: initialHouseTypesTitle,
   houseTypes: initialHouseTypes,
   mapEmbedUrl: initialMapEmbedUrl,
-  projectId
+  projectId,
+  sliderImages = [],
+  neighborhood = ''
 }) {
   const cache = getGlobalCache();
   const projectCache = cache.projects;
@@ -99,6 +101,79 @@ export default function ProjectDetailTemplate({
   const [heroImage, setHeroImage] = useState(initialHeroImage);
   const [heroVideo, setHeroVideo] = useState(initialHeroVideo);
   const [imageFailed, setImageFailed] = useState(false);
+
+  // Slideshow & Form States
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [plotSize, setPlotSize] = useState('');
+  const [budgetRange, setBudgetRange] = useState('');
+  const [paymentPlan, setPaymentPlan] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (sliderImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setActiveSlide(prev => (prev + 1) % sliderImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [sliderImages.length]);
+
+  const handleHeroFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !phone) {
+      setError('Name, Email, and Phone Number are required.');
+      return;
+    }
+    setError('');
+    setSubmitting(true);
+    setSuccess(false);
+
+    const constructedMessage = `Preferred Plot Size: ${plotSize || 'Not selected'}
+Budget Range: ${budgetRange || 'Not selected'}
+Payment Plan: ${paymentPlan || 'Not selected'}
+
+Client Message: ${message || 'No additional comments.'}`;
+
+    try {
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'general',
+          name,
+          phone,
+          email,
+          estate: title,
+          message: constructedMessage
+        })
+      });
+
+      const resData = await response.json();
+      if (!response.ok) {
+        throw new Error(resData.error || 'Failed to submit request.');
+      }
+
+      setSuccess(true);
+      setName('');
+      setPhone('');
+      setEmail('');
+      setPlotSize('');
+      setBudgetRange('');
+      setPaymentPlan('');
+      setMessage('');
+      setTimeout(() => setSuccess(false), 6000);
+    } catch (err) {
+      console.error('Failed to submit hero form:', err);
+      setError(err.message || 'Submission failed. Please check your network and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const isVideo = (url) => {
     if (!url) return false;
@@ -455,121 +530,222 @@ export default function ProjectDetailTemplate({
       </div>
 
       {/* Hero Section */}
-      <section className="pd-hero">
-        <div className="pd-hero-image">
-          {(heroVideo || isVideo(heroImage) || imageFailed) ? (
-            <div className="bg-video-wrapper" style={{ 
-              position: "absolute", 
-              top: "0", 
-              left: "0", 
-              width: "100%", 
-              height: "100%", 
-              overflow: "hidden",
-              zIndex: "0"
-            }}>
-              {getYouTubeId(heroVideo || heroImage) ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/${getYouTubeId(heroVideo || heroImage)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(heroVideo || heroImage)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
-                  frameBorder="0"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  title="Project Detail Hero Video"
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: '100vw',
-                    height: '56.25vw', /* 16:9 Aspect Ratio */
-                    minHeight: '100vh',
-                    minWidth: '177.77vh', /* 16:9 Aspect Ratio */
-                    transform: 'translate(-50%, -50%) scale(1.25)', /* Zoomed to hide controls and channel header */
-                    pointerEvents: 'none',
-                    zIndex: 1
+      <section className="pd-hero-new">
+        <div className="pd-hero-grid-container">
+          {/* Left Column: Form & Title */}
+          <div className="pd-hero-left-col reveal-on-scroll">
+            <h1 className="pd-hero-title-new">
+              {title} {neighborhood ? `(${neighborhood})` : ''}
+            </h1>
+
+            {success && (
+              <div className="pd-hero-alert pd-hero-alert-success">
+                ✓ Your inquiry has been sent successfully. An advisor will contact you shortly!
+              </div>
+            )}
+
+            {error && (
+              <div className="pd-hero-alert pd-hero-alert-error">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleHeroFormSubmit} className="pd-hero-form">
+              <div className="pd-hero-form-row">
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-name">Full Name</label>
+                  <input
+                    type="text"
+                    id="hero-name"
+                    placeholder="Enter Full Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    disabled={submitting}
+                    required
+                  />
+                </div>
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="hero-phone"
+                    placeholder="Enter Phone Number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    disabled={submitting}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="pd-hero-form-row">
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-email">Email</label>
+                  <input
+                    type="email"
+                    id="hero-email"
+                    placeholder="Enter Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={submitting}
+                    required
+                  />
+                </div>
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-plot-size">Preferred Plot Size</label>
+                  <select
+                    id="hero-plot-size"
+                    value={plotSize}
+                    onChange={(e) => setPlotSize(e.target.value)}
+                    disabled={submitting}
+                    required
+                  >
+                    <option value="">Select Preferred Plot Size</option>
+                    {plotSizes && plotSizes.map((p, idx) => (
+                      <option key={idx} value={p.area || p.size}>{p.plotType || 'Standard'} ({p.area || p.size})</option>
+                    ))}
+                    {(!plotSizes || plotSizes.length === 0) && (
+                      <>
+                        <option value="250 SQM">250 SQM</option>
+                        <option value="350 SQM">350 SQM</option>
+                        <option value="500 SQM">500 SQM</option>
+                        <option value="1000 SQM">1000 SQM</option>
+                      </>
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="pd-hero-form-row">
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-budget">Budget Range</label>
+                  <select
+                    id="hero-budget"
+                    value={budgetRange}
+                    onChange={(e) => setBudgetRange(e.target.value)}
+                    disabled={submitting}
+                    required
+                  >
+                    <option value="">Select Budget Range</option>
+                    <option value="Under ₦10,000,000">Under ₦10,000,000</option>
+                    <option value="₦10,000,000 - ₦25,000,000">₦10,000,000 - ₦25,000,000</option>
+                    <option value="₦25,000,000 - ₦50,000,000">₦25,000,000 - ₦50,000,000</option>
+                    <option value="₦50,000,000 - ₦100,000,000">₦50,000,000 - ₦100,000,000</option>
+                    <option value="₦100,000,000+">₦100,000,000+</option>
+                  </select>
+                </div>
+                <div className="pd-hero-form-group">
+                  <label htmlFor="hero-payment-plan">Payment Plan</label>
+                  <select
+                    id="hero-payment-plan"
+                    value={paymentPlan}
+                    onChange={(e) => setPaymentPlan(e.target.value)}
+                    disabled={submitting}
+                    required
+                  >
+                    <option value="">Select Payment Plan</option>
+                    <option value="Outright Payment">Outright Payment</option>
+                    <option value="3 Months Instalment">3 Months Instalment</option>
+                    <option value="6 Months Instalment">6 Months Instalment</option>
+                    <option value="12 Months Instalment">12 Months Instalment</option>
+                    <option value="Custom Plan">Custom Plan</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="pd-hero-form-group full-width-field">
+                <label htmlFor="hero-message">Additional Request Details / Message</label>
+                <textarea
+                  id="hero-message"
+                  rows={4}
+                  placeholder="Enter details about your inquiry..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={submitting}
+                />
+              </div>
+
+              <div className="pd-hero-form-actions">
+                <button
+                  type="submit"
+                  className="pd-hero-submit-btn"
+                  disabled={submitting}
+                >
+                  <div className="flip-text">
+                    <span>{submitting ? 'Submitting...' : 'Submit request'}</span>
+                    <span aria-hidden="true">{submitting ? 'Submitting...' : 'Submit request'}</span>
+                  </div>
+                </button>
+                <Link 
+                  href={`/projects/${resolvedProjectId}/updates`} 
+                  className="pd-hero-updates-btn"
+                  id="hero-updates-btn-link"
+                >
+                  <div className="flip-text">
+                    <span>View Site Update</span>
+                    <span aria-hidden="true">View Site Update</span>
+                  </div>
+                </Link>
+              </div>
+            </form>
+          </div>
+
+          {/* Right Column: Slideshow */}
+          <div className="pd-hero-right-col reveal-on-scroll">
+            <div className="pd-hero-slider">
+              {sliderImages.map((url, idx) => (
+                <div 
+                  key={idx} 
+                  className={`pd-hero-slide ${idx === activeSlide ? 'active' : ''}`}
+                >
+                  <img
+                    src={resolveMediaUrl(url, 2000)}
+                    alt={`${title} Slide ${idx + 1}`}
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* Watermark Logo Overlay */}
+                  <img 
+                    src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g" 
+                    alt="Wisdom Kwati peaks logo"
+                    className="pd-slider-logo-watermark"
+                  />
+                </div>
+              ))}
+
+              {sliderImages.length === 0 && (
+                <div className="pd-hero-slide active">
+                  <img
+                    src={resolveMediaUrl(heroImage, 2000)}
+                    alt={title}
+                    referrerPolicy="no-referrer"
+                  />
+                  <img 
+                    src="https://images.weserv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1cbeI43eSomsIyWb9SI50mmm6L49OAF-g" 
+                    alt="Wisdom Kwati peaks logo"
+                    className="pd-slider-logo-watermark"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Slider Progress Indicator */}
+            <div className="pd-slider-progress-container">
+              <span className="pd-slider-progress-num">
+                {String(activeSlide + 1).padStart(2, '0')}
+              </span>
+              <div className="pd-slider-progress-bar-wrapper">
+                <div 
+                  className="pd-slider-progress-bar-fill"
+                  style={{ 
+                    width: `${((activeSlide + 1) / (sliderImages.length || 1)) * 100}%` 
                   }}
                 />
-              ) : (
-                <>
-                  <video 
-                    ref={videoRef}
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
-                    poster={heroPoster}
-                    onLoadedData={(e) => {
-                        e.currentTarget.play().catch(() => {});
-                    }}
-                    style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      objectFit: "cover",
-                      position: "absolute",
-                      top: "0",
-                      left: "0",
-                      pointerEvents: "none",
-                      zIndex: 2
-                    }}
-                  >
-                    <source 
-                      src={getGoogleDriveUrl(heroVideo || heroImage)} 
-                      type="video/mp4" 
-                    />
-                  </video>
-                  {/* Fallback image behind the video while loading/buffering */}
-                  {(heroImage || detailsImage) && (
-                    <Image 
-                      width={1920} 
-                      height={1080} 
-                      priority={true} 
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: 1 }} 
-                      src={resolveMediaUrl(heroImage || detailsImage, 2000)} 
-                      alt={title} 
-                      referrerPolicy="no-referrer" 
-                    />
-                  )}
-                </>
-              )}
-              
-              {/* Professional Interaction Shield */}
-              <div style={{ 
-                position: "absolute", 
-                top: "0", 
-                left: "0", 
-                width: "100%", 
-                height: "100%", 
-                background: "transparent", 
-                zIndex: "3",
-                pointerEvents: "all"
-              }}></div>
+              </div>
+              <span className="pd-slider-progress-num">
+                {String(sliderImages.length || 1).padStart(2, '0')}
+              </span>
             </div>
-          ) : (
-            <Image 
-              width={1920} 
-              height={1080} 
-              priority={true} 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              src={resolveMediaUrl(heroImage, 2000)} 
-              alt={title} 
-              referrerPolicy="no-referrer" 
-              onError={() => {
-                if (heroImage && (heroImage.includes('drive.google.com') || isVideo(heroImage))) {
-                  setImageFailed(true);
-                }
-              }}
-            />
-          )}
-        </div>
-        <div className="pd-hero-overlay"></div>
-        <div className="pd-hero-content reveal-on-scroll">
-          <h1 className="pd-hero-title" style={{ textTransform: 'uppercase' }}>{title}</h1>
-          <p className="pd-hero-description">{heroDescription}</p>
-          <Link href={`/projects/${resolvedProjectId}/updates`} className="btn-pill" style={{ marginTop: "30px", display: "inline-flex", backgroundColor: "var(--accent-green)", color: "var(--text-primary)", borderWidth: 0 }}>
-            <div className="flip-text">
-              <span>VIEW SITE UPDATES</span>
-              <span aria-hidden="true">VIEW SITE UPDATES</span>
-            </div>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </Link>
+          </div>
         </div>
       </section>
 

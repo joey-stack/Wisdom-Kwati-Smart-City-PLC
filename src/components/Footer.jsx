@@ -186,7 +186,7 @@ export default function Footer() {
                 </div>
                 <div className="newsletter-group">
                     <label htmlFor="newsletter-email" className="sr-only">Email address for newsletter</label>
-                    <input type="email" id="newsletter-email" placeholder="jane@framer.com" className="newsletter-input" required />
+                    <input type="email" id="newsletter-email" placeholder="jane@gmail.com" className="newsletter-input" required />
                     <button type="submit" className="newsletter-submit-btn">
                         <div className="flip-text">
                             <span>SUBSCRIBE</span>

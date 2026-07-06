@@ -44,10 +44,10 @@ test('project detail page hero section renders correctly', async ({ page }) => {
   const slides = page.locator('.pd-hero-slide');
   await expect(slides.first()).toBeVisible();
 
-  const progress = page.locator('.pd-slider-progress-num');
+  const progress = page.locator('.pd-slider-progress-num').first();
   await expect(progress).toBeVisible();
 
-  const logo = page.locator('.pd-slider-logo-watermark');
+  const logo = page.locator('.pd-slider-logo-watermark').first();
   await expect(logo).toBeVisible();
 });
 

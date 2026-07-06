@@ -17,7 +17,7 @@ test('homepage loads correctly', async ({ page }) => {
   });
 
   // Expect the main headline to be visible and contain the brand promise
-  const headline = page.locator('h1.headline');
+  const headline = page.locator('p.headline');
   await expect(headline).toBeVisible();
   await expect(headline).toContainText(/Dream Large|Live Smart/i);
 

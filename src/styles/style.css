@@ -1252,7 +1252,7 @@ body.menu-active .mobile-menu-footer {
   justify-content: center;
   height: 18px; /* Matched to parent height for perfect centering */
   transition: transform 0.5s var(--ease-soft);
-  color: var(--text-primary);
+  color: inherit;
   line-height: 1; /* Reset for flex alignment */
 }
 .btn-pill:hover .flip-text span {
@@ -6267,7 +6267,7 @@ body.menu-active .mobile-menu-footer {
 
 .site-visit-modal-container {
   position: relative;
-  width: 100%;
+  width: calc(100% - 40px);
   max-width: 600px;
   margin: 20px;
   background-color: var(--bg-main);
@@ -6347,7 +6347,7 @@ body.menu-active .mobile-menu-footer {
 
 .consultation-modal-container {
   position: relative;
-  width: 100%;
+  width: calc(100% - 40px);
   max-width: 600px;
   margin: 20px;
   background-color: var(--bg-main);

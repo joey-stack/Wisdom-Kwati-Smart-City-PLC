@@ -601,10 +601,17 @@ Client Message: ${message || 'No additional comments.'}`;
                     required
                   >
                     <option value="">Select Preferred Plot Size</option>
-                    {plotSizes && plotSizes.map((p, idx) => (
-                      <option key={idx} value={p.area || p.size}>{p.plotType || 'Standard'} ({p.area || p.size})</option>
-                    ))}
-                    {(!plotSizes || plotSizes.length === 0) && (
+                    {houseTypes && houseTypes.length > 0 ? (
+                      houseTypes.map((ht, idx) => (
+                        <option key={idx} value={`${ht.name} — ${ht.size}`}>
+                          {ht.name} — {ht.size}
+                        </option>
+                      ))
+                    ) : plotSizes && plotSizes.length > 0 ? (
+                      plotSizes.map((p, idx) => (
+                        <option key={idx} value={p.area || p.size}>{p.plotType || 'Standard'} ({p.area || p.size})</option>
+                      ))
+                    ) : (
                       <>
                         <option value="250 SQM">250 SQM</option>
                         <option value="350 SQM">350 SQM</option>

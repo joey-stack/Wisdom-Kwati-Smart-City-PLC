@@ -196,10 +196,10 @@ export default function SunsetHavenLandingPage() {
             <section className="pd-section reveal-on-scroll" style={{ marginBottom: '100px' }}>
               <div className="pd-section-title">Featured Estate Gallery</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
-                <img src="/images/sunset-haven/hero.jpg" alt="Aerial View of Estate" style={{ width: '100%', borderRadius: '8px' }} />
-                <img src="/images/sunset-haven/masterplan.jpg" alt="Master Plan" style={{ width: '100%', borderRadius: '8px' }} />
-                <img src="/images/sunset-haven/road.jpg" alt="Road Network" style={{ width: '100%', borderRadius: '8px' }} />
-                <img src="/images/sunset-haven/neighbourhood.jpg" alt="Neighbourhood" style={{ width: '100%', borderRadius: '8px' }} />
+                <img src="/images/sunset-haven/hero.jpg" alt="Aerial View of Estate" style={{ width: '100%', borderRadius: '5px' }} />
+                <img src="/images/sunset-haven/masterplan.jpg" alt="Master Plan" style={{ width: '100%', borderRadius: '5px' }} />
+                <img src="/images/sunset-haven/road.jpg" alt="Road Network" style={{ width: '100%', borderRadius: '5px' }} />
+                <img src="/images/sunset-haven/neighbourhood.jpg" alt="Neighbourhood" style={{ width: '100%', borderRadius: '5px' }} />
               </div>
             </section>
 
@@ -207,12 +207,12 @@ export default function SunsetHavenLandingPage() {
 
           {/* Right Column: Sticky Sidebar Form */}
           <aside className="pd-sidebar" id="investment-form">
-            <div className="pd-sidebar-card reveal-on-scroll" style={{ background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "16px", padding: "32px", boxShadow: "var(--shadow-soft)" }}>
+            <div className="pd-sidebar-card reveal-on-scroll" style={{ background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "5px", padding: "32px", boxShadow: "var(--shadow-soft)" }}>
               <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Investment Pack</span>
               <h3 style={{ fontSize: "20px", fontWeight: "700", margin: "0 0 16px" }}>Request Yours Today</h3>
               
               {submitted ? (
-                <div style={{ padding: '20px', backgroundColor: 'var(--accent-green)', color: '#000', fontWeight: 'bold', borderRadius: '4px', textAlign: 'center' }}>
+                <div style={{ padding: '20px', backgroundColor: 'var(--accent-green)', color: '#000', fontWeight: 'bold', borderRadius: '5px', textAlign: 'center' }}>
                   Thank you, {formData.fullName}! Your request has been received. Our investment consultants will contact you shortly.
                 </div>
               ) : (
@@ -234,7 +234,7 @@ export default function SunsetHavenLandingPage() {
                   
                   <div className="form-group">
                     <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Preferred Plot Size</label>
-                    <select name="plotSize" value={formData.plotSize} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '8px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
+                    <select name="plotSize" value={formData.plotSize} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
                       <option value="">Select Plot Size</option>
                       <option value="500sqm">500 SQM</option>
                       <option value="700sqm">700 SQM</option>
@@ -245,7 +245,7 @@ export default function SunsetHavenLandingPage() {
                   
                   <div className="form-group">
                     <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Investment Purpose</label>
-                    <select name="purpose" value={formData.purpose} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '8px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
+                    <select name="purpose" value={formData.purpose} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
                       <option value="">Select Purpose</option>
                       <option value="Residential (To Build)">Residential (To Build)</option>
                       <option value="Land Banking (Hold & Sell)">Land Banking (Hold & Sell)</option>
@@ -272,7 +272,7 @@ export default function SunsetHavenLandingPage() {
             </div>
 
             {/* Contact Info Card */}
-            <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "24px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "16px", padding: "32px", boxShadow: "var(--shadow-soft)" }}>
+            <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "24px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "5px", padding: "32px", boxShadow: "var(--shadow-soft)" }}>
               <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Contact</span>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 <a href="tel:+2348100015555" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>

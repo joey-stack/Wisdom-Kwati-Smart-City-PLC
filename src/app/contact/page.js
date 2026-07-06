@@ -36,7 +36,7 @@ export default function Page() {
                         <div className="form-card">
                             <h3 className="form-title">We're just a form away—send us your question, and we'll be happy to help!</h3>
                             
-                            <ContactForm buttonClassName="submit-btn" defaultPhonePlaceholder="+234 810 001 5555" />
+                            <ContactForm buttonClassName="submit-btn" defaultPhonePlaceholder="0706 661 8999" />
                         </div>
                     </div>
                     <div className="map-column">
@@ -58,8 +58,11 @@ export default function Page() {
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             ABUJA OFFICE HEADQUARTERS
                         </div>
-                        <p className="location-address">2141 Katampe Rd, Kado,<br />Abuja 900108, Federal Capital Territory.</p>
-                        <p className="location-contact">+234 810 001 5555</p>
+                        <p className="location-address">2141 Katampe Rd, Kado,<br />Abuja 900108, Federal Capital Territory, Nigeria.</p>
+                        <p className="location-contact" style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                            <span>0706 661 8999</span>
+                            <span>0816 833 3302</span>
+                        </p>
                         <p className="location-contact">hello@wisdomkwatismartcity.com</p>
                         <p className="location-hours">Monday—Friday: 9:00 AM—5:00 PM<br />Saturday: 10:00 AM—3:00 PM | Sunday: Closed</p>
                     </div>
@@ -83,7 +86,10 @@ export default function Page() {
                             PORT HARCOURT OFFICE
                         </div>
                         <p className="location-address">No. 1 Emeyal Street, Phase 1,<br />New GRA, Port Harcourt, Rivers State.</p>
-                        <p className="location-contact">+234 810 001 5555</p>
+                        <p className="location-contact" style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                            <span>0706 661 8999</span>
+                            <span>0816 833 3302</span>
+                        </p>
                         <p className="location-contact">hello@wisdomkwatismartcity.com</p>
                         <p className="location-hours">Monday—Friday: 9:00 AM—5:00 PM<br />Saturday: 10:00 AM—3:00 PM | Sunday: Closed</p>
                     </div>

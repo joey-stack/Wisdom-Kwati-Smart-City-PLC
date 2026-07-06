@@ -278,18 +278,21 @@ export default function SunsetHavenLandingPage() {
             <div className="pd-sidebar-card reveal-on-scroll" style={{ marginTop: "24px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: "5px", padding: "32px", boxShadow: "var(--shadow-soft)" }}>
               <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Contact</span>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <a href="tel:+2348100015555" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
-                  <i className="fa-solid fa-phone" style={{ width: "14px", color: "var(--accent-green)" }}></i> +234 810 001 5555
+                <a href="tel:07066618999" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
+                  <i className="fa-solid fa-phone" style={{ width: "14px", color: "var(--accent-green)" }}></i> 0706 661 8999
+                </a>
+                <a href="tel:08168333302" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
+                  <i className="fa-solid fa-phone" style={{ width: "14px", color: "var(--accent-green)" }}></i> 0816 833 3302
                 </a>
                 <a href="mailto:hello@wisdomkwatismartcity.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
                   <i className="fa-solid fa-envelope" style={{ width: "14px", color: "var(--accent-green)" }}></i> hello@wisdomkwatismartcity.com
                 </a>
-                <a href="https://wa.me/2348100015555" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
+                <a href="https://wa.me/2347066618999" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
                   <i className="fa-brands fa-whatsapp" style={{ width: "14px", color: "var(--accent-green)" }}></i> WhatsApp Us
                 </a>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "13px", color: "var(--text-primary)", lineHeight: "1.4" }}>
                   <i className="fa-solid fa-location-dot" style={{ width: "14px", color: "var(--accent-green)", marginTop: "4px" }}></i>
-                  <div>2141 Katampe Rd, Kado,<br/>Abuja 900108, Federal Capital Territory.</div>
+                  <div>2141 Katampe Rd,<br/>Kado, Abuja 900108, Federal Capital Territory, Nigeria</div>
                 </div>
               </div>
             </div>

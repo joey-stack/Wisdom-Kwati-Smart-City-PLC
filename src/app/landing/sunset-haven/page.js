@@ -81,8 +81,11 @@ export default function SunsetHavenLandingPage() {
         
         <div className="hero-container" style={{ zIndex: 3, position: "relative" }}>
           <div className="hero-content" style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-            <h1 className="headline reveal-type-lines" style={{ textTransform: 'uppercase', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.25', fontWeight: '700', textShadow: '0 4px 20px rgba(0,0,0,0.6)' }}>
-              Own a Piece of <br /> Abuja's Next <br /> Generation <br /> of Wealth
+            <h1 className="headline reveal-type-lines" style={{ fontFamily: 'var(--font-body)', letterSpacing: '-0.04em', textTransform: 'uppercase', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.15', fontWeight: '500', textShadow: '0 4px 20px rgba(0,0,0,0.6)' }}>
+              Own a Piece of <br /> 
+              Abuja's Next <br /> 
+              Generation <br /> 
+              of Wealth
             </h1>
             <p className="subheadline reveal-type-lines" style={{ 
               fontSize: '16px', 

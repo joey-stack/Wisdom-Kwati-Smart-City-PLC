@@ -287,9 +287,7 @@ export default function SunsetHavenLandingPage() {
                 <a href="mailto:hello@wisdomkwatismartcity.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
                   <i className="fa-solid fa-envelope" style={{ width: "14px", color: "var(--accent-green)" }}></i> hello@wisdomkwatismartcity.com
                 </a>
-                <a href="https://wa.me/2347066618999" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-primary)", textDecoration: "none" }}>
-                  <i className="fa-brands fa-whatsapp" style={{ width: "14px", color: "var(--accent-green)" }}></i> WhatsApp Us
-                </a>
+
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "13px", color: "var(--text-primary)", lineHeight: "1.4" }}>
                   <i className="fa-solid fa-location-dot" style={{ width: "14px", color: "var(--accent-green)", marginTop: "4px" }}></i>
                   <div>2141 Katampe Rd,<br/>Kado, Abuja 900108, Federal Capital Territory, Nigeria</div>

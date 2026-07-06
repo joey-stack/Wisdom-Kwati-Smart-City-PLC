@@ -200,8 +200,8 @@ export default function Footer() {
             {/*  Bottom Bar  */}
             <div className="footer-bottom-bar">
                 <div className="bottom-left">
-                    <a href="#">PRIVACY POLICY</a>
-                    <a href="#">TERMS</a>
+                    <a href="/privacy-policy">PRIVACY POLICY</a>
+                    <a href="/terms">TERMS</a>
                 </div>
                 <div className="bottom-center">
                     <span className="copyright">©2026 WISDOM KWATI SMART CITY PLC. REG RC 1573033.</span>

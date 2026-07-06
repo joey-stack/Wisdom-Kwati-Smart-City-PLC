@@ -306,7 +306,15 @@ export default function SunsetHavenLandingPage() {
 
       {/* Mobile Sticky CTA */}
       <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', background: 'var(--bg-main)', borderTop: '1px solid var(--border)', zIndex: 100 }} className="mobile-only">
-        <a href="#investment-form" className="btn-pill" style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "var(--text-primary)", border: "none" }}>
+        <a 
+          href="#" 
+          className="btn-pill" 
+          style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "var(--text-primary)", border: "none" }}
+          onClick={(e) => {
+            e.preventDefault();
+            setIsModalOpen(true);
+          }}
+        >
           <div className="flip-text">
             <span>GET INVESTMENT PACK</span>
             <span aria-hidden="true">GET INVESTMENT PACK</span>
@@ -318,6 +326,24 @@ export default function SunsetHavenLandingPage() {
           .mobile-only { display: none !important; }
         }
       `}} />
+
+      {/* Pop-up Modal for Investment Form */}
+      {isModalOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }} onClick={() => setIsModalOpen(false)}>
+          <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: '10px', width: '100%', maxWidth: '500px', padding: '40px', position: 'relative', maxHeight: '90vh', overflowY: 'auto' }} onClick={e => e.stopPropagation()}>
+            <button 
+              onClick={() => setIsModalOpen(false)} 
+              style={{ position: 'absolute', top: '15px', right: '15px', background: 'transparent', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', fontSize: '28px', lineHeight: '1' }}
+              aria-label="Close Modal"
+            >
+              &times;
+            </button>
+            <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Investment Pack</span>
+            <h3 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '24px' }}>Request Yours Today</h3>
+            <FormContent />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

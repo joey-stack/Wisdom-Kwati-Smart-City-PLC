@@ -17,6 +17,7 @@ export default function SunsetHavenLandingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -63,12 +64,75 @@ export default function SunsetHavenLandingPage() {
       window.location.href = `mailto:hello@wisdomkwatismartcity.com?subject=${mailtoSubject}&body=${mailtoBody}`;
       
     } catch (err) {
-      console.error('Error submitting lead:', err);
-      setError('Failed to submit your inquiry. Please try again or contact us directly.');
+      console.error('Error submitting form:', err);
+      setError('An error occurred. Please try again or contact us directly.');
     } finally {
       setSubmitting(false);
     }
   };
+
+  const FormContent = () => (
+    <>
+      {submitted ? (
+        <div style={{ padding: '20px', backgroundColor: 'var(--accent-green)', color: '#000', fontWeight: 'bold', borderRadius: '5px', textAlign: 'center' }}>
+          Thank you, {formData.fullName}! Your request has been received. Our investment consultants will contact you shortly.
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="form-group">
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Full Name</label>
+            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required placeholder="Enter your full name" />
+          </div>
+          
+          <div className="form-group">
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Phone Number</label>
+            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Enter your phone number" />
+          </div>
+          
+          <div className="form-group">
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Email</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Enter your email address" />
+          </div>
+          
+          <div className="form-group">
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Preferred Plot Size</label>
+            <select name="plotSize" value={formData.plotSize} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
+              <option value="">Select Plot Size</option>
+              <option value="500sqm">500 SQM</option>
+              <option value="700sqm">700 SQM</option>
+              <option value="1000sqm">1000 SQM</option>
+              <option value="Undecided">Undecided / I need advice</option>
+            </select>
+          </div>
+          
+          <div className="form-group">
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Investment Purpose</label>
+            <select name="purpose" value={formData.purpose} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
+              <option value="">Select Purpose</option>
+              <option value="Residential (To Build)">Residential (To Build)</option>
+              <option value="Land Banking (Hold & Sell)">Land Banking (Hold & Sell)</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          {error && <p style={{ color: 'red', fontSize: '14px', marginTop: '10px' }}>{error}</p>}
+          
+          <button type="submit" disabled={submitting} className="btn-pill" style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "#000", border: "none", marginTop: "10px", fontWeight: "600", borderRadius: "5px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            <div className="flip-text">
+              <span style={{ color: "#000" }}>
+                {submitting ? 'SUBMITTING...' : 'GET INVESTMENT PACK'}
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', transition: 'transform 0.3s ease', stroke: "#000" }}><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+              <span aria-hidden="true" style={{ color: "#000" }}>
+                {submitting ? 'SUBMITTING...' : 'GET INVESTMENT PACK'}
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', transition: 'transform 0.3s ease', stroke: "#000" }}><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </div>
+          </button>
+        </form>
+      )}
+    </>
+  );
 
   return (
     <div className="pd-page">
@@ -106,12 +170,12 @@ export default function SunsetHavenLandingPage() {
 
           <div className="hero-card delay-1" style={{ flexShrink: 0, paddingBottom: '15px' }}>
             <a 
-              href="#investment-form" 
+              href="#" 
               className="cta-button" 
               style={{ textDecoration: "none" }}
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('investment-form')?.scrollIntoView({ behavior: 'smooth' });
+                setIsModalOpen(true);
               }}
             >
               <div className="flip-text">
@@ -119,8 +183,7 @@ export default function SunsetHavenLandingPage() {
                 <span aria-hidden="true">GET INVESTMENT PACK</span>
               </div>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}>
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
+                <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
           </div>
@@ -214,64 +277,7 @@ export default function SunsetHavenLandingPage() {
               <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Investment Pack</span>
               <h3 style={{ fontSize: "20px", fontWeight: "700", margin: "0 0 16px" }}>Request Yours Today</h3>
               
-              {submitted ? (
-                <div style={{ padding: '20px', backgroundColor: 'var(--accent-green)', color: '#000', fontWeight: 'bold', borderRadius: '5px', textAlign: 'center' }}>
-                  Thank you, {formData.fullName}! Your request has been received. Our investment consultants will contact you shortly.
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  <div className="form-group">
-                    <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Full Name</label>
-                    <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required placeholder="Enter your full name" />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Phone Number</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Enter your phone number" />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Email</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Enter your email address" />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Preferred Plot Size</label>
-                    <select name="plotSize" value={formData.plotSize} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
-                      <option value="">Select Plot Size</option>
-                      <option value="500sqm">500 SQM</option>
-                      <option value="700sqm">700 SQM</option>
-                      <option value="1000sqm">1000 SQM</option>
-                      <option value="Undecided">Undecided / I need advice</option>
-                    </select>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', fontFamily: 'var(--font-header)' }}>Investment Purpose</label>
-                    <select name="purpose" value={formData.purpose} onChange={handleChange} required style={{ width: '100%', padding: '16px 20px', background: 'rgba(0, 0, 0, 0.03)', border: '1px solid rgba(0, 0, 0, 0.05)', color: 'var(--text-primary)', borderRadius: '5px', fontFamily: 'inherit', appearance: 'none', fontSize: '14px' }}>
-                      <option value="">Select Purpose</option>
-                      <option value="Residential (To Build)">Residential (To Build)</option>
-                      <option value="Land Banking (Hold & Sell)">Land Banking (Hold & Sell)</option>
-                      <option value="Commercial">Commercial</option>
-                    </select>
-                  </div>
-
-                  {error && <p style={{ color: 'red', fontSize: '14px', marginTop: '10px' }}>{error}</p>}
-                  
-                  <button type="submit" disabled={submitting} className="btn-pill" style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "#000", border: "none", marginTop: "10px", fontWeight: "600", borderRadius: "5px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                    <div className="flip-text">
-                      <span style={{ color: "#000" }}>
-                        {submitting ? 'SUBMITTING...' : 'GET INVESTMENT PACK'}
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', transition: 'transform 0.3s ease', stroke: "#000" }}><polyline points="9 18 15 12 9 6"></polyline></svg>
-                      </span>
-                      <span aria-hidden="true" style={{ color: "#000" }}>
-                        {submitting ? 'SUBMITTING...' : 'GET INVESTMENT PACK'}
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', transition: 'transform 0.3s ease', stroke: "#000" }}><polyline points="9 18 15 12 9 6"></polyline></svg>
-                      </span>
-                    </div>
-                  </button>
-                </form>
-              )}
+              <FormContent />
             </div>
 
             {/* Contact Info Card */}

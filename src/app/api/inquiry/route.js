@@ -29,6 +29,7 @@ export async function POST(request) {
       plotSize,
       purpose,
       source
+    } = body;
 
     // 1. Validation based on submission type
     if (!name || !email) {

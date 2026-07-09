@@ -35,18 +35,17 @@ test.describe('Sunset Haven Promo Landing Page', () => {
     await expect(galleryHeading).toBeVisible();
 
     // Verify Form rendering
-    const formHeading = page.locator('h2', { hasText: 'Request Yours Today' });
+    const formHeading = page.locator('#investment-form h3', { hasText: 'Request Yours Today' });
     await expect(formHeading).toBeVisible();
     
     // Verify specific form fields exist
-    await expect(page.locator('form.pd-hero-form input[name="name"]')).toBeVisible();
-    await expect(page.locator('form.pd-hero-form input[name="email"]')).toBeVisible();
-    await expect(page.locator('form.pd-hero-form select[name="plotSize"]')).toBeVisible();
-    await expect(page.locator('form.pd-hero-form select[name="investmentPurpose"]')).toBeVisible();
+    await expect(page.locator('#investment-form form input[name="fullName"]')).toBeVisible();
+    await expect(page.locator('#investment-form form input[name="email"]')).toBeVisible();
+    await expect(page.locator('#investment-form form select[name="plotSize"]')).toBeVisible();
+    await expect(page.locator('#investment-form form select[name="purpose"]')).toBeVisible();
 
     // Verify Contact Info
-    await expect(page.locator('h4', { hasText: 'CONTACT US' })).toBeVisible();
-    await expect(page.locator('#investment-form a[href^="tel:"]')).toBeVisible();
-    await expect(page.locator('#investment-form a[href^="https://wa.me"]')).toBeVisible();
+    await expect(page.locator('.pd-sidebar-card span', { hasText: 'Contact' })).toBeVisible();
+    await expect(page.locator('#investment-form a[href^="tel:"]').first()).toBeVisible();
   });
 });

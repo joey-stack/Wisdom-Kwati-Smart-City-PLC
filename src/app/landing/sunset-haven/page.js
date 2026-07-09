@@ -188,7 +188,7 @@ export default function SunsetHavenLandingPage() {
           <div className="pd-left-col">
             
             <section className="pd-section reveal-on-scroll">
-              <div className="pd-section-title">Why Serious Investors Are Buying</div>
+              <h2 className="pd-section-title">Why Serious Investors Are Buying</h2>
               <p className="pd-description-text">
                 Every successful property investor understands one principle: <strong>Money is made when you buy, not when you sell.</strong>
               </p>
@@ -208,7 +208,7 @@ export default function SunsetHavenLandingPage() {
             </section>
 
             <section className="pd-section reveal-on-scroll">
-              <div className="pd-section-title">Who Is This Investment For?</div>
+              <h2 className="pd-section-title">Who Is This Investment For?</h2>
               <div className="pd-table-container">
                 <table className="pd-table">
                   <thead>
@@ -240,7 +240,7 @@ export default function SunsetHavenLandingPage() {
             </section>
 
             <section className="pd-section reveal-on-scroll">
-              <div className="pd-section-title">What Makes Sunset Haven Different?</div>
+              <h2 className="pd-section-title">What Makes Sunset Haven Different?</h2>
               <p className="pd-description-text">
                 Unlike speculative locations with uncertain titles, Sunset Haven offers secure title documentation, strategic location, a planned residential environment, excellent investment fundamentals, and long-term appreciation potential.
               </p>
@@ -251,7 +251,7 @@ export default function SunsetHavenLandingPage() {
 
             {/* Featured Estate Gallery */}
             <section className="pd-section reveal-on-scroll" style={{ marginBottom: '100px' }}>
-              <div className="pd-section-title">Featured Estate Gallery</div>
+              <h2 className="pd-section-title">Featured Estate Gallery</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
                 <img src="/images/sunset-haven/hero.jpg" alt="Aerial View of Estate" style={{ width: '100%', borderRadius: '5px' }} />
                 <img src="/images/sunset-haven/masterplan.jpg" alt="Master Plan" style={{ width: '100%', borderRadius: '5px' }} />

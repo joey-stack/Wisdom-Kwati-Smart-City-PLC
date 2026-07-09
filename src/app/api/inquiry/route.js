@@ -23,8 +23,12 @@ export async function POST(request) {
       consultationMethod,
       preferredTime,
       advisorName,
-      advisorEmail
-    } = body;
+      advisorEmail,
+      
+      // Campaign Lead specifics
+      plotSize,
+      purpose,
+      source
 
     // 1. Validation based on submission type
     if (!name || !email) {
@@ -146,6 +150,38 @@ export async function POST(request) {
           
           <hr style="border: none; border-top: 1px solid #d8dde6; margin-top: 30px;" />
           <p style="font-size: 11px; color: #6b7585; text-align: center;">This request was submitted directly on the Wisdom Kwati Smart City portal and recorded in the administration dashboard.</p>
+        </div>
+      `;
+    } else if (type === 'campaign-lead') {
+      leadData.type = 'campaign-lead';
+      leadData.estate = estate || 'Wisdom Kwati Smart City';
+      leadData.plotSize = plotSize;
+      leadData.purpose = purpose;
+      leadData.source = source || 'Landing Page';
+
+      emailTo = customerExperienceEmail;
+      emailSubject = `New Campaign Lead: ${name} - ${leadData.estate}`;
+      emailHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #c7d2fe; border-radius: 8px; background-color: #eef2ff;">
+          <h2 style="color: #3730a3; border-bottom: 2px solid #4f46e5; padding-bottom: 10px; margin-top: 0;">New Landing Page Lead</h2>
+          <p>A prospective client has requested an investment pack from a promotional landing page:</p>
+          <hr style="border: none; border-top: 1px solid #c7d2fe; margin: 15px 0;" />
+          <p><strong>Client Name:</strong> ${name}</p>
+          <p><strong>Email Address:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Phone Number:</strong> ${phone ? `<a href="tel:${phone}">${phone}</a>` : 'Not provided'}</p>
+          <p><strong>Campaign/Estate:</strong> <span style="color: #4f46e5; font-weight: bold;">${leadData.estate}</span></p>
+          <p><strong>Source:</strong> ${leadData.source}</p>
+          
+          <div style="margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 4px; border: 1px solid #c7d2fe;">
+            <h4 style="margin-top: 0; color: #3730a3;">Investment Preferences:</h4>
+            <ul style="margin: 0; padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.6;">
+              <li><strong>Plot Size:</strong> ${plotSize || 'Not specified'}</li>
+              <li><strong>Investment Purpose:</strong> ${purpose || 'Not specified'}</li>
+            </ul>
+          </div>
+          
+          <hr style="border: none; border-top: 1px solid #c7d2fe; margin-top: 30px;" />
+          <p style="font-size: 11px; color: #64748b; text-align: center;">This lead was captured directly on a landing page and recorded in the administration dashboard.</p>
         </div>
       `;
     } else {
@@ -371,6 +407,32 @@ async function sendClientAutoResponder({ name, email, type, estate, preferredDat
           </div>
           <div style="text-align: center;">
             <a href="https://wisdomkwatismartcityplc.com" style="background-color: #0f4b94; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 4px; font-weight: bold; font-size: 14px; display: inline-block;">Access Portal</a>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 35px; color: #6b7585; font-size: 12px; line-height: 1.5;">
+          <p style="margin: 0 0 10px;">If you have any questions, you can contact us at <a href="mailto:hello@wisdomkwatismartcity.com" style="color: #0f4b94; text-decoration: none;">hello@wisdomkwatismartcity.com</a></p>
+          <p style="margin: 0;">&copy; ${new Date().getFullYear()} Wisdom Kwati Smart City PLC. All rights reserved.</p>
+        </div>
+      </div>
+    `;
+  } else if (type === 'campaign-lead') {
+    subject = 'Your Investment Pack Request - Wisdom Kwati Smart City';
+    bodyHtml = `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #faffe8; border: 1px solid #d8dde6; border-radius: 8px; color: #1a1a1a;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #0f4b94; font-size: 28px; margin: 0; font-family: 'Outfit', sans-serif;">Wisdom Kwati Smart City</h1>
+          <p style="color: #4e5a69; font-size: 14px; margin: 5px 0 0; text-transform: uppercase; letter-spacing: 2px;">Dream Large. Live Smart.</p>
+        </div>
+        <div style="background-color: #ffffff; padding: 30px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+          <h2 style="color: #0f4b94; font-size: 20px; margin-top: 0; margin-bottom: 20px;">Thank You, ${name}!</h2>
+          <p style="font-size: 15px; line-height: 1.6; color: #4e5a69; margin-bottom: 20px;">
+            Thank you for requesting the investment pack for ${estate ? `<strong>${estate}</strong>` : 'Wisdom Kwati Smart City'}.
+          </p>
+          <p style="font-size: 15px; line-height: 1.6; color: #4e5a69; margin-bottom: 30px;">
+            One of our premium luxury advisors has received your request and will send the official investment pack directly to your email shortly.
+          </p>
+          <div style="text-align: center;">
+            <a href="https://wisdomkwatismartcityplc.com" style="background-color: #0f4b94; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 4px; font-weight: bold; font-size: 14px; display: inline-block;">Visit Our Website</a>
           </div>
         </div>
         <div style="text-align: center; margin-top: 35px; color: #6b7585; font-size: 12px; line-height: 1.5;">

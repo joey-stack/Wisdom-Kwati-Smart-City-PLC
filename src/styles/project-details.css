@@ -3,6 +3,377 @@
    "The Architectural Ledger" Layout
    ======================================== */
 
+/* ============================================
+   NEW HERO SECTION — Dual-Column Grid Layout
+   ============================================ */
+.pd-hero-new {
+  width: 100%;
+  background: var(--bg-main);
+  padding: 140px 40px 80px;
+  box-sizing: border-box;
+}
+
+.pd-hero-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1380px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Left column: title + form */
+.pd-hero-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pd-hero-title-new {
+  font-family: var(--font-outfit);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+/* Alerts */
+.pd-hero-alert {
+  padding: 14px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.pd-hero-alert-success {
+  background: rgba(190, 222, 45, 0.15);
+  border: 1px solid rgba(190, 222, 45, 0.5);
+  color: var(--text-primary);
+}
+.pd-hero-alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+/* Form */
+.pd-hero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pd-hero-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pd-hero-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-hero-form-group.full-width-field {
+  grid-column: 1 / -1;
+}
+
+.pd-hero-form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.pd-hero-form-group input,
+.pd-hero-form-group select,
+.pd-hero-form-group textarea {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pd-hero-form-group input:focus,
+.pd-hero-form-group select:focus,
+.pd-hero-form-group textarea:focus {
+  border-color: var(--accent-green);
+}
+
+.pd-hero-form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23888' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.pd-hero-form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Form action buttons */
+.pd-hero-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.pd-hero-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 5px;
+  background: var(--accent-green);
+  color: #000;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  overflow: hidden;
+}
+.pd-hero-submit-btn:hover { opacity: 0.85; }
+.pd-hero-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.pd-hero-updates-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  overflow: hidden;
+}
+.pd-hero-updates-btn:hover { border-color: rgba(190, 222, 45, 0.6); }
+
+/* Right column: image slideshow */
+.pd-hero-right-col {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pd-hero-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.pd-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.pd-hero-slide.active {
+  opacity: 1;
+}
+
+.pd-hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Watermark logo on slider */
+.pd-slider-logo-watermark {
+  position: absolute !important;
+  bottom: 16px;
+  right: 16px;
+  width: 48px !important;
+  height: auto !important;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Slider progress bar */
+.pd-slider-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-slider-progress-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-family: var(--font-inter);
+  min-width: 20px;
+}
+
+.pd-slider-progress-bar-wrapper {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.pd-slider-progress-bar-fill {
+  height: 100%;
+  background: var(--accent-green);
+  border-radius: 1px;
+  transition: width 0.6s ease;
+}
+
+/* Compact item: side by side name + district inline */
+.pd-compact-info {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+/* ============ Responsive hero ============ */
+@media (max-width: 960px) {
+  .pd-hero-new {
+    padding: 120px 24px 60px;
+  }
+
+  .pd-hero-grid-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .pd-hero-right-col {
+    position: static;
+  }
+
+  .pd-hero-slider {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .pd-hero-new {
+    padding: 100px 16px 50px;
+  }
+
+  .pd-hero-title-new {
+    font-size: clamp(26px, 8vw, 38px);
+  }
+
+  .pd-hero-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-hero-form-actions {
+    flex-direction: column;
+  }
+
+  .pd-hero-submit-btn,
+  .pd-hero-updates-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Sticky Mobile CTA Bar */
+.sticky-mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  gap: 12px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
+
+.sticky-mobile-cta .cta-btn-primary {
+  flex: 1;
+  padding: 14px 0;
+  background: var(--accent-green);
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.sticky-mobile-cta .cta-btn-secondary {
+  flex: 1;
+  padding: 14px 0;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .sticky-mobile-cta {
+    display: flex;
+  }
+}
+
+/* Compact flipper card — hide back on desktop, show on hover */
+.pd-compact-flipper {
+  width: 100%;
+}
+.pd-compact-back {
+  display: none;
+}
+.pd-compact-item:hover .pd-compact-back {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pd-compact-item:hover .pd-compact-front {
+  display: none;
+}
+
 .pd-page {
   background-color: var(--bg-main);
   color: var(--text-primary);

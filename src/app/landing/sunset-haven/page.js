@@ -32,36 +32,26 @@ export default function SunsetHavenLandingPage() {
     setError('');
 
     try {
-      // 1. Submit lead details to Firestore 'leads' collection
-      await addDoc(collection(db, 'leads'), {
-        name: formData.fullName,
-        phone: formData.phone,
-        email: formData.email,
-        estate: 'Sunset Haven',
-        preferredDate: '',
-        message: `Plot Size: ${formData.plotSize}\nPurpose: ${formData.purpose}`,
-        type: 'lead',
-        source: 'Landing Page - Sunset Haven',
-        status: 'pending',
-        createdAt: new Date().toISOString()
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'campaign-lead',
+          name: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          estate: 'Sunset Haven',
+          plotSize: formData.plotSize,
+          purpose: formData.purpose,
+          source: 'Landing Page - Sunset Haven'
+        })
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
       
       setSubmitted(true);
-
-      // 2. Trigger native mailto client dispatch fallback
-      const mailtoSubject = encodeURIComponent(`Investment Pack Request: ${formData.fullName} - Sunset Haven`);
-      const mailtoBody = encodeURIComponent(
-          `Wisdom Kwati Smart City - Investment Pack Request\n\n` +
-          `Name: ${formData.fullName}\n` +
-          `Phone: ${formData.phone}\n` +
-          `Email: ${formData.email}\n` +
-          `Project: Sunset Haven\n` +
-          `Plot Size: ${formData.plotSize}\n` +
-          `Purpose: ${formData.purpose}\n\n` +
-          `Submitted via Sunset Haven Landing Page.`
-      );
-      
-      window.location.href = `mailto:hello@wisdomkwatismartcity.com?subject=${mailtoSubject}&body=${mailtoBody}`;
       
     } catch (err) {
       console.error('Error submitting form:', err);
@@ -71,7 +61,7 @@ export default function SunsetHavenLandingPage() {
     }
   };
 
-  const FormContent = () => (
+  const renderForm = () => (
     <>
       {submitted ? (
         <div style={{ padding: '20px', backgroundColor: 'var(--accent-green)', color: '#000', fontWeight: 'bold', borderRadius: '5px', textAlign: 'center' }}>
@@ -169,12 +159,13 @@ export default function SunsetHavenLandingPage() {
           </div>
 
           <div className="hero-card delay-1" style={{ flexShrink: 0, paddingBottom: '15px' }}>
-            <a 
-              href="#" 
+            <button 
               className="cta-button" 
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
+                console.log("Hero CTA clicked");
                 setIsModalOpen(true);
               }}
             >
@@ -185,7 +176,7 @@ export default function SunsetHavenLandingPage() {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}>
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -277,7 +268,7 @@ export default function SunsetHavenLandingPage() {
               <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Investment Pack</span>
               <h3 style={{ fontSize: "20px", fontWeight: "700", margin: "0 0 16px" }}>Request Yours Today</h3>
               
-              <FormContent />
+              {renderForm()}
             </div>
 
             {/* Contact Info Card */}
@@ -306,12 +297,13 @@ export default function SunsetHavenLandingPage() {
 
       {/* Mobile Sticky CTA */}
       <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', background: 'var(--bg-main)', borderTop: '1px solid var(--border)', zIndex: 100 }} className="mobile-only">
-        <a 
-          href="#" 
+        <button 
           className="btn-pill" 
-          style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "var(--text-primary)", border: "none" }}
+          style={{ width: "100%", justifyContent: "center", background: "var(--accent-green)", color: "var(--text-primary)", border: "none", cursor: "pointer" }}
           onClick={(e) => {
             e.preventDefault();
+            e.stopPropagation();
+            console.log("Mobile Sticky CTA clicked");
             setIsModalOpen(true);
           }}
         >
@@ -319,7 +311,7 @@ export default function SunsetHavenLandingPage() {
             <span>GET INVESTMENT PACK</span>
             <span aria-hidden="true">GET INVESTMENT PACK</span>
           </div>
-        </a>
+        </button>
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         @media (min-width: 992px) {
@@ -329,7 +321,7 @@ export default function SunsetHavenLandingPage() {
 
       {/* Pop-up Modal for Investment Form */}
       {isModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }} onClick={() => setIsModalOpen(false)}>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 999999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }} onClick={() => setIsModalOpen(false)}>
           <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: '10px', width: '100%', maxWidth: '500px', padding: '40px', position: 'relative', maxHeight: '90vh', overflowY: 'auto' }} onClick={e => e.stopPropagation()}>
             <button 
               onClick={() => setIsModalOpen(false)} 
@@ -340,7 +332,7 @@ export default function SunsetHavenLandingPage() {
             </button>
             <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)", display: "block", marginBottom: "16px" }}>Investment Pack</span>
             <h3 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '24px' }}>Request Yours Today</h3>
-            <FormContent />
+            {renderForm()}
           </div>
         </div>
       )}

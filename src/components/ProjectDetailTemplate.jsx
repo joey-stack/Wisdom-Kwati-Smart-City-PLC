@@ -948,28 +948,6 @@ Client Message: ${message || 'No additional comments.'}`;
           </div>
         </div>
       </section>
-      
-      {/* Sticky Mobile CTA Bar */}
-      <div className="sticky-mobile-cta">
-        <button 
-          onClick={() => {
-            const modal = document.getElementById('siteVisitModal');
-            if (modal) {
-              modal.classList.add('active');
-              document.body.classList.add('no-scroll');
-            }
-          }}
-          className="cta-btn-primary"
-        >
-          Book a Site Visit
-        </button>
-        <button 
-          onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-modal'))}
-          className="cta-btn-secondary"
-        >
-          Download Brochure
-        </button>
-      </div>
     </div>
   );
 }

@@ -698,12 +698,12 @@
 
 .pd-compact-back {
   background: var(--accent-green);
-  color: #ffffff;
+  color: #000000;
 }
 
 .pd-compact-back h4,
 .pd-compact-back p {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .pd-compact-thumb {

@@ -657,7 +657,7 @@
 
 .pd-compact-item {
   position: relative;
-  perspective: 1000px;
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
   display: block;
@@ -670,35 +670,30 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.645, 0.045, 0.355, 1);
+  will-change: transform;
 }
 
 .pd-compact-item:hover .pd-compact-flipper {
-  transform: rotateY(180deg);
+  transform: translateY(-86px);
 }
 
 .pd-compact-front,
 .pd-compact-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  height: 86px;
   background: var(--bg-surface);
   border-radius: 5px;
   border: 1px solid var(--border);
   padding: 10px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 .pd-compact-back {
-  transform: rotateY(180deg);
   background: var(--accent-green);
   border-color: var(--accent-green);
   color: #ffffff;

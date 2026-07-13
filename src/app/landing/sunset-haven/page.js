@@ -156,26 +156,25 @@ export default function SunsetHavenLandingPage() {
             }}>
               Secure premium land in Sunset Haven, Katampe Extension before the next valuation increase. Request your private investment pack today for current pricing and available plots.
             </p>
-          </div>
-
-          <div className="hero-card delay-1" style={{ flexShrink: 0, paddingBottom: '15px' }}>
-            <button 
-              className="cta-button" 
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("Hero CTA clicked");
-                setIsModalOpen(true);
-              }}
-            >
-              <div className="flip-text">
-                <span>GET INVESTMENT PACK</span>
-                <span aria-hidden="true">GET INVESTMENT PACK</span>
-              </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}>
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
+            <div className="hero-card delay-1" style={{ flexShrink: 0, paddingBottom: '15px' }}>
+              <button 
+                className="cta-button" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("Hero CTA clicked");
+                  setIsModalOpen(true);
+                }}
+              >
+                <div className="flip-text">
+                  <span>GET INVESTMENT PACK</span>
+                  <span aria-hidden="true">GET INVESTMENT PACK</span>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}>
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>

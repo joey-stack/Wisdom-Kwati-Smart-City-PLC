@@ -56,8 +56,8 @@ export async function POST(request) {
     const smtpFrom = process.env.SMTP_FROM || 'no-reply@wisdomkwati.com';
 
     // Careers email is the default SMTP_TO configuration
-    const defaultCareersEmail = process.env.SMTP_TO || 'careers@wisdomkwati.com';
-    const customerExperienceEmail = 'hello@wisdomkwatismartcity.com';
+    const defaultCareersEmail = process.env.SMTP_TO || 'careers@wisdomkwatismartcity.com';
+    const customerExperienceEmail = process.env.SMTP_TO || 'hello@wisdomkwatismartcity.com';
 
     if (type === 'site-visit') {
       if (!estate || !preferredDate || !budget) {

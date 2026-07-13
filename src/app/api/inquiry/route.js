@@ -57,7 +57,7 @@ export async function POST(request) {
 
     // Careers email is the default SMTP_TO configuration
     const defaultCareersEmail = process.env.SMTP_TO || 'careers@wisdomkwatismartcity.com';
-    const customerExperienceEmail = process.env.SMTP_TO || 'hello@wisdomkwatismartcity.com';
+    const customerExperienceEmail = 'hello@wisdomkwatismartcity.com';
 
     if (type === 'site-visit') {
       if (!estate || !preferredDate || !budget) {
@@ -241,12 +241,19 @@ export async function POST(request) {
     }
 
     // 2. Save to Firestore collection 'leads'
-    const leadsRef = collection(db, 'leads');
-    const docRef = await addDoc(leadsRef, leadData);
-    console.log(`[API Inquiry] Inquiry saved to Firestore with ID: ${docRef.id} (${type || 'general'})`);
+    let docRef = { id: 'mock-test-id' };
+    if (process.env.PLAYWRIGHT_TEST === 'true') {
+      console.log('[API Inquiry] Playwright test mode: skipping Firestore save.');
+    } else {
+      const leadsRef = collection(db, 'leads');
+      docRef = await addDoc(leadsRef, leadData);
+      console.log(`[API Inquiry] Inquiry saved to Firestore with ID: ${docRef.id} (${type || 'general'})`);
+    }
 
     // 3. Send Email Notification via Nodemailer
-    if (smtpHost && smtpUser && smtpPass) {
+    if (process.env.PLAYWRIGHT_TEST === 'true') {
+      console.log('[API Inquiry] Playwright test mode: skipping SMTP email notification.');
+    } else if (smtpHost && smtpUser && smtpPass) {
       try {
         const transporter = nodemailer.createTransport({
           host: smtpHost,
@@ -261,18 +268,30 @@ export async function POST(request) {
           socketTimeout: 8000      // 8 seconds socket timeout
         });
 
+        // Ensure both the customer experience inbox and SMTP_TO receive the notification
+        let recipients = emailTo;
+        if (process.env.SMTP_TO && !recipients.includes(process.env.SMTP_TO)) {
+          recipients = `${recipients}, ${process.env.SMTP_TO}`;
+        }
+
         const mailOptions = {
           from: `"${name} (via Platform)" <${smtpFrom}>`,
           replyTo: email,
-          to: emailTo,
+          to: recipients,
           subject: emailSubject,
           html: emailHtml
         };
 
-        await transporter.sendMail(mailOptions);
-        console.log(`[API Inquiry] Email notification successfully sent to ${emailTo}`);
-      } catch (emailErr) {
-        console.error('[API Inquiry] Failed to send email notification (non-fatal):', emailErr);
+        // Send Email Notification asynchronously so we don't block the HTTP response
+        transporter.sendMail(mailOptions)
+          .then(() => {
+            console.log(`[API Inquiry] Email notification successfully sent to ${recipients}`);
+          })
+          .catch(emailErr => {
+            console.error('[API Inquiry] Failed to send email notification (non-fatal):', emailErr);
+          });
+      } catch (transporterErr) {
+        console.error('[API Inquiry] Failed to initialize nodemailer transporter:', transporterErr);
       }
     } else {
       console.warn('[API Inquiry] SMTP configuration is missing. Skipping email notification. Inquiry saved in database.');
@@ -301,6 +320,11 @@ export async function POST(request) {
 }
 
 async function sendClientAutoResponder({ name, email, type, estate, preferredDate, budget, serviceInterest, consultationMethod, preferredTime, advisorName }) {
+  if (process.env.PLAYWRIGHT_TEST === 'true') {
+    console.log('[Auto-Responder] Playwright test mode: skipping auto-responder email.');
+    return;
+  }
+
   const smtpHost = process.env.SMTP_HOST;
   const smtpPort = process.env.SMTP_PORT || 587;
   const smtpUser = process.env.SMTP_USER;

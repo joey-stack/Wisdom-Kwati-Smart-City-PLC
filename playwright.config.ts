@@ -78,6 +78,9 @@ export default defineConfig({
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
+    env: {
+      PLAYWRIGHT_TEST: 'true',
+    },
   },
 });
 

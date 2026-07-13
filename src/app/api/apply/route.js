@@ -28,24 +28,28 @@ export async function POST(request) {
     }
 
     // 2. Save to Cloud Firestore
-    const applicationsRef = collection(db, 'applications');
-    const docRef = await addDoc(applicationsRef, {
-      candidateName,
-      candidateEmail,
-      candidatePhone,
-      linkedinUrl: linkedinUrl || '',
-      portfolioUrl: portfolioUrl || '',
-      coverLetter: coverLetter || '',
-      resumeBase64,
-      resumeName,
-      resumeType: resumeType || 'application/pdf',
-      jobTitle,
-      jobId: jobId || 'general',
-      appliedAt: appliedAt || new Date().toISOString(),
-      status: status || 'pending'
-    });
-
-    console.log(`[API Apply] Application saved to Firestore with ID: ${docRef.id}`);
+    let docRef = { id: 'mock-test-id' };
+    if (process.env.PLAYWRIGHT_TEST === 'true') {
+      console.log('[API Apply] Playwright test mode: skipping Firestore save.');
+    } else {
+      const applicationsRef = collection(db, 'applications');
+      docRef = await addDoc(applicationsRef, {
+        candidateName,
+        candidateEmail,
+        candidatePhone,
+        linkedinUrl: linkedinUrl || '',
+        portfolioUrl: portfolioUrl || '',
+        coverLetter: coverLetter || '',
+        resumeBase64,
+        resumeName,
+        resumeType: resumeType || 'application/pdf',
+        jobTitle,
+        jobId: jobId || 'general',
+        appliedAt: appliedAt || new Date().toISOString(),
+        status: status || 'pending'
+      });
+      console.log(`[API Apply] Application saved to Firestore with ID: ${docRef.id}`);
+    }
 
     // 3. Send Email Notification via Nodemailer (if configured)
     const smtpHost = process.env.SMTP_HOST;
@@ -55,7 +59,9 @@ export async function POST(request) {
     const smtpFrom = process.env.SMTP_FROM || 'no-reply@wisdomkwati.com';
     const smtpTo = process.env.SMTP_TO || 'careers@wisdomkwati.com';
 
-    if (smtpHost && smtpUser && smtpPass) {
+    if (process.env.PLAYWRIGHT_TEST === 'true') {
+      console.log('[API Apply] Playwright test mode: skipping SMTP email notification.');
+    } else if (smtpHost && smtpUser && smtpPass) {
       const transporter = nodemailer.createTransport({
         host: smtpHost,
         port: parseInt(smtpPort),

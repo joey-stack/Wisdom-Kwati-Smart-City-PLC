@@ -161,7 +161,6 @@ export default function SunsetHavenLandingPage() {
           <div className="hero-card delay-1" style={{ flexShrink: 0, paddingBottom: '15px' }}>
             <button 
               className="cta-button" 
-              style={{ textDecoration: "none", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

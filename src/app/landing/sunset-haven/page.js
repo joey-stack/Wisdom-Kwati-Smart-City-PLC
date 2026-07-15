@@ -5,6 +5,7 @@ import Link from 'next/link';
 // If you're not using Firebase, you can remove these imports and the addDoc logic below.
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import Script from 'next/script';
 
 export default function SunsetHavenLandingPage() {
   const [formData, setFormData] = useState({
@@ -126,6 +127,36 @@ export default function SunsetHavenLandingPage() {
 
   return (
     <div className="pd-page">
+      {/* Meta Pixel Code */}
+      <Script
+        id="meta-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '4430762700508648');
+            fbq('track', 'PageView');
+          `
+        }}
+      />
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: 'none' }}
+          src="https://www.facebook.com/tr?id=4430762700508648&ev=PageView&noscript=1"
+          alt=""
+        />
+      </noscript>
+      {/* End Meta Pixel Code */}
+
       {/* SECTION 1: HERO */}
       <header className="hero">
         <div className="hero-video-wrapper" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", zIndex: 0 }}>
